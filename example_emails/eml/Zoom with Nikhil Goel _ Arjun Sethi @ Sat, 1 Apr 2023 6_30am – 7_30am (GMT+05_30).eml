@@ -1,0 +1,172 @@
+Delivered-To: kavin@tribecap.co
+Received: by 2002:a05:7010:ac8e:b0:341:6b4e:1a5e with SMTP id dv14csp2072769mdb;
+        Sun, 2 Apr 2023 19:26:20 -0700 (PDT)
+X-Received: by 2002:a17:907:960f:b0:93b:5d19:52e1 with SMTP id gb15-20020a170907960f00b0093b5d1952e1mr46027032ejc.50.1680488780113;
+        Sun, 02 Apr 2023 19:26:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1680488780; cv=none;
+        d=google.com; s=arc-20160816;
+        b=reBkf2jRcrLXeK4jTsp8SJVmwPvplFiTzZuB43Ufw5AbHJ2btBLDgxagAnBd9mEr3r
+         Bwaq/2UaLyIBlBp70FEboNo8PZhjUvQB7uykUWyQdvgD/rIH65+XgxVNHthth/fndDSG
+         aOytz4GlxD84XxWldTkmYIpG6xwOyY3LdTs0+rrvFqsVO7JFooNGpvTQ3STSj3sQquRK
+         56K9K8DoeVoWLXNXCBi+/ytkTo08+8h4M+yEgk3iMfa/Cqiy1bInbJOCviQH6xtC9dJZ
+         8Elsv2enmKPQXmj6fsjBW0ymAowuWnB51bbllmODlQ90EbqQl2v17D9Mcgg9jSZd1KIj
+         dRSQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=+thrpXHT5ZBnuDHAnbFTsRNDk0k+dwnj/k4yMLe8zuc=;
+        b=w01wgFfjeyaNT1N6TFQPPu2Lqay6KpLcvxJIy4QGfbyCdbkxz6DBfqU1iAwVGwVD4V
+         VIcMqRw4p3G/ZrTPut0bfms97sQ0qcorrhONVezf2hf66uFkpuyTgIPXN9K/C4KfbHG4
+         I/XBm6nNr28/wWjiCAPZRHrbKa9tDRM+WM3Hzf8ooMTarhyuiTUHfXT0HKV2BsLIRudN
+         RsgdRjjwDbqcybHTv9WeL7KQtm0n+wbx6m/9+G9QKVx4+5CikgGWdQb2Jp0dTtBSV7NZ
+         kHXXBlsFe/XMNBlLX3b5onAopPhS3I7T6dvBJJTlIocdlayG4vM2xlap13/rZpP+1IKc
+         rJPA==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=LE+Q2Nr9;
+       spf=pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=veronica@tribecap.co
+Return-Path: <veronica@tribecap.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id ht20-20020a170907609400b009326c86edf5sor4247745ejc.96.2023.04.02.19.26.19
+        for <kavin@tribecap.co>
+        (Google Transport Security);
+        Sun, 02 Apr 2023 19:26:20 -0700 (PDT)
+Received-SPF: pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=LE+Q2Nr9;
+       spf=pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=veronica@tribecap.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tribecap.co; s=google; t=1680488779;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=+thrpXHT5ZBnuDHAnbFTsRNDk0k+dwnj/k4yMLe8zuc=;
+        b=LE+Q2Nr9VaI3BjqOuVLHhDtTKZ/szr7w4J9Sk5kU7aIOODva/5WJQQoxPpnpGLvUMC
+         v6d+kKq9wWyhI4Hd/b5hCKNPje2o338Enu/HKcAqhq9v+ul1Pbp8u4J06RRWqH7MnCE4
+         0VVLZVo0v7N/5Hf18uCpFPNRmTS7UonNMWpZy9xeJMWp2PRq7oStCTS7Nh1HVUXmQsAJ
+         xKxEtwgn3IIJEy1EN4nb97WU93PCDm0yaC09YyjfzLGZ3pTWeyBIqjnFZA07ac9VrFEv
+         BLX6eYBNmLQlQ4o3Wpnbk22DMVUu3/s0wEn5D+nvtL/ekyIFTwP7vgu3vGfJaIvKujtK
+         PLEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680488779;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=+thrpXHT5ZBnuDHAnbFTsRNDk0k+dwnj/k4yMLe8zuc=;
+        b=H0VMQ+XnbXn9r2K2+qKvUAWIdfyleA2422cbGEIxKxI0VqlB0WeJF5te7v+v1evDtk
+         K82V+CG+KdaaGx8o5w0CWQwiJcW6VMGTBH0ZgBPKm6iJgXwk5yDZ+vZCDbLT4+RmEBX1
+         WF0YAqpkj5B0hemZQNkC5dQAYblmVDrc/XXQNbWrnSv1xpAWcJQf+qqVDLm/A332h0lO
+         2xCUC8AeRaY8H+4WnKc/W9l/cLeH63VSbVBcbaxeSJ1TMIy67bfm9J/zZNDuudNNZHpp
+         bUnpwgyI1dLCp31vc68AKSttUF4IeSJ6VeipNHMQxTydTXo9fnMTqXqtTIw3m6VAMhPV
+         sJzA==
+X-Gm-Message-State: AAQBX9fL8t65EPcLR0lHP8ICooLuWVqDuusUnLTxQhJH32MCrj1YsUdk
+	NNMMmV+M5HmyPulgM9TvzaFqoPO4MnBjhgcPbBqXDhEBFux3BwBqthfGEQm0zfwHUvJn62RecIZ
+	ZI2KaoM469W+LQZA66UgAEbMUEiTzw7NwDq1XU9rl+MHO+DnowEr4finw2G93cGpxMyXCgPL9ne
+	Na2uegwW56/0o9SNwtNO2/jS2IYPdG87bdUXLYcR9TE6IWSA==
+X-Google-Smtp-Source: AKy350ZAhZkHXZpdhvRx7YlxklzAWYSKYCL0eb9X/0hfFkKt7aaKOJFQYyMutk/CbH2c/j0KxmNmQGZRQjEmUCzbU9w=
+X-Received: by 2002:a17:907:d68c:b0:947:556e:ed3 with SMTP id
+ wf12-20020a170907d68c00b00947556e0ed3mr7084693ejc.11.1680488779561; Sun, 02
+ Apr 2023 19:26:19 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAD9SAYagVWXFD8G9GrgoymR72XHO5CO1CTE=YskfWR=5xG8_UA@mail.gmail.com>
+ <CAN2_rVdXY8kmWfqFq01DPhwwZD3NmybJiENQhT-xFLkZ4HyAuA@mail.gmail.com> <CAD9SAYY3Uu82WRuN3E7B=wAoKrO=iMc7Ud_66f1PCP17M6cQ=Q@mail.gmail.com>
+In-Reply-To: <CAD9SAYY3Uu82WRuN3E7B=wAoKrO=iMc7Ud_66f1PCP17M6cQ=Q@mail.gmail.com>
+From: Veronica Sullivan <veronica@tribecap.co>
+Date: Sun, 2 Apr 2023 22:26:08 -0400
+Message-ID: <CAGhPhKc5e8a3KLW2Z_JypRTpebY7crT0O8=cDqzs2Ye=pqyAKA@mail.gmail.com>
+Subject: =?UTF-8?Q?Re=3A_Zoom_with_Nikhil_Goel_=2F_Arjun_Sethi_=40_Sat=2C_1_Apr?=
+	=?UTF-8?Q?_2023_6=3A30am_=E2=80=93_7=3A30am_=28GMT=2B05=3A30=29?=
+To: Nikhil Goel <nikhil@salarybox.in>
+Content-Type: multipart/alternative; boundary="000000000000c155c405f8654875"
+Bcc: kavin@tribecap.co
+
+--000000000000c155c405f8654875
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Nikhil,
+
+I was out of pocket much of this weeknd so just seeing this now.  Are you
+available to Zoom on April 4th at 5 pm PDT?
+
+Kind regards,
+
+Veronica Sullivan
+Assistant to Arjun Sethi
+Tribe Capital
+(646) 280-5410
+
+
+On Sat, Apr 1, 2023 at 11:02=E2=80=AFPM Nikhil Goel <nikhil@salarybox.in> w=
+rote:
+
+> No worries. Can speak this weekend, let me know the time.
+>
+> On Sun, Apr 2, 2023, 2:02 AM Arjun Sethi <arj@tribecap.co> wrote:
+>
+>> Hey I missed this - apologies. How are you this weekend?
+>>
+>> On Fri, Mar 31, 2023 at 18:09 Nikhil Goel <nikhil@salarybox.in> wrote:
+>>
+>>> Hi Arjun - Waiting on the call. Let me know if we should reschedule or
+>>> cancel the call.
+>>>
+>>
+>> *Disclaimer*
+>> The information contained in this communication from the sender is
+>> confidential. It is intended solely for use by the recipient and others
+>> authorized to receive it. If you are not the recipient, you are hereby
+>> notified that any disclosure, copying, distribution or taking action in
+>> relation of the contents of this information is strictly prohibited and =
+may
+>> be unlawful. If you have received this communication in error, please
+>> notify Tribe at (619) 567-9955 and delete this communication immediately
+>> without making any copy or distribution.
+>>
+>
+
+--000000000000c155c405f8654875
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gmail_default" style=3D"fon=
+t-family:tahoma,sans-serif">Hi Nikhil,</div><div class=3D"gmail_default" st=
+yle=3D"font-family:tahoma,sans-serif"><br></div><div class=3D"gmail_default=
+" style=3D"font-family:tahoma,sans-serif">I was out of pocket much of this =
+weeknd so just seeing this now.=C2=A0 Are you available to Zoom on April 4t=
+h at 5 pm PDT?</div><div class=3D"gmail_default" style=3D"font-family:tahom=
+a,sans-serif"><br></div><div class=3D"gmail_default" style=3D"font-family:t=
+ahoma,sans-serif">Kind regards,</div><div><div dir=3D"ltr" class=3D"gmail_s=
+ignature"><div dir=3D"ltr"><div><br></div>Veronica Sullivan<div>Assistant t=
+o Arjun Sethi</div><div>Tribe Capital</div><div>(646) 280-5410</div></div><=
+/div></div><br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Sat, Apr 1, 2023 at 11:02=E2=80=AFPM Nikhil Goel &lt;<a =
+href=3D"mailto:nikhil@salarybox.in">nikhil@salarybox.in</a>&gt; wrote:<br><=
+/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
+rder-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"auto"><d=
+iv>No worries. Can speak this weekend, let me know the time.=C2=A0<br><br><=
+div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sun, Apr=
+ 2, 2023, 2:02 AM Arjun Sethi &lt;<a href=3D"mailto:arj@tribecap.co" target=
+=3D"_blank">arj@tribecap.co</a>&gt; wrote:<br></div><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex"><div dir=3D"auto">Hey I missed this - apologies.=
+ How are you this weekend?=C2=A0</div><div><br><div class=3D"gmail_quote"><=
+div dir=3D"ltr" class=3D"gmail_attr">On Fri, Mar 31, 2023 at 18:09 Nikhil G=
+oel &lt;<a href=3D"mailto:nikhil@salarybox.in" rel=3D"noreferrer" target=3D=
+"_blank">nikhil@salarybox.in</a>&gt; wrote:<br></div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex"><div dir=3D"ltr">Hi Arjun - Waiting on the call=
+. Let me know if we should reschedule or cancel=C2=A0the call.=C2=A0</div>
+</blockquote></div></div>
+
+<br>
+<div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1"><b>Disclaimer</=
+b></font></div><div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1">=
+The information contained in this communication from the sender is confiden=
+tial. It is intended solely for use by the recipient and others authorized =
+to receive it. If you are not the recipient, you are hereby notified that a=
+ny disclosure, copying, distribution or taking action in relation of the co=
+ntents of this information is strictly prohibited and may be unlawful. If y=
+ou have received this communication in error, please notify Tribe at (619) =
+567-9955 and delete this communication immediately without making any copy =
+or distribution.</font></div></blockquote></div></div></div>
+</blockquote></div></div>
+
+--000000000000c155c405f8654875--

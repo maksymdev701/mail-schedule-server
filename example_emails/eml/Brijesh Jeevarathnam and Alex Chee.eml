@@ -1,0 +1,732 @@
+Delivered-To: kavin@tribecap.co
+Received: by 2002:a05:7010:ac8e:b0:341:6b4e:1a5e with SMTP id dv14csp2621843mdb;
+        Mon, 3 Apr 2023 13:59:39 -0700 (PDT)
+X-Received: by 2002:a17:90a:f0f:b0:23f:9448:89c2 with SMTP id 15-20020a17090a0f0f00b0023f944889c2mr319650pjy.7.1680555578849;
+        Mon, 03 Apr 2023 13:59:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1680555578; cv=none;
+        d=google.com; s=arc-20160816;
+        b=bP5AysIwYZYqi3EW2Ye5zjqAlnd04wO0Ry1Ve4khxZaUk7HPOk8mTI2Z/EYblerwdm
+         IgFBriJVyUbk2mSvZx9PnkX/iIzGdceeFI3Zaz4tZoUiz6VmEs5aSEF+X+U/0Bn9ibMs
+         cu+J5xCZvbLSkzNC3WbVjI5FoNCMJa9ZAUDg1Bpzl806hEKUoE1/SHO040J1dZ10FS/N
+         Imo7QbBbhIx7unAspn/LmP+mwKeWojZ8BUKn6TPvvzfTHUq+bojJ7uH026KKNxFO4bgm
+         P8+toqN5kIpVHJP6h5R2lPHQ4LWcEF60O7Ku2GPKDiEbhI8gR9WuBj+cEzx9ecilFLbM
+         E2xQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=wykx5hVtkecKbfzp9vB1acN4B1Oo4QKIrhuRwSLqBig=;
+        b=oTGKYsJZnA7XHBufqh+uDhDpXunowjLu0r9vAWuHzI2Y+Xm36+FA4aTtHKlblqD4Gh
+         TFMs9O4h6PDTdGJqPXhlomkyPTRvBNmDfoiYaeXNT0M/EhrycaDaLP61Jo6Ldi0WYEAI
+         82i3YBykL0ZYMXA430ZnX3xPCoBMYbBdBWPFePyE1/KF7g/dLVveMgI6T1hvIuQRIDTI
+         nojCO18u9yoB+YJB5lk3812+6+JsMWx2xRpeSWTCshTyG1dVWIt/FkIRkNh5IZAqnPm5
+         Nhhzf6tDsdJw4ygGVej8fNIxkS2k/M5QjhnUOUm5+HqdB6YK5qx7aJDxNljWDvBxq6Q3
+         thnw==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=BPunAZdy;
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+Return-Path: <chelsea@tribecap.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id r11-20020a1709028bcb00b001a190c559a5sor4708146plo.51.2023.04.03.13.59.38
+        for <kavin@tribecap.co>
+        (Google Transport Security);
+        Mon, 03 Apr 2023 13:59:38 -0700 (PDT)
+Received-SPF: pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=BPunAZdy;
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tribecap.co; s=google; t=1680555576;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=wykx5hVtkecKbfzp9vB1acN4B1Oo4QKIrhuRwSLqBig=;
+        b=BPunAZdyEmJ6PFJSPggMtxlbu3RG4TkaojJRc2cURLv4kfCa4SpWEbj7N4U2JwNFOo
+         lJS3SG23tS2UQKMgvVQ59nXbZnZcWxR3yJqfqwqHNTP68B9orkSl9BLR2yqcLk51pvS5
+         gAQVcWihQPd8by1zdXr6gJMaald4o2Cy1hOdzN45Y+cQvzrHOBaS9JbvzXY4LXa3+j/F
+         3Re9fVGSRkWoS2ZLkDUU0naKSVPKSU49rivvWLIeIrcz7yrIz6imqdqEbXZUzqdT3+Kj
+         LNByPiqShjbDZOtzd8+4N9wrJgHiQ4XD6NG2VGPB9jqDayUnBNqYUA0UxQUQCp/HLtKt
+         JsRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680555576;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=wykx5hVtkecKbfzp9vB1acN4B1Oo4QKIrhuRwSLqBig=;
+        b=XuTq8jbEfGnh1UVJiHQU5fyFWg0M7DT43iPROM4ACwQ6UzHkN5VzPQaWYQ+CwVFyz9
+         vYZCyUx/HdvpYRCpUirINNhL99EEIUmU5zlZ7R16K5IAOsZCFEoPbYeOYFsvu//nmKq2
+         IUSTdInKyKd+0lgs4YtoBsLrCnTFb/OpexeGVHOuxl9xpXPFDZOXfbq/05R6SsdVb7Fx
+         8SecviRfPOsvehGMGAR0pW5nd3dHq3cLpiFTwpGbGZzQC3V7yCXQUCbD8J1Whcn7mVc9
+         ySKrr0nznJNPsYMyK4BSqfVPzxK6rDuAalHkolciyzSQWc1y4NX71QEH9V9ABc0b73V3
+         kVdw==
+X-Gm-Message-State: AAQBX9dQEyuLHFoB6FPW2mxPFo/7+FiNP/pXAE1XQRW7H4IXrzYuxwvM
+	Bd4AyX/mXITHKPTBPYOdrzuizfBGa0Ds9MU8Uyb47nwgQxRQlTE9uNJoD6FWJSnCAlonoDAG6hO
+	QTffH2O5Nxqj6hT9f8W+lXDG66MQZ4R3IhUN1wLbcs1btk7f9NzRJUisTQQlzHyIjSmjBeS7+XO
+	ikCPV34mNYQkd3nnp9mkZyt+FErFolK3HQyyguL/XE0gPqfg==
+X-Google-Smtp-Source: AKy350YoXvvAexzf4g3geIrkSAGGqMW7ECAH66yWILdmlCeDy9xO5wa9/AxWu5DbsBo9Kt7EkKR/YkV1nRszUFXZ6MM=
+X-Received: by 2002:a17:902:db11:b0:1a1:ce05:9cc with SMTP id
+ m17-20020a170902db1100b001a1ce0509ccmr138917plx.10.1680555575632; Mon, 03 Apr
+ 2023 13:59:35 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAMEKxAyh2C6oEXAuSJ=iiAaw3PrqCmHrNXpRANNoe553cuFcXg@mail.gmail.com>
+ <BY3PR15MB49328BA0ED01203F90211068B3A89@BY3PR15MB4932.namprd15.prod.outlook.com>
+ <CAEF9bpUDnX1nBp3JtgH-m4bbCTwDjKqJk4QXvVdrvbnWwQC4kw@mail.gmail.com>
+ <BY3PR15MB4929BBFE397F19E17B43CAFCB3A89@BY3PR15MB4929.namprd15.prod.outlook.com>
+ <lejico99.c2b90eed-68e8-435e-a0f6-0241181c2b2b@we.are.superhuman.com>
+ <CAEF9bpV-HZL=NpOH9vNwUWwoJvQ-xhW3_qYzR3g0n2wxEg93Pg@mail.gmail.com> <CAEF9bpWhhDEKk8h_f67UpcQvupY3RBEmgK=W6OKqixhRBJO8HA@mail.gmail.com>
+In-Reply-To: <CAEF9bpWhhDEKk8h_f67UpcQvupY3RBEmgK=W6OKqixhRBJO8HA@mail.gmail.com>
+From: Chelsea Masri <chelsea@tribecap.co>
+Date: Mon, 3 Apr 2023 13:59:17 -0700
+Message-ID: <CAEF9bpXuRWvAweD6wbFFRBCYF6PwELfgE--spA8fYQ2GLG6KUg@mail.gmail.com>
+Subject: Fwd: Brijesh Jeevarathnam and Alex Chee
+To: Kavin Stewart <kavin@tribecap.co>
+Content-Type: multipart/related; boundary="0000000000001c90a505f874d622"
+
+--0000000000001c90a505f874d622
+Content-Type: multipart/alternative; boundary="0000000000001c90a405f874d621"
+
+--0000000000001c90a405f874d621
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+---------- Forwarded message ---------
+From: Chelsea Masri <chelsea@tribecap.co>
+Date: Mon, Feb 27, 2023 at 1:08=E2=80=AFPM
+Subject: Re: Brijesh Jeevarathnam and Alex Chee
+To: Alex Chee <alex@tribecap.co>
+
+
+Call with Brijesh Jeevarathna (Adams Street) rescheduled to 3/20 at 1pm PST=
+.
+
+On Fri, Feb 24, 2023 at 10:35=E2=80=AFPM Chelsea Masri <chelsea@tribecap.co=
+> wrote:
+
+> Will do!
+>
+> On Fri, Feb 24, 2023 at 9:15 PM Alex Chee <alex@tribecap.co> wrote:
+>
+>> Let=E2=80=99s suggest more a bit out so they can bring more =E2=80=9Ccri=
+tical=E2=80=9D folks
+>>
+>>
+>> On Fri, Feb 24 2023 at 11:30 AM, LeAnne Ritter <
+>> lritter@adamsstreetpartners.com> wrote:
+>>
+>>> Hi Chelsea,
+>>>
+>>>
+>>>
+>>> I will get back to you on this shortly.  Checking with the team to see
+>>> who is critical as some people are out during those dates.
+>>>
+>>>
+>>>
+>>> Thanks,
+>>>
+>>>
+>>>
+>>> LeAnne
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> *LeAnne Ritter*
+>>>
+>>> Executive Assistant, Growth Equity
+>>>
+>>> +1 650 331 4864 direct
+>>>
+>>> lritter@adamsstreetpartners.com
+>>>
+>>>
+>>>
+>>> *From:* Chelsea Masri <chelsea@tribecap.co>
+>>> *Sent:* Friday, February 24, 2023 11:12 AM
+>>> *To:* Lalutska, Yulia <ylalutska@adamsstreetpartners.com>; Ritter,
+>>> LeAnne <lritter@adamsstreetpartners.com>
+>>> *Cc:* Alex Chee <alex@tribecap.co>; Jeevarathnam, Brijesh <
+>>> brijesh@adamsstreetpartners.com>; Tammaro, David <
+>>> dtammaro@adamsstreetpartners.com>; Lindroos, Marcus <
+>>> mlindroos@adamsstreetpartners.com>
+>>> *Subject:* Re: Brijesh Jeevarathnam and Alex Chee
+>>>
+>>>
+>>>
+>>> *CAUTION:** External email. Do not click or open attachments if you
+>>> don't recognize the originating email address.*
+>>>
+>>>
+>>>
+>>>
+>>> ------------------------------
+>>>
+>>> Hello Yulia,
+>>>
+>>>
+>>>
+>>> Thank you so much for your flexibility. I will coordinate with LeAnne t=
+o
+>>> schedule.
+>>>
+>>>
+>>>
+>>> LeAnne,
+>>>
+>>>
+>>>
+>>> Please let me know if any of the following dates and times work well fo=
+r
+>>> the team over the next couple of weeks. Thank you so much.
+>>>
+>>>    - Monday, 3/6 between 1:30-3pm PST
+>>>    - Wednesday, 3/8 between 2-3pm PST
+>>>    - Thursday, 3/9 at 8am or between 2-3pm PST
+>>>    - Friday, 3/10 at 8:30am PST
+>>>
+>>>
+>>>
+>>> On Fri, Feb 24, 2023 at 10:41 AM Lalutska, Yulia <
+>>> ylalutska@adamsstreetpartners.com> wrote:
+>>>
+>>> Hi Alex,
+>>>
+>>>
+>>>
+>>> Not a problem =E2=80=93 copying LeAnne here who can find some other tim=
+e for us
+>>> to speak over the next couple of weeks.
+>>>
+>>>
+>>>
+>>> Best,
+>>> Yulia
+>>>
+>>>
+>>>
+>>> *From:* Alex Chee <alex@tribecap.co>
+>>> *Sent:* Friday, February 24, 2023 10:32 AM
+>>> *To:* Chelsea Masri <chelsea@tribecap.co>; Jeevarathnam, Brijesh <
+>>> brijesh@adamsstreetpartners.com>; Jeevarathnam, Brijesh <
+>>> brijesh@adamsstreetpartners.com>; Tammaro, David <
+>>> dtammaro@adamsstreetpartners.com>; Lindroos, Marcus <
+>>> mlindroos@adamsstreetpartners.com>; Lalutska, Yulia <
+>>> ylalutska@adamsstreetpartners.com>
+>>> *Subject:* Brijesh Jeevarathnam and Alex Chee
+>>>
+>>>
+>>>
+>>> *CAUTION:** External email. Do not click or open attachments if you
+>>> don't recognize the originating email address.*
+>>>
+>>>
+>>>
+>>>
+>>> ------------------------------
+>>>
+>>> Brijesh, my apologies for the last minute notice. I=E2=80=99ve had a pe=
+rsonal
+>>> emergency and need to reschedule. Can we find another time?
+>>>
+>>>
+>>>
+>>> We=E2=80=99ve been speaking amongst the partnership and we=E2=80=99ve r=
+eally enjoyed the
+>>> back and forth over the year with you all. Appreciate the flexibility.
+>>>
+>>>
+>>>
+>>> - Alex
+>>>
+>>>
+>>>
+>>> *Disclaimer*
+>>>
+>>> The information contained in this communication from the sender is
+>>> confidential. It is intended solely for use by the recipient and others
+>>> authorized to receive it. If you are not the recipient, you are hereby
+>>> notified that any disclosure, copying, distribution or taking action in
+>>> relation of the contents of this information is strictly prohibited and=
+ may
+>>> be unlawful. If you have received this communication in error, please
+>>> notify Tribe at (619) 567-9955 and delete this communication immediatel=
+y
+>>> without making any copy or distribution.
+>>>
+>>> <http://www.adamsstreetpartners.com>
+>>>
+>>> LEADING WITH FORESIGHTTM
+>>>
+>>>
+>>> 2730 Sand Hill Road, Suite 300
+>>> Menlo Park, CA 94025
+>>>
+>>> Visit us on LinkedIn
+>>> <https://www.linkedin.com/company/adams-street-partners/> and view our
+>>> latest insights <https://www.adamsstreetpartners.com/insights/>
+>>>
+>>>
+>>>
+>>> *Disclaimer*
+>>>
+>>> The information contained in this communication from the sender is
+>>> confidential. It is intended solely for use by the recipient and others
+>>> authorized to receive it. If you are not the recipient, you are hereby
+>>> notified that any disclosure, copying, distribution or taking action in
+>>> relation of the contents of this information is strictly prohibited and=
+ may
+>>> be unlawful. If you have received this communication in error, please
+>>> notify Tribe at (619) 567-9955 and delete this communication immediatel=
+y
+>>> without making any copy or distribution.
+>>>
+>>
+
+--0000000000001c90a405f874d621
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">---------- Forwarded message ---------<br>From: <strong cla=
+ss=3D"gmail_sendername" dir=3D"auto">Chelsea Masri</strong> <span dir=3D"au=
+to">&lt;<a href=3D"mailto:chelsea@tribecap.co">chelsea@tribecap.co</a>&gt;<=
+/span><br>Date: Mon, Feb 27, 2023 at 1:08=E2=80=AFPM<br>Subject: Re: Brijes=
+h Jeevarathnam and Alex Chee<br>To: Alex Chee &lt;<a href=3D"mailto:alex@tr=
+ibecap.co">alex@tribecap.co</a>&gt;<br></div><br><br><div dir=3D"ltr"><font=
+ face=3D"arial, sans-serif">Call with <span style=3D"color:rgb(31,31,31)">B=
+rijesh Jeevarathna (Adams Street) r</span>escheduled=C2=A0to 3/20 at 1pm PS=
+T.</font></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gma=
+il_attr">On Fri, Feb 24, 2023 at 10:35=E2=80=AFPM Chelsea Masri &lt;<a href=
+=3D"mailto:chelsea@tribecap.co" target=3D"_blank">chelsea@tribecap.co</a>&g=
+t; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
+x 0px 0.8ex;border-left-width:1px;border-left-style:solid;border-left-color=
+:rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr">Will do!</div><br><div=
+ class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Feb 24=
+, 2023 at 9:15 PM Alex Chee &lt;<a href=3D"mailto:alex@tribecap.co" target=
+=3D"_blank">alex@tribecap.co</a>&gt; wrote:<br></div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-=
+left-style:solid;border-left-color:rgb(204,204,204);padding-left:1ex"><div>=
+<div>
+    <div>
+        <div>Let=E2=80=99s suggest more a bit out so they can bring more =
+=E2=80=9Ccritical=E2=80=9D folks</div>
+        <div><div style=3D"display:none;border:0px;width:0px;height:0px;ove=
+rflow:hidden"><img src=3D"https://r.superhuman.com/1DyOIlpMQEShVwRc_Y_6A7pl=
+22dLd7IK_1TEoVzEgtVHoy6VuyCdAx8_fB3EP-ZUi5vcxabiyq5alj-MsmJzX0DQy9T_onDN9rF=
+AAF8CzMG27ipJi9pGzn1AcJXKnpw69A6F1AR5-xLk-mGYcvt1RYTqs2PMaBuDT9YvbUGeLlXbF-=
+LM0sGP.gif" alt=3D"" width=3D"1" height=3D"0" style=3D"display:none;border:=
+0px;width:0px;height:0px;overflow:hidden"></div>
+        <br>
+        <div>
+   =20
+   =20
+</div>
+    </div>
+    <div class=3D"gmail_extra">
+    <br>
+    <div class=3D"gmail_quote">
+        On Fri, Feb 24 2023 at 11:30 AM, LeAnne Ritter
+        &lt;<a href=3D"mailto:lritter@adamsstreetpartners.com" target=3D"_b=
+lank">lritter@adamsstreetpartners.com</a>&gt;
+        wrote:
+        <br>
+        <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0.8ex;bor=
+der-left-width:1px;border-left-style:solid;border-left-color:rgb(204,204,20=
+4);padding-left:1ex">
+        <div lang=3D"EN-US">
+<div>
+<p class=3D"MsoNormal">Hi Chelsea,<u></u><u></u></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal">I will get back to you on this shortly.=C2=A0 Checki=
+ng with the team to see who is critical as some people are out during those=
+ dates.<u></u><u></u></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal">Thanks,<u></u><u></u></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal">LeAnne<u></u><u></u></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal"><b><span style=3D"color:black">LeAnne Ritter</span><=
+/b><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;color:black">Executive=
+ Assistant, Growth Equity<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;color:black">+1 650 33=
+1 4864 direct<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt"><a href=3D"mailto:lri=
+tter@adamsstreetpartners.com" target=3D"_blank">lritter@adamsstreetpartners=
+.com</a><u></u><u></u></span></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div style=3D"border-style:solid none none;border-top-width:1pt;border-top-=
+color:rgb(225,225,225);padding:3pt 0in 0in">
+<p class=3D"MsoNormal"><b>From:</b> Chelsea Masri &lt;<a href=3D"mailto:che=
+lsea@tribecap.co" target=3D"_blank">chelsea@tribecap.co</a>&gt; <br>
+<b>Sent:</b> Friday, February 24, 2023 11:12 AM<br>
+<b>To:</b> Lalutska, Yulia &lt;<a href=3D"mailto:ylalutska@adamsstreetpartn=
+ers.com" target=3D"_blank">ylalutska@adamsstreetpartners.com</a>&gt;; Ritte=
+r, LeAnne &lt;<a href=3D"mailto:lritter@adamsstreetpartners.com" target=3D"=
+_blank">lritter@adamsstreetpartners.com</a>&gt;<br>
+<b>Cc:</b> Alex Chee &lt;<a href=3D"mailto:alex@tribecap.co" target=3D"_bla=
+nk">alex@tribecap.co</a>&gt;; Jeevarathnam, Brijesh &lt;<a href=3D"mailto:b=
+rijesh@adamsstreetpartners.com" target=3D"_blank">brijesh@adamsstreetpartne=
+rs.com</a>&gt;; Tammaro, David &lt;<a href=3D"mailto:dtammaro@adamsstreetpa=
+rtners.com" target=3D"_blank">dtammaro@adamsstreetpartners.com</a>&gt;; Lin=
+droos, Marcus &lt;<a href=3D"mailto:mlindroos@adamsstreetpartners.com" targ=
+et=3D"_blank">mlindroos@adamsstreetpartners.com</a>&gt;<br>
+<b>Subject:</b> Re: Brijesh Jeevarathnam and Alex Chee<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<div>
+<div style=3D"border:1pt solid rgb(156,101,0);padding:2pt">
+<p class=3D"MsoNormal" style=3D"line-height:12pt;background-color:rgb(255,2=
+35,156)"><b><span style=3D"font-size:10pt;color:rgb(156,101,0)">CAUTION:</s=
+pan></b><b><span style=3D"font-size:10pt;color:black"> External email. Do n=
+ot click or open attachments if you don&#39;t recognize the
+ originating email address.<u></u><u></u></span></b></p>
+</div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:9pt;font-family:Helvetic=
+a,sans-serif;color:black"><u></u>=C2=A0<u></u></span></b></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:9pt;font-family:Helvetica,s=
+ans-serif;color:black"><u></u>=C2=A0<u></u></span></p>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"2" width=3D"100%" align=3D"center">
+</div>
+</div>
+<p class=3D"MsoNormal">Hello=C2=A0Yulia,<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<p class=3D"MsoNormal">Thank you so much for your flexibility. I will coord=
+inate with LeAnne to schedule.<u></u><u></u></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">LeAnne,<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Please let me know if any of the following dates and=
+ times work well for the team over the next couple of weeks. Thank you so m=
+uch.=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<ul type=3D"disc">
+<li class=3D"MsoNormal">
+Monday, 3/6 between 1:30-3pm PST<u></u><u></u></li><li class=3D"MsoNormal">
+Wednesday, 3/8 between 2-3pm PST<u></u><u></u></li><li class=3D"MsoNormal">
+Thursday, 3/9 at 8am or between 2-3pm PST<u></u><u></u></li><li class=3D"Ms=
+oNormal">
+Friday, 3/10 at 8:30am PST<u></u><u></u></li></ul>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Fri, Feb 24, 2023 at 10:41 AM Lalutska, Yulia &lt=
+;<a href=3D"mailto:ylalutska@adamsstreetpartners.com" target=3D"_blank">yla=
+lutska@adamsstreetpartners.com</a>&gt; wrote:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border-style:none none none solid;border-left-width:1p=
+t;border-left-color:rgb(204,204,204);padding:0in 0in 0in 6pt;margin-left:4.=
+8pt;margin-right:0in">
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal">Hi Alex,
+<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Not a problem =E2=80=93 copying LeAnne here who can =
+find some other time for us to speak over the next couple of weeks.
+<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Best,
+<br>
+Yulia <u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div style=3D"border-style:solid none none;border-top-width:1pt;border-top-=
+color:rgb(225,225,225);padding:3pt 0in 0in">
+<p class=3D"MsoNormal"><b>From:</b> Alex Chee &lt;<a href=3D"mailto:alex@tr=
+ibecap.co" target=3D"_blank">alex@tribecap.co</a>&gt;
+<br>
+<b>Sent:</b> Friday, February 24, 2023 10:32 AM<br>
+<b>To:</b> Chelsea Masri &lt;<a href=3D"mailto:chelsea@tribecap.co" target=
+=3D"_blank">chelsea@tribecap.co</a>&gt;; Jeevarathnam, Brijesh &lt;<a href=
+=3D"mailto:brijesh@adamsstreetpartners.com" target=3D"_blank">brijesh@adams=
+streetpartners.com</a>&gt;; Jeevarathnam, Brijesh &lt;<a href=3D"mailto:bri=
+jesh@adamsstreetpartners.com" target=3D"_blank">brijesh@adamsstreetpartners=
+.com</a>&gt;;
+ Tammaro, David &lt;<a href=3D"mailto:dtammaro@adamsstreetpartners.com" tar=
+get=3D"_blank">dtammaro@adamsstreetpartners.com</a>&gt;; Lindroos, Marcus &=
+lt;<a href=3D"mailto:mlindroos@adamsstreetpartners.com" target=3D"_blank">m=
+lindroos@adamsstreetpartners.com</a>&gt;; Lalutska,
+ Yulia &lt;<a href=3D"mailto:ylalutska@adamsstreetpartners.com" target=3D"_=
+blank">ylalutska@adamsstreetpartners.com</a>&gt;<br>
+<b>Subject:</b> Brijesh Jeevarathnam and Alex Chee<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<div style=3D"border:1pt solid rgb(156,101,0);padding:2pt">
+<p class=3D"MsoNormal" style=3D"line-height:12pt;background-color:rgb(255,2=
+35,156)">
+<b><span style=3D"font-size:10pt;color:rgb(156,101,0)">CAUTION:</span></b><=
+b><span style=3D"font-size:10pt;color:black"> External email. Do not click =
+or open attachments if you don&#39;t recognize the originating email addres=
+s.</span></b><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:9pt;font-family:Helvetic=
+a,sans-serif;color:black">=C2=A0</span></b><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:9pt;font-family:Helvetica,s=
+ans-serif;color:black">=C2=A0</span><u></u><u></u></p>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"2" width=3D"100%" align=3D"center">
+</div>
+</div>
+<p class=3D"MsoNormal">Brijesh, my apologies for the last minute notice. I=
+=E2=80=99ve had a personal emergency and need to reschedule. Can we find an=
+other time?<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">We=E2=80=99ve been speaking amongst the partnership =
+and we=E2=80=99ve really enjoyed the back and forth over the year with you =
+all. Appreciate the flexibility.=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">- Alex<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:Arial,=
+sans-serif">Disclaimer</span></b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:Arial,san=
+s-serif">The information contained in this communication from the sender is=
+ confidential. It is intended solely for use by the
+ recipient and others authorized to receive it. If you are not the recipien=
+t, you are hereby notified that any disclosure, copying, distribution or ta=
+king action in relation of the contents of this information is strictly pro=
+hibited and may be unlawful. If
+ you have received this communication in error, please notify Tribe at (619=
+) 567-9955 and delete this communication immediately without making any cop=
+y or distribution.</span><u></u><u></u></p>
+</div>
+</div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal"><a href=3D"http://www.adamsstreetpartners.com" targe=
+t=3D"_blank"><span style=3D"text-decoration:none"><img border=3D"0" width=
+=3D"135" height=3D"67" style=3D"width:1.4062in;height:0.6979in" id=3D"m_-40=
+93500751876579586m_-3721913656749978084m_-2782612610121826073Picture_x0020_=
+3" src=3D"cid:18687484d734cff311"></span></a><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;color:black">LEADING W=
+ITH FORESIGHT</span><sup><span style=3D"font-size:10pt">TM</span></sup><spa=
+n style=3D"font-size:10pt">
+</span><br>
+<span style=3D"font-size:10pt"><br>
+<br>
+2730 Sand Hill Road, Suite 300<br>
+Menlo Park, CA 94025<br>
+<br>
+Visit us on <a href=3D"https://www.linkedin.com/company/adams-street-partne=
+rs/" target=3D"_blank">
+LinkedIn</a> and view our latest <a href=3D"https://www.adamsstreetpartners=
+.com/insights/" target=3D"_blank">
+insights</a></span><u></u><u></u></p>
+</div>
+</div>
+</blockquote>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:Arial,=
+sans-serif">Disclaimer</span></b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:Arial,san=
+s-serif">The information contained in this communication from the sender is=
+ confidential. It is intended solely for use by the recipient and others au=
+thorized to receive it. If you are
+ not the recipient, you are hereby notified that any disclosure, copying, d=
+istribution or taking action in relation of the contents of this informatio=
+n is strictly prohibited and may be unlawful. If you have received this com=
+munication in error, please notify
+ Tribe at (619) 567-9955 and delete this communication immediately without =
+making any copy or distribution.</span><u></u><u></u></p>
+</div>
+</div>
+
+
+</div>
+        </blockquote>
+    </div>
+</div>
+</div></div></div></blockquote></div>
+</blockquote></div>
+</div></div>
+
+--0000000000001c90a405f874d621--
+--0000000000001c90a505f874d622
+Content-Type: image/png; name="image001.png"
+Content-Disposition: inline; filename="image001.png"
+Content-Transfer-Encoding: base64
+Content-ID: <18687484d734cff311>
+X-Attachment-Id: 18687484d734cff311
+
+iVBORw0KGgoAAAANSUhEUgAAAIcAAABDCAYAAAC2nhaoAAAACXBIWXMAABcSAAAXEgFnn9JSAAAF
++mlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0w
+TXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRh
+LyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEz
+LTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3Jn
+LzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0i
+IiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRw
+Oi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMu
+YWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNv
+bS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9z
+VHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0Mg
+MjAxOSAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDE5LTEwLTExVDEwOjEyOjQ4LTA1OjAw
+IiB4bXA6TW9kaWZ5RGF0ZT0iMjAxOS0xMC0xMVQxMTozMjo0My0wNTowMCIgeG1wOk1ldGFkYXRh
+RGF0ZT0iMjAxOS0xMC0xMVQxMTozMjo0My0wNTowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBo
+b3Rvc2hvcDpDb2xvck1vZGU9IjMiIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2
+LTIuMSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowNjU4ZmVjYi0wNzQxLWFkNGMtYWJmNi02
+Y2ExNjY2NTczY2UiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDoxM2Jl
+MWUwMC01NjNmLTk5NGYtYTBkMS03MzQ4MDYwNGQzNTciIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJ
+RD0ieG1wLmRpZDo4OWRjZTdjYi04YjUxLTRmNDAtYTczNS1kZjAzOTc0MWZlYWMiPiA8eG1wTU06
+SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDpp
+bnN0YW5jZUlEPSJ4bXAuaWlkOjg5ZGNlN2NiLThiNTEtNGY0MC1hNzM1LWRmMDM5NzQxZmVhYyIg
+c3RFdnQ6d2hlbj0iMjAxOS0xMC0xMVQxMDoxMjo0OC0wNTowMCIgc3RFdnQ6c29mdHdhcmVBZ2Vu
+dD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKFdpbmRvd3MpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0
+aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowNjU4ZmVjYi0wNzQxLWFkNGMt
+YWJmNi02Y2ExNjY2NTczY2UiIHN0RXZ0OndoZW49IjIwMTktMTAtMTFUMTE6MzI6NDMtMDU6MDAi
+IHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChXaW5kb3dzKSIg
+c3RFdnQ6Y2hhbmdlZD0iLyIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVz
+Y3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz60gb7J
+AAAYdklEQVR4nO2deZgU1bnGf9U9w8AMywgSEFHBDdxCFERFMaKIG4IGQVyDiopocuNyk2iuMbmu
+2RSVeBONAjG5CK4XQZTggguJgogKbog6sojDNsAAs3V3/njPuae6uqq7ZxE06fd5+qmp6uqqc059
+5/vebzk1Xqf+H9NM7AW8C1QCg4B1wHNAP+Bs4GngIeAsYBLwH429gRdrQ6JmORsXH9vcthbQCMRa
+4BrfB9oBy4EVwEnAQKAGWAy0AUYBpcDUFrhfATsIzRWOYuBi8/cfzPWGmf37kbCMBcqABcA/gBOB
+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
+DVBCxQAAAABJRU5ErkJggg0K
+--0000000000001c90a505f874d622--

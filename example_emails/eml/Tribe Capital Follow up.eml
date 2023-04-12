@@ -1,0 +1,608 @@
+Delivered-To: kavin@tribecap.co
+Received: by 2002:a05:7010:ac8e:b0:341:6b4e:1a5e with SMTP id dv14csp2104044mdb;
+        Sun, 2 Apr 2023 21:08:02 -0700 (PDT)
+X-Received: by 2002:a05:6402:384:b0:502:6fc0:3f17 with SMTP id o4-20020a056402038400b005026fc03f17mr13862127edv.4.1680494881680;
+        Sun, 02 Apr 2023 21:08:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1680494881; cv=none;
+        d=google.com; s=arc-20160816;
+        b=fUU5dpFKm4eG1tcySB3aKNfSMeWrMoUaNdhLBGq/+6LuSzOSU6LnngWda3jccHwGkh
+         +ytRhz2kbjpHXoAmq3/kNoV2ePI0avPMTaLyb+QO2xwEnRt8h/uSnVGJ07i+he49C4KH
+         uIBwPVBGnU5RG5OIeZL+EXVxKXRSAH9H7ZAIoBivdqLF/fcCGy7TmHGlUocHE/3UFG7G
+         U5dDScHIC9vD4faYWvg5gMHxBgOdBARJKzjn+tSfheELTfzzq+MpsblRoLqg9IEv1G0z
+         +MUnLNkYemOA65UEyFGjRzWzq0CiZU8VjUG2vB6IsSzyrmeIGIYo+iy0fyk98Kmjpjz0
+         aS1Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=pTgs4MD3jMsDye6VOn6w2rDIjpld0+J71KmemFI0dRE=;
+        b=F/Ghy2XFf9AOS+m9Y1E+IsC0rYZ0ZuLFqCSy3hEuRUVHE2rYOFcTcfkFeaeSSF9iG+
+         oaAfRzQcMg/zpR7AQz0aDp9DiACQrd3u9h7owzWShYckZDA15ZWKyMASPZCv0hp7iMlK
+         fkAUtrT8MOUq7cYCm3wCleFARTgYwB7k72+Nc+mvey3U5ki3A3fhCyxez0xiJHw1D4EO
+         Un7g6hEDU3iKLoilpSwLET4y35n3XH+ADEF+BkylB0DcDsyFqO6GK7RrYogZbzhPJ1vK
+         xewq84mXUAJOwXt7MgF1S2Fd2bdi2DCli/F8dtSwlG8BTlPv1BYNsQJb6zD9a55WjGrD
+         9xnQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=RtQaqkfW;
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+Return-Path: <chelsea@tribecap.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id lu20-20020a170906fad400b00947abb6b7c9sor3730638ejb.131.2023.04.02.21.08.01
+        for <kavin@tribecap.co>
+        (Google Transport Security);
+        Sun, 02 Apr 2023 21:08:01 -0700 (PDT)
+Received-SPF: pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=RtQaqkfW;
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tribecap.co; s=google; t=1680494880;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=pTgs4MD3jMsDye6VOn6w2rDIjpld0+J71KmemFI0dRE=;
+        b=RtQaqkfWtUxjbeVCdqgE6sORrNjyWbYINZ1Rt8QyLqYylYEQv8cIRRDsk5UM/ZzWyv
+         fIhzghBef/4NmxekamDAsbng4snm8ZK8ayTYT4xJgN79M+jLv9DkJLzMVyXQHwzPaBOn
+         kirHxOZRp4X5YEjAOOnvDlNvOrhO5v25icGwk62XEkW1DUiwJwNNvO7J57Qjl0djiznc
+         yIw/9UVxOv8N7t0SBmep0mQ/1iuPh4+kKKT3oiOqmNk3v3SUo+YCuXfZUkwlQxphygjD
+         woGWXbuOVWTFQoiEzRmeQ0jAOes/8I4Bg5ZuWDrYcU/vg0czag07lYoA5lckGoF7oFDP
+         f+pg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680494880;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=pTgs4MD3jMsDye6VOn6w2rDIjpld0+J71KmemFI0dRE=;
+        b=EqVIqclNbVBIs7E02xa++EAiZqDu9HZuOjDsU7S0epZCPg2428oxghI8AqdTkd0ONM
+         Y1j7hF5b4CmPOwK2D1Vidj6PJP8L1boK5dzb7GzT7yz1TbTaMerH/aGo2TE2tORMkpq6
+         XsU3TSRLHJ+bj1mJimPtd4mR2S6+t2ub/8FDfhXd4LEr9vVStCz4jhRnLfP/q5bXLMTT
+         yENPdhQ6MxKDtojmuNjxeTxbTECZR6epuVON4oAPA7grzCfeTxkEuuO/APqXz4uMRfq3
+         78wi/PQso5CaLQj5gU63uEpsdy/0XH7q+ds0jyZ8mBxco2uPWsbD5p1/PFFMpCmyl/t2
+         ImIA==
+X-Gm-Message-State: AAQBX9fPeBsUGG3LXH5+9HxA6yRGfCNO6r6qiaeTPyMEJN4qbrIYmOFP
+	PXFs9gnsl5vtGNZEnQOW9nNykBZXfq+CDMT2kbNPRVsBfVrb4+RcYgFnu01HwF4+2Gd+mfDMbe2
+	62LUezuU+tfWWOUmI9rz7J/5Wvn6I5R0uJ7MIbgP46DCyY8L9+oB3Q6brptfdQRXBLJo8gsLLoU
+	vsALYst5R/kXNdu9L3g3HgF+fhE7HNXomkNQS+7anPEYY3Fg==
+X-Google-Smtp-Source: AK7set97xGLM1I3VJVIn27568RnANiNQMU5K/6pxR1RKPoQzoyIMBUh3hcwt6E9jLvSdW18mAyu8LgBoQKXCo0NK82w=
+X-Received: by 2002:a17:907:869f:b0:8b8:aef3:f2a9 with SMTP id
+ qa31-20020a170907869f00b008b8aef3f2a9mr16082133ejc.0.1680494879769; Sun, 02
+ Apr 2023 21:07:59 -0700 (PDT)
+MIME-Version: 1.0
+References: <CA+m9nB14L7KeDPdaQsjenPPvheEaqU=PkUdG4-bsdSdXhUoxbw@mail.gmail.com>
+ <CAEF9bpW77G9mo4gCF8nNmN0qSs6=+A9L-k1qc=U6rW54fv6WcA@mail.gmail.com>
+ <CAEF9bpWHR=qCGnq_NHeEdfk6omMwb4kfSY3F6LmgV0oso9NC8w@mail.gmail.com>
+ <C64438E6-8349-46AA-99B6-7A2A204BC574@marcenacapital.com> <CAEF9bpXxAxZAoG6KunkktJb01kpvdqrWWBBLG79op8pz875LcA@mail.gmail.com>
+ <CAHNEXEO1onS0njOYAh8KpCWzys02Oz367DqcU4WxV80GqORbZw@mail.gmail.com>
+ <CAEF9bpXc3joos+x0GcFcjsfj5a3h455TK=DfHKM8s_naoEdwLQ@mail.gmail.com> <CAHNEXENg90MpMZPphYAsbdNYxsBpe4S+RcwSbU3f8i1U-O7Z4Q@mail.gmail.com>
+In-Reply-To: <CAHNEXENg90MpMZPphYAsbdNYxsBpe4S+RcwSbU3f8i1U-O7Z4Q@mail.gmail.com>
+From: Chelsea Masri <chelsea@tribecap.co>
+Date: Sun, 2 Apr 2023 21:07:40 -0700
+Message-ID: <CAEF9bpVhqwaVGTqhiN_KsPVYt5WnYVD+eRXhwBn_MxTEKn+Bhw@mail.gmail.com>
+Subject: Fwd: Tribe Capital Follow up
+To: Kavin Stewart <kavin@tribecap.co>
+Content-Type: multipart/related; boundary="0000000000005bab3805f866b420"
+
+--0000000000005bab3805f866b420
+Content-Type: multipart/alternative; boundary="0000000000005bab3705f866b41f"
+
+--0000000000005bab3705f866b41f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+---------- Forwarded message ---------
+From: Tiffany Cervasio <tiffany@nxp.vc>
+Date: Wed, Mar 22, 2023 at 12:52=E2=80=AFPM
+Subject: Re: Tribe Capital Follow up
+To: Chelsea Masri <chelsea@tribecap.co>
+
+
+Great thank you!
+
+On Wed, Mar 22, 2023 at 3:50=E2=80=AFPM Chelsea Masri <chelsea@tribecap.co>=
+ wrote:
+
+> Yes, I have copied both of his emails on the invite. Thank you!
+>
+> On Wed, Mar 22, 2023 at 11:47=E2=80=AFAM Tiffany Cervasio <tiffany@nxp.vc=
+> wrote:
+>
+>> Hi Chelsea,
+>>
+>> Yes this one works:
+>>
+>>    - Tuesday, 4/4 at 5pm
+>>
+>> He is having some difficulty with his calendar in the US. Can you copy
+>> shashank.marcena@gmail.com on the invite please?
+>>
+>> Thanks for your help!
+>>
+>> Best,
+>>
+>> Tiffany
+>>
+>> On Wed, Mar 22, 2023 at 12:37=E2=80=AFPM Chelsea Masri <chelsea@tribecap=
+.co>
+>> wrote:
+>>
+>>> Hello Tiffany,
+>>>
+>>> Please let me know if any of the following dates/times work for
+>>> Shashank. All in London local time. Thank you!
+>>>
+>>>    - Friday, 3/24 at 3:30pm
+>>>    - Friday, 3/31 at 3:30pm
+>>>    - Monday, 4/3 at 3:30pm
+>>>    - Tuesday, 4/4 at 3:30pm, 5pm
+>>>    - Thursday, 4/6 at 3:30pm
+>>>
+>>>
+>>> On Tue, Mar 21, 2023 at 11:52=E2=80=AFAM Shashank Marcena <
+>>> shashank.sripada@marcenacapital.com> wrote:
+>>>
+>>>> Hi Chelsea,
+>>>>
+>>>> Thanks for reaching out, looping Tiffany in to help us find a time.
+>>>> Thanks.
+>>>>
+>>>>
+>>>> Best,
+>>>>
+>>>>
+>>>> *Shashank Sripada*
+>>>> Chief Investment Officer
+>>>> *Marcena Capital Ltd.*
+>>>> Green Park House
+>>>> 15 Stratton Street
+>>>> London
+>>>> www.marcenacapital.com
+>>>> Office Contact: +442081443348
+>>>> Mobile Contact: +447947762406
+>>>>
+>>>> [image: image004.png]
+>>>> ------------------------------
+>>>>
+>>>> This email is confidential and may be privileged. If you are not the
+>>>> intended recipient, dissemination or copying of this email is not allo=
+wed.
+>>>> If you may have received this email in error, please contact the sende=
+r
+>>>> immediately by return email. Please then delete the email and do not
+>>>> disclose its contents to another person. Marcena Capital Ltd. is a pri=
+vate
+>>>> limited company registered in England and Wales under registered numbe=
+r
+>>>> *09254624*. Marcena Capital Ltd. (*Firm Reference No.653103*) is an
+>>>> Appointed Representative of Capital Alliance Partners Ltd. (*Firm
+>>>> Reference No.460233*) which is authorised and regulated by the
+>>>> Financial Conduct Authority in the United Kingdom. Additional informat=
+ion
+>>>> about our company and regulation can be found respectively on our webs=
+ite
+>>>> at www.marcenacapital.com <https://marcenacapital.com/> and at
+>>>> register.fca.org.uk.
+>>>> ------------------------------
+>>>>
+>>>>
+>>>>
+>>>> On Mar 21, 2023, at 11:36 AM, Chelsea Masri <chelsea@tribecap.co>
+>>>> wrote:
+>>>>
+>>>> Hello Shashank,
+>>>>
+>>>> I wanted to follow up with new availability. Please let me know which
+>>>> date and time works best for you, thank you. All in London local time.
+>>>>
+>>>>    - Friday, 3/24 at 3:30pm
+>>>>    - Friday, 3/31 at 3:30pm
+>>>>    - Monday, 4/3 at 3:30pm
+>>>>    - Tuesday, 4/4 at 3:30pm, 5pm
+>>>>    - Thursday, 4/6 at 3:30pm
+>>>>
+>>>>
+>>>> On Thu, Mar 16, 2023 at 9:55=E2=80=AFAM Chelsea Masri <chelsea@tribeca=
+p.co>
+>>>> wrote:
+>>>>
+>>>>> Absolutely, Pablo.
+>>>>>
+>>>>> Hello Shashank,
+>>>>>
+>>>>> Please let me know if any of the following dates and times work for
+>>>>> you next week. I believe you are in London, so all times are in GMT. =
+Please
+>>>>> let me know if you may be in another time zone and I can adjust
+>>>>> accordingly.
+>>>>>
+>>>>>    - Wednesday, 3/22 at 3:30pm
+>>>>>    - Thursday, 3/23 at 3:30pm
+>>>>>    - Friday, 3/24 at 3:30pm, 6pm
+>>>>>
+>>>>>
+>>>>> On Thu, Mar 16, 2023 at 9:42=E2=80=AFAM Pablo Solano <psolano@accessc=
+apital.vc>
+>>>>> wrote:
+>>>>>
+>>>>>> Dear Chelsea,
+>>>>>>
+>>>>>> Can you please help us find a time in the second half of next week t=
+o
+>>>>>> do a zoom with Shashank? We want to dive into the Flagship IV opport=
+unity.
+>>>>>>
+>>>>>> Many thanks,
+>>>>>> P
+>>>>>>
+>>>>>> --
+>>>>>> Partner
+>>>>>>
+>>>>>> *Pablo Solano*
+>>>>>> m:+1.415.316.8270 <++1415.3168270>
+>>>>>> <https://www.linkedin.com/in/pabloasolano>
+>>>>>> <http://twitter.com/solanopa>    *Late Stage VC*
+>>>>>>
+>>>>>>
+>>>> *Disclaimer*
+>>>> The information contained in this communication from the sender is
+>>>> confidential. It is intended solely for use by the recipient and other=
+s
+>>>> authorized to receive it. If you are not the recipient, you are hereby
+>>>> notified that any disclosure, copying, distribution or taking action i=
+n
+>>>> relation of the contents of this information is strictly prohibited an=
+d may
+>>>> be unlawful. If you have received this communication in error, please
+>>>> notify Tribe at (619) 567-9955 and delete this communication immediate=
+ly
+>>>> without making any copy or distribution.
+>>>>
+>>>>
+>>>>
+>>> *Disclaimer*
+>>> The information contained in this communication from the sender is
+>>> confidential. It is intended solely for use by the recipient and others
+>>> authorized to receive it. If you are not the recipient, you are hereby
+>>> notified that any disclosure, copying, distribution or taking action in
+>>> relation of the contents of this information is strictly prohibited and=
+ may
+>>> be unlawful. If you have received this communication in error, please
+>>> notify Tribe at (619) 567-9955 and delete this communication immediatel=
+y
+>>> without making any copy or distribution.
+>>>
+>>
+> *Disclaimer*
+> The information contained in this communication from the sender is
+> confidential. It is intended solely for use by the recipient and others
+> authorized to receive it. If you are not the recipient, you are hereby
+> notified that any disclosure, copying, distribution or taking action in
+> relation of the contents of this information is strictly prohibited and m=
+ay
+> be unlawful. If you have received this communication in error, please
+> notify Tribe at (619) 567-9955 and delete this communication immediately
+> without making any copy or distribution.
+>
+
+--0000000000005bab3705f866b41f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">---------- Forwarded message ---------<br>From: <strong cla=
+ss=3D"gmail_sendername" dir=3D"auto">Tiffany Cervasio</strong> <span dir=3D=
+"auto">&lt;<a href=3D"mailto:tiffany@nxp.vc">tiffany@nxp.vc</a>&gt;</span><=
+br>Date: Wed, Mar 22, 2023 at 12:52=E2=80=AFPM<br>Subject: Re: Tribe Capita=
+l Follow up<br>To: Chelsea Masri &lt;<a href=3D"mailto:chelsea@tribecap.co"=
+>chelsea@tribecap.co</a>&gt;<br></div><br><br><div dir=3D"ltr">Great thank =
+you!=C2=A0</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gm=
+ail_attr">On Wed, Mar 22, 2023 at 3:50=E2=80=AFPM Chelsea Masri &lt;<a href=
+=3D"mailto:chelsea@tribecap.co" target=3D"_blank">chelsea@tribecap.co</a>&g=
+t; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
+x 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div d=
+ir=3D"ltr">Yes, I have copied both of his emails on the invite. Thank you!<=
+/div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">O=
+n Wed, Mar 22, 2023 at 11:47=E2=80=AFAM Tiffany Cervasio &lt;<a href=3D"mai=
+lto:tiffany@nxp.vc" target=3D"_blank">tiffany@nxp.vc</a>&gt; wrote:<br></di=
+v><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;borde=
+r-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr">Hi Che=
+lsea,<div><br></div><div>Yes this one works:=C2=A0</div><ul><li style=3D"ma=
+rgin-left:15px">Tuesday, 4/4 at 5pm</li></ul><div>He is having some difficu=
+lty with his calendar in the US. Can you copy=C2=A0<a href=3D"mailto:shasha=
+nk.marcena@gmail.com" target=3D"_blank">shashank.marcena@gmail.com</a> on t=
+he invite please?</div><div><br></div><div>Thanks for your help!=C2=A0</div=
+><div><br></div><div>Best,=C2=A0</div><div><br></div><div>Tiffany=C2=A0</di=
+v></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr=
+">On Wed, Mar 22, 2023 at 12:37=E2=80=AFPM Chelsea Masri &lt;<a href=3D"mai=
+lto:chelsea@tribecap.co" target=3D"_blank">chelsea@tribecap.co</a>&gt; wrot=
+e:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
+.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"l=
+tr">Hello=C2=A0Tiffany,<div><br></div><div>Please let me know if any of the=
+ following dates/times work for Shashank. All in London local time. Thank y=
+ou!</div><div><ul><li style=3D"margin-left:15px">Friday, 3/24 at 3:30pm</li=
+><li style=3D"margin-left:15px">Friday, 3/31 at 3:30pm</li><li style=3D"mar=
+gin-left:15px">Monday, 4/3 at 3:30pm</li><li style=3D"margin-left:15px">Tue=
+sday, 4/4 at 3:30pm, 5pm</li><li style=3D"margin-left:15px">Thursday, 4/6 a=
+t 3:30pm</li></ul></div></div><br><div class=3D"gmail_quote"><div dir=3D"lt=
+r" class=3D"gmail_attr">On Tue, Mar 21, 2023 at 11:52=E2=80=AFAM Shashank M=
+arcena &lt;<a href=3D"mailto:shashank.sripada@marcenacapital.com" target=3D=
+"_blank">shashank.sripada@marcenacapital.com</a>&gt; wrote:<br></div><block=
+quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
+px solid rgb(204,204,204);padding-left:1ex"><div>Hi Chelsea,<div><br></div>=
+<div>Thanks for reaching out, looping Tiffany in to help us find a time. Th=
+anks.</div><div><br></div><div><br></div><div>Best,</div><div><br></div><di=
+v><br><div>
+<div style=3D"font-family:Helvetica;font-size:12px;font-style:normal;font-v=
+ariant-caps:normal;font-weight:normal;letter-spacing:normal;text-align:star=
+t;text-indent:0px;text-transform:none;white-space:normal;word-spacing:0px;t=
+ext-decoration:none;color:rgb(0,0,0)"><b>Shashank Sripada</b><br>Chief Inve=
+stment Officer<br><b>Marcena Capital Ltd.</b><br>Green Park House<br>15 Str=
+atton Street<br>London<br><a href=3D"http://www.marcenacapital.com" target=
+=3D"_blank">www.marcenacapital.com</a><br>Office Contact: +442081443348<br>=
+Mobile Contact: +447947762406</div><span style=3D"font-family:Helvetica;fon=
+t-size:12px;font-style:normal;font-variant-caps:normal;font-weight:normal;l=
+etter-spacing:normal;text-align:start;text-indent:0px;text-transform:none;w=
+hite-space:normal;word-spacing:0px;text-decoration:none;color:rgb(0,0,0)"><=
+br style=3D"color:rgb(0,0,0);font-family:Helvetica;font-size:12px;font-styl=
+e:normal;font-variant-caps:normal;font-weight:normal;letter-spacing:normal;=
+text-align:start;text-indent:0px;text-transform:none;white-space:normal;wor=
+d-spacing:0px"><span style=3D"color:rgb(0,0,0);font-family:Helvetica;font-s=
+ize:12px;font-style:normal;font-variant-caps:normal;font-weight:normal;lett=
+er-spacing:normal;text-align:start;text-indent:0px;text-transform:none;whit=
+e-space:normal;word-spacing:0px"><span><span></span></span></span></span><s=
+pan><img alt=3D"image004.png" src=3D"cid:1870a2c0c037745b41"></span><br><hr=
+ style=3D"font-style:normal;font-variant-caps:normal;font-weight:normal;let=
+ter-spacing:normal;text-align:start;text-indent:0px;text-transform:none;whi=
+te-space:normal;word-spacing:0px;text-decoration:none;color:rgb(34,34,34);f=
+ont-family:arial,sans-serif;font-size:12.6667px"><div style=3D"font-style:n=
+ormal;font-variant-caps:normal;font-weight:normal;letter-spacing:normal;tex=
+t-align:start;text-indent:0px;text-transform:none;white-space:normal;word-s=
+pacing:0px;text-decoration:none;color:rgb(34,34,34);font-family:arial,sans-=
+serif;font-size:12.6667px"><br></div><font size=3D"1" style=3D"font-style:n=
+ormal;font-variant-caps:normal;font-weight:normal;letter-spacing:normal;tex=
+t-align:start;text-indent:0px;text-transform:none;white-space:normal;word-s=
+pacing:0px;text-decoration:none;color:rgb(34,34,34);font-family:arial,sans-=
+serif">This email is confidential and may be privileged. If you are not the=
+ intended recipient, dissemination or copying of this email is not allowed.=
+ If you may have received this email in error, please contact the sender im=
+mediately by return email. Please then delete the email and do not disclose=
+ its contents to another person. Marcena Capital Ltd. is a private limited =
+company registered in England and Wales under registered number=C2=A0<b>092=
+54624</b>. Marcena Capital Ltd. (<b>Firm Reference No.653103</b>) is an App=
+ointed Representative of Capital Alliance Partners Ltd. (<b>Firm Reference =
+No.460233</b>) which is authorised and regulated by the Financial Conduct A=
+uthority in the United Kingdom. Additional information about our company an=
+d regulation can be found respectively on our website at=C2=A0<a href=3D"ht=
+tps://marcenacapital.com/" target=3D"_blank">www.marcenacapital.com</a>=C2=
+=A0and at=C2=A0<a href=3D"https://register.fca.org.uk/" target=3D"_blank">r=
+egister.fca.org.uk</a>.</font><br style=3D"font-size:12px;font-style:normal=
+;font-variant-caps:normal;font-weight:normal;letter-spacing:normal;text-ali=
+gn:start;text-indent:0px;text-transform:none;white-space:normal;word-spacin=
+g:0px;text-decoration:none;color:rgb(34,34,34);font-family:arial,sans-serif=
+"><hr style=3D"font-style:normal;font-variant-caps:normal;font-weight:norma=
+l;letter-spacing:normal;text-align:start;text-indent:0px;text-transform:non=
+e;white-space:normal;word-spacing:0px;text-decoration:none;color:rgb(34,34,=
+34);font-family:arial,sans-serif;font-size:12.6667px"><br style=3D"color:rg=
+b(0,0,0);font-family:Helvetica;font-size:12px;font-style:normal;font-varian=
+t-caps:normal;font-weight:normal;letter-spacing:normal;text-align:start;tex=
+t-indent:0px;text-transform:none;white-space:normal;word-spacing:0px;text-d=
+ecoration:none"><br style=3D"color:rgb(0,0,0);font-family:Helvetica;font-si=
+ze:12px;font-style:normal;font-variant-caps:normal;font-weight:normal;lette=
+r-spacing:normal;text-align:start;text-indent:0px;text-transform:none;white=
+-space:normal;word-spacing:0px;text-decoration:none">
+</div>
+<div><br><blockquote type=3D"cite"><div>On Mar 21, 2023, at 11:36 AM, Chels=
+ea Masri &lt;<a href=3D"mailto:chelsea@tribecap.co" target=3D"_blank">chels=
+ea@tribecap.co</a>&gt; wrote:</div><br><div><div dir=3D"ltr">Hello=C2=A0Sha=
+shank,<div><br></div><div>I wanted to follow up with new availability. Plea=
+se let me know which date and time=C2=A0works best for you, thank you. All =
+in London local time.</div><div><ul><li style=3D"margin-left:15px">Friday, =
+3/24 at 3:30pm</li><li style=3D"margin-left:15px">Friday, 3/31 at 3:30pm</l=
+i><li style=3D"margin-left:15px">Monday, 4/3 at 3:30pm</li><li style=3D"mar=
+gin-left:15px">Tuesday, 4/4 at 3:30pm, 5pm</li><li style=3D"margin-left:15p=
+x">Thursday, 4/6 at 3:30pm</li></ul></div></div><br><div class=3D"gmail_quo=
+te"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Mar 16, 2023 at 9:55=E2=
+=80=AFAM Chelsea Masri &lt;<a href=3D"mailto:chelsea@tribecap.co" target=3D=
+"_blank">chelsea@tribecap.co</a>&gt; wrote:<br></div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex"><div dir=3D"ltr">Absolutely, Pablo.<div><br></d=
+iv><div>Hello Shashank,</div><div><br></div><div>Please let me know if any =
+of the following dates and times work for you next week. I believe=C2=A0you=
+ are in London, so all times are in GMT. Please let me know if you may be i=
+n another time zone and I can adjust accordingly.=C2=A0</div><div><ul><li>W=
+ednesday, 3/22 at 3:30pm</li><li>Thursday, 3/23 at 3:30pm</li><li>Friday, 3=
+/24 at 3:30pm, 6pm</li></ul></div></div><br><div class=3D"gmail_quote"><div=
+ dir=3D"ltr" class=3D"gmail_attr">On Thu, Mar 16, 2023 at 9:42=E2=80=AFAM P=
+ablo Solano &lt;<a href=3D"mailto:psolano@accesscapital.vc" target=3D"_blan=
+k">psolano@accesscapital.vc</a>&gt; wrote:<br></div><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex"><div dir=3D"ltr">Dear Chelsea,=C2=A0<div><br></d=
+iv><div>Can you please help us find a time in the second half of next week =
+to do a zoom with Shashank? We want to dive into the Flagship IV opportunit=
+y.=C2=A0</div><div><br></div><div>Many thanks,</div><div>P<br clear=3D"all"=
+><div><br></div><span>-- </span><br><div dir=3D"ltr"><div dir=3D"ltr"><div =
+dir=3D"ltr">Partner=C2=A0</div><div dir=3D"ltr"><br></div><div dir=3D"ltr">=
+<div style=3D"font-family:Arial;font-size:14px;color:rgb(100,100,100)"><b>P=
+ablo Solano</b></div><div style=3D"font-family:Roboto,RobotoDraft,Helvetica=
+,Arial,sans-serif;font-size:12.8px;padding:5px 0px"><span style=3D"color:rg=
+b(141,141,141);font-family:Arial;font-size:13px;display:inline-block"><span=
+ style=3D"color:rgb(62,72,201)">m:</span><a href=3D"tel:++1415.3168270" sty=
+le=3D"color:rgb(141,141,141)" target=3D"_blank">+1.415.316.8270</a></span><=
+span style=3D"color:rgb(141,141,141)"></span></div><div style=3D"font-famil=
+y:Arial;font-size:14px;color:rgb(100,100,100);margin-top:5px"><a href=3D"ht=
+tps://www.linkedin.com/in/pabloasolano" style=3D"color:rgb(17,85,204)" targ=
+et=3D"_blank"><img width=3D"16" height=3D"16" src=3D"https://s3.amazonaws.c=
+om/images.wisestamp.com/icons_32/linkedin.png" alt=3D"" style=3D"border-rad=
+ius:0px;border:0px;width:16px;min-height:16px"></a>=C2=A0<a href=3D"http://=
+twitter.com/solanopa" style=3D"color:rgb(17,85,204)" target=3D"_blank"><img=
+ width=3D"16" height=3D"16" src=3D"https://s3.amazonaws.com/images.wisestam=
+p.com/icons_32/twitter.png" alt=3D"" style=3D"border-radius:0px;border:0px;=
+width:16px;min-height:16px"></a>=C2=A0 =C2=A0 <i style=3D"font-size:small;c=
+olor:rgb(34,34,34);font-family:arial,sans-serif">Late Stage VC</i></div><di=
+v style=3D"font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif;font-s=
+ize:12.8px;margin-top:5px"><br></div></div></div></div></div></div>
+</blockquote></div>
+</blockquote></div>
+
+<br>
+<div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1"><b>Disclaimer</=
+b></font></div><div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1">=
+The information contained in this communication from the sender is confiden=
+tial. It is intended solely for use by the recipient and others authorized =
+to receive it. If you are not the recipient, you are hereby notified that a=
+ny disclosure, copying, distribution or taking action in relation of the co=
+ntents of this information is strictly prohibited and may be unlawful. If y=
+ou have received this communication in error, please notify Tribe at (619) =
+567-9955 and delete this communication immediately without making any copy =
+or distribution.</font></div></div></blockquote></div><br></div></div></blo=
+ckquote></div>
+
+<br>
+<div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1"><b>Disclaimer</=
+b></font></div><div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1">=
+The information contained in this communication from the sender is confiden=
+tial. It is intended solely for use by the recipient and others authorized =
+to receive it. If you are not the recipient, you are hereby notified that a=
+ny disclosure, copying, distribution or taking action in relation of the co=
+ntents of this information is strictly prohibited and may be unlawful. If y=
+ou have received this communication in error, please notify Tribe at (619) =
+567-9955 and delete this communication immediately without making any copy =
+or distribution.</font></div></blockquote></div>
+</blockquote></div>
+
+<br>
+<div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1"><b>Disclaimer</=
+b></font></div><div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1">=
+The information contained in this communication from the sender is confiden=
+tial. It is intended solely for use by the recipient and others authorized =
+to receive it. If you are not the recipient, you are hereby notified that a=
+ny disclosure, copying, distribution or taking action in relation of the co=
+ntents of this information is strictly prohibited and may be unlawful. If y=
+ou have received this communication in error, please notify Tribe at (619) =
+567-9955 and delete this communication immediately without making any copy =
+or distribution.</font></div></blockquote></div>
+</div></div>
+
+--0000000000005bab3705f866b41f--
+--0000000000005bab3805f866b420
+Content-Type: image/png; name="image004.png"
+Content-Disposition: inline; filename="image004.png"
+Content-Transfer-Encoding: base64
+Content-ID: <1870a2c0c037745b41>
+X-Attachment-Id: 1870a2c0c037745b41
+
+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
+--0000000000005bab3805f866b420--

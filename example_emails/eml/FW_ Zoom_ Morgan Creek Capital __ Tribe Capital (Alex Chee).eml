@@ -1,0 +1,1013 @@
+Delivered-To: kavin@tribecap.co
+Received: by 2002:a05:7010:ac8e:b0:341:6b4e:1a5e with SMTP id dv14csp2621961mdb;
+        Mon, 3 Apr 2023 13:59:58 -0700 (PDT)
+X-Received: by 2002:a05:6a20:4d90:b0:d6:c9e2:17a1 with SMTP id gj16-20020a056a204d9000b000d6c9e217a1mr32543347pzb.62.1680555597940;
+        Mon, 03 Apr 2023 13:59:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1680555597; cv=none;
+        d=google.com; s=arc-20160816;
+        b=lqCkk5+/92x9nfCZy+RYY/x9pmpVIGfkhQlsm43i54uQFg3VUp2v+zkJXX1tJGEX+K
+         ZX4wdb7QNTB7ypvlRiho+IOhkXO3FpNqGTKuSajekgtWdvQb7LrYQ9R4qB773JHHZjPY
+         tJr/W3yKWpgz0/uGNdleIMpxHMxrkEG7iYBe4rbMDTOE8GmcSYiOAmdhs5GQeKGvy9aF
+         4NMZKqfNoPzaa/fJ4gQ42FXUw1cjd61PiXZ9pLazcEevO59+Axn2BDPxz99IAiEqHbl8
+         Xi7oie7oxa1bcFG2JSvwrJ3ZMCQ0ZWZb7gjlnyvqa5PfUQhLyxqQODep0q2Pbw2Kn4WY
+         rCww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=/XcJZgZemIAlWylOmop6wvfyAHHVnpncWJ9fSRLLNTE=;
+        b=SGsd4Q4Cjy4cdeGnJF1vidIiF9LXX8WoJ5nGooHeI7U90VgC4I6gPIHJs31f52OSa8
+         6SyBa4HmrkIrLhgJOG1ji/Xho12gbYyBowsDFz0yqr/w1d9XL+AwqCTs+XkhdMkrbke0
+         X2I7GWAjNFokJ6N7e2to83vLjOAKa4dJWWwwkqMhI6O16OSiTlGIWTuHQ/FJ+YjLguOk
+         /dR5BJFa92desZF3p3gDZMEdqMqlMI/5KIkn5z9DLdgJuufvcUiGHf6vQUNU9NTtM8G9
+         GtbrEyJ1cslx0dqTQPBoggCRL0NsVDdD2dAkBPXDpfRBAS+kjqyrSKTGmG7XxTAcvrJe
+         SRyw==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=CDkiFVRz;
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+Return-Path: <chelsea@tribecap.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id q2-20020a056a0002a200b0062d941e0b60sor4285920pfs.64.2023.04.03.13.59.57
+        for <kavin@tribecap.co>
+        (Google Transport Security);
+        Mon, 03 Apr 2023 13:59:57 -0700 (PDT)
+Received-SPF: pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=CDkiFVRz;
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tribecap.co; s=google; t=1680555595;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=/XcJZgZemIAlWylOmop6wvfyAHHVnpncWJ9fSRLLNTE=;
+        b=CDkiFVRzeE5s2ygPUVBcfztdgv1o1VMTcSeiPCZc0guhMC8gheXSmfpf0pg4UoxIxp
+         Y3lIYE6D+DKZeCctT9iU/ST8l3ZeZInwMaawTSdXEbeIw2wEmkuSar7MPwHw2lFJ/oPk
+         XjaiP4Tf586vwFliEyT52YHNJdD8BQoKwLfaBYUC1HW0sZS6jOfjjPrzfMQhcX51NpFI
+         PihI+2JAaq5tjbQ+Pl/V4zXxbjBe0XxA4hXDLSJeOo2Q3xjGtUUYkV5QwoS7+xbFBpG0
+         EPr/QHfq+PNsqMYK2/FbQMyu1enD/FTcVkhQ1HbkyPFkOOR3bcMTDz0aHbiCDTcaPP11
+         s2Sg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680555595;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=/XcJZgZemIAlWylOmop6wvfyAHHVnpncWJ9fSRLLNTE=;
+        b=m0w8/ltAArzLBNqCxmBabJKEsM7Bd/ewMTcPaLIOkOrAru0E+U752Ld2UcbXai7pvt
+         ej6w/6eSKrTkviQs9q7tE3blQ6fNRxp75ACq87qpkVdGvg6oy1H0kts56ijRwZTxne31
+         aSZiSrEdfHazd8Qi5IZxAArE2RNQXOH7ujqBBekrt8/eJVNLlPite2Gy2fcZeXO6SfdN
+         m+1hzH+e6/RtCvNeH1AOr8uRExDorFNswu/4ic5L7BFHik9VHb5JGxdGkVMXxuR7gNGf
+         Fux0d2Yf5Wnh0VbibBWUYkrrIyvYxyWQ/nF+hYFFiEA3gRdwGiHbTLsD68EE1FRHxGPx
+         8fKA==
+X-Gm-Message-State: AAQBX9dPKAUmz9zcMVMJi9gBvct5IShxlEShUuxMcLdv9iu6phFH3OAq
+	eVvl5SWLaxsal0Et4nO5iyX6z7C3MPEkUSN5Opu7XALHJiekNG9/nXTxLNjYMoeeIOd1j4cSI6q
+	JwMU/XOX642Esk2BQ8nmYUhR7QB9RqwhoxQ8Rkz9wI0REwLspEGNTZjgFAl6ZgMRqVU2/O0wVD9
+	n2r4m8o9d4Lyi7g67npT6gCcgaKLvj958k2gRA0nDx/d62lQ==
+X-Google-Smtp-Source: AKy350ZtID1p6gUGzvIyON/Ws1xi8G3AVb5XQaeyEVMDXa37ynJPw2mA80VYGnjjXnB3vO1rSnG+QxaRFlX6V8q5M6E=
+X-Received: by 2002:a05:6a00:1a91:b0:62d:dfe3:ea2e with SMTP id
+ e17-20020a056a001a9100b0062ddfe3ea2emr32240pfv.1.1680555595263; Mon, 03 Apr
+ 2023 13:59:55 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAEF9bpUkqY+Y2iEV7hBVd=1VvkVUnD5MhDe4nBPx8JZWyck80w@mail.gmail.com>
+ <SN7PR14MB7044F8738648EA57599AD2F9C1B69@SN7PR14MB7044.namprd14.prod.outlook.com>
+ <BN8PR14MB3236A6EE25C0E49501687978CBB69@BN8PR14MB3236.namprd14.prod.outlook.com>
+ <CAEF9bpVbfLsaBx11qDTLBmbocUX3v+Cmpe_dNyKFhGpAa4U1xw@mail.gmail.com>
+ <BN8PR14MB32363D5FB09A8C412495105DCBB69@BN8PR14MB3236.namprd14.prod.outlook.com>
+ <CAEF9bpXJX6mn2-ZuDSS_1E5W86UQ6-88y7YCAYUeHPe9sGk=oQ@mail.gmail.com>
+In-Reply-To: <CAEF9bpXJX6mn2-ZuDSS_1E5W86UQ6-88y7YCAYUeHPe9sGk=oQ@mail.gmail.com>
+From: Chelsea Masri <chelsea@tribecap.co>
+Date: Mon, 3 Apr 2023 13:59:39 -0700
+Message-ID: <CAEF9bpXXBYpr0zOAesFirOOLntnpG6c1s2euhbqUCPKPaFvPrg@mail.gmail.com>
+Subject: Fwd: FW: Zoom: Morgan Creek Capital <> Tribe Capital (Alex Chee)
+To: Kavin Stewart <kavin@tribecap.co>
+Content-Type: multipart/related; boundary="000000000000489edd05f874d7b4"
+
+--000000000000489edd05f874d7b4
+Content-Type: multipart/alternative; boundary="000000000000489edb05f874d7b3"
+
+--000000000000489edb05f874d7b3
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+---------- Forwarded message ---------
+From: Chelsea Masri <chelsea@tribecap.co>
+Date: Mon, Mar 6, 2023 at 8:49=E2=80=AFAM
+Subject: Re: FW: Zoom: Morgan Creek Capital <> Tribe Capital (Alex Chee)
+To: Peggy Mitchell <pmitchell@morgancreekcap.com>
+
+
+The 28th at 1pm PT works well. I will update the calendar invite
+momentarily. Thank you for the flexibility!
+
+On Mon, Mar 6, 2023 at 8:47 AM Peggy Mitchell <pmitchell@morgancreekcap.com=
+>
+wrote:
+
+> 28th or 29th or 30th 1pm PT
+>
+>
+> Peggy Mitchell
+> Investment Assistant
+> (919) 933=E2=80=914004 Main  |  *(919) 933-4048* Fax
+> 301 W. Barbee Chapel Rd. Suite 200 | Chapel Hill, NC | 27517
+> <https://www.google.com/maps/search/301+W.+Barbee+Chapel+Rd.+Suite+200+%7=
+C+Chapel+Hill,+NC+%7C+27517?entry=3Dgmail&source=3Dg>
+> *pmitchell@morgancreekcap.com* <pmitchell@morgancreekcap.com>  |
+> www.morgancreekcap.com
+> ALTERNATIVE THINKING ABOUT INVESTMENTS
+> Please note that we are required to provide you with a summary of the
+> services we provide, Form CRS (Client Relationship Summary), in addition =
+to
+> other important information regarding our firm. Please visit *here*
+> <https://adviserinfo.sec.gov/firm/summary/138401> to view these important
+> documents.
+> This email is intended for the sole use of the individual or entity to
+> which it is addressed and may include information that is confidential or
+> privileged. If you are not the intended recipient, do not copy, distribut=
+e
+> or otherwise disseminate the message or its contents. Instead, notify the
+> sender immediately, either by return email or by telephone at (919)
+> 933-4004, and destroy the message, attachments and all copies. Morgan Cre=
+ek
+> Capital Management, LLC and its affiliates do not offer legal, accounting
+> or tax advice. Any reference to performance data is not warranted as
+> accurate or complete, but based on unaudited figures computed by Morgan
+> Creek. Past performance is not indicative of future results. The content =
+of
+> this message is for informational purposes only and should not be constru=
+ed
+> as a solicitation, recommendation or offer to buy or sell any security or
+> other financial instrument. Any such offering can be made only at the tim=
+e
+> a qualified offeree receives the most recent offering memorandum or
+> prospectus and other operative documents which contain significant detail=
+s
+> with respect to risks and should be carefully read. Email
+> InvestorRelations@morgancreekcap.com with questions regarding this
+> disclosure.
+>
+> *From:* Chelsea Masri <chelsea@tribecap.co>
+> *Sent:* Monday, March 6, 2023 11:45 AM
+> *To:* Peggy Mitchell <pmitchell@morgancreekcap.com>
+> *Subject:* Re: FW: Zoom: Morgan Creek Capital <> Tribe Capital (Alex Chee=
+)
+>
+>
+>
+> Hello Paggy,
+>
+>
+>
+> Unfortunately, 1-2pm is booked already on the 22nd. Could you please
+> suggest a few other times that may work on your teams end?
+>
+>
+>
+> On Mon, Mar 6, 2023 at 8:40 AM Peggy Mitchell <
+> pmitchell@morgancreekcap.com> wrote:
+>
+> We have time on 22nd at 1pm PT as an alternative, would that work?
+>
+>
+>
+> *Peggy Mitchell*
+>
+> Investment Assistant
+>
+> (919) 933=E2=80=914004 Main
+>
+>  |
+>
+> *(919) 933-4048* Fax
+>
+> 301 W. Barbee Chapel Rd. Suite 200 | Chapel Hill, NC | 27517
+> <https://www.google.com/maps/search/301+W.+Barbee+Chapel+Rd.+Suite+200+%7=
+C+Chapel+Hill,+NC+%7C+27517?entry=3Dgmail&source=3Dg>
+>
+> *pmitchell@morgancreekcap.com* <pmitchell@morgancreekcap.com>
+>
+>  |
+>
+> www.morgancreekcap.com
+>
+> ALTERNATIVE THINKING ABOUT INVESTMENTS
+>
+>
+>
+> Please note that we are required to provide you with a summary of the
+> services we provide, Form CRS (Client Relationship Summary), in addition =
+to
+> other important information regarding our firm. Please visit *here
+> <https://adviserinfo.sec.gov/firm/summary/138401>* to view these
+> important documents.
+>
+> *This email is intended for the sole use of the individual or entity to
+> which it is addressed and may include information that is confidential or
+> privileged. If you are not the intended recipient, do not copy, distribut=
+e
+> or otherwise disseminate the message or its contents. Instead, notify the
+> sender immediately, either by return email or by telephone at (919)
+> 933-4004, and destroy the message, attachments and all copies. Morgan Cre=
+ek
+> Capital Management, LLC and its affiliates do not offer legal, accounting
+> or tax advice. Any reference to performance data is not warranted as
+> accurate or complete, but based on unaudited figures computed by Morgan
+> Creek. Past performance is not indicative of future results. The content =
+of
+> this message is for informational purposes only and should not be constru=
+ed
+> as a solicitation, recommendation or offer to buy or sell any security or
+> other financial instrument. Any such offering can be made only at the tim=
+e
+> a qualified offeree receives the most recent offering memorandum or
+> prospectus and other operative documents which contain significant detail=
+s
+> with respect to risks and should be carefully read. Email
+> InvestorRelations@morgancreekcap.com <InvestorRelations@morgancreekcap.co=
+m>
+> with questions regarding this disclosure. *
+>
+> *From:* Frank Tanner <ftanner@morgancreekcap.com>
+> *Sent:* Monday, March 6, 2023 11:32 AM
+> *To:* Chelsea Masri <chelsea@tribecap.co>; alex@tribecap.co; Ryan Newson =
+<
+> rnewson@morgancreekcap.com>; steve@tribecap.co; Peggy Mitchell <
+> pmitchell@morgancreekcap.com>
+> *Subject:* Re: Zoom: Morgan Creek Capital <> Tribe Capital (Alex Chee)
+>
+>
+>
+> Hi Chelsea,
+>
+>
+>
+> No worries. We are fully booked that day, but I'm looping in Peggy to hel=
+p
+> find an alternative in the coming week(s).
+>
+>
+>
+> Best,
+>
+> Frank
+>
+> *Frank** Tanner*
+>
+> Principal
+>
+> (919) 933=E2=80=914004 Main
+>
+>  |
+>
+> *(919) 933-4048* Fax
+>
+> 301 W. Barbee Chapel Road, Suite 200 | Chapel Hill, NC | 27517
+> <https://www.google.com/maps/search/301+W.+Barbee+Chapel+Road,+Suite+200+=
+%7C+Chapel+Hill,+NC+%7C+27517?entry=3Dgmail&source=3Dg>
+>
+> *ftanner@morgancreekcap.com* <ftanner@morgancreekcap.com>
+>
+>  |
+>
+> www.morgancreekcap.com
+>
+> ALTERNATIVE THINKING ABOUT INVESTMENTS
+> ------------------------------
+>
+> *From:* Chelsea Masri <chelsea@tribecap.co>
+> *Sent:* Monday, March 6, 2023 11:24 AM
+> *To:* alex@tribecap.co <alex@tribecap.co>; Frank Tanner <
+> ftanner@morgancreekcap.com>; Ryan Newson <rnewson@morgancreekcap.com>;
+> steve@tribecap.co <steve@tribecap.co>
+> *Subject:* Zoom: Morgan Creek Capital <> Tribe Capital (Alex Chee)
+>
+>
+>
+> Hello,
+>
+>
+>
+> I do apologize for the late notice, but I must reschedule this call with
+> Alex. There has been a scheduling conflict due to the upcoming Terran 1
+> Launch for relativity. Are you all available to speak with Alex on
+> Wednesday, 3/8 between 1-3pm PST?
+>
+>
+>
+> *Disclaimer*
+>
+> The information contained in this communication from the sender is
+> confidential. It is intended solely for use by the recipient and others
+> authorized to receive it. If you are not the recipient, you are hereby
+> notified that any disclosure, copying, distribution or taking action in
+> relation of the contents of this information is strictly prohibited and m=
+ay
+> be unlawful. If you have received this communication in error, please
+> notify Tribe at (619) 567-9955 and delete this communication immediately
+> without making any copy or distribution.
+>
+>
+>
+> *Disclaimer*
+>
+> The information contained in this communication from the sender is
+> confidential. It is intended solely for use by the recipient and others
+> authorized to receive it. If you are not the recipient, you are hereby
+> notified that any disclosure, copying, distribution or taking action in
+> relation of the contents of this information is strictly prohibited and m=
+ay
+> be unlawful. If you have received this communication in error, please
+> notify Tribe at (619) 567-9955 and delete this communication immediately
+> without making any copy or distribution.
+>
+
+--000000000000489edb05f874d7b3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">---------- Forwarded message ---------<br>From: <strong cla=
+ss=3D"gmail_sendername" dir=3D"auto">Chelsea Masri</strong> <span dir=3D"au=
+to">&lt;<a href=3D"mailto:chelsea@tribecap.co">chelsea@tribecap.co</a>&gt;<=
+/span><br>Date: Mon, Mar 6, 2023 at 8:49=E2=80=AFAM<br>Subject: Re: FW: Zoo=
+m: Morgan Creek Capital &lt;&gt; Tribe Capital (Alex Chee)<br>To: Peggy Mit=
+chell &lt;<a href=3D"mailto:pmitchell@morgancreekcap.com">pmitchell@morganc=
+reekcap.com</a>&gt;<br></div><br><br><div dir=3D"auto">The 28th at 1pm PT w=
+orks well. I will update the calendar invite momentarily. Thank you for the=
+ flexibility!</div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cla=
+ss=3D"gmail_attr">On Mon, Mar 6, 2023 at 8:47 AM Peggy Mitchell &lt;<a href=
+=3D"mailto:pmitchell@morgancreekcap.com" target=3D"_blank">pmitchell@morgan=
+creekcap.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
+
+
+
+
+
+<div lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:#1f497d">28<sup>th</sup> or 29<sup>th</sup> or 3=
+0th 1pm PT<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:#1f497d"><u></u>=C2=A0<u></u></span></p>
+<div></div></div></div><div lang=3D"EN-US" link=3D"blue" vlink=3D"purple"><=
+div><div>
+<div dir=3D"ltr" style=3D"font-size:1px;direction:ltr"><table cellpadding=
+=3D"0" cellspacing=3D"0" border=3D"0" style=3D"width:100%;font-size:1px"><t=
+body><tr style=3D"font-size:0"><td align=3D"left" style=3D"vertical-align:t=
+op"><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" style=3D"font-s=
+ize:0;color:#000001;font-style:normal;white-space:nowrap"><tbody><tr style=
+=3D"font-size:18.67px;font-weight:700"><td align=3D"left" style=3D"padding:=
+0;vertical-align:top;font-family:&#39;Times New Roman&#39;">Peggy=C2=A0Mitc=
+hell</td></tr><tr style=3D"font-size:0"><td align=3D"left" style=3D"padding=
+:0;vertical-align:top"><table cellpadding=3D"0" cellspacing=3D"0" border=3D=
+"0" style=3D"font-size:0;color:#000001;font-style:normal;font-weight:400"><=
+tbody><tr style=3D"font-size:13.33px;white-space:nowrap"><td align=3D"left"=
+ style=3D"vertical-align:top;font-family:&#39;Times New Roman&#39;">Investm=
+ent=C2=A0Assistant</td></tr><tr style=3D"font-size:0"><td align=3D"left" st=
+yle=3D"vertical-align:top"><table cellpadding=3D"0" cellspacing=3D"0" borde=
+r=3D"0" style=3D"font-size:0;color:#000001;font-style:normal;font-weight:40=
+0;white-space:nowrap"><tbody><tr style=3D"font-size:13.33px"><td align=3D"l=
+eft" style=3D"vertical-align:top;font-family:&#39;Times New Roman&#39;">(91=
+9)=C2=A0933=E2=80=914004=C2=A0Main</td><td align=3D"left" style=3D"vertical=
+-align:top;font-family:&#39;Times New Roman&#39;">=C2=A0|=C2=A0</td><td ali=
+gn=3D"left" style=3D"vertical-align:top;font-family:&#39;Times New Roman&#3=
+9;"><a id=3D"m_2582586504660399333m_5741883124020969431LPlnk689713" style=
+=3D"text-decoration:none;color:#000001"><strong style=3D"font-weight:400">(=
+919)=C2=A0933-4048</strong></a>=C2=A0Fax</td></tr></tbody></table></td></tr=
+><tr style=3D"font-size:13.33px;white-space:normal"><td align=3D"left" styl=
+e=3D"vertical-align:top;font-family:&#39;Times New Roman&#39;"><a href=3D"h=
+ttps://www.google.com/maps/search/301+W.+Barbee+Chapel+Rd.+Suite+200+%7C+Ch=
+apel+Hill,+NC+%7C+27517?entry=3Dgmail&amp;source=3Dg" target=3D"_blank">301=
+ W. Barbee Chapel Rd. Suite 200 | Chapel Hill, NC | 27517</a></td></tr><tr =
+style=3D"font-size:0"><td align=3D"left" style=3D"vertical-align:top"><tabl=
+e cellpadding=3D"0" cellspacing=3D"0" border=3D"0" style=3D"font-size:0;col=
+or:#000001;font-style:normal;font-weight:400;white-space:nowrap"><tbody><tr=
+ style=3D"font-size:13.33px"><td align=3D"left" style=3D"vertical-align:top=
+;font-family:&#39;Times New Roman&#39;"><a href=3D"mailto:pmitchell@morganc=
+reekcap.com" id=3D"m_2582586504660399333m_5741883124020969431LPlnk689713" s=
+tyle=3D"text-decoration:none;color:#000001" target=3D"_blank"><strong style=
+=3D"font-weight:400">pmitchell@morgancreekcap.com</strong></a></td><td alig=
+n=3D"left" style=3D"vertical-align:top;font-family:&#39;Times New Roman&#39=
+;">=C2=A0|=C2=A0</td><td align=3D"left" style=3D"vertical-align:top;font-fa=
+mily:&#39;Times New Roman&#39;"><a href=3D"http://www.morgancreekcap.com" t=
+arget=3D"_blank">www.morgancreekcap.com</a></td></tr></tbody></table></td><=
+/tr></tbody></table></td></tr><tr style=3D"font-size:0;line-height:normal">=
+<td align=3D"left" style=3D"padding:15px 0 0;vertical-align:top"><img src=
+=3D"cid:186b7d328e6d2f2c9ba2" border=3D"0" alt=3D"" style=3D"width:148px;ma=
+x-width:100%"></td></tr><tr style=3D"font-size:13.33px;font-weight:400"><td=
+ align=3D"left" style=3D"padding:0;vertical-align:top;font-family:&#39;Time=
+s New Roman&#39;">A<span style=3D"font-size:10px">LTERNATIVE=C2=A0</span>T<=
+span style=3D"font-size:10px">HINKING=C2=A0</span>A<span style=3D"font-size=
+:10px">BOUT=C2=A0</span>I<span style=3D"font-size:10px">NVESTMENTS</span></=
+td></tr></tbody></table></td></tr></tbody></table></div><div dir=3D"ltr" st=
+yle=3D"font-size:1px;direction:ltr"><table cellpadding=3D"0" cellspacing=3D=
+"0" border=3D"0" style=3D"width:100%;font-size:1px;color:#000001;font-style=
+:normal;font-weight:400;white-space:normal"><tbody><tr style=3D"font-size:1=
+4.67px"><td align=3D"left" style=3D"vertical-align:top;font-family:Calibri,=
+Arial,sans-serif"><span style=3D"font-size:15.33px">Please note that we=C2=
+=A0are=C2=A0required=C2=A0to=C2=A0provide=C2=A0you=C2=A0with=C2=A0a summary=
+ of the services we provide, Form CRS (Client Relationship Summary), in add=
+ition to other=C2=A0important=C2=A0information=C2=A0regarding=C2=A0our=C2=
+=A0firm.=C2=A0Please=C2=A0visit=C2=A0<span style=3D"font-family:remialcxesa=
+ns;font-size:1px;color:#ffffff;line-height:1px"></span></span><span style=
+=3D"color:#ffffff;font-size:1.33px;font-family:remialcxesans"><span style=
+=3D"color:#ffffff;font-size:1.33px;font-family:remialcxesans;font-weight:40=
+0;font-style:normal"></span></span><span style=3D"font-size:15.33px;font-we=
+ight:700"><span style=3D"font-family:Calibri,sans-serif"><a href=3D"https:/=
+/adviserinfo.sec.gov/firm/summary/138401" id=3D"m_2582586504660399333m_5741=
+883124020969431LPlnk689713" title=3D"Form CRS" style=3D"text-decoration:non=
+e;color:#000001" target=3D"_blank"><strong style=3D"font-weight:700"><span =
+style=3D"text-decoration:underline">here</span></strong></a></span><span st=
+yle=3D"font-weight:400">=C2=A0to=C2=A0view these important documents.</span=
+></span><br></td></tr><tr style=3D"font-size:0"><td align=3D"left" style=3D=
+"vertical-align:top"><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0=
+" style=3D"white-space:normal;color:#c0c0c0;font-size:14.67px;font-family:C=
+alibri,Arial,sans-serif;font-weight:700;font-style:normal;text-align:justif=
+y;width:100%"><tbody><tr style=3D"font-size:10.67px"><td style=3D"font-fami=
+ly:Calibri,Arial,sans-serif">This email is intended for the sole use of the=
+ individual or entity to which it is addressed and may include information =
+that is confidential or privileged. If you are not the intended recipient, =
+do not copy, distribute or otherwise disseminate the message or its content=
+s. Instead, notify the sender immediately, either by return email or by tel=
+ephone at (919) 933-4004, and destroy the message, attachments and all copi=
+es. Morgan Creek Capital Management, LLC and its affiliates do not offer le=
+gal, accounting or tax advice. Any reference to performance data is not war=
+ranted as accurate or complete, but based on unaudited figures computed by =
+Morgan Creek. Past performance is not indicative of future results. The con=
+tent of this message is for informational purposes only and should not be c=
+onstrued as a solicitation, recommendation or offer to buy or sell any secu=
+rity or other financial instrument. Any such offering can be made only at t=
+he time a qualified offeree receives the most recent offering memorandum or=
+ prospectus and other operative documents which contain significant details=
+ with respect to risks and should be carefully read. Email <a href=3D"mailt=
+o:InvestorRelations@morgancreekcap.com" target=3D"_blank">InvestorRelations=
+@morgancreekcap.com</a> with questions regarding this disclosure.=C2=A0<br>=
+</td></tr></tbody></table></td></tr></tbody></table></div><div style=3D"bor=
+der:none;border-top:solid #e1e1e1 1.0pt;padding:3.0pt 0in 0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif">From:</span></b><span style=3D"font-size:11.0pt;=
+font-family:&quot;Calibri&quot;,sans-serif"> Chelsea Masri &lt;<a href=3D"m=
+ailto:chelsea@tribecap.co" target=3D"_blank">chelsea@tribecap.co</a>&gt;
+<br>
+<b>Sent:</b> Monday, March 6, 2023 11:45 AM<br>
+<b>To:</b> Peggy Mitchell &lt;<a href=3D"mailto:pmitchell@morgancreekcap.co=
+m" target=3D"_blank">pmitchell@morgancreekcap.com</a>&gt;<br>
+<b>Subject:</b> Re: FW: Zoom: Morgan Creek Capital &lt;&gt; Tribe Capital (=
+Alex Chee)<u></u><u></u></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<p class=3D"MsoNormal">Hello Paggy,<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Unfortunately, 1-2pm is booked already on the 22nd. =
+Could you please suggest a few other times that may work on your teams end?=
+<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Mon, Mar 6, 2023 at 8:40 AM Peggy Mitchell &lt;<a=
+ href=3D"mailto:pmitchell@morgancreekcap.com" target=3D"_blank">pmitchell@m=
+organcreekcap.com</a>&gt; wrote:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0i=
+n 0in 0in 6.0pt;margin-left:4.8pt;margin-right:0in">
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:#1f497d">We have time on 22<sup>nd</sup> at 1pm =
+PT as an alternative, would that work?</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:#1f497d">=C2=A0</span><u></u><u></u></p>
+<div>
+<div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:14.0pt;color:#000001">Pe=
+ggy=C2=A0Mitchell<u></u><u></u></span></b></p>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001">Inves=
+tment=C2=A0Assistant<u></u><u></u></span></p>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001">(919)=
+=C2=A0933=E2=80=914004=C2=A0Main<u></u><u></u></span></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001">=C2=
+=A0|=C2=A0<u></u><u></u></span></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><strong><span style=3D"font-size:10.0pt;color:#00000=
+1;font-weight:normal">(919)=C2=A0933-4048</span></strong><span style=3D"fon=
+t-size:10.0pt;color:#000001">=C2=A0Fax<u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001"><a hr=
+ef=3D"https://www.google.com/maps/search/301+W.+Barbee+Chapel+Rd.+Suite+200=
++%7C+Chapel+Hill,+NC+%7C+27517?entry=3Dgmail&amp;source=3Dg" target=3D"_bla=
+nk">301 W. Barbee Chapel Rd. Suite 200 | Chapel Hill, NC | 27517</a><u></u>=
+<u></u></span></p>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001"><a hr=
+ef=3D"mailto:pmitchell@morgancreekcap.com" id=3D"m_2582586504660399333m_574=
+1883124020969431m_-7554002380264300423LPlnk689713" target=3D"_blank"><stron=
+g><span style=3D"color:#000001;font-weight:normal;text-decoration:none">pmi=
+tchell@morgancreekcap.com</span></strong></a><u></u><u></u></span></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001">=C2=
+=A0|=C2=A0<u></u><u></u></span></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001"><a hr=
+ef=3D"http://www.morgancreekcap.com" target=3D"_blank">www.morgancreekcap.c=
+om</a><u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:11.25pt 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:1.0pt;color:#000001"><img b=
+order=3D"0" src=3D"cid:186b7d328e6ad7999131" style=3D"width:148px;max-width=
+:100%"><u></u><u></u></span></p>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001">A</sp=
+an><span style=3D"font-size:7.5pt;color:#000001">LTERNATIVE=C2=A0</span><sp=
+an style=3D"font-size:10.0pt;color:#000001">T</span><span style=3D"font-siz=
+e:7.5pt;color:#000001">HINKING=C2=A0</span><span style=3D"font-size:10.0pt;=
+color:#000001">A</span><span style=3D"font-size:7.5pt;color:#000001">BOUT=
+=C2=A0</span><span style=3D"font-size:10.0pt;color:#000001">I</span><span s=
+tyle=3D"font-size:7.5pt;color:#000001">NVESTMENTS</span><span style=3D"font=
+-size:10.0pt;color:#000001"><u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:1.0pt;display:none"><u></u>=
+=C2=A0<u></u></span></p>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.5pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#000001">Please note that we=C2=A0are=C2=A0req=
+uired=C2=A0to=C2=A0provide=C2=A0you=C2=A0with=C2=A0a summary of the service=
+s we provide, Form CRS (Client Relationship Summary), in addition to other=
+=C2=A0important=C2=A0information=C2=A0regarding=C2=A0our=C2=A0firm.=C2=A0Pl=
+ease=C2=A0visit=C2=A0</span><span style=3D"font-size:1.0pt;font-family:&quo=
+t;remialcxesans&quot;,serif;color:white"></span><b><span style=3D"font-size=
+:11.5pt;font-family:&quot;Calibri&quot;,sans-serif;color:#000001"><a href=
+=3D"https://adviserinfo.sec.gov/firm/summary/138401" title=3D"Form CRS" id=
+=3D"m_2582586504660399333m_5741883124020969431m_-7554002380264300423LPlnk68=
+9713" target=3D"_blank"><strong><span style=3D"font-family:&quot;Calibri&qu=
+ot;,sans-serif;color:#000001">here</span></strong></a></span></b><span styl=
+e=3D"font-size:11.5pt;font-family:&quot;Calibri&quot;,sans-serif;color:#000=
+001">=C2=A0to=C2=A0view
+ these important documents.</span><span style=3D"font-size:11.0pt;font-fami=
+ly:&quot;Calibri&quot;,sans-serif;color:#000001"><u></u><u></u></span></p>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal" style=3D"text-align:justify"><b><span style=3D"font-=
+size:8.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:silver">This em=
+ail is intended for the sole use of the individual or entity to which it is=
+ addressed and may include information that is confidential
+ or privileged. If you are not the intended recipient, do not copy, distrib=
+ute or otherwise disseminate the message or its contents. Instead, notify t=
+he sender immediately, either by return email or by telephone at (919) 933-=
+4004, and destroy the message, attachments
+ and all copies. Morgan Creek Capital Management, LLC and its affiliates do=
+ not offer legal, accounting or tax advice. Any reference to performance da=
+ta is not warranted as accurate or complete, but based on unaudited figures=
+ computed by Morgan Creek. Past
+ performance is not indicative of future results. The content of this messa=
+ge is for informational purposes only and should not be construed as a soli=
+citation, recommendation or offer to buy or sell any security or other fina=
+ncial instrument. Any such offering
+ can be made only at the time a qualified offeree receives the most recent =
+offering memorandum or prospectus and other operative documents which conta=
+in significant details with respect to risks and should be carefully read. =
+Email
+<a href=3D"mailto:InvestorRelations@morgancreekcap.com" target=3D"_blank">I=
+nvestorRelations@morgancreekcap.com</a> with questions regarding this discl=
+osure.=C2=A0<u></u><u></u></span></b></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style=3D"border:none;border-top:solid #e1e1e1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif">From:</span></b><span style=3D"font-size:11.0pt;=
+font-family:&quot;Calibri&quot;,sans-serif"> Frank Tanner &lt;<a href=3D"ma=
+ilto:ftanner@morgancreekcap.com" target=3D"_blank">ftanner@morgancreekcap.c=
+om</a>&gt;
+<br>
+<b>Sent:</b> Monday, March 6, 2023 11:32 AM<br>
+<b>To:</b> Chelsea Masri &lt;<a href=3D"mailto:chelsea@tribecap.co" target=
+=3D"_blank">chelsea@tribecap.co</a>&gt;;
+<a href=3D"mailto:alex@tribecap.co" target=3D"_blank">alex@tribecap.co</a>;=
+ Ryan Newson &lt;<a href=3D"mailto:rnewson@morgancreekcap.com" target=3D"_b=
+lank">rnewson@morgancreekcap.com</a>&gt;;
+<a href=3D"mailto:steve@tribecap.co" target=3D"_blank">steve@tribecap.co</a=
+>; Peggy Mitchell &lt;<a href=3D"mailto:pmitchell@morgancreekcap.com" targe=
+t=3D"_blank">pmitchell@morgancreekcap.com</a>&gt;<br>
+<b>Subject:</b> Re: Zoom: Morgan Creek Capital &lt;&gt; Tribe Capital (Alex=
+ Chee)</span><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white">
+<span style=3D"font-family:&quot;Calibri&quot;,sans-serif;color:black">Hi C=
+helsea,</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white">
+<span style=3D"font-family:&quot;Calibri&quot;,sans-serif;color:black">=C2=
+=A0</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white">
+<span style=3D"font-family:&quot;Calibri&quot;,sans-serif;color:black">No w=
+orries. We are fully booked that day, but I&#39;m looping in Peggy to help =
+find an alternative in the coming week(s).</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white">
+<span style=3D"font-family:&quot;Calibri&quot;,sans-serif;color:black">=C2=
+=A0</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white">
+<span style=3D"font-family:&quot;Calibri&quot;,sans-serif;color:black">Best=
+,</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white">
+<span style=3D"font-family:&quot;Calibri&quot;,sans-serif;color:black">Fran=
+k</span><u></u><u></u></p>
+</div>
+<div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100.0%">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:14.0pt;color:#000001">Fr=
+ank</span></b><b><span style=3D"font-size:1.0pt;font-family:&quot;remialcxe=
+sans&quot;,serif;color:white"></span></b><b><span style=3D"font-size:14.0pt=
+;color:#000001">=C2=A0Tanner</span></b><u></u><u></u></p>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001">Princ=
+ipal</span><u></u><u></u></p>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001">(919)=
+=C2=A0933=E2=80=914004=C2=A0Main</span><u></u><u></u></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001">=C2=
+=A0|=C2=A0</span><u></u><u></u></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><strong><span style=3D"font-size:10.0pt;color:#00000=
+1;font-weight:normal">(919)=C2=A0933-4048</span></strong><span style=3D"fon=
+t-size:10.0pt;color:#000001">=C2=A0Fax</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001"><a hr=
+ef=3D"https://www.google.com/maps/search/301+W.+Barbee+Chapel+Road,+Suite+2=
+00+%7C+Chapel+Hill,+NC+%7C+27517?entry=3Dgmail&amp;source=3Dg" target=3D"_b=
+lank">301
+ W. Barbee Chapel Road, Suite 200 | Chapel Hill, NC | 27517</a></span><u></=
+u><u></u></p>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001"><a hr=
+ef=3D"mailto:ftanner@morgancreekcap.com" id=3D"m_2582586504660399333m_57418=
+83124020969431m_-7554002380264300423LPlnk689713" target=3D"_blank"><strong>=
+<span style=3D"color:#000001;font-weight:normal;text-decoration:none">ftann=
+er@morgancreekcap.com</span></strong></a></span><u></u><u></u></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001">=C2=
+=A0|=C2=A0</span><u></u><u></u></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001"><a hr=
+ef=3D"http://www.morgancreekcap.com" target=3D"_blank">www.morgancreekcap.c=
+om</a></span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:11.25pt 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:1.0pt;color:#000001"><img b=
+order=3D"0" src=3D"cid:186b7d328e6ad7999131" style=3D"width:148px;max-width=
+:100%"></span><u></u><u></u></p>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#000001">A</sp=
+an><span style=3D"font-size:7.5pt;color:#000001">LTERNATIVE=C2=A0</span><sp=
+an style=3D"font-size:10.0pt;color:#000001">T</span><span style=3D"font-siz=
+e:7.5pt;color:#000001">HINKING=C2=A0</span><span style=3D"font-size:10.0pt;=
+color:#000001">A</span><span style=3D"font-size:7.5pt;color:#000001">BOUT=
+=C2=A0</span><span style=3D"font-size:10.0pt;color:#000001">I</span><span s=
+tyle=3D"font-size:7.5pt;color:#000001">NVESTMENTS</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"2" width=3D"98%" align=3D"center">
+</div>
+<div id=3D"m_2582586504660399333m_5741883124020969431m_-7554002380264300423=
+divRplyFwdMsg">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:black">From:</span></b><span style=3D"font-=
+size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black"> Chelse=
+a
+ Masri &lt;<a href=3D"mailto:chelsea@tribecap.co" target=3D"_blank">chelsea=
+@tribecap.co</a>&gt;<br>
+<b>Sent:</b> Monday, March 6, 2023 11:24 AM<br>
+<b>To:</b> <a href=3D"mailto:alex@tribecap.co" target=3D"_blank">alex@tribe=
+cap.co</a> &lt;<a href=3D"mailto:alex@tribecap.co" target=3D"_blank">alex@t=
+ribecap.co</a>&gt;; Frank Tanner &lt;<a href=3D"mailto:ftanner@morgancreekc=
+ap.com" target=3D"_blank">ftanner@morgancreekcap.com</a>&gt;;
+ Ryan Newson &lt;<a href=3D"mailto:rnewson@morgancreekcap.com" target=3D"_b=
+lank">rnewson@morgancreekcap.com</a>&gt;;
+<a href=3D"mailto:steve@tribecap.co" target=3D"_blank">steve@tribecap.co</a=
+> &lt;<a href=3D"mailto:steve@tribecap.co" target=3D"_blank">steve@tribecap=
+.co</a>&gt;<br>
+<b>Subject:</b> Zoom: Morgan Creek Capital &lt;&gt; Tribe Capital (Alex Che=
+e)</span> <u></u>
+<u></u></p>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"border:none windowtext 1.0pt;padding:=
+0in">Hello,</span>
+<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">I do apologize for the late notice, but I must resch=
+edule this call with Alex. There has been a scheduling conflict due to the =
+upcoming Terran 1 Launch for relativity. Are you all
+ available to speak with Alex on Wednesday, 3/8 between 1-3pm PST?=C2=A0<u>=
+</u><u></u></p>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:&quot;=
+Arial&quot;,sans-serif">Disclaimer</span></b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:&quot;Ari=
+al&quot;,sans-serif">The information contained in this communication from t=
+he sender is confidential. It is intended solely for use by the
+ recipient and others authorized to receive it. If you are not the recipien=
+t, you are hereby notified that any disclosure, copying, distribution or ta=
+king action in relation of the contents of this information is strictly pro=
+hibited and may be unlawful. If
+ you have received this communication in error, please notify Tribe at (619=
+) 567-9955 and delete this communication immediately without making any cop=
+y or distribution.</span><u></u><u></u></p>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:&quot;=
+Arial&quot;,sans-serif">Disclaimer</span></b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:&quot;Ari=
+al&quot;,sans-serif">The information contained in this communication from t=
+he sender is confidential. It is intended solely for use by the recipient a=
+nd others authorized to receive it. If you are
+ not the recipient, you are hereby notified that any disclosure, copying, d=
+istribution or taking action in relation of the contents of this informatio=
+n is strictly prohibited and may be unlawful. If you have received this com=
+munication in error, please notify
+ Tribe at (619) 567-9955 and delete this communication immediately without =
+making any copy or distribution.</span><u></u><u></u></p>
+</div>
+</div>
+</div>
+
+</blockquote></div></div>
+</div></div>
+
+--000000000000489edb05f874d7b3--
+--000000000000489edd05f874d7b4
+Content-Type: image/png; name="image614163.png"
+Content-Disposition: inline; filename="image614163.png"
+Content-Transfer-Encoding: base64
+Content-ID: <186b7d328e6d2f2c9ba2>
+X-Attachment-Id: 186b7d328e6d2f2c9ba2
+
+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
+rkJggg==
+--000000000000489edd05f874d7b4
+Content-Type: image/png; name="image001.png"
+Content-Disposition: inline; filename="image001.png"
+Content-Transfer-Encoding: base64
+Content-ID: <186b7d328e6ad7999131>
+X-Attachment-Id: 186b7d328e6ad7999131
+
+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
+rkJggg==
+--000000000000489edd05f874d7b4--

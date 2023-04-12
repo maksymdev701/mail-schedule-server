@@ -1,0 +1,1461 @@
+Delivered-To: kavin@tribecap.co
+Received: by 2002:a05:7010:ac8e:b0:341:6b4e:1a5e with SMTP id dv14csp2621680mdb;
+        Mon, 3 Apr 2023 13:59:14 -0700 (PDT)
+X-Received: by 2002:a17:902:f550:b0:19e:e172:2a40 with SMTP id h16-20020a170902f55000b0019ee1722a40mr336347plf.65.1680555554571;
+        Mon, 03 Apr 2023 13:59:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1680555554; cv=none;
+        d=google.com; s=arc-20160816;
+        b=IInSCGbyEUzNkCz/jUYC+RJ0Zt8s+pkR6uip67+uEceyw4JeIVx6CQUB0qywkKn31t
+         e2RcP9urtReqpxQl9kVw7MJn3Ueni8mL8fUAbX58e5T2W8nlRX3zcuYfeTZl8LO9jcgK
+         08z+Oqt/0sl6Wu5q6fzfVqih//KTR0YvZehrMAATSSKUBO3jZIkoRoBkMxqShNT8Lbj+
+         i6Slbt0BaMrs9vGj5pEBp5NeiuUMSyLgb56XI25HbvUy+sidVaJmqgEtGSGX9pRoHksJ
+         FZB7ZQfO3s3tWdwTIo+0g+3mwGLbPllmyMKSBEFNqfmYn4D6a6dNMivvlSyYB0elxgdJ
+         kotQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=3JrLgkfZg3e7dQoLxbT876EAsRCCC/AGnP4zBKHxzw8=;
+        b=GG8Rg1trWtvboGGWwP7d1y18NB4YvT78l/PTKvpGGSWuCCRlKv2dycBEh1NoVMq4qg
+         D5gsvIlWINXQVljZ9PDAd4r42S9yVGcwbdFm0qrOsvsBbAN27XBFVs25lmSgKJfXSGj/
+         82ECDIbjF4Nu3vukdHeiVrwI8kP9qBdvFaDMGSE/wzeXAUYA6fp3lkzf8kZisAQFcey5
+         BhbneoLO6qqNrXdmbtRraFxj6JXm2/fadpD1gbQVq0imuEtLU+ZrCC8PW+D8HVL+8Qkc
+         GvIpR64P5fHypNotNB73CGYpDss2DAV70ZNIg1hAGeK1bSQ2SuUHL2p6AfxYIbbdOfnI
+         9VrA==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b="biT/8Uh+";
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+Return-Path: <chelsea@tribecap.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id u1-20020a170902714100b0019cbcb1d786sor3679235plm.63.2023.04.03.13.59.14
+        for <kavin@tribecap.co>
+        (Google Transport Security);
+        Mon, 03 Apr 2023 13:59:14 -0700 (PDT)
+Received-SPF: pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b="biT/8Uh+";
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tribecap.co; s=google; t=1680555552;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=3JrLgkfZg3e7dQoLxbT876EAsRCCC/AGnP4zBKHxzw8=;
+        b=biT/8Uh+oxd0FTx6V+HNkAkhCrF4IVPk2M9chsJ17gHBzrO54bUKoD8oIhgeEddnBG
+         nivi5Ieg1dF+ukU8wZPWfTOYalZnEMJdLBrzQGLz03oGZAzEqwyfXk5nDLLLzPbSSg46
+         nehAc0yLdA0upt8apLEutRKaUwMt/dgfYO8UG3ugv3LwA6vYBRsO1PyXfqa3PyIkplks
+         gzjzlDs+NTE+EfU8Z2Nnr2stDm7vRa1mS/mSSAbU6xj9JCoOcfd05LtD5zsJiHENiiGo
+         /89tooHHNCWqmZJHVu5ZDAx2b1rqwDpneP0YmVX9V/AC7GkBlekcCp3hz0wDFJujIwT6
+         xuvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680555552;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=3JrLgkfZg3e7dQoLxbT876EAsRCCC/AGnP4zBKHxzw8=;
+        b=I6PrnxkL9K2emO6+bwFP6zjVjowEPwPsZd+pIZ7jDoWQXpTF0Ky7dzBwdwAqhOeZwQ
+         8PghRlMNuw8QboQcuFNSVY8n8+vpiaxT/NKghtAUH/F//xKD87uOrUe2WIbYG9D9pOE1
+         3qBifCT5BjBpWC1Fo2jmSdvSNzFk+Q6tYBKvVKXPG84cv1/DGZDkCgdxgQ3iaQFP8a2M
+         uI1HLvpzPm6tX26RyCAh1VntKFmot+aL+iGAUX4rPGbYLSxgDZ88TS4faTIpLWFT4S/j
+         sWaYzsBvBCQeOQxGbz5rl7j+B74ago7UrlPZf+ADtSCsWm7Lf0BZ3iD3EGPgE1FRMUBg
+         BpHA==
+X-Gm-Message-State: AAQBX9fkGd0qTsxFwwtc+/QRKQESazWQMnDEerJTiKEmE1+KegNSxw9T
+	SG+9xKmtL9Elep2qJGZa5y42U/ykeTcozyGc3l0t94eRlYX8lNW0LgKguz21fE6yzUZMtCllrF1
+	2uevYDMr6yfkSf+P0qIssuBHxidxGwqsp6OSW3faKB4e6WezDnyU99CzwwNj8Fwxt0XCOqpwOkh
+	DxjGwc44kqdJlldtRfwO2jYn0OjfiU14tQZ1Y9izDvRQ5Fdw==
+X-Google-Smtp-Source: AKy350ZBBZ1/zk/iafZBh1Mp+dxfEiNDrw9LI9OOQka80CMEVx9iu61rceakE9+XbhArgbzFVGydk4kKtzQSTd60MvA=
+X-Received: by 2002:a17:902:82cc:b0:19a:5953:e85c with SMTP id
+ u12-20020a17090282cc00b0019a5953e85cmr171296plz.1.1680555551766; Mon, 03 Apr
+ 2023 13:59:11 -0700 (PDT)
+MIME-Version: 1.0
+References: <lclds9xf.82535872-69e6-4d8c-8c11-7370363123ca@we.are.superhuman.com>
+ <lclduldk.0aef96ff-45af-426a-903a-e9ac257e5c5b@we.are.superhuman.com>
+ <MN2PR17MB3406F0D79E1E16EE75CC3F84CBA59@MN2PR17MB3406.namprd17.prod.outlook.com>
+ <lehyxq80.2ef6caca-d139-4902-a946-3d5bfbfe6646@we.are.superhuman.com>
+ <CAEF9bpWhuHBy2E0gbsqByMBUb3M9pgTOCJtTA9A0u2gcn7XGvw@mail.gmail.com>
+ <MN2PR17MB34065D7F29E2EBC6F6C4AB2DCBA89@MN2PR17MB3406.namprd17.prod.outlook.com>
+ <CAEF9bpVK5t--wtc4vsAA41nZmZATgrLnWbto2A98dWFbF4qp_w@mail.gmail.com>
+ <CAEF9bpUhSsxa_KV3j1W-3Yy=Y9SVyxVZz7KBzU5sAQRiHYK7AQ@mail.gmail.com> <CAEF9bpUfgMMJu4gFYj+0xgrVrAR8GeHaKR9ykW3QRaOEfK7LWw@mail.gmail.com>
+In-Reply-To: <CAEF9bpUfgMMJu4gFYj+0xgrVrAR8GeHaKR9ykW3QRaOEfK7LWw@mail.gmail.com>
+From: Chelsea Masri <chelsea@tribecap.co>
+Date: Mon, 3 Apr 2023 13:58:55 -0700
+Message-ID: <CAEF9bpXyLsaAMHijVJvQFxrw8GXLTfMArtm0VeE-R6P4QMFyYQ@mail.gmail.com>
+Subject: Fwd: Been a while
+To: Kavin Stewart <kavin@tribecap.co>
+Content-Type: multipart/related; boundary="000000000000b1855305f874d47a"
+
+--000000000000b1855305f874d47a
+Content-Type: multipart/alternative; boundary="000000000000b1855205f874d479"
+
+--000000000000b1855205f874d479
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+---------- Forwarded message ---------
+From: Chelsea Masri <chelsea@tribecap.co>
+Date: Tue, Mar 7, 2023 at 10:48=E2=80=AFPM
+Subject: Re: Been a while
+To: Alex Chee <alex@tribecap.co>
+
+
+Cal pushed to 2pm to accommodate your lunch at 11am.
+
+On Fri, Feb 24, 2023 at 2:26=E2=80=AFPM Chelsea Masri <chelsea@tribecap.co>=
+ wrote:
+
+> Call with Geoffrey Abrahams (HJ Weinberg) scheduled for 3/23 at 12pm PST.
+>
+> On Fri, Feb 24, 2023 at 2:25 PM Chelsea Masri <chelsea@tribecap.co> wrote=
+:
+>
+>> Thank you, I have just circulated a calendar invite.
+>>
+>> On Fri, Feb 24, 2023 at 2:15 PM Geoffrey Abrahams <
+>> gabrahams@hjweinberg.org> wrote:
+>>
+>>> Hi Chelsea,
+>>>
+>>>
+>>>
+>>> 3/23 at Noon PST sounds great.  Thank you!
+>>>
+>>>
+>>>
+>>> *Geoffrey Abrahams*
+>>>
+>>> *, *
+>>>
+>>> *Investment Manager*
+>>>
+>>> 7 Park Center Court
+>>>
+>>> ,
+>>>
+>>> Owings Mills
+>>>
+>>> ,
+>>>
+>>> MD
+>>>
+>>> 21117
+>>>
+>>> *E: *
+>>>
+>>> gabrahams@hjweinberg.org
+>>>
+>>> * P: *
+>>>
+>>> 410=E2=80=91413=E2=80=916052
+>>>
+>>> Click
+>>>
+>>> *here <https://hjweinbergfoundation.org/enews-signup/>*
+>>>
+>>>  to subscribe to our e=E2=80=91newsletter!
+>>>
+>>> www.hjweinbergfoundation.org <https://hjweinbergfoundation.org/>
+>>>
+>>>
+>>> <https://www.facebook.com/pages/The-Harry-and-Jeanette-Weinberg-Foundat=
+ion-Inc/169299436473114>
+>>>
+>>> <https://twitter.com/hjweinbergfdn>
+>>>
+>>> <https://www.youtube.com/user/HJWeinbergFoundation>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> *From:* Chelsea Masri <chelsea@tribecap.co>
+>>> *Sent:* Friday, February 24, 2023 11:44 AM
+>>> *To:* Geoffrey Abrahams <gabrahams@hjweinberg.org>
+>>> *Cc:* Alex Chee <alex@tribecap.co>
+>>> *Subject:* Re: Been a while
+>>>
+>>>
+>>>
+>>> You don't often get email from chelsea@tribecap.co. Learn why this is
+>>> important <https://aka.ms/LearnAboutSenderIdentification>
+>>>
+>>>
+>>>
+>>> *CAUTION:* This email originated from outside of the organization. Do
+>>> not click on any links or open any attachments unless you recognize the
+>>> sender and know the content is safe.
+>>>
+>>>
+>>>
+>>> Hello Geoff,
+>>>
+>>>
+>>>
+>>> I can assist in setting up a call with Alex sometime next month. Please
+>>> let me know if any of the following dates & times work for you and I wi=
+ll
+>>> circulate a calendar invite.
+>>>
+>>>    - Monday, 3/20 between 12-2pm PST
+>>>    - Tuesday, 3/21 between 11am-12pm or after 1pm PST
+>>>    - Thursday, 3/23 between 9:30am-12:30pm PST
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> On Thu, Feb 23, 2023 at 7:24 PM Alex Chee <alex@tribecap.co> wrote:
+>>>
+>>> Absolutely! Can definitely empathize with the mad rush this year.
+>>> +Chelsea who can help us lock in a time.
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> On Tue, Feb 21, 2023 at 10:52 AM, Geoffrey Abrahams <
+>>> gabrahams@hjweinberg.org> wrote:
+>>>
+>>> Hi Alex,
+>>>
+>>>
+>>>
+>>> Really sorry for the extremely delayed response.  And thank you! My wif=
+e
+>>> and I had identical twin girls at year-end so that=E2=80=99s been aweso=
+me.  Would
+>>> be great to catch up though.  Any times in mid-March look ok for you?  =
+I
+>>> can be pretty flexible.  Thanks again and hope you=E2=80=99re doing wel=
+l also.
+>>>
+>>>
+>>>
+>>> Geoff
+>>>
+>>>
+>>>
+>>> *Geoffrey Abrahams*
+>>>
+>>> *, *
+>>>
+>>> *Investment Manager*
+>>>
+>>> 7 Park Center Court
+>>>
+>>> ,
+>>>
+>>> Owings Mills
+>>>
+>>> ,
+>>>
+>>> MD
+>>>
+>>> 21117
+>>>
+>>> *E: *
+>>>
+>>> gabrahams@hjweinberg.org
+>>>
+>>> * P: *
+>>>
+>>> 410=E2=80=91413=E2=80=916052
+>>>
+>>> Click
+>>>
+>>> *here <https://hjweinbergfoundation.org/enews-signup/>*
+>>>
+>>>  to subscribe to our e=E2=80=91newsletter!
+>>>
+>>> www.hjweinbergfoundation.org <https://hjweinbergfoundation.org/>
+>>>
+>>>
+>>> <https://nam04.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fww=
+w.facebook.com%2Fpages%2FThe-Harry-and-Jeanette-Weinberg-Foundation-Inc%2F1=
+69299436473114&data=3D05%7C01%7Cgabrahams%40hjweinberg.org%7Cb722d830362448=
+05e9b808db16865575%7C9a507581f5814cfa8142c6e1ebbb8d56%7C0%7C0%7C63812853849=
+2236666%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI=
+6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3D14EsINHtvebb50O74aJGfzMZ2Iv=
+T4AfAPK5a2r6MOAo%3D&reserved=3D0>
+>>>
+>>>
+>>> <https://nam04.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Ftw=
+itter.com%2Fhjweinbergfdn&data=3D05%7C01%7Cgabrahams%40hjweinberg.org%7Cb72=
+2d83036244805e9b808db16865575%7C9a507581f5814cfa8142c6e1ebbb8d56%7C0%7C0%7C=
+638128538492236666%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2lu=
+MzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3D9eQWo3bA3DtQ4SB7=
+Cxy3cEcLYFfWh615e9hDOtAlZEU%3D&reserved=3D0>
+>>>
+>>>
+>>> <https://nam04.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fww=
+w.youtube.com%2Fuser%2FHJWeinbergFoundation&data=3D05%7C01%7Cgabrahams%40hj=
+weinberg.org%7Cb722d83036244805e9b808db16865575%7C9a507581f5814cfa8142c6e1e=
+bbb8d56%7C0%7C0%7C638128538492236666%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLj=
+AwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=
+=3DeHRTurpekjMqWdqkgxQXAHxJviVQ%2B70EyGoh77RR47E%3D&reserved=3D0>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> *From:* Alex Chee <alex@tribecap.co>
+>>> *Sent:* Friday, January 6, 2023 10:25 PM
+>>> *To:* Geoffrey Abrahams <gabrahams@hjweinberg.org>
+>>> *Subject:* Re: Been a while
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> *CAUTION:* This email originated from outside of the organization. Do
+>>> not click on any links or open any attachments unless you recognize the
+>>> sender and know the content is safe.
+>>>
+>>>
+>>>
+>>> Just saw the note. Wow congrats!!!
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> On Fri, Jan 06, 2023 at 7:24 PM, Alex Chee <alex@tribecap.co> wrote:
+>>>
+>>> Would love to catch up. Still remember our convo where you shared the
+>>> inner-workings of how foundations work.
+>>>
+>>>
+>>>
+>>> We've grown quite a bit =E2=80=94 not sure if you guys are doing VC, bu=
+t would
+>>> love to share the latest and learn the latest. Let me know!
+>>>
+>>>
+>>>
+>>> - Alex
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> *Disclaimer*
+>>>
+>>> The information contained in this communication from the sender is
+>>> confidential. It is intended solely for use by the recipient and others
+>>> authorized to receive it. If you are not the recipient, you are hereby
+>>> notified that any disclosure, copying, distribution or taking action in
+>>> relation of the contents of this information is strictly prohibited and=
+ may
+>>> be unlawful. If you have received this communication in error, please
+>>> notify Tribe at (619) 567-9955 and delete this communication immediatel=
+y
+>>> without making any copy or distribution.
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> *Disclaimer*
+>>>
+>>> The information contained in this communication from the sender is
+>>> confidential. It is intended solely for use by the recipient and others
+>>> authorized to receive it. If you are not the recipient, you are hereby
+>>> notified that any disclosure, copying, distribution or taking action in
+>>> relation of the contents of this information is strictly prohibited and=
+ may
+>>> be unlawful. If you have received this communication in error, please
+>>> notify Tribe at (619) 567-9955 and delete this communication immediatel=
+y
+>>> without making any copy or distribution.
+>>>
+>>
+
+--000000000000b1855205f874d479
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">---------- Forwarded message ---------<br>From: <strong cla=
+ss=3D"gmail_sendername" dir=3D"auto">Chelsea Masri</strong> <span dir=3D"au=
+to">&lt;<a href=3D"mailto:chelsea@tribecap.co">chelsea@tribecap.co</a>&gt;<=
+/span><br>Date: Tue, Mar 7, 2023 at 10:48=E2=80=AFPM<br>Subject: Re: Been a=
+ while<br>To: Alex Chee &lt;<a href=3D"mailto:alex@tribecap.co">alex@tribec=
+ap.co</a>&gt;<br></div><br><br><div dir=3D"ltr">Cal pushed to 2pm to accomm=
+odate=C2=A0your lunch at 11am.=C2=A0</div><br><div class=3D"gmail_quote"><d=
+iv dir=3D"ltr" class=3D"gmail_attr">On Fri, Feb 24, 2023 at 2:26=E2=80=AFPM=
+ Chelsea Masri &lt;<a href=3D"mailto:chelsea@tribecap.co" target=3D"_blank"=
+>chelsea@tribecap.co</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quo=
+te" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-sty=
+le:solid;border-left-color:rgb(204,204,204);padding-left:1ex"><div dir=3D"l=
+tr">Call with <span style=3D"color:rgb(31,31,31);font-family:&quot;Google S=
+ans&quot;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;white-space:nowrap"=
+>Geoffrey Abrahams (HJ Weinberg) scheduled for 3/23 at 12pm PST.</span></di=
+v><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On F=
+ri, Feb 24, 2023 at 2:25 PM Chelsea Masri &lt;<a href=3D"mailto:chelsea@tri=
+becap.co" target=3D"_blank">chelsea@tribecap.co</a>&gt; wrote:<br></div><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
+t-width:1px;border-left-style:solid;border-left-color:rgb(204,204,204);padd=
+ing-left:1ex"><div dir=3D"ltr">Thank you, I have just circulated a calendar=
+=C2=A0invite.=C2=A0</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cl=
+ass=3D"gmail_attr">On Fri, Feb 24, 2023 at 2:15 PM Geoffrey Abrahams &lt;<a=
+ href=3D"mailto:gabrahams@hjweinberg.org" target=3D"_blank">gabrahams@hjwei=
+nberg.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;=
+border-left-color:rgb(204,204,204);padding-left:1ex"><div>
+
+
+
+
+
+<div lang=3D"EN-US">
+<div>
+<p class=3D"MsoNormal">Hi Chelsea,<u></u><u></u></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal">3/23 at Noon PST sounds great.=C2=A0 Thank you!<u></=
+u><u></u></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100%">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"800" style=
+=3D"width:600pt">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:12pt 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:1pt"><img width=3D"450" hei=
+ght=3D"77" style=3D"width:4.6916in;height:0.8in" id=3D"m_314780967016444896=
+5m_3429142010087626147m_9110048797904851567m_-6455053905169659355Picture_x0=
+020_7" src=3D"cid:18685879c4e4cff311"><u></u><u></u></span></p>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 7.5pt">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"bottom" style=3D"padding:0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12pt;font-family:Arial,s=
+ans-serif;color:rgb(0,47,87)">Geoffrey=C2=A0Abrahams</span></b><b><span sty=
+le=3D"font-size:1pt;font-family:remialcxesans;color:white"></span></b><b><s=
+pan style=3D"font-size:1pt;font-family:template-0N681EObEeumBwANOhMLNA;colo=
+r:white"></span></b><b><span style=3D"font-size:1pt;font-family:zone-1;colo=
+r:white"></span></b><b><span style=3D"font-size:1pt;font-family:zones-AQ;co=
+lor:white"></span></b><b><span style=3D"font-size:12pt;font-family:Arial,sa=
+ns-serif;color:rgb(0,47,87)"><u></u><u></u></span></b></p>
+</td>
+<td valign=3D"bottom" style=3D"padding:0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12pt;font-family:Arial,s=
+ans-serif;color:rgb(0,47,87)">,=C2=A0<u></u><u></u></span></b></p>
+</td>
+<td valign=3D"bottom" style=3D"padding:0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10pt;font-family:Arial,s=
+ans-serif;color:rgb(124,161,183)">Investment=C2=A0Manager<u></u><u></u></sp=
+an></b></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 7.5pt">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><span style=3D"font-size:=
+8.5pt;font-family:Arial,sans-serif;color:rgb(100,108,114)">7=C2=A0Park=C2=
+=A0Center=C2=A0Court<u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><span style=3D"font-size:=
+8.5pt;font-family:Arial,sans-serif;color:rgb(100,108,114)">,=C2=A0<u></u><u=
+></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><span style=3D"font-size:=
+8.5pt;font-family:Arial,sans-serif;color:rgb(100,108,114)">Owings=C2=A0Mill=
+s<u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><span style=3D"font-size:=
+8.5pt;font-family:Arial,sans-serif;color:rgb(100,108,114)">,=C2=A0<u></u><u=
+></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><span style=3D"font-size:=
+8.5pt;font-family:Arial,sans-serif;color:rgb(100,108,114)">MD=C2=A0<u></u><=
+u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><span style=3D"font-size:=
+8.5pt;font-family:Arial,sans-serif;color:rgb(100,108,114)">21117<u></u><u><=
+/u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><b><span style=3D"font-si=
+ze:8.5pt;font-family:Arial,sans-serif;color:rgb(0,47,87)">E:=C2=A0<u></u><u=
+></u></span></b></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><span style=3D"font-size:=
+8.5pt;font-family:Arial,sans-serif;color:rgb(0,47,87)"><a href=3D"mailto:ga=
+brahams@hjweinberg.org" target=3D"_blank"><span style=3D"color:rgb(0,47,87)=
+;text-decoration:none">gabrahams@hjweinberg.org</span></a>=C2=A0<u></u><u><=
+/u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><b><span style=3D"font-si=
+ze:8.5pt;font-family:Arial,sans-serif;color:rgb(0,47,87)">=C2=A0P:=C2=A0<u>=
+</u><u></u></span></b></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><span style=3D"font-size:=
+8.5pt;font-family:Arial,sans-serif;color:rgb(100,108,114)">410=E2=80=91413=
+=E2=80=916052<u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><span style=3D"font-size:=
+8.5pt;font-family:Arial,sans-serif;color:rgb(100,108,114)">Click=C2=A0<u></=
+u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><u><span style=3D"font-si=
+ze:8.5pt;font-family:Arial,sans-serif;color:rgb(0,47,87)"><a href=3D"https:=
+//hjweinbergfoundation.org/enews-signup/" title=3D"https://hjweinbergfounda=
+tion.org/enews-signup/" target=3D"_blank"><span style=3D"color:rgb(0,47,87)=
+">here</span></a></span></u><span style=3D"font-size:8.5pt;font-family:Aria=
+l,sans-serif;color:rgb(0,47,87)"><u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt"><span style=3D"font-size:=
+8.5pt;font-family:Arial,sans-serif;color:rgb(100,108,114)">=C2=A0to=C2=A0su=
+bscribe=C2=A0to=C2=A0our=C2=A0e=E2=80=91newsletter!<u></u><u></u></span></p=
+>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:3pt 0in 3pt 7.5pt">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td nowrap style=3D"padding:0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:8.5pt;font-family:Arial,san=
+s-serif;color:rgb(0,47,87)"><a href=3D"https://hjweinbergfoundation.org/" t=
+arget=3D"_blank"><span style=3D"color:rgb(0,47,87);text-decoration:none">ww=
+w.hjweinbergfoundation.org</span></a><u></u><u></u></span></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<p class=3D"MsoNormal"><a href=3D"https://www.facebook.com/pages/The-Harry-=
+and-Jeanette-Weinberg-Foundation-Inc/169299436473114" target=3D"_blank"><sp=
+an style=3D"font-size:1pt;text-decoration:none"><img border=3D"0" width=3D"=
+20" height=3D"20" style=3D"width:0.2083in;height:0.2083in" id=3D"m_31478096=
+70164448965m_3429142010087626147m_9110048797904851567m_-6455053905169659355=
+Picture_x0020_8" src=3D"cid:18685879c4f5b16b22"></span></a><span style=3D"f=
+ont-size:1pt"><u></u><u></u></span></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<p class=3D"MsoNormal"><a href=3D"https://twitter.com/hjweinbergfdn" target=
+=3D"_blank"><span style=3D"font-size:1pt;text-decoration:none"><img border=
+=3D"0" width=3D"20" height=3D"20" style=3D"width:0.2083in;height:0.2083in" =
+id=3D"m_3147809670164448965m_3429142010087626147m_9110048797904851567m_-645=
+5053905169659355Picture_x0020_9" src=3D"cid:18685879c4f692e333"></span></a>=
+<span style=3D"font-size:1pt"><u></u><u></u></span></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<p class=3D"MsoNormal"><a href=3D"https://www.youtube.com/user/HJWeinbergFo=
+undation" target=3D"_blank"><span style=3D"font-size:1pt;text-decoration:no=
+ne"><img border=3D"0" width=3D"20" height=3D"20" style=3D"width:0.2083in;he=
+ight:0.2083in" id=3D"m_3147809670164448965m_3429142010087626147m_9110048797=
+904851567m_-6455053905169659355Picture_x0020_10" src=3D"cid:18685879c4f7745=
+b44"></span></a><span style=3D"font-size:1pt"><u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:1pt">=C2=A0<u></u><u></u></=
+span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div style=3D"border-style:solid none none;border-top-width:1pt;border-top-=
+color:rgb(225,225,225);padding:3pt 0in 0in">
+<p class=3D"MsoNormal"><b>From:</b> Chelsea Masri &lt;<a href=3D"mailto:che=
+lsea@tribecap.co" target=3D"_blank">chelsea@tribecap.co</a>&gt; <br>
+<b>Sent:</b> Friday, February 24, 2023 11:44 AM<br>
+<b>To:</b> Geoffrey Abrahams &lt;<a href=3D"mailto:gabrahams@hjweinberg.org=
+" target=3D"_blank">gabrahams@hjweinberg.org</a>&gt;<br>
+<b>Cc:</b> Alex Chee &lt;<a href=3D"mailto:alex@tribecap.co" target=3D"_bla=
+nk">alex@tribecap.co</a>&gt;<br>
+<b>Subject:</b> Re: Been a while<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" align=3D"left" widt=
+h=3D"100%" style=3D"width:100%">
+<tbody>
+<tr>
+<td style=3D"background-color:rgb(166,166,166);padding:5.25pt 1.5pt"></td>
+<td width=3D"100%" style=3D"width:100%;background-color:rgb(234,234,234);pa=
+dding:5.25pt 3.75pt 5.25pt 11.25pt">
+<div>
+<p class=3D"MsoNormal">
+<span style=3D"font-size:9pt;font-family:wf_segoe-ui_normal;color:rgb(33,33=
+,33)">You don&#39;t often get email from
+<a href=3D"mailto:chelsea@tribecap.co" target=3D"_blank">chelsea@tribecap.c=
+o</a>. <a href=3D"https://aka.ms/LearnAboutSenderIdentification" target=3D"=
+_blank">
+Learn why this is important</a><u></u><u></u></span></p>
+</div>
+</td>
+<td width=3D"75" style=3D"width:56.25pt;background-color:rgb(234,234,234);p=
+adding:5.25pt 3.75pt">
+</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div style=3D"border:1pt solid rgb(156,101,0);padding:2pt">
+<p class=3D"MsoNormal" style=3D"line-height:12pt;background-color:rgb(255,2=
+35,156)"><b><span style=3D"font-size:10pt;color:rgb(156,101,0)">CAUTION:</s=
+pan></b><span style=3D"font-size:10pt;color:black"> This email originated f=
+rom outside of the organization. Do not click on any links
+ or open any attachments unless you recognize the sender and know the conte=
+nt is safe.<u></u><u></u></span></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">Hello=C2=A0Geoff, <u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">I can assist in setting up a call with Alex sometime=
+ next month. Please let me know if any of the following dates &amp; times w=
+ork for you=C2=A0and I will circulate a calendar invite.=C2=A0<u></u><u></u=
+></p>
+</div>
+<div>
+<ul type=3D"disc">
+<li class=3D"MsoNormal">
+Monday, 3/20 between 12-2pm PST<u></u><u></u></li><li class=3D"MsoNormal">
+Tuesday, 3/21 between 11am-12pm or after 1pm PST<u></u><u></u></li><li clas=
+s=3D"MsoNormal">
+Thursday, 3/23 between 9:30am-12:30pm PST<u></u><u></u></li></ul>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Thu, Feb 23, 2023 at 7:24 PM Alex Chee &lt;<a hre=
+f=3D"mailto:alex@tribecap.co" target=3D"_blank">alex@tribecap.co</a>&gt; wr=
+ote:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border-style:none none none solid;border-left-width:1p=
+t;border-left-color:rgb(204,204,204);padding:0in 0in 0in 6pt;margin-left:4.=
+8pt;margin-right:0in">
+<div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal">Absolutely! Can definitely empathize with the mad ru=
+sh this year. +Chelsea who can help us lock in a time.<u></u><u></u></p>
+</div>
+</div>
+<div>
+<div>
+<p class=3D"MsoNormal"><img border=3D"0" width=3D"1" height=3D"1" style=3D"=
+width:0.0083in;height:0.0083in" id=3D"m_3147809670164448965m_34291420100876=
+26147m_9110048797904851567m_-6455053905169659355_x0000_i1029" src=3D"https:=
+//r.superhuman.com/-Rfv2PTWyw3AyKERzro8ptnUBQmCj6mwdj_D0yUmeBGdpGyIJj_WgtpZ=
+3BQPG7Mrnr4mK-f3_vxpRXakkl2GMXzQpayJ5dvVHlXSV8e0HRLQk9iBHG0wqoHbH2nR8VbGcFm=
+5cX8wAqa9_DEF8wpDvz3ZDAbejFbup-cBLePpgRXMzgmq-9_M.gif"><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Tue, Feb 21, 2023 at 10:52 AM, Geoffrey Abrahams =
+&lt;<a href=3D"mailto:gabrahams@hjweinberg.org" target=3D"_blank">gabrahams=
+@hjweinberg.org</a>&gt; wrote:<u></u><u></u></p>
+<blockquote style=3D"border-style:none none none solid;border-left-width:1p=
+t;border-left-color:rgb(204,204,204);padding:0in 0in 0in 6pt;margin-left:4.=
+8pt;margin-right:0in">
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal">Hi Alex,<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Really sorry for the extremely delayed response.=C2=
+=A0 And thank you! My wife and I had identical twin girls at year-end so th=
+at=E2=80=99s been awesome.=C2=A0 Would be great to catch up though.=C2=A0
+ Any times in mid-March look ok for you?=C2=A0 I can be pretty flexible.=C2=
+=A0 Thanks again and hope you=E2=80=99re doing well also.<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Geoff<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100%">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"800" style=
+=3D"width:600pt">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:12pt 0in 0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:1pt"><img border=3D"0" widt=
+h=3D"450" height=3D"77" style=3D"width:4.6916in;height:0.8in" id=3D"m_31478=
+09670164448965m_3429142010087626147m_9110048797904851567m_-6455053905169659=
+355m_8088251308536033439Picture_x0020_6" src=3D"cid:18685879c4e4cff311"></s=
+pan><u></u><u></u></p>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 7.5pt">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"bottom" style=3D"padding:0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12pt;font-family:Arial,s=
+ans-serif;color:rgb(0,47,87)">Geoffrey=C2=A0Abrahams</span></b><b><span sty=
+le=3D"font-size:1pt;font-family:remialcxesans;color:white"></span></b><b><s=
+pan style=3D"font-size:1pt;font-family:template-0N681EObEeumBwANOhMLNA;colo=
+r:white"></span></b><b><span style=3D"font-size:1pt;font-family:zone-1;colo=
+r:white"></span></b><b><span style=3D"font-size:1pt;font-family:zones-AQ;co=
+lor:white"></span></b><u></u><u></u></p>
+</td>
+<td valign=3D"bottom" style=3D"padding:0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12pt;font-family:Arial,s=
+ans-serif;color:rgb(0,47,87)">,=C2=A0</span></b><u></u><u></u></p>
+</td>
+<td valign=3D"bottom" style=3D"padding:0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10pt;font-family:Arial,s=
+ans-serif;color:rgb(124,161,183)">Investment=C2=A0Manager</span></b><u></u>=
+<u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in 0in 0in 7.5pt">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(100,1=
+08,114)">7=C2=A0Park=C2=A0Center=C2=A0Court</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(100,1=
+08,114)">,=C2=A0</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(100,1=
+08,114)">Owings=C2=A0Mills</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(100,1=
+08,114)">,=C2=A0</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(100,1=
+08,114)">MD=C2=A0</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(100,1=
+08,114)">21117</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<b><span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(0,=
+47,87)">E:=C2=A0</span></b><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(0,47,=
+87)"><a href=3D"mailto:gabrahams@hjweinberg.org" target=3D"_blank"><span st=
+yle=3D"color:rgb(0,47,87);text-decoration:none">gabrahams@hjweinberg.org</s=
+pan></a>=C2=A0</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<b><span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(0,=
+47,87)">=C2=A0P:=C2=A0</span></b><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(100,1=
+08,114)">410=E2=80=91413=E2=80=916052</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(100,1=
+08,114)">Click=C2=A0</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<u><span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(0,=
+47,87)"><a href=3D"https://hjweinbergfoundation.org/enews-signup/" title=3D=
+"https://hjweinbergfoundation.org/enews-signup/" target=3D"_blank"><span st=
+yle=3D"color:rgb(0,47,87)">here</span></a></span></u><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal" style=3D"line-height:13pt">
+<span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(100,1=
+08,114)">=C2=A0to=C2=A0subscribe=C2=A0to=C2=A0our=C2=A0e=E2=80=91newsletter=
+!</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td valign=3D"top" style=3D"padding:3pt 0in 3pt 7.5pt">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td nowrap style=3D"padding:0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:8.5pt;font-family:Arial,san=
+s-serif;color:rgb(0,47,87)"><a href=3D"https://hjweinbergfoundation.org/" t=
+arget=3D"_blank"><span style=3D"color:rgb(0,47,87);text-decoration:none">ww=
+w.hjweinbergfoundation.org</span></a></span><u></u><u></u></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<p class=3D"MsoNormal"><a href=3D"https://nam04.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.facebook.com%2Fpages%2FThe-Harry-and-Jeanett=
+e-Weinberg-Foundation-Inc%2F169299436473114&amp;data=3D05%7C01%7Cgabrahams%=
+40hjweinberg.org%7Cb722d83036244805e9b808db16865575%7C9a507581f5814cfa8142c=
+6e1ebbb8d56%7C0%7C0%7C638128538492236666%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC=
+4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&am=
+p;sdata=3D14EsINHtvebb50O74aJGfzMZ2IvT4AfAPK5a2r6MOAo%3D&amp;reserved=3D0" =
+target=3D"_blank"><span style=3D"font-size:1pt;text-decoration:none"><img b=
+order=3D"0" width=3D"20" height=3D"20" style=3D"width:0.2083in;height:0.208=
+3in" id=3D"m_3147809670164448965m_3429142010087626147m_9110048797904851567m=
+_-6455053905169659355m_8088251308536033439Picture_x0020_2" src=3D"cid:18685=
+879c4f5b16b22"></span></a><u></u><u></u></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<p class=3D"MsoNormal"><a href=3D"https://nam04.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Ftwitter.com%2Fhjweinbergfdn&amp;data=3D05%7C01%7=
+Cgabrahams%40hjweinberg.org%7Cb722d83036244805e9b808db16865575%7C9a507581f5=
+814cfa8142c6e1ebbb8d56%7C0%7C0%7C638128538492236666%7CUnknown%7CTWFpbGZsb3d=
+8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%=
+7C%7C%7C&amp;sdata=3D9eQWo3bA3DtQ4SB7Cxy3cEcLYFfWh615e9hDOtAlZEU%3D&amp;res=
+erved=3D0" target=3D"_blank"><span style=3D"font-size:1pt;text-decoration:n=
+one"><img border=3D"0" width=3D"20" height=3D"20" style=3D"width:0.2083in;h=
+eight:0.2083in" id=3D"m_3147809670164448965m_3429142010087626147m_911004879=
+7904851567m_-6455053905169659355m_8088251308536033439Picture_x0020_3" src=
+=3D"cid:18685879c4f692e333"></span></a><u></u><u></u></p>
+</td>
+<td valign=3D"top" style=3D"padding:0in">
+<p class=3D"MsoNormal"><a href=3D"https://nam04.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.youtube.com%2Fuser%2FHJWeinbergFoundation&am=
+p;data=3D05%7C01%7Cgabrahams%40hjweinberg.org%7Cb722d83036244805e9b808db168=
+65575%7C9a507581f5814cfa8142c6e1ebbb8d56%7C0%7C0%7C638128538492236666%7CUnk=
+nown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJX=
+VCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=3DeHRTurpekjMqWdqkgxQXAHxJviVQ%2B70EyG=
+oh77RR47E%3D&amp;reserved=3D0" target=3D"_blank"><span style=3D"font-size:1=
+pt;text-decoration:none"><img border=3D"0" width=3D"20" height=3D"20" style=
+=3D"width:0.2083in;height:0.2083in" id=3D"m_3147809670164448965m_3429142010=
+087626147m_9110048797904851567m_-6455053905169659355m_8088251308536033439Pi=
+cture_x0020_4" src=3D"cid:18685879c4f7745b44"></span></a><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td style=3D"padding:0in">
+<p class=3D"MsoNormal"><span style=3D"font-size:1pt">=C2=A0</span><u></u><u=
+></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div style=3D"border-style:solid none none;border-top-width:1pt;border-top-=
+color:rgb(225,225,225);padding:3pt 0in 0in">
+<p class=3D"MsoNormal"><b>From:</b> Alex Chee &lt;<a href=3D"mailto:alex@tr=
+ibecap.co" target=3D"_blank">alex@tribecap.co</a>&gt;
+<br>
+<b>Sent:</b> Friday, January 6, 2023 10:25 PM<br>
+<b>To:</b> Geoffrey Abrahams &lt;<a href=3D"mailto:gabrahams@hjweinberg.org=
+" target=3D"_blank">gabrahams@hjweinberg.org</a>&gt;<br>
+<b>Subject:</b> Re: Been a while<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div style=3D"border:1pt solid rgb(156,101,0);padding:2pt">
+<p class=3D"MsoNormal" style=3D"line-height:12pt;background-color:rgb(255,2=
+35,156)">
+<b><span style=3D"font-size:10pt;color:rgb(156,101,0)">CAUTION:</span></b><=
+span style=3D"font-size:10pt;color:black"> This email originated from outsi=
+de of the organization. Do not click on any links or open any attachments u=
+nless you recognize the sender and know
+ the content is safe.</span><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal">Just saw the note. Wow congrats!!!<u></u><u></u></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Fri, Jan 06, 2023 at 7:24 PM, Alex Chee &lt;<a hr=
+ef=3D"mailto:alex@tribecap.co" target=3D"_blank">alex@tribecap.co</a>&gt; w=
+rote:<u></u><u></u></p>
+<blockquote style=3D"border-style:none none none solid;border-left-width:1p=
+t;border-left-color:rgb(204,204,204);padding:0in 0in 0in 6pt;margin:5pt 0in=
+ 5pt 4.8pt">
+<div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal">Would love to catch up. Still remember our convo whe=
+re you shared the inner-workings of how foundations work.<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">We&#39;ve grown quite a bit =E2=80=94 not sure if yo=
+u guys are doing VC, but would love to share the latest and learn the lates=
+t. Let me know!<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">- Alex<u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:Arial,=
+sans-serif">Disclaimer</span></b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:Arial,san=
+s-serif">The information contained in this communication from the sender is=
+ confidential. It is intended solely for use by the
+ recipient and others authorized to receive it. If you are not the recipien=
+t, you are hereby notified that any disclosure, copying, distribution or ta=
+king action in relation of the contents of this information is strictly pro=
+hibited and may be unlawful. If
+ you have received this communication in error, please notify Tribe at (619=
+) 567-9955 and delete this communication immediately without making any cop=
+y or distribution.</span><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:Arial,=
+sans-serif">Disclaimer</span></b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:Arial,san=
+s-serif">The information contained in this communication from the sender is=
+ confidential. It is intended solely for use by the recipient and others au=
+thorized to receive it. If you are
+ not the recipient, you are hereby notified that any disclosure, copying, d=
+istribution or taking action in relation of the contents of this informatio=
+n is strictly prohibited and may be unlawful. If you have received this com=
+munication in error, please notify
+ Tribe at (619) 567-9955 and delete this communication immediately without =
+making any copy or distribution.</span><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div></blockquote></div>
+</blockquote></div>
+</blockquote></div>
+</div></div>
+
+--000000000000b1855205f874d479--
+--000000000000b1855305f874d47a
+Content-Type: image/png; name="image001.png"
+Content-Disposition: inline; filename="image001.png"
+Content-Transfer-Encoding: base64
+Content-ID: <18685879c4e4cff311>
+X-Attachment-Id: 18685879c4e4cff311
+
+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
+/yPNLmkSRXIAAAAASUVORK5CYII=
+--000000000000b1855305f874d47a
+Content-Type: image/png; name="image002.png"
+Content-Disposition: inline; filename="image002.png"
+Content-Transfer-Encoding: base64
+Content-ID: <18685879c4f5b16b22>
+X-Attachment-Id: 18685879c4f5b16b22
+
+iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAAHNJREFUeNpiYBhxgJFYhSz6EQZAqh6IBWBify6ucMRQR4Jh+5ENwwWY
+iHRgPTGGEe1CIDBAYjsCvXqAUhcqUBwp0HDrh3IdkKQuAPEHciJFAM0gbN4nKQxBrjiAz4Vkp0Og
+9/9TO1KIBqMGDkIDBz8ACDAAr5MZM5hYD8cAAAAASUVORK5CYII=
+--000000000000b1855305f874d47a
+Content-Type: image/png; name="image003.png"
+Content-Disposition: inline; filename="image003.png"
+Content-Transfer-Encoding: base64
+Content-ID: <18685879c4f692e333>
+X-Attachment-Id: 18685879c4f692e333
+
+iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAAOVJREFUeNpiYBgFlAJGUjWw6EckACl7IP4AxBv/XFxxACjmAKKxGgiU
+vA+kAoEKLmCRWw+kAtCEH0BxIlDPAyYsjlAA4v1AzQFohjlgMQym3gCIBcDqsCj4AJVcDzQE5I2J
+QAyiHfCEhCPMR4xEegsvABoGNweblwNIjKcHyBxsBi4g0cADhAwsBOILJBi4EK+BwPD4AI0YolwH
+S3/4XAgCgehewZEaCtEFmbGp/Pfyyg8mCR1G5PSFxTBHbImfEUvirSeQ5jaAXAbKFUTlZaChAtCk
+Yw/NBTAXXQSlAFwGjWAAEGAAe7hKPRQFgqMAAAAASUVORK5CYII=
+--000000000000b1855305f874d47a
+Content-Type: image/png; name="image004.png"
+Content-Disposition: inline; filename="image004.png"
+Content-Transfer-Encoding: base64
+Content-ID: <18685879c4f7745b44>
+X-Attachment-Id: 18685879c4f7745b44
+
+iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAAR5JREFUeNrMVMENgjAUBeNdRsAJZANwAvXmTRiBCYgbuIF48wZOIGwA
+GzgC3k30NXlNGqBQogd/8tIC7ev77/9iWf8etu7DfLV/Y1gDGRC96mv+LWHG6ZbEAZACDtAALg4p
+OvsGDrsBZyDnKMLnWAJJn6DZAGGuELvAxSRlLSHSaTh9TCnKzHCdIN0ozwet9yNER5LFgEcbXMIx
+qjKqKxaGug196mFPOqTwTjXGARE+SKOOh1TnMdUd+06NWMMZ6ooilSVsXrGw4rzhXK16wfeTqhyT
+qFIqfiIaZjO5bdQQV/BJ1MpBRm0zFkmrP40Vli3fFkTevpK25rdlMRWPnjmKfw4bW5IH7MWlTmFE
+s2XF5a2QLeW2/OwU5qfxEWAAU99Krv75N78AAAAASUVORK5CYII=
+--000000000000b1855305f874d47a--

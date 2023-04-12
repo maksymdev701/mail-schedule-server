@@ -1,0 +1,1340 @@
+Delivered-To: kavin@tribecap.co
+Received: by 2002:a05:7010:ac8e:b0:341:6b4e:1a5e with SMTP id dv14csp2621346mdb;
+        Mon, 3 Apr 2023 13:58:28 -0700 (PDT)
+X-Received: by 2002:a17:90b:1c83:b0:240:3dc7:4939 with SMTP id oo3-20020a17090b1c8300b002403dc74939mr228031pjb.27.1680555507842;
+        Mon, 03 Apr 2023 13:58:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1680555507; cv=none;
+        d=google.com; s=arc-20160816;
+        b=KdBg4Kfc/WV1WO1n0w0zomcHKEzH3ieAiMm22Mv4nKD6aVZVtgLvkjDNAo7kZ6l5Rq
+         DM5NdyuvBXw0ph/07RIGAdlPQ8lW+lrE7866O4GQOxc8jJ28lMAIA+4KDQmKKqEdbCb4
+         c0UddZ7NlwzlLE9QSH30kjOqWlIM3Tes8EUssX8wkwe/l48cKeUewOV+pyIr0NyzOLQD
+         jXAR9iTawiarCNfjYubPUufV7QcHnxAczrogCGKjSHJYHb5JBvZzhHw3mvXObO/EV56Z
+         dzBXwUNCh9Z+b1uzxa8PqSpNN4c4prXt9ntXgKn911DcLZ67Lqbf5Jbhbr3G2VAC2yYa
+         vBCg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=7N1EXPecyNqcW0BBSiofuTpj7qERxd/7mwWVs/2oj2A=;
+        b=e+JUBnjLeBcldvXB0oQN4ZlNyEKoKwlyjSZi4aRcso9AcX6eU+nkFwhNaZ61D4INzF
+         7hJM7hNTsZtzaQgqGiwFJEzF73uhQd0VyzsUcg5QFOWfLC2zqCPkz1KUcHvqQrYv8UwH
+         vtllSCktnY9H40TH1f23GPPDNru9Phj+QTXOoYmS1BrxzP7pbyqNj+nGh4WsDeLvJdbi
+         ZDYXchiElL/c3g5MnF7S48gWozuF4BFiW9Y/VUECpiOe3Fl3GOmhQUC8TPj3PeVCM+6g
+         Qa/1GRUR1Wsa/70PWMRUiev+mf2RTNmgMFQMMXYLYxrqP7g2/RXdgwZ+Q02nqk84uhy/
+         mzSg==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b="au6/1zix";
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+Return-Path: <chelsea@tribecap.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id lr16-20020a17090b4b9000b0023cfb3c221dsor5449171pjb.38.2023.04.03.13.58.27
+        for <kavin@tribecap.co>
+        (Google Transport Security);
+        Mon, 03 Apr 2023 13:58:27 -0700 (PDT)
+Received-SPF: pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b="au6/1zix";
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tribecap.co; s=google; t=1680555505;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=7N1EXPecyNqcW0BBSiofuTpj7qERxd/7mwWVs/2oj2A=;
+        b=au6/1zixeUi1ENcAK8Ozum5pLYsa7XsLO8Ixwndhp/69QY0gPGOKEf3Ueod5wV7f8L
+         itov6lgmT/V+28sTskVP1yVroHb0HYZiWhKx+yMyBh5qFpqsdm9TNH/GKZmVyvxIlNYL
+         9klLIBZIuWxZkM8Ft110X7EqDFeUaCM31i0Xs+NX5nzhY4aw3OYVjivCaElYnNIlcLtK
+         fKS7Z4ro8yh4veJpgUOvdCI5HCx6d6xZW/EETvWrAH7GTBE0gNlg/SY1C0xiLqhm0eaq
+         /pGF9Z0lr3ttT5Cb+Sdg5hjkUmavgQl+Q9VSWqRqExugYjBlflZmYqi04b3bdc4JhTCc
+         ToUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680555505;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=7N1EXPecyNqcW0BBSiofuTpj7qERxd/7mwWVs/2oj2A=;
+        b=uy0MsX6ARKjiuYz3QCvDyiFe4mq58Xx6Qj3yFWDeQCohVEZrk24sezB87wrfElzYqp
+         cGIfHCOT57iMFEmFXJLcb1Ba0wg8fklDVeVd2jQ8GoVFENZLAhfSbHvO2/X9sHZaw0H8
+         cS8+gsVaf+L8P/BM/ZSaV7FfLWDTByFojmQMADCO06kX2hbS4M824TXSfbgZOZCsE8Ni
+         ZTndyQz/Hne5cYSEFEIXqRi5zvkfA5SRpV9CjNvtK7mMZGgec4spnUhNsXIpqIq4G1df
+         C1qE5X6s3M8zy9enMB1/GZNZ+o/E2FshgpG0hYnA+6QO3eBTtNrQuIKvDK4fP+HuSsIu
+         qgOA==
+X-Gm-Message-State: AAQBX9ehenEtekxD5YgIV97LYEINKxkfCMCV3WKXh9LwBSsHn9vX2lnc
+	/tlzykPkddEXmyiR3iXlSc9TWcEOaCcuEh39nHUFWv11iHfEfpCnwU066loO5CfW1nwFt/9Tcef
+	+NQce5cl0Yn/O4PuOGPnogWlv5I+Gp1BflGld9t8VwR1ZCV6WvC5ISLOHyviCiTmglMwfDqJ7C5
+	PgkIL/6HG1xxWFGQ2tpqsu6p2fu5OFVP4J36CjIlWq0JXHHQ==
+X-Google-Smtp-Source: AKy350ZyEhEY0hA1S90Y2kZ4LHXSGhhfQL8ZoUCoG008XgCErCKRYZRpA41bBUaS6rVgyVLPxtGnNb7XIlHxmhx/tOo=
+X-Received: by 2002:a17:90a:a610:b0:23f:900d:878d with SMTP id
+ c16-20020a17090aa61000b0023f900d878dmr124803pjq.0.1680555505043; Mon, 03 Apr
+ 2023 13:58:25 -0700 (PDT)
+MIME-Version: 1.0
+References: <69360952-E48A-4F71-BBD1-67ABBFA73543@ninefour.vc>
+ <ldnuxo6t.4bf78d13-d6c8-41dc-a1d7-adba243d1b2d@we.are.superhuman.com>
+ <8A084590-8447-45BD-9B02-B5F90DB4A078@ninefour.vc> <7C20F6DC-034D-460B-BB1C-558EC14A9240@ninefour.vc>
+ <lehvi3xb.537912e6-408a-4df5-821c-b271231e936c@we.are.superhuman.com>
+ <CAEF9bpWx8zxJ1pKfxbGg12tVBWfUCXYp8+m0hrUE9WNC81XE7w@mail.gmail.com>
+ <D8C31448-F6A9-4A15-88D0-ADD3BD204855@ninefour.vc> <CAEF9bpU8m0hnJ9E6u+Mc+mWAZPsm6Y4noWYnhAmV7HnK0M9=1A@mail.gmail.com>
+ <C2A1DC9A-9FCA-4634-88FC-BE49EFDC7FCB@ninefour.vc>
+In-Reply-To: <C2A1DC9A-9FCA-4634-88FC-BE49EFDC7FCB@ninefour.vc>
+From: Chelsea Masri <chelsea@tribecap.co>
+Date: Mon, 3 Apr 2023 13:58:11 -0700
+Message-ID: <CAEF9bpWJ8BLijKqaKFu5DBy8+3Y9m1gnc5DCxMGmGAM8zjwmHQ@mail.gmail.com>
+Subject: Fwd: Nine Four Ventures / Tribe Capital - Catching Up?
+To: Kavin Stewart <kavin@tribecap.co>
+Content-Type: multipart/related; boundary="000000000000e8785e05f874d183"
+
+--000000000000e8785e05f874d183
+Content-Type: multipart/alternative; boundary="000000000000e8785c05f874d182"
+
+--000000000000e8785c05f874d182
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+---------- Forwarded message ---------
+From: La Londe, Paul <paul@ninefour.vc>
+Date: Fri, Feb 24, 2023 at 8:25=E2=80=AFAM
+Subject: Re: Nine Four Ventures / Tribe Capital - Catching Up?
+To: Chelsea Masri <chelsea@tribecap.co>
+Cc: Alex Chee <alex@tribecap.co>
+
+
+Thanks, Chelsea!
+
+
+
+*Paul La Londe  *
+
+Partner
+
+*NINE FOUR* VENTURES
+
+C: 415.793.1959
+
+Website <https://ninefour.vc> | Insights <https://ninefour.vc/blog/>
+
+[image: signature_2521655114] <http://www.ninefour.vc/>
+
+--=20
+
+
+
+
+
+*From: *Chelsea Masri <chelsea@tribecap.co>
+*Date: *Thursday, February 23, 2023 at 9:55 PM
+*To: *"La Londe, Paul" <paul@ninefour.vc>
+*Cc: *Alex Chee <alex@tribecap.co>
+*Subject: *Re: Nine Four Ventures / Tribe Capital - Catching Up?
+
+
+
+You don't often get email from chelsea@tribecap.co. Learn why this is
+important <https://aka.ms/LearnAboutSenderIdentification>
+
+Thank you, Paul. I have just circulated a calendar invite with a Zoom link
+as well!
+
+
+
+On Thu, Feb 23, 2023 at 8:04 PM La Londe, Paul <paul@ninefour.vc> wrote:
+
+Thanks, Chelsea!
+
+
+
+2pm PT on Monday 3/20 is great. Does Alex have a Zoom he=E2=80=99d prefer t=
+o you
+use? If not, I=E2=80=99m happy to send one across.
+
+
+
+*Paul La Londe  *
+
+Partner
+
+*NINE FOUR* VENTURES
+
+C: 415.793.1959
+
+Website <https://ninefour.vc> | Insights <https://ninefour.vc/blog/>
+
+[image: signature_2521655114] <http://www.ninefour.vc/>
+
+--=20
+
+
+
+
+
+*From: *Chelsea Masri <chelsea@tribecap.co>
+*Date: *Thursday, February 23, 2023 at 6:15 PM
+*To: *"La Londe, Paul" <paul@ninefour.vc>
+*Cc: *Alex Chee <alex@tribecap.co>
+*Subject: *Re: Nine Four Ventures / Tribe Capital - Catching Up?
+
+
+
+You don't often get email from chelsea@tribecap.co. Learn why this is
+important <https://aka.ms/LearnAboutSenderIdentification>
+
+Hello Paul,
+
+
+
+I can assist in scheduling a call with Alex. Do any of the following dates
+and times work for you? Please let me know and I will circulate a calendar
+invite.
+
+
+
+=E2=80=A2Monday, 3/20 after 12pm PST
+
+=E2=80=A2Tuesday, 3/21 at 9:15am, 11:15am or after 1pm PST
+
+=E2=80=A2Thursday, 3/23 between 9:30am-12:20pm or at 1pm PST
+
+
+
+On Thu, Feb 23, 2023 at 5:47 PM Alex Chee <alex@tribecap.co> wrote:
+
++Chelsea!
+
+*Error! Filename not specified.*
+
+
+
+
+
+On Thu, Feb 23, 2023 at 6:19 PM, Paul La Londe <paul@ninefour.vc> wrote:
+
+Hey Alex =E2=80=93 I hope your AGM went well!
+
+
+
+Just wanted to check in. Do you have 30 mins for a quick call in March?
+Would love to catch up about Nine Four, Steadily, and SFOX, as well as hear
+about what you=E2=80=99re seeing in market at Tribe. Lmk!
+
+
+
+Best,
+Paul
+
+
+
+*Paul La Londe  *
+
+Partner
+
+*NINE FOUR* VENTURES
+
+C: 415.793.1959
+
+Website <https://ninefour.vc> | Insights <https://ninefour.vc/blog/>
+
+<http://www.ninefour.vc/>
+
+--=20
+
+
+
+
+
+*From: *"La Londe, Paul" <paul@ninefour.vc>
+*Date: *Thursday, February 2, 2023 at 8:49 PM
+*To: *Alex Chee <alex@tribecap.co>
+*Subject: *Re: Nine Four Ventures / Tribe Capital - Catching Up?
+
+
+
+Oh shoot, sorry! I didn=E2=80=99t know your AGM was next week, let=E2=80=99=
+s definitely
+catch up afterwards. Maybe the week after?
+
+
+
+A few things top of mind:
+
+   - We=E2=80=99re fundraising Fund II so wanted to briefly discuss to see =
+if there
+   was a potential fit
+   - Our portfolio company Steadily <https://www.steadily.com/> kicked off
+   a Series B. Not sure if you=E2=80=99re already in touch but wanted to ru=
+n it by you
+   in case you wanted to learn more
+   - On a more personal level, curious how SFOX is doing
+
+
+
+Best,
+
+Paul
+
+
+
+*Paul La Londe  *
+
+Partner
+
+*NINE FOUR* VENTURES
+
+C: 415.793.1959
+
+Website <https://ninefour.vc> | Insights <https://ninefour.vc/blog/>
+
+<http://www.ninefour.vc/>
+
+--=20
+
+
+
+
+
+*From: *Alex Chee <alex@tribecap.co>
+*Date: *Thursday, February 2, 2023 at 5:38 PM
+*To: *"La Londe, Paul" <paul@ninefour.vc>
+*Subject: *Re: Nine Four Ventures / Tribe Capital - Catching Up?
+
+
+
+Sure man! Anything top of mind? I'm running our AGM next week but after
+works.
+
+*Error! Filename not specified.*
+
+
+
+
+
+On Thu, Feb 02, 2023 at 11:03 AM, Paul La Londe <paul@ninefour.vc> wrote:
+
+Hey Alex =E2=80=93 it=E2=80=99s been a while! How are you? I hope everythin=
+g is going
+great.
+
+
+
+Want to catch up soon? Would be great to trade notes. Lmk!
+
+
+
+Best,
+
+Paul
+
+
+
+*Paul La Londe  *
+
+Partner
+
+*NINE FOUR* VENTURES
+
+C: 415.793.1959
+
+Website <https://ninefour.vc> | Insights <https://ninefour.vc/blog/>
+
+<http://www.ninefour.vc/>
+
+--=20
+
+
+
+CONFIDENTIALITY NOTICE: The information contained in this e-mail message
+may be privileged and confidential Nine Four information and is intended
+only for the use of the individual and/or entity identified. If you are not
+the intended recipient, or an employee or agent responsible to deliver it
+to the intended recipient, you are hereby requested not to distribute or
+copy this communication. If you have received this communication in error,
+please notify me by telephone or return the e-mail and delete the original
+message from your system. Thank you.
+
+
+
+
+
+*Disclaimer*
+
+The information contained in this communication from the sender is
+confidential. It is intended solely for use by the recipient and others
+authorized to receive it. If you are not the recipient, you are hereby
+notified that any disclosure, copying, distribution or taking action in
+relation of the contents of this information is strictly prohibited and may
+be unlawful. If you have received this communication in error, please
+notify Tribe at (619) 567-9955 and delete this communication immediately
+without making any copy or distribution.
+
+
+
+
+
+*Disclaimer*
+
+The information contained in this communication from the sender is
+confidential. It is intended solely for use by the recipient and others
+authorized to receive it. If you are not the recipient, you are hereby
+notified that any disclosure, copying, distribution or taking action in
+relation of the contents of this information is strictly prohibited and may
+be unlawful. If you have received this communication in error, please
+notify Tribe at (619) 567-9955 and delete this communication immediately
+without making any copy or distribution.
+
+
+
+*Disclaimer*
+
+The information contained in this communication from the sender is
+confidential. It is intended solely for use by the recipient and others
+authorized to receive it. If you are not the recipient, you are hereby
+notified that any disclosure, copying, distribution or taking action in
+relation of the contents of this information is strictly prohibited and may
+be unlawful. If you have received this communication in error, please
+notify Tribe at (619) 567-9955 and delete this communication immediately
+without making any copy or distribution.
+
+--000000000000e8785c05f874d182
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">---------- Forwarded message ---------<br>From: <strong cla=
+ss=3D"gmail_sendername" dir=3D"auto">La Londe, Paul</strong> <span dir=3D"a=
+uto">&lt;<a href=3D"mailto:paul@ninefour.vc">paul@ninefour.vc</a>&gt;</span=
+><br>Date: Fri, Feb 24, 2023 at 8:25=E2=80=AFAM<br>Subject: Re: Nine Four V=
+entures / Tribe Capital - Catching Up?<br>To: Chelsea Masri &lt;<a href=3D"=
+mailto:chelsea@tribecap.co">chelsea@tribecap.co</a>&gt;<br>Cc: Alex Chee &l=
+t;<a href=3D"mailto:alex@tribecap.co">alex@tribecap.co</a>&gt;<br></div><br=
+><br><div class=3D"msg573926045448894294">
+
+
+
+
+
+<div lang=3D"EN-US" link=3D"blue" vlink=3D"purple" style=3D"word-wrap:break=
+-word">
+<div class=3D"m_573926045448894294WordSection1">
+<p class=3D"MsoNormal">Thanks, Chelsea!<u></u><u></u></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:13.5pt;font-family:&quot=
+;Calibri Light&quot;,sans-serif;color:#0070c0;letter-spacing:1.0pt">Paul La=
+ Londe=C2=A0=C2=A0</span></b><span style=3D"font-size:13.5pt;color:black"><=
+u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:13.5pt;font-family:&quot;Ca=
+libri Light&quot;,sans-serif;color:black">Partner</span><span style=3D"font=
+-size:13.5pt;color:black"><u></u><u></u></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-family:&quot;Calibri Light&qu=
+ot;,sans-serif;color:black;letter-spacing:1.0pt">NINE FOUR</span></b><span =
+style=3D"font-family:&quot;Calibri Light&quot;,sans-serif;color:black;lette=
+r-spacing:1.0pt">=C2=A0VENTURES</span><span style=3D"font-size:13.5pt;color=
+:black"><u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Calibri Light&quot;=
+,sans-serif;color:black;letter-spacing:1.0pt">C: 415.793.1959</span><span s=
+tyle=3D"font-size:13.5pt;color:black"><u></u><u></u></span></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:9.6pt"><span style=3D"font-si=
+ze:13.5pt;color:black"><a href=3D"https://ninefour.vc" title=3D"https://nin=
+efour.vc/" target=3D"_blank"><span style=3D"font-size:11.0pt;font-family:&q=
+uot;Calibri Light&quot;,sans-serif;color:#0563c1">Website</span></a></span>=
+<span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif;color:black=
+">=C2=A0|=C2=A0</span><span style=3D"font-size:13.5pt;color:black"><a href=
+=3D"https://ninefour.vc/blog/" title=3D"https://ninefour.vc/insights/" targ=
+et=3D"_blank"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri Lig=
+ht&quot;,sans-serif;color:#0563c1">Insights</span></a><u></u><u></u></span>=
+</p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:9.6pt"><a href=3D"http://www.=
+ninefour.vc/" title=3D"http://www.ninefour.vc/" target=3D"_blank"><span sty=
+le=3D"color:windowtext;text-decoration:none"><img border=3D"0" width=3D"100=
+" height=3D"70" style=3D"width:1.0416in;height:.7291in" id=3D"m_57392604544=
+8894294Picture_x0020_1" src=3D"cid:18748e9b05f4ce8e91" alt=3D"signature_252=
+1655114"></span></a><span style=3D"font-size:13.5pt;color:black"><u></u><u>=
+</u></span></p>
+<p class=3D"MsoNormal">--=C2=A0<u></u><u></u></p>
+</div>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div style=3D"border:none;border-top:solid #b5c4df 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;color:black">From=
+: </span></b><span style=3D"font-size:12.0pt;color:black">Chelsea Masri &lt=
+;<a href=3D"mailto:chelsea@tribecap.co" target=3D"_blank">chelsea@tribecap.=
+co</a>&gt;<br>
+<b>Date: </b>Thursday, February 23, 2023 at 9:55 PM<br>
+<b>To: </b>&quot;La Londe, Paul&quot; &lt;<a href=3D"mailto:paul@ninefour.v=
+c" target=3D"_blank">paul@ninefour.vc</a>&gt;<br>
+<b>Cc: </b>Alex Chee &lt;<a href=3D"mailto:alex@tribecap.co" target=3D"_bla=
+nk">alex@tribecap.co</a>&gt;<br>
+<b>Subject: </b>Re: Nine Four Ventures / Tribe Capital - Catching Up?<u></u=
+><u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" align=3D"left" widt=
+h=3D"100%" style=3D"width:100.0%;display:table;border-collapse:seperate;flo=
+at:none">
+<tbody>
+<tr>
+<td style=3D"background:#a6a6a6;padding:5.25pt 1.5pt 5.25pt 1.5pt"></td>
+<td width=3D"100%" style=3D"width:100.0%;background:#eaeaea;padding:5.25pt =
+3.75pt 5.25pt 11.25pt">
+<div>
+<p class=3D"MsoNormal">
+<span style=3D"font-size:9.0pt;font-family:wf_segoe-ui_normal;color:#212121=
+">You don&#39;t often get email from <a href=3D"mailto:chelsea@tribecap.co"=
+ target=3D"_blank">chelsea@tribecap.co</a>.
+<a href=3D"https://aka.ms/LearnAboutSenderIdentification" target=3D"_blank"=
+>Learn why this is important</a><u></u><u></u></span></p>
+</div>
+</td>
+<td width=3D"75" style=3D"width:56.25pt;background:#eaeaea;padding:5.25pt 3=
+.75pt 5.25pt 3.75pt">
+</td>
+</tr>
+</tbody>
+</table>
+<div>
+<div>
+<p class=3D"MsoNormal">Thank you, Paul. I have just circulated a calendar i=
+nvite with a Zoom link as well!<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Thu, Feb 23, 2023 at 8:04 PM La Londe, Paul &lt;<=
+a href=3D"mailto:paul@ninefour.vc" target=3D"_blank">paul@ninefour.vc</a>&g=
+t; wrote:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0i=
+n 0in 0in 6.0pt;margin-left:4.8pt;margin-right:0in">
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal">Thanks, Chelsea!
+<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">2pm PT on Monday 3/20 is great. Does Alex have a Zoo=
+m he=E2=80=99d prefer to you use? If not, I=E2=80=99m happy to send one acr=
+oss.<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:13.5pt;font-family:&quot=
+;Calibri Light&quot;,sans-serif;color:#0070c0;letter-spacing:1.0pt">Paul La=
+ Londe=C2=A0=C2=A0</span></b><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:13.5pt;font-family:&quot;Ca=
+libri Light&quot;,sans-serif;color:black">Partner</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-family:&quot;Calibri Light&qu=
+ot;,sans-serif;color:black;letter-spacing:1.0pt">NINE FOUR</span></b><span =
+style=3D"font-family:&quot;Calibri Light&quot;,sans-serif;color:black;lette=
+r-spacing:1.0pt">=C2=A0VENTURES</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Calibri Light&quot;=
+,sans-serif;color:black;letter-spacing:1.0pt">C: 415.793.1959</span><u></u>=
+<u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:9.6pt"><span style=3D"font-si=
+ze:13.5pt;color:black"><a href=3D"https://ninefour.vc" title=3D"https://nin=
+efour.vc/" target=3D"_blank"><span style=3D"font-size:11.0pt;font-family:&q=
+uot;Calibri Light&quot;,sans-serif;color:#0563c1">Website</span></a></span>=
+<span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif;color:black=
+">=C2=A0|=C2=A0</span><span style=3D"font-size:13.5pt;color:black"><a href=
+=3D"https://ninefour.vc/blog/" title=3D"https://ninefour.vc/insights/" targ=
+et=3D"_blank"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri Lig=
+ht&quot;,sans-serif;color:#0563c1">Insights</span></a></span><u></u><u></u>=
+</p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:9.6pt"><a href=3D"http://www.=
+ninefour.vc/" title=3D"http://www.ninefour.vc/" target=3D"_blank"><span sty=
+le=3D"color:windowtext;text-decoration:none"><img border=3D"0" width=3D"100=
+" height=3D"70" style=3D"width:1.0416in;height:.7291in" id=3D"m_57392604544=
+8894294m_-6096270299681635997Picture_x0020_1" src=3D"cid:18748e9b05f5b006a2=
+" alt=3D"signature_2521655114"></span></a><u></u><u></u></p>
+<p class=3D"MsoNormal">--=C2=A0<u></u><u></u></p>
+</div>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div style=3D"border:none;border-top:solid #b5c4df 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;color:black">From=
+:
+</span></b><span style=3D"font-size:12.0pt;color:black">Chelsea Masri &lt;<=
+a href=3D"mailto:chelsea@tribecap.co" target=3D"_blank">chelsea@tribecap.co=
+</a>&gt;<br>
+<b>Date: </b>Thursday, February 23, 2023 at 6:15 PM<br>
+<b>To: </b>&quot;La Londe, Paul&quot; &lt;<a href=3D"mailto:paul@ninefour.v=
+c" target=3D"_blank">paul@ninefour.vc</a>&gt;<br>
+<b>Cc: </b>Alex Chee &lt;<a href=3D"mailto:alex@tribecap.co" target=3D"_bla=
+nk">alex@tribecap.co</a>&gt;<br>
+<b>Subject: </b>Re: Nine Four Ventures / Tribe Capital - Catching Up?</span=
+><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" align=3D"left" widt=
+h=3D"100%" style=3D"width:100.0%;display:table;float:none">
+<tbody>
+<tr>
+<td style=3D"background:#a6a6a6;padding:5.25pt 1.5pt 5.25pt 1.5pt"></td>
+<td width=3D"100%" style=3D"width:100.0%;background:#eaeaea;padding:5.25pt =
+3.75pt 5.25pt 11.25pt">
+<div>
+<p class=3D"MsoNormal">
+<span style=3D"font-size:9.0pt;font-family:wf_segoe-ui_normal;color:#212121=
+">You don&#39;t often get email from
+<a href=3D"mailto:chelsea@tribecap.co" target=3D"_blank">chelsea@tribecap.c=
+o</a>. <a href=3D"https://aka.ms/LearnAboutSenderIdentification" target=3D"=
+_blank">
+Learn why this is important</a></span><u></u><u></u></p>
+</div>
+</td>
+<td width=3D"75" style=3D"width:56.25pt;background:#eaeaea;padding:5.25pt 3=
+.75pt 5.25pt 3.75pt">
+</td>
+</tr>
+</tbody>
+</table>
+<div>
+<div>
+<p class=3D"MsoNormal">Hello Paul,<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">I can assist in scheduling a call with Alex. Do any =
+of the following dates and times=C2=A0work for you? Please let me know and =
+I will circulate a calendar invite.=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=E2=80=A2Monday, 3/20 after 12pm PST<u></u><u></u></=
+p>
+</div>
+<div>
+<p class=3D"MsoNormal">=E2=80=A2Tuesday, 3/21 at 9:15am, 11:15am or after 1=
+pm PST<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=E2=80=A2Thursday, 3/23 between 9:30am-12:20pm or at=
+ 1pm PST<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Thu, Feb 23, 2023 at 5:47 PM Alex Chee &lt;<a hre=
+f=3D"mailto:alex@tribecap.co" target=3D"_blank">alex@tribecap.co</a>&gt; wr=
+ote:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0i=
+n 0in 0in 6.0pt;margin-left:4.8pt;margin-top:5.0pt;margin-right:0in;margin-=
+bottom:5.0pt">
+<div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal">+Chelsea!<u></u><u></u></p>
+</div>
+</div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"border:solid windowtext 1.0pt;padding=
+:0in"><b>Error! Filename not specified.</b></span><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Thu, Feb 23, 2023 at 6:19 PM, Paul La Londe &lt;<=
+a href=3D"mailto:paul@ninefour.vc" target=3D"_blank">paul@ninefour.vc</a>&g=
+t; wrote:<u></u><u></u></p>
+<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0i=
+n 0in 0in 6.0pt;margin-left:4.8pt;margin-top:5.0pt;margin-right:0in;margin-=
+bottom:5.0pt">
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal">Hey Alex =E2=80=93 I hope your AGM went well!
+<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Just wanted to check in. Do you have 30 mins for a q=
+uick call in March? Would love to catch up about Nine Four, Steadily, and S=
+FOX, as well as hear about what you=E2=80=99re seeing in market
+ at Tribe. Lmk!<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Best,<br>
+Paul<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:13.5pt;font-family:&quot=
+;Calibri Light&quot;,sans-serif;color:#0070c0;letter-spacing:1.0pt">Paul La=
+ Londe=C2=A0=C2=A0</span></b><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:13.5pt;font-family:&quot;Ca=
+libri Light&quot;,sans-serif;color:black">Partner</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-family:&quot;Calibri Light&qu=
+ot;,sans-serif;color:black;letter-spacing:1.0pt">NINE FOUR</span></b><span =
+style=3D"font-family:&quot;Calibri Light&quot;,sans-serif;color:black;lette=
+r-spacing:1.0pt">=C2=A0VENTURES</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Calibri Light&quot;=
+,sans-serif;color:black;letter-spacing:1.0pt">C: 415.793.1959</span><u></u>=
+<u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:9.6pt"><span style=3D"font-si=
+ze:13.5pt;color:black"><a href=3D"https://ninefour.vc" title=3D"https://nin=
+efour.vc/" target=3D"_blank"><span style=3D"font-size:11.0pt;font-family:&q=
+uot;Calibri Light&quot;,sans-serif;color:#0563c1">Website</span></a></span>=
+<span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif;color:black=
+">=C2=A0|=C2=A0</span><span style=3D"font-size:13.5pt;color:black"><a href=
+=3D"https://ninefour.vc/blog/" title=3D"https://ninefour.vc/insights/" targ=
+et=3D"_blank"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri Lig=
+ht&quot;,sans-serif;color:#0563c1">Insights</span></a></span><u></u><u></u>=
+</p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:9.6pt"><a href=3D"http://www.=
+ninefour.vc/" title=3D"http://www.ninefour.vc/" target=3D"_blank"><span sty=
+le=3D"color:windowtext;text-decoration:none"><img border=3D"0" width=3D"150=
+" height=3D"104" style=3D"width:1.5625in;height:1.0833in" id=3D"m_573926045=
+448894294m_-6096270299681635997_x005f_x0000_i1027" src=3D"cid:18748e9b05f69=
+17eb3"></span></a><u></u><u></u></p>
+<p class=3D"MsoNormal">--=C2=A0<u></u><u></u></p>
+</div>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div style=3D"border:none;border-top:solid #b5c4df 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;color:black">From=
+:
+</span></b><span style=3D"font-size:12.0pt;color:black">&quot;La Londe, Pau=
+l&quot; &lt;<a href=3D"mailto:paul@ninefour.vc" target=3D"_blank">paul@nine=
+four.vc</a>&gt;<br>
+<b>Date: </b>Thursday, February 2, 2023 at 8:49 PM<br>
+<b>To: </b>Alex Chee &lt;<a href=3D"mailto:alex@tribecap.co" target=3D"_bla=
+nk">alex@tribecap.co</a>&gt;<br>
+<b>Subject: </b>Re: Nine Four Ventures / Tribe Capital - Catching Up?</span=
+><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">Oh shoot, sorry! I didn=E2=80=99t know your AGM was =
+next week, let=E2=80=99s definitely catch up afterwards. Maybe the week aft=
+er?<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">A few things top of mind:<u></u><u></u></p>
+<ul type=3D"disc">
+<li class=3D"MsoNormal">
+We=E2=80=99re fundraising Fund II so wanted to briefly discuss to see if th=
+ere was a potential fit<u></u><u></u></li><li class=3D"MsoNormal">
+Our portfolio company <a href=3D"https://www.steadily.com/" target=3D"_blan=
+k">Steadily</a> kicked off a Series B. Not sure if you=E2=80=99re already i=
+n touch but wanted to run it by you in case you wanted to learn more<u></u>=
+<u></u></li><li class=3D"MsoNormal">
+On a more personal level, curious how SFOX is doing<u></u><u></u></li></ul>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Best,<u></u><u></u></p>
+<p class=3D"MsoNormal">Paul<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:13.5pt;font-family:&quot=
+;Calibri Light&quot;,sans-serif;color:#0070c0;letter-spacing:1.0pt">Paul La=
+ Londe=C2=A0=C2=A0</span></b><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:13.5pt;font-family:&quot;Ca=
+libri Light&quot;,sans-serif;color:black">Partner</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-family:&quot;Calibri Light&qu=
+ot;,sans-serif;color:black;letter-spacing:1.0pt">NINE FOUR</span></b><span =
+style=3D"font-family:&quot;Calibri Light&quot;,sans-serif;color:black;lette=
+r-spacing:1.0pt">=C2=A0VENTURES</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Calibri Light&quot;=
+,sans-serif;color:black;letter-spacing:1.0pt">C: 415.793.1959</span><u></u>=
+<u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:9.6pt"><span style=3D"font-si=
+ze:13.5pt;color:black"><a href=3D"https://ninefour.vc" title=3D"https://nin=
+efour.vc/" target=3D"_blank"><span style=3D"font-size:11.0pt;font-family:&q=
+uot;Calibri Light&quot;,sans-serif;color:#0563c1">Website</span></a></span>=
+<span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif;color:black=
+">=C2=A0|=C2=A0</span><span style=3D"font-size:13.5pt;color:black"><a href=
+=3D"https://ninefour.vc/blog/" title=3D"https://ninefour.vc/insights/" targ=
+et=3D"_blank"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri Lig=
+ht&quot;,sans-serif;color:#0563c1">Insights</span></a></span><u></u><u></u>=
+</p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:9.6pt"><a href=3D"http://www.=
+ninefour.vc/" title=3D"http://www.ninefour.vc/" target=3D"_blank"><span sty=
+le=3D"color:windowtext;text-decoration:none"><img border=3D"0" width=3D"150=
+" height=3D"104" style=3D"width:1.5625in;height:1.0833in" id=3D"m_573926045=
+448894294m_-6096270299681635997_x005f_x0000_i1026" src=3D"cid:18748e9b05f77=
+2f6c4"></span></a><u></u><u></u></p>
+<p class=3D"MsoNormal">--=C2=A0<u></u><u></u></p>
+</div>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div style=3D"border:none;border-top:solid #b5c4df 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;color:black">From=
+:
+</span></b><span style=3D"font-size:12.0pt;color:black">Alex Chee &lt;<a hr=
+ef=3D"mailto:alex@tribecap.co" target=3D"_blank">alex@tribecap.co</a>&gt;<b=
+r>
+<b>Date: </b>Thursday, February 2, 2023 at 5:38 PM<br>
+<b>To: </b>&quot;La Londe, Paul&quot; &lt;<a href=3D"mailto:paul@ninefour.v=
+c" target=3D"_blank">paul@ninefour.vc</a>&gt;<br>
+<b>Subject: </b>Re: Nine Four Ventures / Tribe Capital - Catching Up?</span=
+><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal">Sure man! Anything top of mind? I&#39;m running our =
+AGM next week but after works.<u></u><u></u></p>
+</div>
+</div>
+<div>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"border:solid windowtext 1.0pt;padd=
+ing:0in">Error! Filename not specified.</span></b><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Thu, Feb 02, 2023 at 11:03 AM, Paul La Londe &lt;=
+<a href=3D"mailto:paul@ninefour.vc" target=3D"_blank">paul@ninefour.vc</a>&=
+gt; wrote:<u></u><u></u></p>
+<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0i=
+n 0in 0in 6.0pt;margin-left:4.8pt;margin-top:5.0pt;margin-right:0in;margin-=
+bottom:5.0pt">
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal">Hey Alex =E2=80=93 it=E2=80=99s been a while! How ar=
+e you? I hope everything is going great.
+<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Want to catch up soon? Would be great to trade notes=
+. Lmk!<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Best,<u></u><u></u></p>
+<p class=3D"MsoNormal">Paul<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:13.5pt;font-family:&quot=
+;Calibri Light&quot;,sans-serif;color:#0070c0;letter-spacing:1.0pt">Paul La=
+ Londe=C2=A0=C2=A0</span></b><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:13.5pt;font-family:&quot;Ca=
+libri Light&quot;,sans-serif;color:black">Partner</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-family:&quot;Calibri Light&qu=
+ot;,sans-serif;color:black;letter-spacing:1.0pt">NINE FOUR</span></b><span =
+style=3D"font-family:&quot;Calibri Light&quot;,sans-serif;color:black;lette=
+r-spacing:1.0pt">=C2=A0VENTURES</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Calibri Light&quot;=
+,sans-serif;color:black;letter-spacing:1.0pt">C: 415.793.1959</span><u></u>=
+<u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:9.6pt"><span style=3D"font-si=
+ze:13.5pt;color:black"><a href=3D"https://ninefour.vc" title=3D"https://nin=
+efour.vc/" target=3D"_blank"><span style=3D"font-size:11.0pt;font-family:&q=
+uot;Calibri Light&quot;,sans-serif;color:#0563c1">Website</span></a></span>=
+<span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif;color:black=
+">=C2=A0|=C2=A0</span><span style=3D"font-size:13.5pt;color:black"><a href=
+=3D"https://ninefour.vc/blog/" title=3D"https://ninefour.vc/insights/" targ=
+et=3D"_blank"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri Lig=
+ht&quot;,sans-serif;color:#0563c1">Insights</span></a></span><u></u><u></u>=
+</p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:9.6pt"><a href=3D"http://www.=
+ninefour.vc/" title=3D"http://www.ninefour.vc/" target=3D"_blank"><span sty=
+le=3D"color:windowtext;text-decoration:none"><img border=3D"0" width=3D"150=
+" height=3D"104" style=3D"width:1.5625in;height:1.0833in" id=3D"m_573926045=
+448894294m_-6096270299681635997_x005f_x0000_i1025" src=3D"cid:18748e9b05f85=
+46ed5"></span></a><u></u><u></u></p>
+<p class=3D"MsoNormal">--=C2=A0<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">CONFIDENTIALITY NOTICE: The information contained in=
+ this e-mail message may be privileged and confidential Nine Four informati=
+on and is intended only for the use of the individual
+ and/or entity identified. If you are not the intended recipient, or an emp=
+loyee or agent responsible to deliver it to the intended recipient, you are=
+ hereby requested not to distribute or copy this communication. If you have=
+ received this communication in
+ error, please notify me by telephone or return the e-mail and delete the o=
+riginal message from your system. Thank you.
+<u></u><u></u></p>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:&quot;=
+Arial&quot;,sans-serif">Disclaimer</span></b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:&quot;Ari=
+al&quot;,sans-serif">The information contained in this communication from t=
+he sender is confidential. It is intended solely for use by the
+ recipient and others authorized to receive it. If you are not the recipien=
+t, you are hereby notified that any disclosure, copying, distribution or ta=
+king action in relation of the contents of this information is strictly pro=
+hibited and may be unlawful. If
+ you have received this communication in error, please notify Tribe at (619=
+) 567-9955 and delete this communication immediately without making any cop=
+y or distribution.</span><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:&quot;=
+Arial&quot;,sans-serif">Disclaimer</span></b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:&quot;Ari=
+al&quot;,sans-serif">The information contained in this communication from t=
+he sender is confidential. It is intended solely for use by the
+ recipient and others authorized to receive it. If you are not the recipien=
+t, you are hereby notified that any disclosure, copying, distribution or ta=
+king action in relation of the contents of this information is strictly pro=
+hibited and may be unlawful. If
+ you have received this communication in error, please notify Tribe at (619=
+) 567-9955 and delete this communication immediately without making any cop=
+y or distribution.</span><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:&quot;=
+Arial&quot;,sans-serif">Disclaimer</span></b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:&quot;Ari=
+al&quot;,sans-serif">The information contained in this communication from t=
+he sender is confidential. It is intended solely for use by the recipient a=
+nd others authorized to receive it. If you are
+ not the recipient, you are hereby notified that any disclosure, copying, d=
+istribution or taking action in relation of the contents of this informatio=
+n is strictly prohibited and may be unlawful. If you have received this com=
+munication in error, please notify
+ Tribe at (619) 567-9955 and delete this communication immediately without =
+making any copy or distribution.</span><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+
+</div></div></div>
+
+--000000000000e8785c05f874d182--
+--000000000000e8785e05f874d183
+Content-Type: image/jpeg; name="image001.jpg"
+Content-Disposition: inline; filename="image001.jpg"
+Content-Transfer-Encoding: base64
+Content-ID: <18748e9b05f4ce8e91>
+X-Attachment-Id: 18748e9b05f4ce8e91
+
+/9j/4AAQSkZJRgABAQEAkACQAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIf
+IiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7
+Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABnAJYDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD2aiii
+gAooooAKKKSgANZUPijQ7i9NnHqUBnDbdu7AJ9AehrkviD4rkjdtEsJCpx/pMinnn+Af1/KvPMV6
+VDA+0hzSdux5eIzD2c+WCvbc+gpoUuIXhkyUdSpwSDj6jpXj3inTNQ8OauYhe3LwSjfBKZWyR6E5
+6iu3+HetTapo0ltcuZJrNgocnJKEfLn8iPwpnxMtY5fDcdwR88E67Tjs3BH8vyqMO3Qr+zl6F4lR
+r4f2kempwdh4u17TmBi1GWRR/BMfMU/nXe+HPiBZ6tIlpfoLO6bhTn9259j2Psa8pp8MEtzPHbwR
+tJLIwVEXqSa9OthaVRaq3meVRxdWm9Hddj6Cpa5rQdQk028g8NajcGa7S1WVJWP3zzlfwxx6iukr
+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
+RRRQAUUUUAf/2QAAAA==
+--000000000000e8785e05f874d183
+Content-Type: image/jpeg; name="image002.jpg"
+Content-Disposition: inline; filename="image002.jpg"
+Content-Transfer-Encoding: base64
+Content-ID: <18748e9b05f5b006a2>
+X-Attachment-Id: 18748e9b05f5b006a2
+
+/9j/4AAQSkZJRgABAQEAkACQAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIf
+IiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7
+Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABnAJYDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD2aiii
+gAooooAKKKSgANZUPijQ7i9NnHqUBnDbdu7AJ9AehrkviD4rkjdtEsJCpx/pMinnn+Af1/KvPMV6
+VDA+0hzSdux5eIzD2c+WCvbc+gpoUuIXhkyUdSpwSDj6jpXj3inTNQ8OauYhe3LwSjfBKZWyR6E5
+6iu3+HetTapo0ltcuZJrNgocnJKEfLn8iPwpnxMtY5fDcdwR88E67Tjs3BH8vyqMO3Qr+zl6F4lR
+r4f2kempwdh4u17TmBi1GWRR/BMfMU/nXe+HPiBZ6tIlpfoLO6bhTn9259j2Psa8pp8MEtzPHbwR
+tJLIwVEXqSa9OthaVRaq3meVRxdWm9Hddj6Cpa5rQdQk028g8NajcGa7S1WVJWP3zzlfwxx6iukr
+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
+RRRQAUUUUAf/2QAAAAA=
+--000000000000e8785e05f874d183
+Content-Type: image/jpeg; name="image003.jpg"
+Content-Disposition: inline; filename="image003.jpg"
+Content-Transfer-Encoding: base64
+Content-ID: <18748e9b05f6917eb3>
+X-Attachment-Id: 18748e9b05f6917eb3
+
+/9j/4AAQSkZJRgABAQEAkACQAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIf
+IiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7
+Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABnAJYDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD2aiii
+gAooooAKKKSgANZUPijQ7i9NnHqUBnDbdu7AJ9AehrkviD4rkjdtEsJCpx/pMinnn+Af1/KvPMV6
+VDA+0hzSdux5eIzD2c+WCvbc+gpoUuIXhkyUdSpwSDj6jpXj3inTNQ8OauYhe3LwSjfBKZWyR6E5
+6iu3+HetTapo0ltcuZJrNgocnJKEfLn8iPwpnxMtY5fDcdwR88E67Tjs3BH8vyqMO3Qr+zl6F4lR
+r4f2kempwdh4u17TmBi1GWRR/BMfMU/nXe+HPiBZ6tIlpfoLO6bhTn9259j2Psa8pp8MEtzPHbwR
+tJLIwVEXqSa9OthaVRaq3meVRxdWm9Hddj6Cpa5rQdQk028g8NajcGa7S1WVJWP3zzlfwxx6iukr
+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
+RRRQAUUUUAf/2QAAAAAA
+--000000000000e8785e05f874d183
+Content-Type: image/jpeg; name="image004.jpg"
+Content-Disposition: inline; filename="image004.jpg"
+Content-Transfer-Encoding: base64
+Content-ID: <18748e9b05f772f6c4>
+X-Attachment-Id: 18748e9b05f772f6c4
+
+/9j/4AAQSkZJRgABAQEAkACQAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIf
+IiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7
+Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABnAJYDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD2aiii
+gAooooAKKKSgANZUPijQ7i9NnHqUBnDbdu7AJ9AehrkviD4rkjdtEsJCpx/pMinnn+Af1/KvPMV6
+VDA+0hzSdux5eIzD2c+WCvbc+gpoUuIXhkyUdSpwSDj6jpXj3inTNQ8OauYhe3LwSjfBKZWyR6E5
+6iu3+HetTapo0ltcuZJrNgocnJKEfLn8iPwpnxMtY5fDcdwR88E67Tjs3BH8vyqMO3Qr+zl6F4lR
+r4f2kempwdh4u17TmBi1GWRR/BMfMU/nXe+HPiBZ6tIlpfoLO6bhTn9259j2Psa8pp8MEtzPHbwR
+tJLIwVEXqSa9OthaVRaq3meVRxdWm9Hddj6Cpa5rQdQk028g8NajcGa7S1WVJWP3zzlfwxx6iukr
+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
+RRRQAUUUUAf/2QAAAAAAAA==
+--000000000000e8785e05f874d183
+Content-Type: image/jpeg; name="image005.jpg"
+Content-Disposition: inline; filename="image005.jpg"
+Content-Transfer-Encoding: base64
+Content-ID: <18748e9b05f8546ed5>
+X-Attachment-Id: 18748e9b05f8546ed5
+
+/9j/4AAQSkZJRgABAQEAkACQAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIf
+IiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7
+Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABnAJYDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD2aiii
+gAooooAKKKSgANZUPijQ7i9NnHqUBnDbdu7AJ9AehrkviD4rkjdtEsJCpx/pMinnn+Af1/KvPMV6
+VDA+0hzSdux5eIzD2c+WCvbc+gpoUuIXhkyUdSpwSDj6jpXj3inTNQ8OauYhe3LwSjfBKZWyR6E5
+6iu3+HetTapo0ltcuZJrNgocnJKEfLn8iPwpnxMtY5fDcdwR88E67Tjs3BH8vyqMO3Qr+zl6F4lR
+r4f2kempwdh4u17TmBi1GWRR/BMfMU/nXe+HPiBZ6tIlpfoLO6bhTn9259j2Psa8pp8MEtzPHbwR
+tJLIwVEXqSa9OthaVRaq3meVRxdWm9Hddj6Cpa5rQdQk028g8NajcGa7S1WVJWP3zzlfwxx6iukr
+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
+RRRQAUUUUAf/2QAAAAAAAAA=
+--000000000000e8785e05f874d183--

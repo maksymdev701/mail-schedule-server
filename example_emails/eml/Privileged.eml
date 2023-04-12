@@ -1,0 +1,388 @@
+Delivered-To: kavin@tribecap.co
+Received: by 2002:a05:7010:ac8e:b0:341:6b4e:1a5e with SMTP id dv14csp2103546mdb;
+        Sun, 2 Apr 2023 21:06:47 -0700 (PDT)
+X-Received: by 2002:a17:907:782:b0:947:8075:b0c8 with SMTP id xd2-20020a170907078200b009478075b0c8mr13708180ejb.22.1680494807495;
+        Sun, 02 Apr 2023 21:06:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1680494807; cv=none;
+        d=google.com; s=arc-20160816;
+        b=VS75ohjFmf+2JgfomTri7USpH3uN4aSRu8o9iry5+H1mCNjeHIwALyWAZCAsv9iN4U
+         Z3wXmMGjvKvxvM3fiKvbp8KYl6rcWUAePm0KBK+jTp1Iq0RjDVqJDi3oOugBrSvp8k+C
+         65gLK2ZgYVCnURbECFBmRWvJRMYEJeuGFtHaC610/olgn6LC06FiP6ofX8/hHfYyUFOI
+         AfagQxoNgduMaXiVxIMWgyGM7lqljztR09ln9ziKnvbPn3VJeU8dSdFUa5r0IxFYC9by
+         JOz2Kn9JlPJp+bPhUOT8G4zdrL1kR56fQVKrBNrbfp27XAjSRZzXW/Kbgq0lNW5K+Vhj
+         k3YQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=gB4sJGo0Rwk/x9wS9Yr8FYBeaQSRXyMQ/4o7vZKKttw=;
+        b=AMDNLB8aK703BOowRfQSdhpf6gCZOKDusC74qtu9GexnmVi9XE7cxz/vz3ZHbTB8N/
+         xVGhqg6rtMHUV8TTAHKvcYY7d3lQJct9sDSuHMRwJj+yvKhvcbd8sZTiJ+n+sSM8++WK
+         OiFaiLQ+1KTbDsjG1dM7ycJvGzHrkFjFIOpK/G8jImx7nc86NG4gXBTXzmh/+kHUUyyK
+         1abJSQ1XOuP7xKb7P55PiN8NonHJynF4bf4OryVGMMQjCbGrprQFBema9RLE7nBLWmRS
+         mUfZiQuhojidn/Ts6yRGwSq897kTEvHb+wUaQqMiw+P55Bt4U0tHmQVuNuOSNO7EAaMh
+         3Ksg==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=dKjqatUd;
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+Return-Path: <chelsea@tribecap.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id e16-20020a1709062c1000b0093ae72f392esor4375187ejh.33.2023.04.02.21.06.47
+        for <kavin@tribecap.co>
+        (Google Transport Security);
+        Sun, 02 Apr 2023 21:06:47 -0700 (PDT)
+Received-SPF: pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=dKjqatUd;
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tribecap.co; s=google; t=1680494806;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=gB4sJGo0Rwk/x9wS9Yr8FYBeaQSRXyMQ/4o7vZKKttw=;
+        b=dKjqatUdFXskqGyPpRVE4sM2fQYuO/cjfAINrW2Ex2DCbO/ixiWkfjftTZUP7sCNmT
+         wGM3XEnOl4u7AGPo4Y71HuoMQMNAdkCPfbewUuW3PKzbcJ65iGerZ5XqBKKXBJMUceRb
+         Rf0KqOGi7XLMGfexz9McLrc5dwaeQX2ctoAUwyLayFjELxEYyLnf5AP13Xqp7NL7uKlU
+         tfTQCIzmrH3n+9RjgYl81XbekEvvOMJ6+RN0mRgP/a7YqUGXY8nlaz4K1t3AfedV+BlO
+         t6yr3SAIQlLfPeuD1aAsu3Pc0auNeA45aLbJnmk6tLjjbQyPuAo32uJPwT2Nr0lyQU6K
+         ZYyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680494806;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=gB4sJGo0Rwk/x9wS9Yr8FYBeaQSRXyMQ/4o7vZKKttw=;
+        b=aN280hdUcjScWwOfYx4gkFN3u0zp/RpfykBGElV+mVpgN/YKKIbCY6jomMHJGgsqsB
+         RNZdVaRxYPqlFBbLQDScDqj7fEvtULYzarNgaPmrnk/a5f4ubfmIQYPy6m+TWPyO/qtn
+         PCf/wSAzxKhBEAIUkGn29hX5utvt/P+n2lRzhg0n1S0+oKAvKgXFM5yLG/++RYnE7OPe
+         RvxLNy9fIwLrGpnLj6gzTosnZrQfCJ9vS+n1oWyHQ27EGEgpliZ2X+hQievWhOKjI9yl
+         fOyxmcZaROs4xeYWihD7l7QHsfuz/uwzlH8Af+SWZ4dkKxLR/0bWNER8Lw70qw2MDwXe
+         i/+Q==
+X-Gm-Message-State: AAQBX9ccVkeq3mGPqBDh2Eq5cng308HS9DlgHsjDHXbeHgKqyVWsJjVh
+	5KaOEahStI/K0BlWMkg+rNcBHBt5MbJY2TSv5sYcfwoE1lowPcvvf9n9ggNh+Prr6wnrN4eAPRh
+	VLrPlXOzz7ba/fezMy4GF17Xrrg1ZVRBaIBrcRkrnAcJXAaVVIDwPDyx0txozFmOlIr1hGgD+Km
+	TA5p4+7oguo+MuboL8UZnW8RfaaA80/3/KOr7svP8X9QDGjg==
+X-Google-Smtp-Source: AKy350Z6Mi2jVFx0nKx7mMe4c5mY59YaFM5GzED+o2lfe5sUmX1gigbtKpfaA7D1RBPrX3lyU3cWSZhGWXrBhACn+Hk=
+X-Received: by 2002:a17:907:a49:b0:931:6f5b:d27d with SMTP id
+ be9-20020a1709070a4900b009316f5bd27dmr17774232ejc.0.1680494805808; Sun, 02
+ Apr 2023 21:06:45 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAKm0YmsOeheM=YeFu4Qw4007m=z9yEx7e88jW-3voCvtNN-WTQ@mail.gmail.com>
+ <CAMEKxAy3Akno8DyjQ3g92OOTRz8oNKBGS3vbEt+hNq5bKj+kNA@mail.gmail.com>
+ <CAEF9bpUCbbHoOAq4aUXi+yZ5-4yBOAyV15ow4SbYC9dpW3h3rg@mail.gmail.com>
+ <BL0PR08MB453120DF9B0C58C36F7118CBBF899@BL0PR08MB4531.namprd08.prod.outlook.com>
+ <CAEF9bpVv35kG+Sp_pRAsYtnCtP=NF8iWkCTDj-+1gXstOE-G9A@mail.gmail.com>
+In-Reply-To: <CAEF9bpVv35kG+Sp_pRAsYtnCtP=NF8iWkCTDj-+1gXstOE-G9A@mail.gmail.com>
+From: Chelsea Masri <chelsea@tribecap.co>
+Date: Sun, 2 Apr 2023 21:06:26 -0700
+Message-ID: <CAEF9bpWj9hpwSj0b1NL0QUAMRM2C_wfDk2TdJ3viX7J_sD0s0w@mail.gmail.com>
+Subject: Fwd: Privileged
+To: Kavin Stewart <kavin@tribecap.co>
+Content-Type: multipart/alternative; boundary="000000000000f2876a05f866af7a"
+
+--000000000000f2876a05f866af7a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+---------- Forwarded message ---------
+From: Chelsea Masri <chelsea@tribecap.co>
+Date: Wed, Mar 29, 2023 at 8:41=E2=80=AFPM
+Subject: Re: Privileged
+To: Alex Chee <alex@tribecap.co>
+
+
+Call with Matt & Quinn team scheduled on 4/3 at 12pm PST.
+
+On Wed, Mar 29, 2023 at 4:49=E2=80=AFPM Ryan Gorman <ryangorman@quinnemanue=
+l.com>
+wrote:
+
+> Hi Chelsea,
+>
+>
+>
+> Thanks for the help coordinating.
+>
+>
+>
+> Matt and Alex =E2=80=93 Monday, 4/3 at 12pm PST works for our team.  I=E2=
+=80=99ll
+> circulate a Zoom in a few.
+>
+>
+>
+> Thanks,
+>
+> Ryan
+>
+>
+>
+> *From:* Chelsea Masri <chelsea@tribecap.co>
+> *Sent:* Wednesday, March 29, 2023 2:45 PM
+> *To:* Michael Liftik <michaelliftik@quinnemanuel.com>; Ryan Gorman <
+> ryangorman@quinnemanuel.com>; Aliki Sofis <alikisofis@quinnemanuel.com>
+> *Cc:* Alex Chee <alex@tribecap.co>; Matt Tolve <matt@tribecap.co>
+> *Subject:* Re: Privileged
+>
+>
+>
+> *[EXTERNAL EMAIL from chelsea@tribecap.co <chelsea@tribecap.co>]*
+>
+>
+> ------------------------------
+>
+> Hello,
+>
+>
+>
+> Please let me know if any of the following dates and times work for you
+> all next week. Thank you!
+>
+>    - Monday, 4/3 at 12pm PST
+>    - Wednesday, 4/5 at 1pm, 2pm PST
+>
+>
+>
+> On Wed, Mar 29, 2023 at 11:13=E2=80=AFAM Alex Chee <alex@tribecap.co> wro=
+te:
+>
+> Great. Let's find time
+>
+>
+>
+> On Wed, Mar 29, 2023 at 10:34=E2=80=AFAM Matt Tolve <matt@tribecap.co> wr=
+ote:
+>
+> Hi Alex,
+>
+>
+>
+> We are preparing our defense of the arbitration claims by some of the
+> Invenia investors.  We would like to meet with you for an hour next week =
+to
+> discuss your recollections of the investment.  The goal here is to make
+> sure we have a full understanding of the facts and can position our defen=
+se
+> in as strong a way as possible.  Copying the Quinn team, plus Chelsea, wh=
+o
+> hopefully can help us find a time.  Please let me know of any questions.
+>
+>
+>
+> Many thanks,
+>
+>
+>
+> Matt
+>
+>
+>
+> Matt Tolve
+>
+> *Tribe Capital*
+>
+> General Counsel & CCO
+>
+> Cell: 301-775-2387
+>
+> Email:  matt@tribecap.co
+>
+>
+>
+> *Disclaimer*
+>
+> The information contained in this communication from the sender is
+> confidential. It is intended solely for use by the recipient and others
+> authorized to receive it. If you are not the recipient, you are hereby
+> notified that any disclosure, copying, distribution or taking action in
+> relation of the contents of this information is strictly prohibited and m=
+ay
+> be unlawful. If you have received this communication in error, please
+> notify Tribe at (619) 567-9955 and delete this communication immediately
+> without making any copy or distribution.
+>
+
+--000000000000f2876a05f866af7a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">---------- Forwarded message ---------<br>From: <strong cla=
+ss=3D"gmail_sendername" dir=3D"auto">Chelsea Masri</strong> <span dir=3D"au=
+to">&lt;<a href=3D"mailto:chelsea@tribecap.co">chelsea@tribecap.co</a>&gt;<=
+/span><br>Date: Wed, Mar 29, 2023 at 8:41=E2=80=AFPM<br>Subject: Re: Privil=
+eged<br>To: Alex Chee &lt;<a href=3D"mailto:alex@tribecap.co">alex@tribecap=
+.co</a>&gt;<br></div><br><br><div dir=3D"ltr">Call with=C2=A0Matt &amp; Qui=
+nn team scheduled on 4/3 at 12pm PST.</div><br><div class=3D"gmail_quote"><=
+div dir=3D"ltr" class=3D"gmail_attr">On Wed, Mar 29, 2023 at 4:49=E2=80=AFP=
+M Ryan Gorman &lt;<a href=3D"mailto:ryangorman@quinnemanuel.com" target=3D"=
+_blank">ryangorman@quinnemanuel.com</a>&gt; wrote:<br></div><blockquote cla=
+ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;=
+border-left-style:solid;border-left-color:rgb(204,204,204);padding-left:1ex=
+"><div>
+
+
+
+
+
+<div lang=3D"EN-US">
+<div>
+<p class=3D"MsoNormal">Hi Chelsea,<u></u><u></u></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal">Thanks for the help coordinating.=C2=A0 <u></u><u></=
+u></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal">Matt and Alex =E2=80=93 Monday, 4/3 at 12pm PST work=
+s for our team.=C2=A0 I=E2=80=99ll circulate a Zoom in a few.<u></u><u></u>=
+</p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal">Thanks,<u></u><u></u></p>
+<p class=3D"MsoNormal">Ryan<u></u><u></u></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div style=3D"border-style:solid none none;border-top-width:1pt;border-top-=
+color:rgb(225,225,225);padding:3pt 0in 0in">
+<p class=3D"MsoNormal"><b>From:</b> Chelsea Masri &lt;<a href=3D"mailto:che=
+lsea@tribecap.co" target=3D"_blank">chelsea@tribecap.co</a>&gt; <br>
+<b>Sent:</b> Wednesday, March 29, 2023 2:45 PM<br>
+<b>To:</b> Michael Liftik &lt;<a href=3D"mailto:michaelliftik@quinnemanuel.=
+com" target=3D"_blank">michaelliftik@quinnemanuel.com</a>&gt;; Ryan Gorman =
+&lt;<a href=3D"mailto:ryangorman@quinnemanuel.com" target=3D"_blank">ryango=
+rman@quinnemanuel.com</a>&gt;; Aliki Sofis &lt;<a href=3D"mailto:alikisofis=
+@quinnemanuel.com" target=3D"_blank">alikisofis@quinnemanuel.com</a>&gt;<br=
+>
+<b>Cc:</b> Alex Chee &lt;<a href=3D"mailto:alex@tribecap.co" target=3D"_bla=
+nk">alex@tribecap.co</a>&gt;; Matt Tolve &lt;<a href=3D"mailto:matt@tribeca=
+p.co" target=3D"_blank">matt@tribecap.co</a>&gt;<br>
+<b>Subject:</b> Re: Privileged<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<p align=3D"center" style=3D"margin:0in;text-align:center;line-height:12pt;=
+background-color:rgb(255,254,0)">
+<strong><span style=3D"font-size:10pt;font-family:Calibri,sans-serif;color:=
+black">[EXTERNAL EMAIL from
+<a href=3D"mailto:chelsea@tribecap.co" target=3D"_blank">chelsea@tribecap.c=
+o</a>]</span></strong><b><span style=3D"font-size:9pt;font-family:Helvetica=
+,sans-serif;color:black"><u></u><u></u></span></b></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:9pt;font-family:Helvetica,s=
+ans-serif;color:black"><u></u>=C2=A0<u></u></span></p>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"2" width=3D"100%" align=3D"center">
+</div>
+</div>
+<p class=3D"MsoNormal">Hello,<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Please let me know if any of the following dates and=
+=C2=A0times work for you all next week. Thank you!<u></u><u></u></p>
+</div>
+<div>
+<ul type=3D"disc">
+<li class=3D"MsoNormal">
+Monday, 4/3 at 12pm PST<u></u><u></u></li><li class=3D"MsoNormal">
+Wednesday, 4/5 at 1pm, 2pm PST<u></u><u></u></li></ul>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Wed, Mar 29, 2023 at 11:13=E2=80=AFAM Alex Chee &=
+lt;<a href=3D"mailto:alex@tribecap.co" target=3D"_blank">alex@tribecap.co</=
+a>&gt; wrote:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border-style:none none none solid;border-left-width:1p=
+t;border-left-color:rgb(204,204,204);padding:0in 0in 0in 6pt;margin-left:4.=
+8pt;margin-right:0in">
+<div>
+<p class=3D"MsoNormal">Great. Let&#39;s find time<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Wed, Mar 29, 2023 at 10:34=E2=80=AFAM Matt Tolve =
+&lt;<a href=3D"mailto:matt@tribecap.co" target=3D"_blank">matt@tribecap.co<=
+/a>&gt; wrote:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border-style:none none none solid;border-left-width:1p=
+t;border-left-color:rgb(204,204,204);padding:0in 0in 0in 6pt;margin-left:4.=
+8pt;margin-right:0in">
+<div>
+<p class=3D"MsoNormal">Hi Alex,<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">We are preparing our defense of the arbitration clai=
+ms by some of the Invenia investors.=C2=A0 We would like to meet with you f=
+or an hour next week to discuss your recollections of the investment.=C2=A0=
+ The goal here is to make sure we have=C2=A0a full
+ understanding=C2=A0of the facts and can position our defense in as strong =
+a way as possible.=C2=A0 Copying=C2=A0the Quinn team, plus Chelsea, who hop=
+efully can help us find a time.=C2=A0 Please let me know of any questions.<=
+u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Many thanks,<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Matt<u></u><u></u></p>
+</div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<p class=3D"MsoNormal">Matt Tolve<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><b>Tribe Capital</b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">General Counsel &amp; CCO<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Cell: 301-775-2387<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Email:=C2=A0 <a href=3D"mailto:matt@tribecap.co" tar=
+get=3D"_blank">matt@tribecap.co</a><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</blockquote>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:Arial,=
+sans-serif">Disclaimer</span></b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:Arial,san=
+s-serif">The information contained in this communication from the sender is=
+ confidential. It is intended solely for use by the recipient and others au=
+thorized to receive it. If you are
+ not the recipient, you are hereby notified that any disclosure, copying, d=
+istribution or taking action in relation of the contents of this informatio=
+n is strictly prohibited and may be unlawful. If you have received this com=
+munication in error, please notify
+ Tribe at (619) 567-9955 and delete this communication immediately without =
+making any copy or distribution.</span><u></u><u></u></p>
+</div>
+</div>
+</div>
+
+</div></blockquote></div>
+</div></div>
+
+--000000000000f2876a05f866af7a--

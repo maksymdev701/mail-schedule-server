@@ -1,0 +1,420 @@
+Delivered-To: kavin@tribecap.co
+Received: by 2002:a05:7010:ac8e:b0:341:6b4e:1a5e with SMTP id dv14csp2446021mdb;
+        Mon, 3 Apr 2023 08:35:38 -0700 (PDT)
+X-Received: by 2002:a17:906:a84c:b0:92e:3b80:9841 with SMTP id dx12-20020a170906a84c00b0092e3b809841mr33271431ejb.42.1680536137810;
+        Mon, 03 Apr 2023 08:35:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1680536137; cv=none;
+        d=google.com; s=arc-20160816;
+        b=famsZ055weHz/ry4/BvGZJh7XOeQHyOROqmj1uOO8HEFiISo2Wq11RXiadgNNRfmjp
+         baepYpR6w/mcH51xutru/hesGu4hP8fLXqgK45ahnCGZH1ytDl2IfqG/1QqTaN2S7d+8
+         ONHpI/X+wEhh2Owu9a+KdvLBPVputMJqfCKSG0cJA7jyY+GR5p/w/yKFx0CBD9ixLZ1Q
+         zX1zIQ/gOk6pqspLgVwdOvplXFGlFPGVM5rBOYBQfIe9EhFo0OdqTT4ZRNLK5NQqMrWX
+         UhhGH9IFuZwsErXvb3LfHYraxnFxGgO3cNxbnSHFgTMNzs/g3dbLANw6rFS93YGqT8NF
+         ulhQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=EF+aAOJtGaQdb1WHIdvrOyvNhcgph3L9N5FsAFY0I9U=;
+        b=cXdu0Bau6C904BlZuHzvbgFdoR6IRFS/6orRcHrpCpuEUgWxtHjqvQ4sFexGYMfojW
+         v5F/OTbpy5FVNvapjxH5deeza+pmySg7XwtoWN/BsIcngGhR7Z9OHUGHvjJ5aRS1DDdy
+         FbJGfGVnDnbsyuj3MbAeMLEpnH2fqj9+Dz261xYRIPeas6I/z2ZZB2H852McVVMBqNh4
+         6YtRSJuWyHyiTuh8wSdUrytpTe1WCzf34pwJHwgjv2pSCcLXquqBS2dA1TsLIraYzLLR
+         Oh/+XzJh37BB0Wr1ffC/sr8ST4XZVhBAocDNPtoPQB/syP+0e6KjgPnffvuCNO2S66+D
+         mmqg==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=Vv1uAPhk;
+       spf=pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=veronica@tribecap.co
+Return-Path: <veronica@tribecap.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id dv26-20020a170906b81a00b0093149d89272sor5174288ejb.118.2023.04.03.08.35.37
+        for <kavin@tribecap.co>
+        (Google Transport Security);
+        Mon, 03 Apr 2023 08:35:37 -0700 (PDT)
+Received-SPF: pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=Vv1uAPhk;
+       spf=pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=veronica@tribecap.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tribecap.co; s=google; t=1680536137;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=EF+aAOJtGaQdb1WHIdvrOyvNhcgph3L9N5FsAFY0I9U=;
+        b=Vv1uAPhkEdrfnZ5fSwgD2DTiBm9mm+wfxQl0hLMUck3uKjRWxWfwlTMcr8CgL1GdyG
+         V2St0mbBjga+JbF8Ekj5rH0DCy49zu7B8/SizmJgpllbMzgbI+A4dUK+LsdEmlTc83AX
+         G1OodiPx694vcxNOlfajH64ykteJycmkOSf1T1INK3EtkpwaLRlWSYEhphniDZEu7mPZ
+         OpCdE/GjD2cgQ81Rog22nI2Drgt76C1ty1/uBauttoIFF+CwS0wllEifILbfpF7F0YDH
+         jMNkc3Vh68RGV3HK/VJ1ghFWv6PJBvLHwxvaorYbT9fpjioNmOa6rb1CwdlslhjLyElP
+         ND3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680536137;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=EF+aAOJtGaQdb1WHIdvrOyvNhcgph3L9N5FsAFY0I9U=;
+        b=lUQghg6xHUjBg7WIu3RkiRtpwkFMoSpsiOmIu04jp1jyu/8WOw4+OMnXOAIRgGCZd5
+         TPamSFGlbG0sQvhvIpEwjs2rYgRSz5DQWLWQLTocTbspFlO7/t+rq+lvQPr5vBbpgW/t
+         oZgHBDat5Lf90WikasByguNbI96sXi2Cj9NFH4Pcu6G2HI15FwJGinbtyiBCMivXVNyj
+         u7uOuqcYiTnbd2G/fNeLEme7Oe8lUddeS6ldtTArHuqS3Cjczu9ANPhttI55lGJ1vWQN
+         xfbZOTmdmCzOhPYaS1hMRqfje+Ah22V5FIJ49TFs1vjnJXQ2oVRWeGjRn07Z+B6ElD8n
+         gvRQ==
+X-Gm-Message-State: AAQBX9dEwEGtb7WM0kek3DtVIRikk8Hz9aYf2F0LMFR1xv1plyz5hIRA
+	nKcRSTF1iO+DmYSq+JXO3WkGrh7jDcMt9f+jKbhWYVngYgs0S4/4eD8Wn4UcMOw4d1epK860B5M
+	Itkdl4mFIikQ7mw1e+ozxtNPe+Fgt1Lm8sV7KZGelC0DQjpq5/KVE2SaCpw9RJu1eP3XzIZxF1m
+	epJIH8CfOr6kys2lMfiAMwKGPgfOfMAe3gDGs=
+X-Google-Smtp-Source: AKy350buFc6SFKwqD6TXbVxAOlX5aVPE1XQM4myr2oPmFOKZRQOXPIWFEyh05qdTA6omu1eP8L9oAdQMhiVAN7MphzU=
+X-Received: by 2002:a17:907:720e:b0:947:46e0:9e51 with SMTP id
+ dr14-20020a170907720e00b0094746e09e51mr6982099ejc.11.1680536137281; Mon, 03
+ Apr 2023 08:35:37 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAGgycR0aO1UY9-x_YLjn-JfrqqhaUrXy=kB5EF7zhAFRa0LseA@mail.gmail.com>
+ <CACb-0EdwTkAmUZCnLu2C8YFBApcDVbiPkniVQuR-GS5Yp9-xEA@mail.gmail.com>
+ <CAN2_rVfpgz1Zm17mhX=8GJ5QTmXvqJmpwqs+YHVHdZXmCtrktg@mail.gmail.com>
+ <CAGhPhKeb-ehWpBvFNdskrWUL=OdkJWqbaiy16gO3ebXSJ_ieEg@mail.gmail.com> <CACb-0EdVVHF_Hek+4vpJRZdy19LXMY=a+igR5w6HPPGndK4cwg@mail.gmail.com>
+In-Reply-To: <CACb-0EdVVHF_Hek+4vpJRZdy19LXMY=a+igR5w6HPPGndK4cwg@mail.gmail.com>
+From: Veronica Sullivan <veronica@tribecap.co>
+Date: Mon, 3 Apr 2023 11:35:26 -0400
+Message-ID: <CAGhPhKced4yhiJjU5effbDpDFhgo+N3+US6TJ4_bBNEPNa0N5Q@mail.gmail.com>
+Subject: Re: Connecting: Arjun (Tribe) <> Rahul
+To: Rahul Parulekar <raparulekar@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000007ec6a605f8704fe0"
+Bcc: kavin@tribecap.co
+
+--0000000000007ec6a605f8704fe0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Fantastic.  I sent out a calendar invite.  Here is the Zoom link for your
+reference:
+
+https://tribecap-co.zoom.us/j/84354911453?pwd=3DREN5anFwZ3hweXh5L1d0amRDRER=
+xQT09
+<https://www.google.com/url?q=3Dhttps://tribecap-co.zoom.us/j/84354911453?p=
+wd%3DREN5anFwZ3hweXh5L1d0amRDRERxQT09&sa=3DD&source=3Dcalendar&usg=3DAOvVaw=
+115zWPy9q7JMzCJ8i9PxoR>
+
+Kind regards,
+
+Veronica Sullivan
+Assistant to Arjun Sethi
+Tribe Capital
+(646) 280-5410
+
+
+On Mon, Apr 3, 2023 at 2:00=E2=80=AFAM Rahul Parulekar <raparulekar@gmail.c=
+om>
+wrote:
+
+> Yes, that works for me.  Thanks Veronica!
+>
+> On Sun, Apr 2, 2023 at 7:53=E2=80=AFPM Veronica Sullivan <veronica@tribec=
+ap.co>
+> wrote:
+>
+>> Hi Rahul,
+>>
+>> Are you available to Zoom with Arjun on April 6th at 12:30 pm PDT for 30
+>> minutes?
+>>
+>> *Please let me know if 30 minutes is not enough time!
+>>
+>> Kind regards,
+>>
+>> Veronica Sullivan
+>> Assistant to Arjun Sethi
+>> Tribe Capital
+>> (646) 280-5410
+>>
+>>
+>> On Sun, Apr 2, 2023 at 10:49=E2=80=AFPM Arjun Sethi <arj@tribecap.co> wr=
+ote:
+>>
+>>> +Veronica Sullivan <veronica@tribecap.co> look forward to connecting
+>>>
+>>> On Sun, Apr 2, 2023 at 6:41=E2=80=AFPM Rahul Parulekar <raparulekar@gma=
+il.com>
+>>> wrote:
+>>>
+>>>> Thanks for the kind introduction Sahil (and moving you to bcc).
+>>>>
+>>>> Hi Arjun,
+>>>>
+>>>> Great to connect with you and excited to see Tribe's portfolio
+>>>> footprint in India!
+>>>> Please let me know if we can talk sometime this week?
+>>>> I am based in Palo Alto.
+>>>>
+>>>> Best,
+>>>> Rahul
+>>>> 650 441 7781
+>>>>
+>>>> On Sun, Apr 2, 2023 at 3:42=E2=80=AFPM Sahil Gupta <sahil@sgupta.co> w=
+rote:
+>>>>
+>>>>> Arjun,
+>>>>>
+>>>>> As discussed , please meet Rahul
+>>>>> <https://www.linkedin.com/in/rahulparulekar/>, the founder of
+>>>>> NRIVANA (details below).
+>>>>>
+>>>>> I worked with Rahul at Noah, where he served as our CIO + head of
+>>>>> data/risk. Rahul is super smart, analytical with a very strong backgr=
+ound
+>>>>> in fintech, proptech - given his experience both in startups and Wall=
+ St.
+>>>>> firms.
+>>>>>
+>>>>> He's been ideating on a new startup for a while and is now looking to
+>>>>> raise an initial round of funding for his new fintech. I thought he s=
+hould
+>>>>> definitely chat with you and the Tribe team.
+>>>>>
+>>>>> Rahul - Arjun <https://www.linkedin.com/in/asethi/> is the co-founder
+>>>>> of Tribe Capital + along with an angel investor in many
+>>>>> fintech/proptechs/crypto startups. Arjun was an early investor in Noa=
+h +
+>>>>> always open to helping out + super connector across domains. He's gro=
+wn
+>>>>> Tribe into a $1.7b+ venture firm in just over 4 years and that's been
+>>>>> amazing to see.
+>>>>>
+>>>>> I've spoken with you both independently about connecting and will let
+>>>>> you take it from here.
+>>>>>
+>>>>> Cheers,
+>>>>> Sahil
+>>>>>
+>>>>>
+>>>>> ---------------------------------------------------------------------=
+-----------------------
+>>>>>
+>>>>> NRIVANA is a cross-border bank for expats and immigrants.
+>>>>>
+>>>>>    - We are solving the problem for 35MM Indian diaspora who have a
+>>>>>    nightmare dealing with the Indian financial system.
+>>>>>    - Our customers have over $200BN of deposits in India and remit
+>>>>>    over $100BN p.a. for family support and investments.
+>>>>>    - They control around $2.5TN of wealth and are growing by 8% p.a.
+>>>>>
+>>>>> Our founders have over 45 years of deep banking, regulatory, fintech,
+>>>>> risk management experience in the US and India.
+>>>>>
+>>>>>    - Rahul Parulekar
+>>>>>       - Started his career as a fixed income quant at Lehman, Bear,
+>>>>>       and Citi in New York City.  At Citi he was Managing Director of=
+ Mortgage
+>>>>>       Research.
+>>>>>       - More recently, he was the Head of Risk at Opendoor and then
+>>>>>       CIO of Noah (a USV funded startup in the home equity space).
+>>>>>       - Rahul is a graduate of IIT Bombay, University of Maryland
+>>>>>       College Park, and MIT-Sloan.
+>>>>>    - Nirvikar
+>>>>>       - CEO of FIrst Abu Dhabi Bank and has held various corporate
+>>>>>       banking roles at BoA, Citi, ICICI in India.
+>>>>>       - Most recently he was Chief Revenue Officer of Volopay (the
+>>>>>       Brex equivalent in India/Indonesia/Singapore).
+>>>>>       - Nirvikar is a graduate of Stanford GSB and XLRI, India.
+>>>>>
+>>>>>
+>>>>> ---------------------------------------------------------------------=
+-----------------------
+>>>>>
+>>>>> This message is intended only for the designated recipient(s). It may
+>>>>> contain confidential or proprietary information and may be subject to=
+ the
+>>>>> attorney-client privilege or other confidentiality protections. If yo=
+u are
+>>>>> not a designated recipient, you may not review, copy or distribute th=
+is
+>>>>> message. If you receive this in error, please notify the sender by re=
+ply
+>>>>> e-mail and delete this message. The information contained in this ema=
+il
+>>>>> communication and any attachments is for information purposes, and sh=
+ould
+>>>>> not be regarded as an offer to sell or a solicitation of an offer to =
+buy
+>>>>> any security in any jurisdiction where such an offer or solicitation =
+would
+>>>>> be in violation of any local laws. It does not constitute a recommend=
+ation
+>>>>> or take into account the particular investment objectives, financial
+>>>>> conditions, or needs of specific investors. The price and value of th=
+e
+>>>>> investments referred to in this email communication and the income fr=
+om
+>>>>> such investments may fluctuate, and investors may realize losses on t=
+hese
+>>>>> investments, including a loss of principal. Past performance is not
+>>>>> indicative or a guarantee of future performance. The recipient should=
+ not
+>>>>> consider the content of this email as tax, accounting, or legal advic=
+e and
+>>>>> is advised to consult with their tax, accounting, or legal advisers
+>>>>> regarding any potential investment. The information and any opinions
+>>>>> contained in this email communication have been obtained from sources=
+ that
+>>>>> we consider reliable, but we do not represent such information and op=
+inions
+>>>>> are accurate or complete, and thus should not be relied upon as such.=
+ Thank
+>>>>> you.
+>>>>>
+>>>>
+>> *Disclaimer*
+>> The information contained in this communication from the sender is
+>> confidential. It is intended solely for use by the recipient and others
+>> authorized to receive it. If you are not the recipient, you are hereby
+>> notified that any disclosure, copying, distribution or taking action in
+>> relation of the contents of this information is strictly prohibited and =
+may
+>> be unlawful. If you have received this communication in error, please
+>> notify Tribe at (619) 567-9955 and delete this communication immediately
+>> without making any copy or distribution.
+>>
+>
+
+--0000000000007ec6a605f8704fe0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gmail_default" style=3D"fon=
+t-family:tahoma,sans-serif">Fantastic.=C2=A0 I sent out a calendar invite.=
+=C2=A0 Here is the Zoom link for your reference:</div><div class=3D"gmail_d=
+efault" style=3D"font-family:tahoma,sans-serif"><br></div><div class=3D"gma=
+il_default" style=3D"font-family:tahoma,sans-serif"><a href=3D"https://www.=
+google.com/url?q=3Dhttps://tribecap-co.zoom.us/j/84354911453?pwd%3DREN5anFw=
+Z3hweXh5L1d0amRDRERxQT09&amp;sa=3DD&amp;source=3Dcalendar&amp;usg=3DAOvVaw1=
+15zWPy9q7JMzCJ8i9PxoR" target=3D"_blank" style=3D"color:rgb(26,115,232);fon=
+t-family:Roboto,Helvetica,Arial,sans-serif;font-size:14px">https://tribecap=
+-co.zoom.us/j/84354911453?pwd=3DREN5anFwZ3hweXh5L1d0amRDRERxQT09</a><br></d=
+iv><div class=3D"gmail_default" style=3D"font-family:tahoma,sans-serif"><br=
+></div><div class=3D"gmail_default" style=3D"font-family:tahoma,sans-serif"=
+>Kind=C2=A0regards,</div><div><div dir=3D"ltr" class=3D"gmail_signature"><d=
+iv dir=3D"ltr"><div><br></div>Veronica Sullivan<div>Assistant to Arjun Seth=
+i</div><div>Tribe Capital</div><div>(646) 280-5410</div></div></div></div><=
+br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_att=
+r">On Mon, Apr 3, 2023 at 2:00=E2=80=AFAM Rahul Parulekar &lt;<a href=3D"ma=
+ilto:raparulekar@gmail.com">raparulekar@gmail.com</a>&gt; wrote:<br></div><=
+blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
+eft:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr">Yes, that=
+ works for me.=C2=A0 Thanks=C2=A0Veronica!<br></div><br><div class=3D"gmail=
+_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sun, Apr 2, 2023 at 7:53=
+=E2=80=AFPM Veronica Sullivan &lt;<a href=3D"mailto:veronica@tribecap.co" t=
+arget=3D"_blank">veronica@tribecap.co</a>&gt; wrote:<br></div><blockquote c=
+lass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px soli=
+d rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr"><div=
+ style=3D"font-family:tahoma,sans-serif">Hi Rahul,</div><div style=3D"font-=
+family:tahoma,sans-serif"><br></div><div style=3D"font-family:tahoma,sans-s=
+erif">Are you available to Zoom with Arjun on April 6th at 12:30 pm PDT for=
+ 30 minutes?</div><div style=3D"font-family:tahoma,sans-serif"><br></div><d=
+iv style=3D"font-family:tahoma,sans-serif">*Please let me know if 30 minute=
+s is not enough time!</div><div style=3D"font-family:tahoma,sans-serif"><br=
+></div><div style=3D"font-family:tahoma,sans-serif">Kind regards,</div><div=
+><div dir=3D"ltr"><div dir=3D"ltr"><div><br></div>Veronica Sullivan<div>Ass=
+istant to Arjun Sethi</div><div>Tribe Capital</div><div>(646) 280-5410</div=
+></div></div></div><br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr=
+" class=3D"gmail_attr"><span class=3D"gmail_default" style=3D"font-family:t=
+ahoma,sans-serif"></span>On Sun, Apr 2, 2023 at 10:49=E2=80=AFPM Arjun Seth=
+i &lt;<a href=3D"mailto:arj@tribecap.co" target=3D"_blank">arj@tribecap.co<=
+/a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><=
+div dir=3D"ltr"><a class=3D"gmail_plusreply" id=3D"m_3451045744058283188m_-=
+9043119271810988784m_3173375032209022978plusReplyChip-1" href=3D"mailto:ver=
+onica@tribecap.co" target=3D"_blank">+Veronica Sullivan</a>=C2=A0look forwa=
+rd=C2=A0to connecting<br></div><br><div class=3D"gmail_quote"><div dir=3D"l=
+tr" class=3D"gmail_attr">On Sun, Apr 2, 2023 at 6:41=E2=80=AFPM Rahul Parul=
+ekar &lt;<a href=3D"mailto:raparulekar@gmail.com" target=3D"_blank">raparul=
+ekar@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" st=
+yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
+ing-left:1ex"><div dir=3D"ltr">Thanks for the kind introduction Sahil (and =
+moving you to bcc).<div><br></div><div>Hi Arjun,</div><div><br></div><div>G=
+reat to connect with you and excited to see Tribe&#39;s portfolio footprint=
+ in India!</div><div>Please let me know if we can talk sometime this week?=
+=C2=A0=C2=A0</div><div>I am based in Palo Alto.</div><div><br></div><div>Be=
+st,</div><div>Rahul</div><div>650 441 7781</div></div><br><div class=3D"gma=
+il_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sun, Apr 2, 2023 at 3:42=
+=E2=80=AFPM Sahil Gupta &lt;<a href=3D"mailto:sahil@sgupta.co" target=3D"_b=
+lank">sahil@sgupta.co</a>&gt; wrote:<br></div><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
+4);padding-left:1ex"><div dir=3D"ltr">Arjun,<div><br></div><div>As discusse=
+d , please meet <a href=3D"https://www.linkedin.com/in/rahulparulekar/" tar=
+get=3D"_blank">Rahul</a>, the founder of NRIVANA=C2=A0(details below).</div=
+><div><br></div><div>I worked with Rahul at Noah, where he served as our CI=
+O=C2=A0+ head of data/risk. Rahul is super smart, analytical with a very st=
+rong background in fintech, proptech - given his experience both in startup=
+s and Wall St. firms.=C2=A0</div><div><br></div><div>He&#39;s been ideating=
+ on a new startup for a while and is now looking to raise an initial round =
+of funding for his new fintech. I thought he should definitely=C2=A0chat wi=
+th you and the Tribe team.</div><div><br></div><div>Rahul - <a href=3D"http=
+s://www.linkedin.com/in/asethi/" target=3D"_blank">Arjun</a> is the co-foun=
+der of Tribe Capital=C2=A0+ along=C2=A0with an angel investor in many finte=
+ch/proptechs/crypto startups. Arjun was an early investor in Noah=C2=A0+ al=
+ways open to helping out + super connector across domains. He&#39;s grown T=
+ribe into a $1.7b+ venture firm in just over 4 years and that&#39;s been am=
+azing to see.</div><div><br></div><div>I&#39;ve spoken with you both indepe=
+ndently about connecting and will let you take it from here.</div><div><br>=
+</div><div>Cheers,</div><div>Sahil</div><div><br></div>--------------------=
+------------------------------------------------------------------------<di=
+v><br>NRIVANA is a cross-border bank for expats and immigrants. =C2=A0 <br>=
+<ul><li>We are solving the problem for 35MM Indian diaspora who have a nigh=
+tmare dealing with the Indian financial system. =C2=A0</li><li>Our customer=
+s have over $200BN of deposits in India and remit over $100BN p.a. for fami=
+ly support and investments. =C2=A0</li><li>They control around $2.5TN of we=
+alth and are growing by 8% p.a. </li></ul>Our founders have over 45 years o=
+f deep banking, regulatory, fintech, risk management experience in the US a=
+nd India. =C2=A0<br><ul><li>Rahul Parulekar</li><ul><li>Started his career =
+as a fixed income quant at Lehman, Bear, and Citi in New York City.=C2=A0 A=
+t Citi he was Managing Director of Mortgage Research. =C2=A0</li><li>More r=
+ecently, he was the Head of Risk at Opendoor and then CIO of Noah (a USV fu=
+nded startup in the home equity space). =C2=A0</li><li>Rahul is a graduate =
+of IIT Bombay, University of Maryland College Park, and MIT-Sloan.</li></ul=
+><li>Nirvikar</li><ul><li>CEO of FIrst Abu Dhabi Bank and has held various =
+corporate banking roles at BoA, Citi, ICICI in India. =C2=A0</li><li>Most r=
+ecently he was Chief Revenue Officer of Volopay (the Brex equivalent in Ind=
+ia/Indonesia/Singapore). =C2=A0</li><li>Nirvikar is a graduate of Stanford =
+GSB and XLRI, India.</li></ul></ul><div><div dir=3D"ltr"><div dir=3D"ltr"><=
+div style=3D"color:rgb(34,34,34)">-----------------------------------------=
+---------------------------------------------------<br></div><div style=3D"=
+color:rgb(34,34,34)"><br></div><p dir=3D"ltr" style=3D"color:rgb(34,34,34);=
+line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size=
+:7.5pt;font-family:Arial;color:rgb(153,153,153);background-color:transparen=
+t;vertical-align:baseline;white-space:pre-wrap">This message is intended on=
+ly for the designated recipient(s). It may contain confidential or propriet=
+ary information and may be subject to the attorney-client privilege or othe=
+r confidentiality protections. If you are not a designated recipient, you m=
+ay not review, copy or distribute this message. If you receive this in erro=
+r, please notify the sender by reply e-mail and delete this message. The in=
+formation contained in this email communication and any attachments is for =
+information purposes, and should not be regarded as an offer to sell or a s=
+olicitation of an offer to buy any security in any jurisdiction where such =
+an offer or solicitation would be in violation of any local laws. It does n=
+ot constitute a recommendation or take into account the particular investme=
+nt objectives, financial conditions, or needs of specific investors. The pr=
+ice and value of the investments referred to in this email communication an=
+d the income from such investments may fluctuate, and investors may realize=
+ losses on these investments, including a loss of principal. Past performan=
+ce is not indicative or a guarantee of future performance. The recipient sh=
+ould not consider the content of this email as tax, accounting, or legal ad=
+vice and is advised to consult with their tax, accounting, or legal adviser=
+s regarding any potential investment. The information and any opinions cont=
+ained in this email communication have been obtained from sources that we c=
+onsider reliable, but we do not represent such information and opinions are=
+ accurate or complete, and thus should not be relied upon as such. Thank yo=
+u.<br></span></p></div></div></div></div></div>
+</blockquote></div>
+</blockquote></div>
+</blockquote></div></div>
+
+<br>
+<div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1"><b>Disclaimer</=
+b></font></div><div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1">=
+The information contained in this communication from the sender is confiden=
+tial. It is intended solely for use by the recipient and others authorized =
+to receive it. If you are not the recipient, you are hereby notified that a=
+ny disclosure, copying, distribution or taking action in relation of the co=
+ntents of this information is strictly prohibited and may be unlawful. If y=
+ou have received this communication in error, please notify Tribe at (619) =
+567-9955 and delete this communication immediately without making any copy =
+or distribution.</font></div></blockquote></div>
+</blockquote></div></div>
+
+--0000000000007ec6a605f8704fe0--

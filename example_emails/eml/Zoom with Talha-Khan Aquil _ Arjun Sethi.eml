@@ -1,0 +1,1660 @@
+Delivered-To: kavin@tribecap.co
+Received: by 2002:a05:7010:ac8e:b0:341:6b4e:1a5e with SMTP id dv14csp2104241mdb;
+        Sun, 2 Apr 2023 21:08:38 -0700 (PDT)
+X-Received: by 2002:a05:6a20:3b91:b0:d9:d287:75dd with SMTP id b17-20020a056a203b9100b000d9d28775ddmr28709444pzh.50.1680494918171;
+        Sun, 02 Apr 2023 21:08:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1680494918; cv=none;
+        d=google.com; s=arc-20160816;
+        b=nyrt6LM/aQjd0wZ3B7M/eP2h24A975O0m1GFuQtKkPF5Juhz/JkMefX/dKQLabsSYk
+         ULY0VHWKtLHX4s4xirLs7YyQLHX4ZN5MFmDu/zx4By0iAIwf1NX272b67rjsoGtzo2/Q
+         NfKH/N3WSheIe/KPmdLATVQa0xBTzIzNDMVcoHy1/2DRREwh/NJsrBxi9mkZNhuUz3OU
+         BYyZXXWM3rsXU253IqLZE6K5Io5QxiwJKcmiVzjwlvFySVwdBTVocK/2VO/zWeWvZiZ/
+         AyOMsM9zxLS98BEE4xDfmF+gqQ9CGcv8qOgCY5SDZb3h7HTZpnyglp1C73yDyaIKjTeN
+         uJjA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=WIa7DelamWUT4xbpNChgDwIoSpXzKM4rRSF3Y/suSKk=;
+        b=d87GfhY9qyHb7997OFPbkQPOTBJHorDaT6ousoGbgkLgx9GoqqtI+K9D4WaCtw/pC5
+         8SjNsxe2n8JwTK/d+XFH9FMjqT3dy9dRQ5QBpSmerX3lAx8ujPFKAQD98C57gNLUmAXI
+         IQ1qgzNXpqITxDY8I2jVGbWLKZBiwmdDvvXzV5opIG8iNCLSgY1s9YRFjC7WbLaAf4jU
+         tS8s7gNOxk1OS8JrkUsy4L9ttm/FyNgInDyL1/aCK4BBvvCLEUR+P1sEfW+wkPNkCj5L
+         NT/On9hfvk3/Qbu02Bv4z1IwkAJ2To6l8lgITTs0YuUn1u4eXj9PGkPaPeSDJQbof2OP
+         uFtA==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=Ckstad0X;
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+Return-Path: <chelsea@tribecap.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id s2-20020aa78d42000000b0062dad540225sor3317151pfe.78.2023.04.02.21.08.38
+        for <kavin@tribecap.co>
+        (Google Transport Security);
+        Sun, 02 Apr 2023 21:08:38 -0700 (PDT)
+Received-SPF: pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=Ckstad0X;
+       spf=pass (google.com: domain of chelsea@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=chelsea@tribecap.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tribecap.co; s=google; t=1680494916;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=WIa7DelamWUT4xbpNChgDwIoSpXzKM4rRSF3Y/suSKk=;
+        b=Ckstad0X6vD40dbmX457rVJkM4pisF5RdyP1poHParLNuDRgAeaRHHtqy1cJMJg6Mz
+         NPA8Ub0B5Pe7nt1dcmlJW+kdGaBzLX55i7O8Am1+E6l1NilA70Gxxn57IIC/IX/v30yP
+         O6J9utkuxULvcMGQB/7M4XpsQj62hbdanQGKikZ5bRKxXw4PVUlP7mneEHxwffjg0GC4
+         ax96c83hW7Kg6oejdFv2pQRwgMDJo/60bBuuMAiQ/EqMHyLBSr7OzpX/nxvYVye0auEz
+         2gJnMV+74sQErr9qf2X9VgAYOQoWD6BAcmlMI8HO/+s5lNXYBcwWktEdHmDxHHfFKNk+
+         BMyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680494916;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=WIa7DelamWUT4xbpNChgDwIoSpXzKM4rRSF3Y/suSKk=;
+        b=lj89K2dLn0Nz42Y4DyadRNOV9njvs++1OREAyjV1iOp2NjIj4bC4z1vFZo36zku+bh
+         DxL81Tm9pbYfO+CZtqn+pFJhy3iROBWh7jTc9ZSF+X3A7T1Rr3na8oi3es9o1E45MuQ4
+         iAkWzo2rponBAKT7G6wxSqZIjZVxvtfbqHXLvAHHZFGNjpNep2iwGx5rIkDWL1rJRrhH
+         tW05sfdODoadr5Rh/DKtohddnSZR20kbdr2wK/DsJ3qax8xYSo6p3TUHcP01ABSoGsGY
+         ggpfKy4P8u/ItM2YaB/5oK4TBsqs6cTGQVboBEi3csRwcltn+kw54cL2j2SZ/Cj4dM4t
+         nx5A==
+X-Gm-Message-State: AAQBX9eSeAvBF/VrO3NPNpSVWLGZ5Km7K+dd5KLc97La7HJ2wRZ8Ud2f
+	ucFZ4hdwfGpOEJS0bf8Um1htcSNhaNJfSLH+PmxXn3zhq58fYUYbgyEKFF8HZhr8h2lBc5R7cxv
+	US6LZTfFtH9A+q4dIxseWs+McGzFNHZGvrNUxsKxZfGkW/HFgpmvXSumM47LMPxKPAAzaxX31eF
+	IzlPZ8oEboT+DaOI+IzKzIlRkHtlFaEX8BYW3Uyt+5fIt0oQ==
+X-Google-Smtp-Source: AKy350bRRWROuSKEn/S/6/C3FkD7ACrqksOdgaxm0dzP6wD8zZkG8ohkQMKSPh1eWhF5nifO5p12kq2ZrrXRMURa2m0=
+X-Received: by 2002:a05:6a00:1a03:b0:623:8990:4712 with SMTP id
+ g3-20020a056a001a0300b0062389904712mr17639886pfv.1.1680494915247; Sun, 02 Apr
+ 2023 21:08:35 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAN2_rVdPZxg+76E=LnhXpfsbnHUWoJc7=SgXHpoSNHCXaGgQcw@mail.gmail.com>
+ <DXZP273MB05098B6DD5497D56494F502B96BF9@DXZP273MB0509.AREP273.PROD.OUTLOOK.COM>
+ <lfb6kzv5.123196f9-ed26-4e7e-a042-fce3816f51de@we.are.superhuman.com>
+ <AUXP273MB05040735E0B87DD1467EAA1396BC9@AUXP273MB0504.AREP273.PROD.OUTLOOK.COM>
+ <lfb9shs6.948bb11a-a080-427d-9b26-88e97f4d3390@we.are.superhuman.com>
+ <AUXP273MB05046AEFC70B99309A5EE42796BC9@AUXP273MB0504.AREP273.PROD.OUTLOOK.COM>
+ <lfbnxsl1.676bed15-d7bf-4dd3-bc09-a816a8a50345@we.are.superhuman.com>
+ <AUXP273MB050451EDBA2BDAA1F1EE5F6996BC9@AUXP273MB0504.AREP273.PROD.OUTLOOK.COM>
+ <CAEF9bpWxaNRm+RWbYb83gUNdyEopXWF=vQ__BmT+OfN=W8codg@mail.gmail.com>
+ <AUXP273MB0504C7CAA3B982D64ADEACFF96BD9@AUXP273MB0504.AREP273.PROD.OUTLOOK.COM>
+ <CAEF9bpXQxe2Y4ZAKYicit42EmW0MKh-UYx4Dn26PBti7dk0waA@mail.gmail.com> <CAEF9bpU2vNZ8B6KqPVU3HMboFuBXjFRp3ePx-2qtWL2y+QsbDg@mail.gmail.com>
+In-Reply-To: <CAEF9bpU2vNZ8B6KqPVU3HMboFuBXjFRp3ePx-2qtWL2y+QsbDg@mail.gmail.com>
+From: Chelsea Masri <chelsea@tribecap.co>
+Date: Sun, 2 Apr 2023 21:08:16 -0700
+Message-ID: <CAEF9bpUYkvK7sn5qfHvHWoN2LJ_sLLUYZOQKS2hJMW3Om9HXxw@mail.gmail.com>
+Subject: Fwd: Zoom with Talha-Khan Aquil / Arjun Sethi
+To: Kavin Stewart <kavin@tribecap.co>
+Content-Type: multipart/related; boundary="00000000000079119c05f866b641"
+
+--00000000000079119c05f866b641
+Content-Type: multipart/alternative; boundary="00000000000079119a05f866b640"
+
+--00000000000079119a05f866b640
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+---------- Forwarded message ---------
+From: Chelsea Masri <chelsea@tribecap.co>
+Date: Fri, Mar 17, 2023 at 8:16=E2=80=AFAM
+Subject: Re: Zoom with Talha-Khan Aquil / Arjun Sethi
+To: Alex Chee <alex@tribecap.co>
+
+
+Call with Talha Aquil (Gulf Equity) scheduled for 3/21 at 8:30am PST.
+
+On Fri, Mar 17, 2023 at 8:15 AM Chelsea Masri <chelsea@tribecap.co> wrote:
+
+> Thank you, Talha. I have just circulated a calendar invite.
+>
+> On Fri, Mar 17, 2023 at 6:34 AM Talha Aquil <talha.aquil@gulfequity.com>
+> wrote:
+>
+>> Dear Chelsea,
+>>
+>>
+>>
+>> Tuesday 21st March, at 11:30AM ET works well for me.
+>>
+>>
+>>
+>> Best,
+>>
+>>
+>>
+>> Talha-Khan
+>>
+>>
+>>
+>> [image: Logo Description automatically generated]
+>>
+>> Talha-Khan Aquil
+>>
+>> Managing Partner
+>>
+>>
+>>
+>> T: +971 4 557 6649 <+97145576649>
+>>
+>> M: +971 55 244 6264 <+971552446264>
+>>
+>> E: talha.aquil@gulfequity.com
+>>
+>>
+>>
+>> Suite 603, Cayan Business Center
+>>
+>> Barsha Heights, Dubai UAE
+>>
+>>
+>>
+>>
+>>
+>> *From: *Chelsea Masri <chelsea@tribecap.co>
+>> *Date: *Friday, 17 March 2023 at 7:12 AM
+>> *To: *Talha Aquil <talha.aquil@gulfequity.com>
+>> *Cc: *Alex Chee <alex@tribecap.co>
+>> *Subject: *Re: Zoom with Talha-Khan Aquil / Arjun Sethi
+>>
+>> Hello Talha,
+>>
+>>
+>>
+>> I can assist in scheduling a Zoom call. Please let me know if any of the
+>> following times work for you next week, all in ET.
+>>
+>>    - Tuesday, 3/21 at 11:30am, 12:30pm
+>>    - Friday, 3/24 at 11:30am
+>>
+>>
+>>
+>> On Thu, Mar 16, 2023 at 3:30=E2=80=AFPM Talha Aquil <talha.aquil@gulfequ=
+ity.com>
+>> wrote:
+>>
+>> Yes absolutely! That would be wonderful. Generally speaking I=E2=80=99m =
+available
+>> till early to mid afternoon (ET) on most days during the next week.
+>>
+>>
+>>
+>> *Error! Filename not specified.*
+>>
+>> Talha-Khan Aquil
+>>
+>> Managing Partner
+>>
+>>
+>>
+>> T: +971 4 557 6649 <+97145576649>
+>>
+>> M: +971 55 244 6264 <+971552446264>
+>>
+>> E: talha.aquil@gulfequity.com
+>>
+>>
+>>
+>> Suite 603, Cayan Business Center
+>>
+>> Barsha Heights, Dubai UAE
+>>
+>>
+>> ------------------------------
+>>
+>> *From:* Alex Chee <alex@tribecap.co>
+>> *Sent:* Friday, March 17, 2023 2:09:10 AM
+>> *To:* Talha Aquil <talha.aquil@gulfequity.com>
+>> *Cc:* Chelsea Masri <chelsea@tribecap.co>
+>> *Subject:* Re: Zoom with Talha-Khan Aquil / Arjun Sethi
+>>
+>>
+>>
+>> No worries Talha. Would love to do intros regardless when you have time.
+>> Perhaps zoom?
+>>
+>>
+>>
+>>
+>>
+>> On Thu, Mar 16, 2023 at 9:23 PM, Talha Aquil <talha.aquil@gulfequity.com=
+>
+>> wrote:
+>>
+>> I unfortunately fly off at 6PM. Perhaps the next time you=E2=80=99re in =
+the
+>> region.best, Talha
+>>
+>>
+>>
+>> *Error! Filename not specified.*
+>>
+>> Talha-Khan Aquil
+>>
+>> Managing Partner
+>>
+>>
+>>
+>> T: +971 4 557 6649 <+97145576649>
+>>
+>> M: +971 55 244 6264 <+971552446264>
+>>
+>> E: talha.aquil@gulfequity.com
+>>
+>>
+>>
+>> Suite 603, Cayan Business Center
+>>
+>> Barsha Heights, Dubai UAE
+>>
+>>
+>> ------------------------------
+>>
+>> *From:* Alex Chee <alex@tribecap.co>
+>> *Sent:* Thursday, March 16, 2023 7:35:41 PM
+>> *To:* Talha Aquil <talha.aquil@gulfequity.com>
+>> *Cc:* Chelsea Masri <chelsea@tribecap.co>
+>> *Subject:* Re: Zoom with Talha-Khan Aquil / Arjun Sethi
+>>
+>>
+>>
+>> I am meeting a friend (from NEOM) near the Dubai super trees at 7pm and
+>> may be able to move that back a bit. Would you be able to meet around th=
+at
+>> area around 6:30pm?
+>>
+>>
+>>
+>> Appreciate the flexibility.
+>>
+>>
+>>
+>>
+>>
+>> On Thu, Mar 16 2023 at 6:26 PM, Talha Aquil <talha.aquil@gulfequity.com>
+>> wrote:
+>>
+>> Hi Alex,
+>>
+>>
+>>
+>> Great to hear from you. I=E2=80=99m abu dhabi based and with tomorrow be=
+ing
+>> Friday (prayers) I will not be able to meet before 2PM in Dubai. If that
+>> works I=E2=80=99d love to welcome you to our offices at CAYAN Business T=
+ower in
+>> TECOM at 2PM?
+>>
+>>
+>>
+>> Best,
+>>
+>>
+>>
+>> Talha
+>>
+>>
+>>
+>> *Error! Filename not specified.*
+>>
+>> Talha-Khan Aquil
+>>
+>> Managing Partner
+>>
+>>
+>>
+>> T: +971 4 557 6649 <+97145576649>
+>>
+>> M: +971 55 244 6264 <+971552446264>
+>>
+>> E: talha.aquil@gulfequity.com
+>>
+>>
+>>
+>> Suite 603, Cayan Business Center
+>>
+>> Barsha Heights, Dubai UAE
+>>
+>>
+>> ------------------------------
+>>
+>> *From:* Alex Chee <alex@tribecap.co>
+>> *Sent:* Thursday, March 16, 2023 6:04:44 PM
+>> *To:* Talha Aquil <talha.aquil@gulfequity.com>
+>> *Cc:* Arjun Sethi <arj@tribecap.co>; Steve Weidenbach <steve@tribecap.co=
+>;
+>> AG Ganguly <ag@abgassociates.com>; Leon Smith <Leon.smith@gulfequity.com=
+>;
+>> Chelsea Masri <chelsea@tribecap.co>
+>> *Subject:* Re: Zoom with Talha-Khan Aquil / Arjun Sethi
+>>
+>>
+>>
+>> Talha, I=E2=80=99m in transit to Dubai right now actually. Have some tim=
+e open at
+>> 10:30am tomorrow if that works for you. Would love to meet.
+>>
+>>
+>>
+>>
+>>
+>> On Thu, Mar 16 2023 at 1:11 AM, Talha Aquil <talha.aquil@gulfequity.com>
+>> wrote:
+>>
+>> Thank you Arjun. A true pleasure.
+>>
+>>
+>>
+>> Thanks Steve. Have seen the email in the inbox but haven=E2=80=99t gone =
+into it.
+>>
+>>
+>>
+>> Alex please let me know if you=E2=80=99re in either AD or Dubai over the=
+se next
+>> few days for a in person catch up.
+>>
+>>
+>>
+>> Best,
+>>
+>>
+>>
+>> Talha
+>>
+>>
+>>
+>> *Error! Filename not specified.*
+>>
+>> Talha-Khan Aquil
+>>
+>> Managing Partner
+>>
+>>
+>>
+>> T: +971 4 557 6649 <+97145576649>
+>>
+>> M: +971 55 244 6264 <+971552446264>
+>>
+>> E: talha.aquil@gulfequity.com
+>>
+>>
+>>
+>> Suite 603, Cayan Business Center
+>>
+>> Barsha Heights, Dubai UAE
+>>
+>>
+>> ------------------------------
+>>
+>> *From:* Arjun Sethi <arj@tribecap.co>
+>> *Sent:* Wednesday, March 15, 2023 20:22
+>> *To:* Alex Chee <alex@tribecap.co>; Steve Weidenbach <steve@tribecap.co>=
+;
+>> Talha Aquil <talha.aquil@gulfequity.com>
+>> *Subject:* Zoom with Talha-Khan Aquil / Arjun Sethi
+>>
+>>
+>>
+>> Good to connect this morning and look forward to finding ways to do that=
+.
+>> In the meantime I=E2=80=99ll follow up on Relativity.
+>>
+>>
+>>
+>> +Steve can share our data room and materials.
+>>
+>>
+>>
+>> And adding Alex since he=E2=80=99s in the region.
+>>
+>>
+>>
+>> *Disclaimer*
+>>
+>> The information contained in this communication from the sender is
+>> confidential. It is intended solely for use by the recipient and others
+>> authorized to receive it. If you are not the recipient, you are hereby
+>> notified that any disclosure, copying, distribution or taking action in
+>> relation of the contents of this information is strictly prohibited and =
+may
+>> be unlawful. If you have received this communication in error, please
+>> notify Tribe at (619) 567-9955 and delete this communication immediately
+>> without making any copy or distribution.
+>>
+>>
+>>
+>> *Disclaimer*
+>>
+>> The information contained in this communication from the sender is
+>> confidential. It is intended solely for use by the recipient and others
+>> authorized to receive it. If you are not the recipient, you are hereby
+>> notified that any disclosure, copying, distribution or taking action in
+>> relation of the contents of this information is strictly prohibited and =
+may
+>> be unlawful. If you have received this communication in error, please
+>> notify Tribe at (619) 567-9955 and delete this communication immediately
+>> without making any copy or distribution.
+>>
+>>
+>>
+>> *Disclaimer*
+>>
+>> The information contained in this communication from the sender is
+>> confidential. It is intended solely for use by the recipient and others
+>> authorized to receive it. If you are not the recipient, you are hereby
+>> notified that any disclosure, copying, distribution or taking action in
+>> relation of the contents of this information is strictly prohibited and =
+may
+>> be unlawful. If you have received this communication in error, please
+>> notify Tribe at (619) 567-9955 and delete this communication immediately
+>> without making any copy or distribution.
+>>
+>>
+>>
+>>
+>>
+>> *Disclaimer*
+>>
+>> The information contained in this communication from the sender is
+>> confidential. It is intended solely for use by the recipient and others
+>> authorized to receive it. If you are not the recipient, you are hereby
+>> notified that any disclosure, copying, distribution or taking action in
+>> relation of the contents of this information is strictly prohibited and =
+may
+>> be unlawful. If you have received this communication in error, please
+>> notify Tribe at (619) 567-9955 and delete this communication immediately
+>> without making any copy or distribution.
+>>
+>>
+>>
+>> *Disclaimer*
+>>
+>> The information contained in this communication from the sender is
+>> confidential. It is intended solely for use by the recipient and others
+>> authorized to receive it. If you are not the recipient, you are hereby
+>> notified that any disclosure, copying, distribution or taking action in
+>> relation of the contents of this information is strictly prohibited and =
+may
+>> be unlawful. If you have received this communication in error, please
+>> notify Tribe at (619) 567-9955 and delete this communication immediately
+>> without making any copy or distribution.
+>>
+>
+
+--00000000000079119a05f866b640
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">---------- Forwarded message ---------<br>From: <strong cla=
+ss=3D"gmail_sendername" dir=3D"auto">Chelsea Masri</strong> <span dir=3D"au=
+to">&lt;<a href=3D"mailto:chelsea@tribecap.co">chelsea@tribecap.co</a>&gt;<=
+/span><br>Date: Fri, Mar 17, 2023 at 8:16=E2=80=AFAM<br>Subject: Re: Zoom w=
+ith Talha-Khan Aquil / Arjun Sethi<br>To: Alex Chee &lt;<a href=3D"mailto:a=
+lex@tribecap.co">alex@tribecap.co</a>&gt;<br></div><br><br><div dir=3D"auto=
+">Call with Talha Aquil (Gulf Equity) scheduled for 3/21 at 8:30am PST.</di=
+v><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr"=
+>On Fri, Mar 17, 2023 at 8:15 AM Chelsea Masri &lt;<a href=3D"mailto:chelse=
+a@tribecap.co" target=3D"_blank">chelsea@tribecap.co</a>&gt; wrote:<br></di=
+v><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:=
+1px #ccc solid;padding-left:1ex"><div dir=3D"auto">Thank you, Talha. I have=
+ just circulated a calendar=C2=A0invite.</div><div><br><div class=3D"gmail_=
+quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Mar 17, 2023 at 6:34 A=
+M Talha Aquil &lt;<a href=3D"mailto:talha.aquil@gulfequity.com" target=3D"_=
+blank">talha.aquil@gulfequity.com</a>&gt; wrote:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
+ing-left:1ex">
+
+
+
+
+
+<div lang=3D"en-AE" link=3D"blue" vlink=3D"purple" style=3D"word-wrap:break=
+-word">
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:11.0pt">Dear=
+ Chelsea,<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:11.0pt"><u><=
+/u>=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:11.0pt">Tues=
+day 21<sup>st</sup> March, at 11:30AM ET works well for me.<u></u><u></u></=
+span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:11.0pt"><u><=
+/u>=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:11.0pt">Best=
+,<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:11.0pt"><u><=
+/u>=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:11.0pt">Talh=
+a-Khan<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+<div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"border-col=
+lapse:collapse">
+<tbody>
+<tr style=3D"height:107.15pt">
+<td width=3D"97" valign=3D"top" style=3D"width:72.85pt;padding:.75pt .75pt =
+.75pt .75pt;height:107.15pt">
+<p class=3D"MsoNormal" style=3D"line-height:10.8pt"><span style=3D"font-siz=
+e:9.0pt;color:black"><img src=3D"cid:186f0240165ad7999131" alt=3D"Logo
+
+Description automatically generated" style=3D"width:331px;max-width:100%"><=
+u></u><u></u></span></p>
+</td>
+<td width=3D"329" valign=3D"top" style=3D"width:247.05pt;padding:.75pt .75p=
+t .75pt .75pt;height:107.15pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">Talha-K=
+han Aquil</span><span style=3D"font-size:12.0pt;color:black"><u></u><u></u>=
+</span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">Managin=
+g Partner=C2=A0<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">=C2=A0<=
+u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">T:=C2=
+=A0</span><span style=3D"font-size:11.0pt"><a href=3D"tel:+97145576649" tar=
+get=3D"_blank"><span style=3D"color:#0563c1">+971 4 557 6649</span></a><spa=
+n style=3D"color:black"><u></u><u></u></span></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">M:=C2=
+=A0</span><span style=3D"font-size:11.0pt"><a href=3D"tel:+971552446264" ta=
+rget=3D"_blank"><span style=3D"color:#0563c1">+971 55 244 6264</span></a><s=
+pan style=3D"color:black"><u></u><u></u></span></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">E:=C2=
+=A0</span><span style=3D"font-size:11.0pt"><a href=3D"mailto:talha.aquil@gu=
+lfequity.com" title=3D"mailto:talha.aquil@gulfequity.com" target=3D"_blank"=
+><span style=3D"color:#0563c1">talha.aquil@gulfequity.com</span></a><span s=
+tyle=3D"color:black"><u></u><u></u></span></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">=C2=A0<=
+u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">Suite=
+=C2=A0603,=C2=A0Cayan Business Center<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;color:black">Barsha=
+=C2=A0Heights,=C2=A0Dubai UAE<u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+<div style=3D"border:none;border-top:solid #b5c4df 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt"><b><span style=3D"fon=
+t-size:12.0pt;color:black">From:
+</span></b><span style=3D"font-size:12.0pt;color:black">Chelsea Masri &lt;<=
+a href=3D"mailto:chelsea@tribecap.co" target=3D"_blank">chelsea@tribecap.co=
+</a>&gt;<br>
+<b>Date: </b>Friday, 17 March 2023 at 7:12 AM<br>
+<b>To: </b>Talha Aquil &lt;<a href=3D"mailto:talha.aquil@gulfequity.com" ta=
+rget=3D"_blank">talha.aquil@gulfequity.com</a>&gt;<br>
+<b>Cc: </b>Alex Chee &lt;<a href=3D"mailto:alex@tribecap.co" target=3D"_bla=
+nk">alex@tribecap.co</a>&gt;<br>
+<b>Subject: </b>Re: Zoom with Talha-Khan Aquil / Arjun Sethi<u></u><u></u><=
+/span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Hello=C2=A0Talha,<u=
+></u><u></u></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">I can assist in sch=
+eduling a Zoom call. Please let me know if any of the following times work =
+for you next week, all in ET.<u></u><u></u></span></p>
+</div>
+<div>
+<ul type=3D"disc">
+<li class=3D"MsoNormal">
+<span style=3D"font-size:11.0pt">Tuesday, 3/21 at 11:30am, 12:30pm<u></u><u=
+></u></span></li><li class=3D"MsoNormal">
+<span style=3D"font-size:11.0pt">Friday, 3/24 at 11:30am<u></u><u></u></spa=
+n></li></ul>
+</div>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">On Thu, Mar 16, 202=
+3 at 3:30=E2=80=AFPM Talha Aquil &lt;<a href=3D"mailto:talha.aquil@gulfequi=
+ty.com" target=3D"_blank">talha.aquil@gulfequity.com</a>&gt; wrote:<u></u><=
+u></u></span></p>
+</div>
+<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0c=
+m 0cm 0cm 6.0pt;margin-left:4.8pt;margin-right:0cm">
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Yes absolutely! Tha=
+t would be wonderful. Generally speaking I=E2=80=99m available till early t=
+o mid afternoon (ET) on most days during the next week.=C2=A0<u></u><u></u>=
+</span></p>
+</div>
+</div>
+<div id=3D"m_-7189474465100927818m_-5306022194590111309m_-25804307127327314=
+41ms-outlook-mobile-signature">
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"border-col=
+lapse:collapse">
+<tbody>
+<tr style=3D"height:107.15pt">
+<td width=3D"97" valign=3D"top" style=3D"width:72.85pt;padding:.75pt .75pt =
+.75pt .75pt;height:107.15pt">
+<p style=3D"margin:0cm;line-height:10.8pt"><b><span lang=3D"EN-US" style=3D=
+"font-size:9.0pt;color:black">Error! Filename not specified.</span></b><spa=
+n style=3D"font-size:9.0pt;color:black">=C2=A0</span><span style=3D"font-si=
+ze:12.0pt;color:black"><u></u><u></u></span></p>
+</td>
+<td width=3D"329" valign=3D"top" style=3D"width:247.05pt;padding:.75pt .75p=
+t .75pt .75pt;height:107.15pt">
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Talha-=
+Khan Aquil=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Managi=
+ng Partner=C2=A0=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">=C2=A0=
+=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">T:=C2=
+=A0<a href=3D"tel:+97145576649" target=3D"_blank"><span style=3D"color:#954=
+f72">+971 4 557 6649</span></a>=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">M:=C2=
+=A0<a href=3D"tel:+971552446264" target=3D"_blank"><span style=3D"color:#95=
+4f72">+971 55 244 6264</span></a>=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">E:=C2=
+=A0<a href=3D"mailto:talha.aquil@gulfequity.com" title=3D"mailto:talha.aqui=
+l@gulfequity.com" target=3D"_blank"><span style=3D"color:#954f72">talha.aqu=
+il@gulfequity.com</span></a>=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">=C2=A0=
+=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Suite=
+=C2=A0603,=C2=A0Cayan Business Center=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Barsha=
+=C2=A0Heights,=C2=A0Dubai UAE=C2=A0<u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"line-height:16.2pt"><span style=3D"font-siz=
+e:13.5pt;color:black"><u></u>=C2=A0<u></u></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span=
+ style=3D"font-size:11.0pt">
+<hr size=3D"0" width=3D"100%" align=3D"center">
+</span></div>
+<div id=3D"m_-7189474465100927818m_-5306022194590111309m_-25804307127327314=
+41divRplyFwdMsg">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;color:black">From=
+:</span></b><span style=3D"font-size:11.0pt;color:black"> Alex Chee &lt;<a =
+href=3D"mailto:alex@tribecap.co" target=3D"_blank">alex@tribecap.co</a>&gt;=
+<br>
+<b>Sent:</b> Friday, March 17, 2023 2:09:10 AM<br>
+<b>To:</b> Talha Aquil &lt;<a href=3D"mailto:talha.aquil@gulfequity.com" ta=
+rget=3D"_blank">talha.aquil@gulfequity.com</a>&gt;<br>
+<b>Cc:</b> Chelsea Masri &lt;<a href=3D"mailto:chelsea@tribecap.co" target=
+=3D"_blank">chelsea@tribecap.co</a>&gt;<br>
+<b>Subject:</b> Re: Zoom with Talha-Khan Aquil / Arjun Sethi</span><span st=
+yle=3D"font-size:11.0pt">
+<u></u><u></u></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">=C2=A0<u></u><u></u=
+></span></p>
+</div>
+</div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">No worries Talha. W=
+ould love to do intros regardless when you have time. Perhaps zoom?<u></u><=
+u></u></span></p>
+</div>
+</div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><img border=3D"0" w=
+idth=3D"1" style=3D"width:.0104in" id=3D"m_-7189474465100927818m_-530602219=
+4590111309_x0000_i1028" src=3D"https://r.superhuman.com/HC7vQk2MBnJU4wf7xfq=
+LQ-vxB2ZbWf7m0_9u0X-AvQRHbdV3GuXXgMplmbufO5yLodxxPT1_pyhwRqnwEwBBBMMDvn2LRW=
+Uy6qTnzeM2cFY05F8IlphiLTgd7wYCPu1DmT7rFQ8aiKRZChvQTnYx8le6hAz4Q1Am225xee0Uj=
+TAXz3hki67BHkIggdU4ag.gif"><u></u><u></u></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">On Thu, Mar 16, 202=
+3 at 9:23 PM, Talha Aquil &lt;<a href=3D"mailto:talha.aquil@gulfequity.com"=
+ target=3D"_blank">talha.aquil@gulfequity.com</a>&gt; wrote:<u></u><u></u><=
+/span></p>
+<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0c=
+m 0cm 0cm 6.0pt;margin-left:4.8pt;margin-right:0cm">
+<div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">I unfortunately fly=
+ off at 6PM. Perhaps the next time you=E2=80=99re in the
+<a href=3D"http://region.best/" target=3D"_blank">region.best</a>, Talha<u>=
+</u><u></u></span></p>
+</div>
+</div>
+<div id=3D"m_-7189474465100927818m_-5306022194590111309m_-25804307127327314=
+41x_ms-outlook-mobile-signature">
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"border-col=
+lapse:collapse">
+<tbody>
+<tr style=3D"height:107.15pt">
+<td width=3D"97" valign=3D"top" style=3D"width:72.85pt;padding:.75pt .75pt =
+.75pt .75pt;height:107.15pt">
+<p style=3D"margin:0cm;line-height:10.8pt"><b><span lang=3D"EN-US" style=3D=
+"font-size:9.0pt;color:black">Error! Filename not specified.</span></b><spa=
+n style=3D"font-size:9.0pt;color:black">=C2=A0</span><span style=3D"font-si=
+ze:12.0pt;color:black"><u></u><u></u></span></p>
+</td>
+<td width=3D"329" valign=3D"top" style=3D"width:247.05pt;padding:.75pt .75p=
+t .75pt .75pt;height:107.15pt">
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Talha-=
+Khan Aquil=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Managi=
+ng Partner=C2=A0=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">=C2=A0=
+=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">T:=C2=
+=A0<a href=3D"tel:+97145576649" target=3D"_blank"><span style=3D"color:#954=
+f72">+971 4 557 6649</span></a>=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">M:=C2=
+=A0<a href=3D"tel:+971552446264" target=3D"_blank"><span style=3D"color:#95=
+4f72">+971 55 244 6264</span></a>=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">E:=C2=
+=A0<a href=3D"mailto:talha.aquil@gulfequity.com" title=3D"mailto:talha.aqui=
+l@gulfequity.com" target=3D"_blank"><span style=3D"color:#954f72">talha.aqu=
+il@gulfequity.com</span></a>=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">=C2=A0=
+=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Suite=
+=C2=A0603,=C2=A0Cayan Business Center=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Barsha=
+=C2=A0Heights,=C2=A0Dubai UAE=C2=A0<u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"line-height:16.2pt"><span style=3D"font-siz=
+e:13.5pt;color:black"><u></u>=C2=A0<u></u></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span=
+ style=3D"font-size:11.0pt">
+<hr size=3D"0" width=3D"100%" align=3D"center">
+</span></div>
+<div id=3D"m_-7189474465100927818m_-5306022194590111309m_-25804307127327314=
+41x_divRplyFwdMsg">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;color:black">From=
+:</span></b><span style=3D"font-size:11.0pt;color:black"> Alex Chee &lt;<a =
+href=3D"mailto:alex@tribecap.co" target=3D"_blank">alex@tribecap.co</a>&gt;=
+<br>
+<b>Sent:</b> Thursday, March 16, 2023 7:35:41 PM<br>
+<b>To:</b> Talha Aquil &lt;<a href=3D"mailto:talha.aquil@gulfequity.com" ta=
+rget=3D"_blank">talha.aquil@gulfequity.com</a>&gt;<br>
+<b>Cc:</b> Chelsea Masri &lt;<a href=3D"mailto:chelsea@tribecap.co" target=
+=3D"_blank">chelsea@tribecap.co</a>&gt;<br>
+<b>Subject:</b> Re: Zoom with Talha-Khan Aquil / Arjun Sethi</span><span st=
+yle=3D"font-size:11.0pt">
+<u></u><u></u></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">=C2=A0<u></u><u></u=
+></span></p>
+</div>
+</div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">I am meeting a frie=
+nd (from NEOM) near the Dubai super trees at 7pm and may be able to move th=
+at back a bit. Would you be able to meet around that area around 6:30pm?<u>=
+</u><u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Appreciate the flex=
+ibility.=C2=A0<u></u><u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">On Thu, Mar 16 2023=
+ at 6:26 PM, Talha Aquil &lt;<a href=3D"mailto:talha.aquil@gulfequity.com" =
+target=3D"_blank">talha.aquil@gulfequity.com</a>&gt; wrote:
+<u></u><u></u></span></p>
+<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0c=
+m 0cm 0cm 6.0pt;margin-left:0cm;margin-right:0cm;margin-bottom:4.8pt">
+<div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Hi Alex,<u></u><u><=
+/u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Great to hear from =
+you. I=E2=80=99m abu dhabi based and with tomorrow being Friday (prayers) I=
+ will not be able to meet before 2PM in Dubai. If that works I=E2=80=99d lo=
+ve to welcome you to our offices at CAYAN Business Tower
+ in TECOM at 2PM?=C2=A0<u></u><u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Best,<u></u><u></u>=
+</span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Talha<u></u><u></u>=
+</span></p>
+</div>
+</div>
+</div>
+<div id=3D"m_-7189474465100927818m_-5306022194590111309m_-25804307127327314=
+41x_x_ms-outlook-mobile-signature">
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"border-col=
+lapse:collapse">
+<tbody>
+<tr style=3D"height:107.15pt">
+<td width=3D"97" valign=3D"top" style=3D"width:72.85pt;padding:.75pt .75pt =
+.75pt .75pt;height:107.15pt">
+<p style=3D"margin:0cm;line-height:10.8pt"><b><span lang=3D"EN-US" style=3D=
+"font-size:9.0pt;color:black">Error! Filename not specified.</span></b><spa=
+n style=3D"font-size:9.0pt;color:black">=C2=A0</span><span style=3D"font-si=
+ze:12.0pt;color:black"><u></u><u></u></span></p>
+</td>
+<td width=3D"329" valign=3D"top" style=3D"width:247.05pt;padding:.75pt .75p=
+t .75pt .75pt;height:107.15pt">
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Talha-=
+Khan Aquil=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Managi=
+ng Partner=C2=A0=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">=C2=A0=
+=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">T:=C2=
+=A0<a href=3D"tel:+97145576649" target=3D"_blank"><span style=3D"color:#954=
+f72">+971 4 557 6649</span></a>=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">M:=C2=
+=A0<a href=3D"tel:+971552446264" target=3D"_blank"><span style=3D"color:#95=
+4f72">+971 55 244 6264</span></a>=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">E:=C2=
+=A0<a href=3D"mailto:talha.aquil@gulfequity.com" title=3D"mailto:talha.aqui=
+l@gulfequity.com" target=3D"_blank"><span style=3D"color:#954f72">talha.aqu=
+il@gulfequity.com</span></a>=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">=C2=A0=
+=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Suite=
+=C2=A0603,=C2=A0Cayan Business Center=C2=A0<u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Barsha=
+=C2=A0Heights,=C2=A0Dubai UAE=C2=A0<u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"line-height:16.2pt"><span style=3D"font-siz=
+e:13.5pt;color:black"><u></u>=C2=A0<u></u></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span=
+ style=3D"font-size:11.0pt">
+<hr size=3D"0" width=3D"100%" align=3D"center">
+</span></div>
+<div id=3D"m_-7189474465100927818m_-5306022194590111309m_-25804307127327314=
+41x_x_divRplyFwdMsg">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;color:black">From=
+:</span></b><span style=3D"font-size:11.0pt;color:black"> Alex Chee &lt;<a =
+href=3D"mailto:alex@tribecap.co" target=3D"_blank">alex@tribecap.co</a>&gt;=
+<br>
+<b>Sent:</b> Thursday, March 16, 2023 6:04:44 PM<br>
+<b>To:</b> Talha Aquil &lt;<a href=3D"mailto:talha.aquil@gulfequity.com" ta=
+rget=3D"_blank">talha.aquil@gulfequity.com</a>&gt;<br>
+<b>Cc:</b> Arjun Sethi &lt;<a href=3D"mailto:arj@tribecap.co" target=3D"_bl=
+ank">arj@tribecap.co</a>&gt;; Steve Weidenbach &lt;<a href=3D"mailto:steve@=
+tribecap.co" target=3D"_blank">steve@tribecap.co</a>&gt;; AG Ganguly &lt;<a=
+ href=3D"mailto:ag@abgassociates.com" target=3D"_blank">ag@abgassociates.co=
+m</a>&gt;;
+ Leon Smith &lt;<a href=3D"mailto:Leon.smith@gulfequity.com" target=3D"_bla=
+nk">Leon.smith@gulfequity.com</a>&gt;; Chelsea Masri &lt;<a href=3D"mailto:=
+chelsea@tribecap.co" target=3D"_blank">chelsea@tribecap.co</a>&gt;<br>
+<b>Subject:</b> Re: Zoom with Talha-Khan Aquil / Arjun Sethi</span><span st=
+yle=3D"font-size:11.0pt">
+<u></u><u></u></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">=C2=A0<u></u><u></u=
+></span></p>
+</div>
+</div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Talha, I=E2=80=99m =
+in transit to Dubai right now actually. Have some time open at 10:30am tomo=
+rrow if that works for you. Would love to meet.=C2=A0<u></u><u></u></span><=
+/p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">On Thu, Mar 16 2023=
+ at 1:11 AM, Talha Aquil &lt;<a href=3D"mailto:talha.aquil@gulfequity.com" =
+target=3D"_blank">talha.aquil@gulfequity.com</a>&gt; wrote:
+<u></u><u></u></span></p>
+<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0c=
+m 0cm 0cm 6.0pt;margin-left:0cm;margin-right:0cm;margin-bottom:4.8pt">
+<div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Thank you Arjun. A =
+true pleasure.=C2=A0<u></u><u></u></span></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Thanks Steve. Have =
+seen the email in the inbox but haven=E2=80=99t gone into it.=C2=A0<u></u><=
+u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Alex please let me =
+know if you=E2=80=99re in either AD or Dubai over these next few days for a=
+ in person catch up.=C2=A0<u></u><u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Best,<u></u><u></u>=
+</span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Talha=C2=A0<u></u><=
+u></u></span></p>
+</div>
+<div id=3D"m_-7189474465100927818m_-5306022194590111309m_-25804307127327314=
+41x_x_x_ms-outlook-mobile-signature">
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"border-col=
+lapse:collapse">
+<tbody>
+<tr style=3D"height:107.15pt">
+<td width=3D"97" valign=3D"top" style=3D"width:72.85pt;padding:.75pt .75pt =
+.75pt .75pt;height:107.15pt">
+<p style=3D"margin:0cm;line-height:10.8pt"><b><span lang=3D"EN-US" style=3D=
+"font-size:9.0pt;color:black">Error! Filename not specified.</span></b><spa=
+n style=3D"font-size:9.0pt;color:black">=C2=A0</span><span style=3D"font-si=
+ze:12.0pt"><u></u><u></u></span></p>
+</td>
+<td width=3D"329" valign=3D"top" style=3D"width:247.05pt;padding:.75pt .75p=
+t .75pt .75pt;height:107.15pt">
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Talha-=
+Khan Aquil=C2=A0</span><span style=3D"font-size:12.0pt"><u></u><u></u></spa=
+n></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Managi=
+ng Partner=C2=A0=C2=A0</span><span style=3D"font-size:12.0pt"><u></u><u></u=
+></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">=C2=A0=
+=C2=A0</span><span style=3D"font-size:12.0pt"><u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">T:=C2=
+=A0</span><span style=3D"font-size:12.0pt"><a href=3D"tel:+97145576649" tar=
+get=3D"_blank"><span style=3D"color:#954f72">+971 4 557 6649</span></a><spa=
+n style=3D"color:black">=C2=A0</span><u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">M:=C2=
+=A0</span><span style=3D"font-size:12.0pt"><a href=3D"tel:+971552446264" ta=
+rget=3D"_blank"><span style=3D"color:#954f72">+971 55 244 6264</span></a><s=
+pan style=3D"color:black">=C2=A0</span><u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">E:=C2=
+=A0</span><span style=3D"font-size:12.0pt"><a href=3D"mailto:talha.aquil@gu=
+lfequity.com" title=3D"mailto:talha.aquil@gulfequity.com" target=3D"_blank"=
+><span style=3D"color:#954f72">talha.aquil@gulfequity.com</span></a><span s=
+tyle=3D"color:black">=C2=A0</span><u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">=C2=A0=
+=C2=A0</span><span style=3D"font-size:12.0pt"><u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Suite=
+=C2=A0603,=C2=A0Cayan Business Center=C2=A0</span><span style=3D"font-size:=
+12.0pt"><u></u><u></u></span></p>
+<p style=3D"margin:0cm"><span style=3D"font-size:12.0pt;color:black">Barsha=
+=C2=A0Heights,=C2=A0Dubai UAE=C2=A0</span><span style=3D"font-size:12.0pt">=
+<u></u><u></u></span></p>
+</td>
+</tr></tbody></table></div></div></div></div></div></div></blockquote></div=
+></div></div></div></div></div></blockquote></div></div></div></div></div><=
+/div></div></blockquote></div></div></div></div></div></div></blockquote></=
+div></div></div><div lang=3D"en-AE" link=3D"blue" vlink=3D"purple" style=3D=
+"word-wrap:break-word"><div><div><blockquote style=3D"border:none;border-le=
+ft:solid #cccccc 1.0pt;padding:0cm 0cm 0cm 6.0pt;margin-left:4.8pt;margin-r=
+ight:0cm"><div><div><div><div><div><div><blockquote style=3D"border:none;bo=
+rder-left:solid #cccccc 1.0pt;padding:0cm 0cm 0cm 6.0pt;margin-left:4.8pt;m=
+argin-right:0cm"><div><div><div><div><div><div><div><blockquote style=3D"bo=
+rder:none;border-left:solid #cccccc 1.0pt;padding:0cm 0cm 0cm 6.0pt;margin-=
+left:0cm;margin-right:0cm;margin-bottom:4.8pt"><div><div><div><div><div><di=
+v><blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:=
+0cm 0cm 0cm 6.0pt;margin-left:0cm;margin-right:0cm;margin-bottom:4.8pt"><di=
+v><div><div><div id=3D"m_-7189474465100927818m_-5306022194590111309m_-25804=
+30712732731441x_x_x_ms-outlook-mobile-signature"><div><div><table border=3D=
+"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"border-collapse:collapse">=
+<tbody><tr style=3D"height:107.15pt"></tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"line-height:16.2pt"><span style=3D"font-siz=
+e:13.5pt;color:black"><u></u>=C2=A0<u></u></span></p>
+</div>
+</div>
+</div>
+<div id=3D"m_-7189474465100927818m_-5306022194590111309m_-25804307127327314=
+41x_x_x_mail-editor-reference-message-container">
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span=
+ style=3D"font-size:11.0pt">
+<hr size=3D"0" width=3D"100%" align=3D"center">
+</span></div>
+<div id=3D"m_-7189474465100927818m_-5306022194590111309m_-25804307127327314=
+41x_x_x_divRplyFwdMsg">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt">From:</span></b>=
+<span style=3D"font-size:11.0pt"> Arjun Sethi &lt;<a href=3D"mailto:arj@tri=
+becap.co" target=3D"_blank">arj@tribecap.co</a>&gt;<br>
+<b>Sent:</b> Wednesday, March 15, 2023 20:22<br>
+<b>To:</b> Alex Chee &lt;<a href=3D"mailto:alex@tribecap.co" target=3D"_bla=
+nk">alex@tribecap.co</a>&gt;; Steve Weidenbach &lt;<a href=3D"mailto:steve@=
+tribecap.co" target=3D"_blank">steve@tribecap.co</a>&gt;; Talha Aquil &lt;<=
+a href=3D"mailto:talha.aquil@gulfequity.com" target=3D"_blank">talha.aquil@=
+gulfequity.com</a>&gt;<br>
+<b>Subject:</b> Zoom with Talha-Khan Aquil / Arjun Sethi <u></u><u></u></sp=
+an></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">=C2=A0<u></u><u></u=
+></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Good to connect thi=
+s morning and look forward to finding ways to do that. In the meantime I=E2=
+=80=99ll follow up on Relativity.
+<u></u><u></u></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">+Steve can share ou=
+r data room and materials.=C2=A0<u></u><u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">And adding Alex sin=
+ce he=E2=80=99s in the region.=C2=A0<u></u><u></u></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:&quot;=
+Arial&quot;,sans-serif">Disclaimer</span></b><span style=3D"font-size:11.0p=
+t"><u></u><u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:&quot;Ari=
+al&quot;,sans-serif">The information contained in this communication from t=
+he sender is confidential. It is intended solely for use by the recipient a=
+nd others authorized to receive it. If you are
+ not the recipient, you are hereby notified that any disclosure, copying, d=
+istribution or taking action in relation of the contents of this informatio=
+n is strictly prohibited and may be unlawful. If you have received this com=
+munication in error, please notify
+ Tribe at (619) 567-9955 and delete this communication immediately without =
+making any copy or distribution.</span><span style=3D"font-size:11.0pt"><u>=
+</u><u></u></span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:&quot;=
+Arial&quot;,sans-serif">Disclaimer</span></b><span style=3D"font-size:11.0p=
+t"><u></u><u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:&quot;Ari=
+al&quot;,sans-serif">The information contained in this communication from t=
+he sender is confidential. It is intended solely for use by the recipient a=
+nd others authorized to receive it. If you are
+ not the recipient, you are hereby notified that any disclosure, copying, d=
+istribution or taking action in relation of the contents of this informatio=
+n is strictly prohibited and may be unlawful. If you have received this com=
+munication in error, please notify
+ Tribe at (619) 567-9955 and delete this communication immediately without =
+making any copy or distribution.</span><span style=3D"font-size:11.0pt"><u>=
+</u><u></u></span></p>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:&quot;=
+Arial&quot;,sans-serif">Disclaimer</span></b><span style=3D"font-size:11.0p=
+t"><u></u><u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:&quot;Ari=
+al&quot;,sans-serif">The information contained in this communication from t=
+he sender is confidential. It is intended solely for use by the recipient a=
+nd others authorized to receive it. If you are
+ not the recipient, you are hereby notified that any disclosure, copying, d=
+istribution or taking action in relation of the contents of this informatio=
+n is strictly prohibited and may be unlawful. If you have received this com=
+munication in error, please notify
+ Tribe at (619) 567-9955 and delete this communication immediately without =
+making any copy or distribution.</span><span style=3D"font-size:11.0pt"><u>=
+</u><u></u></span></p>
+</div>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:&quot;=
+Arial&quot;,sans-serif">Disclaimer</span></b><span style=3D"font-size:11.0p=
+t"><u></u><u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:&quot;Ari=
+al&quot;,sans-serif">The information contained in this communication from t=
+he sender is confidential. It is intended solely for use by the recipient a=
+nd others authorized to receive it. If you are
+ not the recipient, you are hereby notified that any disclosure, copying, d=
+istribution or taking action in relation of the contents of this informatio=
+n is strictly prohibited and may be unlawful. If you have received this com=
+munication in error, please notify
+ Tribe at (619) 567-9955 and delete this communication immediately without =
+making any copy or distribution.</span><span style=3D"font-size:11.0pt"><u>=
+</u><u></u></span></p>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u>=C2=A0<u></u=
+></span></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:&quot;=
+Arial&quot;,sans-serif">Disclaimer</span></b><span style=3D"font-size:11.0p=
+t"><u></u><u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:&quot;Ari=
+al&quot;,sans-serif">The information contained in this communication from t=
+he sender is confidential. It is intended solely for use by the recipient a=
+nd others authorized to receive it. If you are
+ not the recipient, you are hereby notified that any disclosure, copying, d=
+istribution or taking action in relation of the contents of this informatio=
+n is strictly prohibited and may be unlawful. If you have received this com=
+munication in error, please notify
+ Tribe at (619) 567-9955 and delete this communication immediately without =
+making any copy or distribution.</span><span style=3D"font-size:11.0pt"><u>=
+</u><u></u></span></p>
+</div>
+</div>
+</div>
+
+</blockquote></div></div></blockquote></div></div>
+</div></div>
+
+--00000000000079119a05f866b640--
+--00000000000079119c05f866b641
+Content-Type: image/png; name="image001.png"
+Content-Disposition: inline; filename="image001.png"
+Content-Transfer-Encoding: base64
+Content-ID: <186f0240165ad7999131>
+X-Attachment-Id: 186f0240165ad7999131
+
+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
+P7wo9OekiunIAAAAAElFTkSuQmCCAA==
+--00000000000079119c05f866b641--

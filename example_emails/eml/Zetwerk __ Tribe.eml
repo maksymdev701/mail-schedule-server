@@ -1,0 +1,554 @@
+Delivered-To: kavin@tribecap.co
+Received: by 2002:a05:7010:ac8e:b0:341:6b4e:1a5e with SMTP id dv14csp2452860mdb;
+        Mon, 3 Apr 2023 08:47:20 -0700 (PDT)
+X-Received: by 2002:a17:906:148b:b0:933:422b:5f5d with SMTP id x11-20020a170906148b00b00933422b5f5dmr37320418ejc.18.1680536840184;
+        Mon, 03 Apr 2023 08:47:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1680536840; cv=none;
+        d=google.com; s=arc-20160816;
+        b=jrQkjRnrHBrtFZy9z2w71n2m6kd0w0gc+zh8cB2a8P61qrHyIijWoZuSp2Goac36Nf
+         ZdC5GXuha9q/l1F6Hnv/bvlVTHNKzfDJT/condIVLMSLGLXH8T+OsK0gVHBHZatzaC4I
+         eiHAcAZ5Y/193Jfe+R83s4Z8MI5k35TmqoOg2fuQuCDygXGKINFhkRHTY2g6eENYku5a
+         D7MXwp7eP2bTwgqSTTNPVcbrntvsURfzqr1PzpSORZQieqaiuTwtFQCQFggd6+5Z91IW
+         vun1dzUM4xMiH97cNCAmQF2tG/aof5KEh01yW4FwJEIiy/cFo2kcTluMpVD7h0UNWBfR
+         FDBA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=B7h+k5DbTmLnSH2F/czwbSH7+pBiH7aKAisSuyxA/yM=;
+        b=UHlgmFcY3QShUsArqWsX6DacW6wPQ9OXibIyyJhjlm2GO/rmFTBr/yco4yj423DZUg
+         9ym052gmSBT6PW+/MADhgsv6MsGZ07oqUZ6yg++nChdPj1B+4mgNeqRfUPVkkY47ECSm
+         o+ROjBWrkgiEyjtxIrcZnTSDG7PKD6h1WxZEEytQ0Uq+QFeHxYZLchedj16BNi8OU9NU
+         zrLmmm+9f+R0Ds7DdozmFkcelGrCiTvhlAEgnx0J1fjg7t/Lok026srWY2YwF1TgBLoi
+         t0T5KUaFTsLnVsC0vryZLAP0oaXH7qXth0e0wSve9D4dstflbe42JXfBmrMmql9I4/P8
+         hvbQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=HgJwnjRd;
+       spf=pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=veronica@tribecap.co
+Return-Path: <veronica@tribecap.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id x9-20020a1709064bc900b009474eb6719csor5134000ejv.134.2023.04.03.08.47.20
+        for <kavin@tribecap.co>
+        (Google Transport Security);
+        Mon, 03 Apr 2023 08:47:20 -0700 (PDT)
+Received-SPF: pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=HgJwnjRd;
+       spf=pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=veronica@tribecap.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tribecap.co; s=google; t=1680536840;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=B7h+k5DbTmLnSH2F/czwbSH7+pBiH7aKAisSuyxA/yM=;
+        b=HgJwnjRdFCeIkIHm2u2cKSzDVznDQ1yMDOT0ELHs9aJ0F7IqnRpJiuYX6+78O2LUP8
+         0/jIG1QghZrkxv7Y0bh76LkE9kfA6RqxB1U0wFW8+ENQNWHkFhE3zbEL4sOhUUJ83KG0
+         sistLqLyP/kSetV+kybSkPpBml1U4OKoDAgGS6XbQelbref1v53IwJNDZY0l7pl4K5qM
+         gC+GHN+FnfMu9CZkZSk8Hi0xqhzS7V57zKXaE6uu8FmZVlZ8jpS48HWedqjZefugbWw3
+         OjYSrHmzLZEOzcwc+xVFGuiCtTQZ16XrJMg5Aqcnx7Hi/gDhRERVrXSSBMGlJy0YnzPM
+         KOCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680536840;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=B7h+k5DbTmLnSH2F/czwbSH7+pBiH7aKAisSuyxA/yM=;
+        b=2ocQYB0FQ4uXu+yKXShXSNtu7yDfKPAX90NYs9vrX0pgzb864ES/7RUD1eYYPcEvlF
+         Mzwevzm+6MnQlY1jAD6lEEKvZON7Raiyl2hj/cXbvFr26qL6prVBJjRVDL2wQFEhdwCd
+         feYFoM72TSAgUXzTrxMx68N97CjS4SvOuGD3M3fmZ5JCt5PKH/SEnwEKvNYp0XOe2glH
+         N9WYOKlTKSGAObbOoT3ZH2IOWvXAM78NNJJOPkV71tr+ziJSPfAUIYht0BvPkEJ0h8/7
+         wjMq1RS4eT1aK1wV+YffACWex+kPPfP+PcgwCWj0ICkno3G9zih0U+xwnenZ15QBBEi5
+         clDg==
+X-Gm-Message-State: AAQBX9c8L11N6UDjHD2TFToTqM4U7pe1RtNKnTU+qq0WOLRNinV/2wW3
+	PDa/2MC9opZbus7LmpdRrsuEyATgSildF5ES70+4V6gdz9OIxYSYRCXUw6QYzQBdhGen4Xi2JZN
+	604WUnkhyuwttP6IL2exAk29FroWo11B6nQWOBJjNZHmOIBIlt/6d5Bdu3/r7RfnWztcOMBmlMf
+	3D9xLzH9qDMMX0sDdxWIGKS3b2ufw0Ceft3J+5QIxnVyIXnA==
+X-Google-Smtp-Source: AKy350YILc1sP6Tqi4O67LFotY85wfhXHXC6nz9/Nj7AIxs2RSDhex7nQllhFOiK6LybORgir3YS3uMNMIWKei8BpTM=
+X-Received: by 2002:a17:907:d412:b0:930:310:abbf with SMTP id
+ vi18-20020a170907d41200b009300310abbfmr17788777ejc.11.1680536839691; Mon, 03
+ Apr 2023 08:47:19 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAFCu_mQoLLOMfmC0SLDB0csDksj1sQ52_fP1Qxu7C6FHm9tYfA@mail.gmail.com>
+ <CAMnVNkjf3z9t+uD506YYaGMOcjOausSMTauL1DcrcjwrVxe87Q@mail.gmail.com>
+ <CAN2_rVeh2LYb_L=SyYw3QEGFmAg3Fwu5KN7vbJ2VcVWdmZ_itg@mail.gmail.com>
+ <CAGhPhKejB4Zs0bAU0jQ8=vpjO4CJ7LgO_yyPJsSJFBFSb-EL6Q@mail.gmail.com>
+ <CAMnVNkggufAF+KRPZH3NT0MiKNBFLqR4uzqApJPKgQiAx=6ggA@mail.gmail.com>
+ <CAOWnkCxS=KWJZmbFtdthdq17tWj4iiMr=Gb8XUhX9_suX63iNQ@mail.gmail.com>
+ <CAGhPhKfEC8GrfOtSrT+iCzp77KzZCXbzgDWJHYuCtW=gG2WZyg@mail.gmail.com> <CAOWnkCwQ3=rENr_JVsBY1pkf4Ed_cSf3PewT0OUhxN0Dg4--wg@mail.gmail.com>
+In-Reply-To: <CAOWnkCwQ3=rENr_JVsBY1pkf4Ed_cSf3PewT0OUhxN0Dg4--wg@mail.gmail.com>
+From: Veronica Sullivan <veronica@tribecap.co>
+Date: Mon, 3 Apr 2023 11:47:08 -0400
+Message-ID: <CAGhPhKeX1AM+_A75QJr3bndEUKPt7tm-0pmzfWc0CcydU-UE+g@mail.gmail.com>
+Subject: Re: Zetwerk <> Tribe
+To: Krishnapriya k <krishnapriya.k@zetwerk.com>
+Content-Type: multipart/alternative; boundary="0000000000005cbe0005f8707953"
+Bcc: kavin@tribecap.co
+
+--0000000000005cbe0005f8707953
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Fantastic.  I sent out a calendar invite.  The address is 933 Hermosa Way,
+Menlo Park, CA 94025.
+
+Many thanks,
+
+Veronica Sullivan
+Assistant to Arjun Sethi
+Tribe Capital
+(646) 280-5410
+
+
+On Mon, Apr 3, 2023 at 8:14=E2=80=AFAM Krishnapriya k <krishnapriya.k@zetwe=
+rk.com>
+wrote:
+
+> Hello Veronica,
+>
+> 11:15AM on 27th April works for Amrity. Request if you can please share
+> the calendar invite along with the location.
+>
+> Regards,
+>  Priya
+>
+> On Sat, Apr 1, 2023 at 8:48=E2=80=AFAM Veronica Sullivan <veronica@tribec=
+ap.co>
+> wrote:
+>
+>> Hi Priya,
+>>
+>> Arjun is available to meet in Menlo Park on April 27th at 11:15 am.  The
+>> address to meet is:  933 Hermosa Way, Menlo Park, CA 94025.  Would this
+>> appropriate for Amrit?
+>>
+>> Kind regards,
+>>
+>> Veronica Sullivan
+>> Assistant to Arjun Sethi
+>> Tribe Capital
+>> (646) 280-5410
+>>
+>>
+>> On Fri, Mar 31, 2023 at 5:41=E2=80=AFAM Krishnapriya k <
+>> krishnapriya.k@zetwerk.com> wrote:
+>>
+>>> Hello Veronica,
+>>>
+>>> Greetings!
+>>>
+>>> Please find below Amrit's available slots-
+>>> 1. 26th April - AM
+>>> 2. 27th April - AM
+>>> 3. 28th April - after 10:30hrs AM and PM
+>>>
+>>> Please let me know the slot that works and provide me with the address.
+>>>
+>>> Regards,
+>>>  Priya
+>>>
+>>> On Thu, Mar 30, 2023 at 7:17=E2=80=AFPM Amrit Acharya <amrit@zetwerk.in=
+> wrote:
+>>>
+>>>> Thanks Veronica. @Krishnapriya k <krishnapriya.k@zetwerk.com> has my
+>>>> calendar
+>>>>
+>>>> On Mon, Mar 27, 2023 at 11:54=E2=80=AFPM Veronica Sullivan <
+>>>> veronica@tribecap.co> wrote:
+>>>>
+>>>>>
+>>>>> Hi Amrit,
+>>>>>
+>>>>> Do you have any plans to be on the Peninsula the week of April 24th?
+>>>>> Arjun is based in Menlo Park.
+>>>>>
+>>>>> Kind regards,
+>>>>>
+>>>>> Veronica Sullivan
+>>>>> Assistant to Arjun Sethi
+>>>>> Tribe Capital
+>>>>> (646) 280-5410
+>>>>>
+>>>>>
+>>>>> On Mon, Mar 27, 2023 at 2:40=E2=80=AFAM Arjun Sethi <arj@tribecap.co>=
+ wrote:
+>>>>>
+>>>>>> Look forward to connecting; adding Veronica. +Veronica Sullivan
+>>>>>> <veronica@tribecap.co>
+>>>>>>
+>>>>>> On Sun, Mar 26, 2023 at 9:53=E2=80=AFPM Amrit Acharya <amrit@zetwerk=
+.in>
+>>>>>> wrote:
+>>>>>>
+>>>>>>> Thanks Vaibhav - moving you to bcc
+>>>>>>>
+>>>>>>> Arjun, good to meet you. I am in the Bay Area the week of April 24t=
+h
+>>>>>>> and NYC the week after. If calendars align, would love to meet othe=
+rwise we
+>>>>>>> can do a zoom.
+>>>>>>>
+>>>>>>> On Mon, Mar 27, 2023 at 10:19=E2=80=AFAM Vaibhav Agrawal <vaibhav@l=
+svp.com>
+>>>>>>> wrote:
+>>>>>>>
+>>>>>>>> Arjun, as promised, please meet Amrit who's the CEO and co-founder
+>>>>>>>> of Zetwerk. You'd enjoy meeting him and learning about the busines=
+s.
+>>>>>>>>
+>>>>>>>> Amrit, Arjun is the founder and leads investments at Tribe. Wish
+>>>>>>>> you an interesting conversation.
+>>>>>>>>
+>>>>>>>> Vaibhav
+>>>>>>>>
+>>>>>>>> This message and its attachments are intended only for the
+>>>>>>>> addressee and may contain legally privileged and/or confidential
+>>>>>>>> information. If you are not the intended recipient, you are hereby=
+ notified
+>>>>>>>> that you must not use, disseminate, or copy this material in any f=
+orm, or
+>>>>>>>> take any action based upon it. If you have received this message b=
+y error,
+>>>>>>>> please immediately delete it and its attachments and notify the se=
+nder at
+>>>>>>>> Lightspeed Venture Partners by electronic mail message reply. Than=
+k you.
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>> --
+>>>>>>>
+>>>>>>> *Amrit Acharya | *Cofounder/CEO
+>>>>>>>
+>>>>>>> + 919337259358 | Address: https://goo.gl/maps/s1WiuPSJwJSMUMSQ7
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>> *This information may be confidential and/or privileged. Use of thi=
+s
+>>>>>>> information by anyone other than the intended recipient is prohibit=
+ed. If
+>>>>>>> you receive this in error, please inform the sender and remove any =
+record
+>>>>>>> of this message*
+>>>>>>
+>>>>>>
+>>>>> *Disclaimer*
+>>>>> The information contained in this communication from the sender is
+>>>>> confidential. It is intended solely for use by the recipient and othe=
+rs
+>>>>> authorized to receive it. If you are not the recipient, you are hereb=
+y
+>>>>> notified that any disclosure, copying, distribution or taking action =
+in
+>>>>> relation of the contents of this information is strictly prohibited a=
+nd may
+>>>>> be unlawful. If you have received this communication in error, please
+>>>>> notify Tribe at (619) 567-9955 and delete this communication immediat=
+ely
+>>>>> without making any copy or distribution.
+>>>>>
+>>>>
+>>>>
+>>>> --
+>>>>
+>>>> *Amrit Acharya | *Cofounder/CEO
+>>>>
+>>>> + 919337259358 | Address: https://goo.gl/maps/s1WiuPSJwJSMUMSQ7
+>>>>
+>>>>
+>>>>
+>>>>
+>>>
+>>> --
+>>> Regards,
+>>>  Priya
+>>>
+>>> *This information may be confidential and/or privileged. Use of this
+>>> information by anyone other than the intended recipient is prohibited. =
+If
+>>> you receive this in error, please inform the sender and remove any reco=
+rd
+>>> of this message*
+>>
+>>
+>> *Disclaimer*
+>> The information contained in this communication from the sender is
+>> confidential. It is intended solely for use by the recipient and others
+>> authorized to receive it. If you are not the recipient, you are hereby
+>> notified that any disclosure, copying, distribution or taking action in
+>> relation of the contents of this information is strictly prohibited and =
+may
+>> be unlawful. If you have received this communication in error, please
+>> notify Tribe at (619) 567-9955 and delete this communication immediately
+>> without making any copy or distribution.
+>>
+>
+>
+> --
+> Regards,
+>  Priya
+>
+> *This information may be confidential and/or privileged. Use of this
+> information by anyone other than the intended recipient is prohibited. If
+> you receive this in error, please inform the sender and remove any record
+> of this message*
+
+--0000000000005cbe0005f8707953
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gmail_default" style=3D"fon=
+t-family:tahoma,sans-serif">Fantastic.=C2=A0 I sent out a calendar invite.=
+=C2=A0 The address is 933 Hermosa Way, Menlo Park, CA 94025.</div><div clas=
+s=3D"gmail_default" style=3D"font-family:tahoma,sans-serif"><br></div><div =
+class=3D"gmail_default" style=3D"font-family:tahoma,sans-serif">Many thanks=
+,</div><div><div dir=3D"ltr" class=3D"gmail_signature"><div dir=3D"ltr"><di=
+v><br></div>Veronica Sullivan<div>Assistant to Arjun Sethi</div><div>Tribe =
+Capital</div><div>(646) 280-5410</div></div></div></div><br></div><br><div =
+class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Apr 3, =
+2023 at 8:14=E2=80=AFAM Krishnapriya k &lt;<a href=3D"mailto:krishnapriya.k=
+@zetwerk.com">krishnapriya.k@zetwerk.com</a>&gt; wrote:<br></div><blockquot=
+e class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px s=
+olid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr">Hello=C2=A0Veronic=
+a,<div><br></div><div>11:15AM on 27th April works for Amrity. Request=C2=A0=
+if you can please share the calendar=C2=A0invite along with=C2=A0the=C2=A0l=
+ocation.</div><div><br></div><div>Regards,</div><div>=C2=A0Priya</div></div=
+><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sa=
+t, Apr 1, 2023 at 8:48=E2=80=AFAM Veronica Sullivan &lt;<a href=3D"mailto:v=
+eronica@tribecap.co" target=3D"_blank">veronica@tribecap.co</a>&gt; wrote:<=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"=
+><div dir=3D"ltr"><div style=3D"font-family:tahoma,sans-serif">Hi Priya,</d=
+iv><div style=3D"font-family:tahoma,sans-serif"><br></div><div style=3D"fon=
+t-family:tahoma,sans-serif">Arjun is available to meet in Menlo Park on Apr=
+il 27th at 11:15 am.=C2=A0 The address to meet is:=C2=A0 933 Hermosa Way, M=
+enlo Park, CA 94025.=C2=A0 Would this appropriate for Amrit?</div><div styl=
+e=3D"font-family:tahoma,sans-serif"><br></div><div style=3D"font-family:tah=
+oma,sans-serif">Kind regards,</div><div><div dir=3D"ltr"><div dir=3D"ltr"><=
+div><br></div>Veronica Sullivan<div>Assistant to Arjun Sethi</div><div>Trib=
+e Capital</div><div>(646) 280-5410</div></div></div></div><br></div><br><di=
+v class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Mar 3=
+1, 2023 at 5:41=E2=80=AFAM Krishnapriya k &lt;<a href=3D"mailto:krishnapriy=
+a.k@zetwerk.com" target=3D"_blank">krishnapriya.k@zetwerk.com</a>&gt; wrote=
+:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
+8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"lt=
+r">Hello=C2=A0Veronica,<div><br></div><div>Greetings!</div><div><br></div><=
+div>Please find below Amrit&#39;s available slots-</div><div>1. 26th April =
+- AM</div><div>2. 27th April - AM</div><div>3. 28th April - after 10:30hrs =
+AM=C2=A0and PM</div><div><br></div><div>Please let me know the slot that=C2=
+=A0works and provide me with the address.</div><div><br></div><div>Regards,=
+</div><div>=C2=A0Priya</div></div><br><div class=3D"gmail_quote"><div dir=
+=3D"ltr" class=3D"gmail_attr">On Thu, Mar 30, 2023 at 7:17=E2=80=AFPM Amrit=
+ Acharya &lt;<a href=3D"mailto:amrit@zetwerk.in" target=3D"_blank">amrit@ze=
+twerk.in</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D=
+"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
+ft:1ex"><div dir=3D"ltr">Thanks Veronica.=C2=A0<a class=3D"gmail_plusreply"=
+ id=3D"m_2473645952918893300m_7589382938013725653m_-1219784794223544697m_80=
+38188173074999552plusReplyChip-4" href=3D"mailto:krishnapriya.k@zetwerk.com=
+" target=3D"_blank">@Krishnapriya k</a>=C2=A0has my calendar</div><br><div =
+class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Mar 27,=
+ 2023 at 11:54=E2=80=AFPM Veronica Sullivan &lt;<a href=3D"mailto:veronica@=
+tribecap.co" target=3D"_blank">veronica@tribecap.co</a>&gt; wrote:<br></div=
+><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
+-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div di=
+r=3D"ltr"><div style=3D"font-family:tahoma,sans-serif"><br clear=3D"all"></=
+div><div><div dir=3D"ltr"><div dir=3D"ltr"><div><div style=3D"font-family:t=
+ahoma,sans-serif">Hi Amrit,</div><div style=3D"font-family:tahoma,sans-seri=
+f"><br></div><div style=3D"font-family:tahoma,sans-serif">Do you have any p=
+lans to be on the Peninsula the week of April 24th?=C2=A0 Arjun is based in=
+ Menlo Park.</div><div style=3D"font-family:tahoma,sans-serif"><br></div><d=
+iv style=3D"font-family:tahoma,sans-serif">Kind regards,</div><br></div>Ver=
+onica Sullivan<div>Assistant to Arjun Sethi</div><div>Tribe Capital</div><d=
+iv>(646) 280-5410</div></div></div></div><br></div><div style=3D"font-famil=
+y:tahoma,sans-serif"></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
+class=3D"gmail_attr">On Mon, Mar 27, 2023 at 2:40=E2=80=AFAM Arjun Sethi &l=
+t;<a href=3D"mailto:arj@tribecap.co" target=3D"_blank">arj@tribecap.co</a>&=
+gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
+px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div =
+dir=3D"ltr">Look forward to connecting; adding Veronica.=C2=A0<a class=3D"g=
+mail_plusreply" id=3D"m_2473645952918893300m_7589382938013725653m_-12197847=
+94223544697m_8038188173074999552m_7598588195578781197m_-2566645995092702030=
+plusReplyChip-9" href=3D"mailto:veronica@tribecap.co" target=3D"_blank">+Ve=
+ronica Sullivan</a>=C2=A0</div><br><div class=3D"gmail_quote"><div dir=3D"l=
+tr" class=3D"gmail_attr">On Sun, Mar 26, 2023 at 9:53=E2=80=AFPM Amrit Acha=
+rya &lt;<a href=3D"mailto:amrit@zetwerk.in" target=3D"_blank">amrit@zetwerk=
+.in</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
+in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
+x"><div dir=3D"ltr">Thanks Vaibhav - moving you to bcc<div><br></div><div>A=
+rjun, good to meet you. I am in the Bay Area the week of April 24th and NYC=
+ the week after. If calendars align, would love to meet otherwise we can do=
+ a zoom.=C2=A0</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" c=
+lass=3D"gmail_attr">On Mon, Mar 27, 2023 at 10:19=E2=80=AFAM Vaibhav Agrawa=
+l &lt;<a href=3D"mailto:vaibhav@lsvp.com" target=3D"_blank">vaibhav@lsvp.co=
+m</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin=
+:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
+><div dir=3D"ltr">Arjun, as promised, please meet Amrit who&#39;s the CEO a=
+nd co-founder of Zetwerk. You&#39;d enjoy meeting him and learning about th=
+e business.=C2=A0<div><div><br></div><div>Amrit, Arjun is the founder and l=
+eads investments at Tribe. Wish you an interesting conversation.</div><div>=
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><div dir=3D"ltr">Vaibhav<br></d=
+iv></div></div></div></div>
+
+<br>
+<span style=3D"font-family:Arial;font-size:small;background-color:rgb(255,2=
+55,255)">This message and its attachments are intended only for the address=
+ee and may contain legally privileged and/or confidential information. If y=
+ou are not the intended recipient, you are hereby notified that you must no=
+t use, disseminate, or copy this material in any form, or take any action b=
+ased upon it. If you have received this message by error, please immediatel=
+y delete it and its attachments and notify the sender at Lightspeed Venture=
+ Partners by electronic mail message reply. Thank you.</span></blockquote><=
+/div><br clear=3D"all"><div><br></div><span>-- </span><br><div dir=3D"ltr">=
+<div dir=3D"ltr"><p class=3D"MsoNormal" style=3D"margin:0in 0in 8pt;color:r=
+gb(34,34,34);line-height:15.6933px"><font color=3D"#1f3864" face=3D"Gotham =
+Medium"><span style=3D"font-size:13.3333px"><b>Amrit Acharya |=C2=A0</b></s=
+pan></font><span style=3D"font-family:Baskerville,serif;font-size:10pt">Cof=
+ounder/CEO</span></p><p style=3D"line-height:1.15"><span style=3D"color:rgb=
+(34,34,34);line-height:14.2667px;font-family:Baskerville,serif;font-size:13=
+.3333px">+</span><span style=3D"color:rgb(34,34,34);font-size:10pt;line-hei=
+ght:14.2667px;font-family:Baskerville,serif">=C2=A0919337259358 | Address:=
+=C2=A0<a href=3D"https://goo.gl/maps/s1WiuPSJwJSMUMSQ7" target=3D"_blank">h=
+ttps://goo.gl/maps/s1WiuPSJwJSMUMSQ7</a></span></p><p class=3D"MsoNormal" s=
+tyle=3D"margin:0in 0in 8pt;color:rgb(34,34,34);line-height:15.6933px;font-s=
+ize:11pt;font-family:Calibri,sans-serif"><img width=3D"200" height=3D"75"><=
+br></p><div><br></div></div></div>
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span style=3D"color:gray"><span style=3D"font-family:&quot;Sans Serif&quot=
+;"><span style=3D"background-color:white"><i><b><span>This information may
+be confidential and/or privileged. Use of this information by anyone other =
+than
+the intended recipient is prohibited. If you receive this in error, please
+inform the sender and remove any record of this message</span></b></i></spa=
+n></span></span>
+
+
+
+</blockquote></div>
+</blockquote></div></div>
+
+<br>
+<div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1"><b>Disclaimer</=
+b></font></div><div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1">=
+The information contained in this communication from the sender is confiden=
+tial. It is intended solely for use by the recipient and others authorized =
+to receive it. If you are not the recipient, you are hereby notified that a=
+ny disclosure, copying, distribution or taking action in relation of the co=
+ntents of this information is strictly prohibited and may be unlawful. If y=
+ou have received this communication in error, please notify Tribe at (619) =
+567-9955 and delete this communication immediately without making any copy =
+or distribution.</font></div></blockquote></div><br clear=3D"all"><div><br>=
+</div><span>-- </span><br><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"Mso=
+Normal" style=3D"margin:0in 0in 8pt;color:rgb(34,34,34);line-height:15.6933=
+px"><font color=3D"#1f3864" face=3D"Gotham Medium"><span style=3D"font-size=
+:13.3333px"><b>Amrit Acharya |=C2=A0</b></span></font><span style=3D"font-f=
+amily:Baskerville,serif;font-size:10pt">Cofounder/CEO</span></p><p style=3D=
+"line-height:1.15"><span style=3D"color:rgb(34,34,34);line-height:14.2667px=
+;font-family:Baskerville,serif;font-size:13.3333px">+</span><span style=3D"=
+color:rgb(34,34,34);font-size:10pt;line-height:14.2667px;font-family:Basker=
+ville,serif">=C2=A0919337259358 | Address:=C2=A0<a href=3D"https://goo.gl/m=
+aps/s1WiuPSJwJSMUMSQ7" target=3D"_blank">https://goo.gl/maps/s1WiuPSJwJSMUM=
+SQ7</a></span></p><p class=3D"MsoNormal" style=3D"margin:0in 0in 8pt;color:=
+rgb(34,34,34);line-height:15.6933px;font-size:11pt;font-family:Calibri,sans=
+-serif"><img width=3D"200" height=3D"75" src=3D"https://ci3.googleuserconte=
+nt.com/mail-sig/AIorK4xDnHNzloyldXvheKZhG9LfYhTgaTcZ9Ewep-nnr1kawNKKZRBYyZP=
+MGu8p2LK64gHYfvAMo1o"><br></p><div><br></div></div></div>
+</blockquote></div><br clear=3D"all"><div><br></div><span>-- </span><br><di=
+v dir=3D"ltr"><div dir=3D"ltr">Regards,<div>=C2=A0Priya</div></div></div>
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span style=3D"color:gray"><span style=3D"font-family:&quot;Sans Serif&quot=
+;"><span style=3D"background-color:white"><i><b><span>This information may
+be confidential and/or privileged. Use of this information by anyone other =
+than
+the intended recipient is prohibited. If you receive this in error, please
+inform the sender and remove any record of this message</span></b></i></spa=
+n></span></span>
+
+
+
+</blockquote></div></div>
+
+<br>
+<div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1"><b>Disclaimer</=
+b></font></div><div><font face=3D"Arial, Helvetica, sans-serif" size=3D"1">=
+The information contained in this communication from the sender is confiden=
+tial. It is intended solely for use by the recipient and others authorized =
+to receive it. If you are not the recipient, you are hereby notified that a=
+ny disclosure, copying, distribution or taking action in relation of the co=
+ntents of this information is strictly prohibited and may be unlawful. If y=
+ou have received this communication in error, please notify Tribe at (619) =
+567-9955 and delete this communication immediately without making any copy =
+or distribution.</font></div></blockquote></div><br clear=3D"all"><div><br>=
+</div><span>-- </span><br><div dir=3D"ltr"><div dir=3D"ltr">Regards,<div>=
+=C2=A0Priya</div></div></div>
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span style=3D"color:gray"><span style=3D"font-family:&quot;Sans Serif&quot=
+;"><span style=3D"background-color:white"><i><b><span>This information may
+be confidential and/or privileged. Use of this information by anyone other =
+than
+the intended recipient is prohibited. If you receive this in error, please
+inform the sender and remove any record of this message</span></b></i></spa=
+n></span></span>
+
+
+
+</blockquote></div></div>
+
+--0000000000005cbe0005f8707953--

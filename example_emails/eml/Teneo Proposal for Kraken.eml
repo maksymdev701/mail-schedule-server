@@ -1,0 +1,2840 @@
+Delivered-To: kavin@tribecap.co
+Received: by 2002:a05:7010:ac8e:b0:341:6b4e:1a5e with SMTP id dv14csp2078871mdb;
+        Sun, 2 Apr 2023 19:48:39 -0700 (PDT)
+X-Received: by 2002:a05:6402:411:b0:4fc:154:3fda with SMTP id q17-20020a056402041100b004fc01543fdamr34556400edv.4.1680490119190;
+        Sun, 02 Apr 2023 19:48:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1680490119; cv=none;
+        d=google.com; s=arc-20160816;
+        b=ldoyCZr/R1oR5aXIVT3+ys1txHUd4uDtLGVysFZqRN4qOdEvaqfiJj0GSCBEKpXfx+
+         Hg/AFbypxa0sqmdvwfclZQaJDw5WAiKp2TtiWuxM7/wv0asHyqZzT2nQ/08KAaVqMReV
+         zLZmwFyUj8vcN2duKMOXuwtaOfrJN9xDIzki5r19Wjald9G5G8TIs6q7tAjnjN1Kfkh1
+         jEctaJ0nAodbzjSsrz1Ys1MaqW8ks5As9UEF5JNCYDfa19BDskgsyRkP4aHMkXGR300Y
+         rXLAkj5D5nAQPjM0CUCx8Ev62gRTb8NK3BA+zxSQqdmte23lUDnklBjmIn/BzJDFJ6n+
+         nT3A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=u4O7Hj+wMvtgCmqLMo4TANurnCB4TayIhFA5YQP2iNY=;
+        b=O+tWqI92p9HucynkWg1BCBvnshGqrkijYResM0ziMmexptXF0APk4XZhNj+K1MwSpj
+         8wt0KZZtDHjb6Wl2vQ9Vpd/genkGeUoVreJ/1SxhUBq3+RwF72zni+DfAN3VCHeLKniJ
+         l3zpmFfdCXrSAvJPPsuHtgH+CzVoJNGksjwqvr/E6X3DUNvuVQBIc+9LiGFNiSGa+ywG
+         25yhKxHWdpjU07y5DT9qGq44kJ/o7dyF3z5Yg8lDy98peHi9COm1JhWBse0SmO2naQFS
+         uq6Croew1ntaothbx+hrdDWVtmImPa6Ymn7qLaZ4DFB5VlNC+JHPsS6W6KY/UfAW2luT
+         OxhQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=KuKgDekd;
+       spf=pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=veronica@tribecap.co
+Return-Path: <veronica@tribecap.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id h5-20020a50c385000000b005021ac54ceasor3586413edf.6.2023.04.02.19.48.39
+        for <kavin@tribecap.co>
+        (Google Transport Security);
+        Sun, 02 Apr 2023 19:48:39 -0700 (PDT)
+Received-SPF: pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=KuKgDekd;
+       spf=pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=veronica@tribecap.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tribecap.co; s=google; t=1680490119;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=u4O7Hj+wMvtgCmqLMo4TANurnCB4TayIhFA5YQP2iNY=;
+        b=KuKgDekdC5WNZHZ8h5JtuRtlloMw9vBaE768hJ9IWZyBtucyMYJdbrRWkBfSJ8xxb7
+         CKVlmkgCbi+Uca2+2fhQ3EvWWbLq/ElvSbuvHZgJQnMrbRXWEAjMKsfgnk8G52Dw+yk/
+         7r9tIzXvtxdsF+YNgzdL5iaj52eR5H3zlf01BRT9yhg9NVB9F7ZlUMnivIUyiF2hMr9M
+         8OHtoa+A0pjTmGsBjoCLbxg1PsdqEgtCmv2Tsw4IJXg31i3LJPsWb6v9pr0W7Tc3J03t
+         5aH6824O8vrLi5jt65jUUL4xndHpnmliEBBn3k0uktJGuIvNVgzd2+ts5E3gowAcy1iA
+         NLKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680490119;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=u4O7Hj+wMvtgCmqLMo4TANurnCB4TayIhFA5YQP2iNY=;
+        b=kDd2A/BtuGBcWqVq63Ko1ygyk2jsyQuM0/uiD/HZmVD3cTGctHnMqCH7bAYLx1cCqu
+         SgquT1ylcZmDaw7iiLBUqHYX2oPUL7fGzcx1kfn+hWyJxzm2RozxheuL1zEx00m4JWFJ
+         8ld2AQ61swmYZRMMGQED1hLzYdbqJG2XRFwl4MGyworgmDvwu9md7dstMZIdsPYvBGOe
+         tQ4Dzvr9fEvFIJlM4uoGJ2c26C99cw7uqgHwT9BaW/zYy5zOFT4UqA8NXxlvg++mKU5G
+         E1rCUgxyp+ZvivViITFZkadYsTSqCbULVMAQXD83xO0BrxmGscGIfjFDX1pcOLs1OVHz
+         lcXg==
+X-Gm-Message-State: AAQBX9fxIMll4lHa+zDO8/yvbGBOfJKeUFxjT2AyKPWYsSPK7ojWX1uJ
+	rm9Hme83NJhAwnD8YwHOzO0x/3K32EXMXxyGWf0tV3fwyxEhusXSARPmr8yP2qjuoLhI2z3joOI
+	SXMtzmIwuPHao7MM4qy5DspDLp/9SAYsX87g8bLIgqVRZY3bZRSPRSrghRoBdKM8YGNDGdf8rhf
+	9GLzKf2OVy3kUmdFK0RD5eO6O1TdcVPyYxiNw=
+X-Google-Smtp-Source: AKy350ZZAO5c6bj82WK9tJVCi4EZW5d4VeHtqzNRAU7d3f/LCXuRcv+I49yTaw+5O5kfgXdsPy3U0dEzfAJWCQKFjvI=
+X-Received: by 2002:a50:ce4e:0:b0:502:4c87:7982 with SMTP id
+ k14-20020a50ce4e000000b005024c877982mr11282122edj.2.1680490118495; Sun, 02
+ Apr 2023 19:48:38 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAE6U+fdMhjOtf-q0HqOm1yOf=zxOAxQjuLcN2GJY4jm9f1HDog@mail.gmail.com>
+ <37B88E6C-51CC-4639-A897-BC8471703D9F@tribecap.co> <BL1PR18MB4198351385BEA2AF9254DE53E08F9@BL1PR18MB4198.namprd18.prod.outlook.com>
+ <CALk7TWnyczCwLuaKbAC7S5t=W9MbkLoq0XxAMBLPtHUj6nTJBg@mail.gmail.com>
+In-Reply-To: <CALk7TWnyczCwLuaKbAC7S5t=W9MbkLoq0XxAMBLPtHUj6nTJBg@mail.gmail.com>
+From: Veronica Sullivan <veronica@tribecap.co>
+Date: Sun, 2 Apr 2023 22:48:26 -0400
+Message-ID: <CAGhPhKcALrx6mjvQ-_Jnm83J3PjP3+de8E==RjzNWutdSRJMjQ@mail.gmail.com>
+Subject: Re: Teneo Proposal for Kraken
+To: Naz Fazli <naz.fazli@kraken.com>
+Cc: Fanda Shkreli <fanda.shkreli@teneo.com>, Janae Brooks <janaeb@kraken.com>, 
+	Stacy Nisthal <stacy.nisthal@kraken.com>
+Content-Type: multipart/related; boundary="00000000000090861b05f86598fb"
+Bcc: kavin@tribecap.co
+
+--00000000000090861b05f86598fb
+Content-Type: multipart/alternative; boundary="00000000000090861a05f86598fa"
+
+--00000000000090861a05f86598fa
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Fanda, are you sending out an invite?
+
+Veronica Sullivan
+Assistant to Arjun Sethi
+Tribe Capital
+(646) 280-5410
+
+
+On Fri, Mar 31, 2023 at 10:15=E2=80=AFAM Naz Fazli <naz.fazli@kraken.com> w=
+rote:
+
+> Good morning all,
+>
+> Happy Friday-
+>
+> Yes we can lock the 7am slot -
+>
+> Regards,
+>
+> Naz
+>
+>
+>
+> On Fri, Mar 31, 2023 at 6:18=E2=80=AFAM Fanda Shkreli <fanda.shkreli@tene=
+o.com>
+> wrote:
+>
+>> Good morning and Happy Friday!
+>>
+>>
+>>
+>> @Naz can we lock in 4/19 @ 7am PT?
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>> *Fanda Shkreli *Executive Assistant to Paul Keary
+>>
+>>
+>> *Teneo *280 Park Avenue, 4th Floor
+>> New York, NY 10017
+>> *M: *+1 (917) 525-6729
+>> *E: *fanda.shkreli@teneo.com
+>>
+>> <https://www.linkedin.com/company/teneoglobal/>
+>> <https://twitter.com/Teneo/> <https://www.teneo.com/>
+>> <https://www.teneo.com/insights/podcasts/>
+>>
+>>
+>>
+>> *teneo.com* <https://www.teneo.com/>
+>>
+>>
+>>
+>> *From:* Veronica Sullivan <veronica@tribecap.co>
+>> *Sent:* Thursday, March 30, 2023 2:25 PM
+>> *To:* Janae Brooks <janaeb@kraken.com>
+>> *Cc:* Fanda Shkreli <fanda.shkreli@teneo.com>; Naz Fazli <
+>> naz.fazli@kraken.com>; Stacy Nisthal <stacy.nisthal@kraken.com>
+>> *Subject:* Re: Teneo Proposal for Kraken
+>>
+>>
+>>
+>>
+>>
+>> Arjun will be traveling overseas during this time.
+>>
+>>
+>>
+>> On 04/14 he has a dinner so Arjun is a no-go.
+>>
+>>
+>>
+>> 04/19 at 7 am  is a strong possibility!  Can we book this?
+>>
+>>
+>>
+>> 04/20  he=E2=80=99s on a flight so no-go!
+>>
+>> Veronica Sullivan
+>>
+>> Assistant to Arjun Sethi
+>>
+>> Tribe Capital
+>>
+>> (646) 280-5410
+>>
+>>
+>>
+>>
+>> On Mar 30, 2023, at 12:57 PM, Janae Brooks <janaeb@kraken.com> wrote:
+>>
+>> =EF=BB=BF
+>>
+>> Hello Fanda,
+>> Here is what I have for Dave for PT mornings (also, I just found out he
+>> will be taking some time off):
+>> 4/14 - 9am PT
+>> 4/19 - 7am PT
+>> 4/20 - 9am PT
+>>
+>> All the best,
+>> Janae
+>>
+>>
+>>
+>> On Thu, Mar 30, 2023 at 9:34=E2=80=AFAM Fanda Shkreli <fanda.shkreli@ten=
+eo.com>
+>> wrote:
+>>
+>> Hello,
+>>
+>>
+>>
+>> Following up on the email below.
+>>
+>>
+>>
+>> Please let me know some times that work in the morning as I now have to
+>> include two of the Teneo team members, one from Saudi Arabia and the oth=
+er
+>> in Hong Kong.
+>>
+>>
+>>
+>> Janae and Naz, can you please provide some times that work on your end
+>> and Veronica and I will see what we can make work.
+>>
+>>
+>>
+>> Thank you,
+>>
+>> Fanda
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>> *Fanda Shkreli *Executive Assistant to Paul Keary
+>>
+>>
+>> *Teneo *280 Park Avenue, 4th Floor
+>> New York, NY 10017
+>> *M: *+1 (917) 525-6729
+>> *E: *fanda.shkreli@teneo.com
+>>
+>> <image001.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.linkedin.com%2Fcompany%2Fteneoglobal%2F&data=3D05%7C01%7Cfanda.shkreli%40t=
+eneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce=
+713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMD=
+AiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DYq=
+tat13Zz4hYxAjzUodyfJvKaeJiAx7%2Fk%2BAOoRuJ6bg%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Ftwi=
+tter.com%2FTeneo%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32=
+844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579=
+75503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJ=
+BTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DSIrHjlqTPnXtaGHIAtlQen4=
+6k%2F6DlILCS6Dj26D4H%2B0%3D&reserved=3D0>
+>>
+>> <image002.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Ftwi=
+tter.com%2FTeneo%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32=
+844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579=
+75503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJ=
+BTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DSIrHjlqTPnXtaGHIAtlQen4=
+6k%2F6DlILCS6Dj26D4H%2B0%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755030=
+31194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DQeQmRVH%2BHUviAuVYMhRNFoBQRs2=
+pQchoUWXymr3SocM%3D&reserved=3D0>
+>>
+>> <image003.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755030=
+31194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DQeQmRVH%2BHUviAuVYMhRNFoBQRs2=
+pQchoUWXymr3SocM%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Finsights%2Fpodcasts%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.=
+com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7=
+C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJ=
+QIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DM0F6jhL=
+GHrQDZ6%2Bcu4pI6rMIIZ2yWfA3Fzl8C0qfdG4%3D&reserved=3D0>
+>>
+>> <image004.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Finsights%2Fpodcasts%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.=
+com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7=
+C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJ=
+QIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DM0F6jhL=
+GHrQDZ6%2Bcu4pI6rMIIZ2yWfA3Fzl8C0qfdG4%3D&reserved=3D0>
+>>
+>>
+>>
+>>
+>>
+>> *teneo.com*
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755030=
+31194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DQeQmRVH%2BHUviAuVYMhRNFoBQRs2=
+pQchoUWXymr3SocM%3D&reserved=3D0>
+>>
+>>
+>>
+>> *From:* Fanda Shkreli
+>> *Sent:* Wednesday, March 29, 2023 12:18 PM
+>> *To:* Naz Fazli <naz.fazli@kraken.com>
+>> *Cc:* Janae Brooks <janaeb@kraken.com>; Veronica Sullivan <
+>> veronica@tribecap.co>; Stacy Nisthal <stacy.nisthal@kraken.com>
+>> *Subject:* RE: FW: Teneo Proposal for Kraken
+>>
+>>
+>>
+>> Ladies,
+>>
+>>
+>>
+>> My sincere apologies, it was just brough to my attention that I need to
+>> include two of my colleagues, Nick who is in Saudi Arabi and Lauren who =
+is
+>> in Hong Kong on this call.
+>>
+>>
+>>
+>> Can you please make send through availability for PT mornings and I will
+>> then align with everyone on the different time zones.
+>>
+>>
+>>
+>> Once again, apologies for the misunderstanding.
+>>
+>>
+>>
+>> Thank you,
+>>
+>> Fanda
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>> *Fanda Shkreli *Executive Assistant to Paul Keary
+>>
+>>
+>> *Teneo *280 Park Avenue, 4th Floor
+>> New York, NY 10017
+>> *M: *+1 (917) 525-6729
+>> *E: *fanda.shkreli@teneo.com
+>>
+>> <image001.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.linkedin.com%2Fcompany%2Fteneoglobal%2F&data=3D05%7C01%7Cfanda.shkreli%40t=
+eneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce=
+713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMD=
+AiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DYq=
+tat13Zz4hYxAjzUodyfJvKaeJiAx7%2Fk%2BAOoRuJ6bg%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Ftwi=
+tter.com%2FTeneo%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32=
+844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579=
+75503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJ=
+BTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DSIrHjlqTPnXtaGHIAtlQen4=
+6k%2F6DlILCS6Dj26D4H%2B0%3D&reserved=3D0>
+>>
+>> <image002.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Ftwi=
+tter.com%2FTeneo%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32=
+844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579=
+75503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJ=
+BTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DSIrHjlqTPnXtaGHIAtlQen4=
+6k%2F6DlILCS6Dj26D4H%2B0%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755030=
+31194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DQeQmRVH%2BHUviAuVYMhRNFoBQRs2=
+pQchoUWXymr3SocM%3D&reserved=3D0>
+>>
+>> <image003.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755030=
+31194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DQeQmRVH%2BHUviAuVYMhRNFoBQRs2=
+pQchoUWXymr3SocM%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Finsights%2Fpodcasts%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.=
+com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7=
+C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJ=
+QIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DM0F6jhL=
+GHrQDZ6%2Bcu4pI6rMIIZ2yWfA3Fzl8C0qfdG4%3D&reserved=3D0>
+>>
+>> <image004.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Finsights%2Fpodcasts%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.=
+com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7=
+C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJ=
+QIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DM0F6jhL=
+GHrQDZ6%2Bcu4pI6rMIIZ2yWfA3Fzl8C0qfdG4%3D&reserved=3D0>
+>>
+>>
+>>
+>>
+>>
+>> *teneo.com*
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755030=
+31194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DQeQmRVH%2BHUviAuVYMhRNFoBQRs2=
+pQchoUWXymr3SocM%3D&reserved=3D0>
+>>
+>>
+>>
+>> *From:* Naz Fazli <naz.fazli@kraken.com>
+>> *Sent:* Wednesday, March 29, 2023 10:42 AM
+>> *To:* Fanda Shkreli <fanda.shkreli@teneo.com>
+>> *Cc:* Janae Brooks <janaeb@kraken.com>; Veronica Sullivan <
+>> veronica@tribecap.co>; Stacy Nisthal <stacy.nisthal@kraken.com>
+>> *Subject:* Re: FW: Teneo Proposal for Kraken
+>>
+>>
+>>
+>>
+>>
+>> Hello,
+>>
+>>
+>>
+>> I can make Thursday, April 6th @ 2:30 pm work for 25 mins; kindly note
+>> Carrie has a hard stop at 2:55pm.
+>>
+>>
+>>
+>> Thanks,
+>>
+>>
+>>
+>> Naz
+>>
+>>
+>>
+>> On Wed, Mar 29, 2023 at 6:01=E2=80=AFAM Fanda Shkreli <fanda.shkreli@ten=
+eo.com>
+>> wrote:
+>>
+>> Good morning,
+>>
+>>
+>>
+>> It seems as if we do not have any times that work for everyone.
+>>
+>>
+>>
+>> Naz is there anyway you can make either Monday, April 3rd @ 3pm or
+>> Thursday, April 6th @ 2:30pm work for Carrie?  It seems those times
+>> would work for everyone else.
+>>
+>>
+>>
+>> Please let me know.  Once confirmed, I will send through a calendar
+>> invite.
+>>
+>>
+>>
+>> Best,
+>>
+>> Fanda
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>> *Fanda Shkreli *Executive Assistant to Paul Keary
+>>
+>>
+>> *Teneo *280 Park Avenue, 4th Floor
+>> New York, NY 10017
+>> *M: *+1 (917) 525-6729
+>> *E: *fanda.shkreli@teneo.com
+>>
+>> <image001.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.linkedin.com%2Fcompany%2Fteneoglobal%2F&data=3D05%7C01%7Cfanda.shkreli%40t=
+eneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce=
+713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMD=
+AiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3Dw%=
+2BjB6FJzSLj0numv7HH5mW6GCctokah1GDh9nw1xifM%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Ftwi=
+tter.com%2FTeneo%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32=
+844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579=
+75503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJ=
+BTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3D2G4fO4Z4bMw3z9%2Bf7aV5w=
+G1xjRVb84wu7%2FlnbCW8hMk%3D&reserved=3D0>
+>>
+>> <image002.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Ftwi=
+tter.com%2FTeneo%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32=
+844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579=
+75503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJ=
+BTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3D2G4fO4Z4bMw3z9%2Bf7aV5w=
+G1xjRVb84wu7%2FlnbCW8hMk%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755031=
+87417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGln=
+k7T2vS6n8j4RXpP7wc%3D&reserved=3D0>
+>>
+>> <image003.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755031=
+87417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGln=
+k7T2vS6n8j4RXpP7wc%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Finsights%2Fpodcasts%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.=
+com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7=
+C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJ=
+QIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DM2icxH8=
+%2FMGgYoaChOLJJWHhJUiqlfdfnr%2BafGqXnz9c%3D&reserved=3D0>
+>>
+>> <image004.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Finsights%2Fpodcasts%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.=
+com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7=
+C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJ=
+QIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DM2icxH8=
+%2FMGgYoaChOLJJWHhJUiqlfdfnr%2BafGqXnz9c%3D&reserved=3D0>
+>>
+>>
+>>
+>>
+>>
+>> *teneo.com*
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755031=
+87417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGln=
+k7T2vS6n8j4RXpP7wc%3D&reserved=3D0>
+>>
+>>
+>>
+>> *From:* Naz Fazli <naz.fazli@kraken.com>
+>> *Sent:* Tuesday, March 28, 2023 2:38 PM
+>> *To:* Janae Brooks <janaeb@kraken.com>
+>> *Cc:* Fanda Shkreli <fanda.shkreli@teneo.com>; Veronica Sullivan <
+>> veronica@tribecap.co>; Stacy Nisthal <stacy.nisthal@kraken.com>
+>> *Subject:* Re: FW: Teneo Proposal for Kraken
+>>
+>>
+>>
+>>
+>>
+>> Hello,
+>>
+>>
+>>
+>> For Carrie
+>>
+>>
+>>
+>> Monday, April 3rd - anytime between 2pm-5pm PT
+>> Tuesday, April 4th - 9am PT (30 mins)
+>> Wednesday, April 5th - 1pm PT or 3pm PT (30 mins)
+>> Thursday, April 6th - anytime between 2pm-230pm or 4-5pm PT
+>>
+>>
+>>
+>> Regards,
+>>
+>>
+>>
+>> Naz
+>>
+>>
+>>
+>> On Tue, Mar 28, 2023 at 9:47=E2=80=AFAM Janae Brooks <janaeb@kraken.com>=
+ wrote:
+>>
+>> Hello Fanda,
+>> Also copying Carrie's interim EA (Naz) to assist with her calendar.
+>> David's availability for a call will start next week, below are the opti=
+ons
+>> he has open:
+>>
+>> Monday, April 3rd - anytime between 2pm-5pm PT
+>> Tuesday, April 4th - 9am PT (30 mins)
+>> Wednesday, April 3rd - 1pm PT or 3pm PT (30 mins)
+>> Thursday, April 4th - anytime between 2pm-5pm PT
+>>
+>> Naz will let us know if Carrie can match any of the times listed above.
+>>
+>> All the best,
+>> Janae
+>>
+>>
+>>
+>> On Tue, Mar 28, 2023 at 6:56=E2=80=AFAM Fanda Shkreli <fanda.shkreli@ten=
+eo.com>
+>> wrote:
+>>
+>> Good morning,
+>>
+>>
+>>
+>> I hope this email finds you both well.  Following up on the emails
+>> below.  Looking to schedule a time for everyone to connect.  Janae, can =
+you
+>> please provide some times that work for your team and Veronica and I can
+>> align calendars accordingly.
+>>
+>>
+>>
+>> Thank you both in advance for your help in getting this on the calendar.
+>>
+>>
+>>
+>> Warm regards,
+>>
+>> Fanda
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>>
+>> *Fanda Shkreli *Executive Assistant to Paul Keary
+>>
+>>
+>> *Teneo *280 Park Avenue, 4th Floor
+>> New York, NY 10017
+>> *M: *+1 (917) 525-6729
+>> *E: *fanda.shkreli@teneo.com
+>>
+>> <image001.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.linkedin.com%2Fcompany%2Fteneoglobal%2F&data=3D05%7C01%7Cfanda.shkreli%40t=
+eneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce=
+713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMD=
+AiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3Dw%=
+2BjB6FJzSLj0numv7HH5mW6GCctokah1GDh9nw1xifM%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Ftwi=
+tter.com%2FTeneo%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32=
+844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579=
+75503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJ=
+BTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3D2G4fO4Z4bMw3z9%2Bf7aV5w=
+G1xjRVb84wu7%2FlnbCW8hMk%3D&reserved=3D0>
+>>
+>> <image002.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Ftwi=
+tter.com%2FTeneo%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32=
+844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579=
+75503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJ=
+BTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3D2G4fO4Z4bMw3z9%2Bf7aV5w=
+G1xjRVb84wu7%2FlnbCW8hMk%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755031=
+87417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGln=
+k7T2vS6n8j4RXpP7wc%3D&reserved=3D0>
+>>
+>> <image003.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755031=
+87417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGln=
+k7T2vS6n8j4RXpP7wc%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Finsights%2Fpodcasts%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.=
+com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7=
+C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJ=
+QIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DM2icxH8=
+%2FMGgYoaChOLJJWHhJUiqlfdfnr%2BafGqXnz9c%3D&reserved=3D0>
+>>
+>> <image004.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Finsights%2Fpodcasts%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.=
+com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7=
+C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJ=
+QIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DM2icxH8=
+%2FMGgYoaChOLJJWHhJUiqlfdfnr%2BafGqXnz9c%3D&reserved=3D0>
+>>
+>>
+>>
+>>
+>>
+>> *teneo.com*
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755031=
+87417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGln=
+k7T2vS6n8j4RXpP7wc%3D&reserved=3D0>
+>>
+>>
+>>
+>> *From:* David Ripley <david@kraken.com>
+>> *Sent:* Monday, March 27, 2023 3:28 PM
+>> *To:* Colleen Hsia <colleen.hsia@teneo.com>
+>> *Cc:* arj@tribecap.co; Paul Keary <paul.keary@teneo.com>; Nicholas
+>> McDonagh <nicholas.mcdonagh@teneo.com>; Lauren Chung <
+>> Lauren.Chung@teneo.com>; Fanda Shkreli <fanda.shkreli@teneo.com>
+>> *Subject:* Re: Teneo Proposal for Kraken
+>>
+>>
+>>
+>>
+>>
+>> Hi Colleen,
+>>
+>> Thanks for the follow up.  Yes, we can work on scheduling another call.
+>> We'll have Carrie, our CFO, join the next call.
+>>
+>>
+>>
+>> - Dave
+>>
+>>
+>>
+>>
+>>
+>> On Mon, Mar 27, 2023 at 11:48=E2=80=AFAM Colleen Hsia <colleen.hsia@tene=
+o.com>
+>> wrote:
+>>
+>> Dave and Arjun,
+>>
+>>
+>>
+>> Hope you have been well.  An action-packed few weeks, to say the least.
+>> We wanted to check in and resurface our proposal for consideration.  Wou=
+ld
+>> you have some time in the next 1-2 weeks to connect and discuss?
+>>
+>>
+>>
+>> Copying Fanda who I know is already in contact with Veronica and Janae.
+>>
+>>
+>>
+>> Thanks,
+>>
+>> Colleen
+>>
+>>
+>>
+>> *From:* Colleen Hsia
+>> *Sent:* Tuesday, March 14, 2023 7:41 PM
+>> *To:* David Ripley <david@kraken.com>; arj@tribecap.co
+>> *Cc:* Paul Keary <paul.keary@teneo.com>; Nicholas McDonagh <
+>> nicholas.mcdonagh@teneo.com>; Lauren Chung <Lauren.Chung@teneo.com>
+>> *Subject:* Teneo Proposal for Kraken
+>>
+>>
+>>
+>> David and Arjun,
+>>
+>>
+>>
+>> Thanks so much for taking the time to speak with us a few weeks ago.
+>> Hard to believe how much has changed in the world since then.
+>>
+>>
+>>
+>> Per our conversation, we=E2=80=99ve assembled a broad scope of work to d=
+escribe
+>> how we can be helpful to Kraken in the MENA and Asia regions.
+>>
+>>
+>>
+>> In MENA, we understand this will be your second foray, which will shape
+>> some of the nuances of engagement =E2=80=93 but ultimately we didn=E2=80=
+=99t feel it
+>> changes what should be done.  As for Asia, we didn=E2=80=99t have the te=
+am on our
+>> last call, but we=E2=80=99ve brought Lauren and her team up to speed and=
+ they=E2=80=99ve
+>> fed in their thoughts as well.  We=E2=80=99ve also attached our credenti=
+als for
+>> each region.
+>>
+>>
+>>
+>> Once you=E2=80=99ve had a chance to review the proposal, we=E2=80=99d lo=
+ve the
+>> opportunity to walk you through our approach and get a sense for your
+>> thinking.
+>>
+>>
+>>
+>> Thanks,
+>>
+>> Colleen
+>>
+>>
+>>
+>>
+>> *Colleen Hsia *Senior Managing Director
+>>
+>>
+>> *Teneo *280 Park Avenue, 4th Floor
+>> New York, NY 10017
+>> *M: *+1 (646) 387-8580
+>> *E: *colleen.hsia@teneo.com
+>>
+>>
+>>
+>> <image001.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.linkedin.com%2Fcompany%2Fteneoglobal%2F&data=3D05%7C01%7Cfanda.shkreli%40t=
+eneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce=
+713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMD=
+AiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3Dw%=
+2BjB6FJzSLj0numv7HH5mW6GCctokah1GDh9nw1xifM%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Ftwi=
+tter.com%2FTeneo%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32=
+844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579=
+75503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJ=
+BTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3D2G4fO4Z4bMw3z9%2Bf7aV5w=
+G1xjRVb84wu7%2FlnbCW8hMk%3D&reserved=3D0>
+>>
+>> <image002.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Ftwi=
+tter.com%2FTeneo%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32=
+844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579=
+75503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJ=
+BTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3D2G4fO4Z4bMw3z9%2Bf7aV5w=
+G1xjRVb84wu7%2FlnbCW8hMk%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755031=
+87417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGln=
+k7T2vS6n8j4RXpP7wc%3D&reserved=3D0>
+>>
+>> <image003.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755031=
+87417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGln=
+k7T2vS6n8j4RXpP7wc%3D&reserved=3D0>
+>>
+>>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Finsights%2Fpodcasts%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.=
+com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7=
+C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJ=
+QIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DM2icxH8=
+%2FMGgYoaChOLJJWHhJUiqlfdfnr%2BafGqXnz9c%3D&reserved=3D0>
+>>
+>> <image004.png>
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Finsights%2Fpodcasts%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.=
+com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7=
+C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJ=
+QIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DM2icxH8=
+%2FMGgYoaChOLJJWHhJUiqlfdfnr%2BafGqXnz9c%3D&reserved=3D0>
+>>
+>>
+>>
+>>
+>>
+>> *teneo.com*
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755031=
+87417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGln=
+k7T2vS6n8j4RXpP7wc%3D&reserved=3D0>
+>>
+>>
+>> ------------------------------
+>>
+>>       This communication is confidential and may contain privileged
+>> information, or may otherwise be protected from disclosure. Any
+>> unauthorized disclosure, copying, distribution, or use of the informatio=
+n
+>> contained herein (including any reliance thereon) is strictly prohibited=
+.
+>> If you are not the intended recipient, please notify the sender that you
+>> have received this communication in error and delete and destroy all cop=
+ies
+>> in your possession. Nothing contained in this disclaimer shall be constr=
+ued
+>> in any way to grant permission to transmit confidential information via
+>> this firm=E2=80=99s e-mail system or as a waiver of confidentiality or p=
+rivilege.
+>> No responsibility or liability is accepted by Teneo for any loss or dama=
+ge
+>> arising in any way from the use of this communication. No representation=
+ is
+>> being made that the information presented is accurate, current or comple=
+te,
+>> and such information is at all times subject to change without notice.
+>> E-mail messages are not guaranteed to be secure.
+>>       Teneo does not provide tax, accounting or legal advice. This e-mai=
+l
+>> and any attachments are not intended or written to be used, and cannot b=
+e
+>> used or relied upon, by any taxpayer for the purpose of (i) avoiding U.S=
+.
+>> tax related penalties or (ii) promoting, marketing or recommending to
+>> another party any transaction or matter addressed herein. Each person
+>> should seek advice based on its particular circumstances from independen=
+t
+>> legal, accounting and tax advisors regarding the matters discussed in th=
+is
+>> communication.
+>>       This communication is for informational purposes only. Nothing
+>> herein should be construed as an attempt to effect any transaction in, o=
+r
+>> induce or attempt to induce the sale of, any security. Any such offer or
+>> solicitation may only be made by means of delivery of an offering
+>> memorandum and would be subject to applicable disclosure, documentation,
+>> registration and investor qualification requirements. Investment banking
+>> services are conducted by Teneo Capital LLC , including transactions by =
+its
+>> subsidiary Teneo Securities LLC, a member of FINRA and SIPC. To view our
+>> privacy policy, click here
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Fprivacy-policy%2Fglobal%2F&data=3D05%7C01%7Cfanda.shkreli%40te=
+neo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce7=
+13%7C0%7C0%7C638157975503343638%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDA=
+iLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DFOv=
+qUXcomFcg9TWWHDVlwonGsEkQBrH2yWDC%2FzkDsvM%3D&reserved=3D0>
+>> .
+>>
+>>
+>>
+>>
+>>
+>>
+>> --
+>>
+>> David Ripley
+>> COO | Kraken
+>> www.kraken.com
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttp%3A%2F%2Fwww.=
+kraken.com%2F&data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469=
+df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C6381579755033=
+43638%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6I=
+k1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DXwTse7YLJvK6kW8tkpU%2FUhdsg%2=
+FQoOo2pSdbdYlaTt9k%3D&reserved=3D0>
+>> ------------------------------
+>>
+>>       This communication is confidential and may contain privileged
+>> information, or may otherwise be protected from disclosure. Any
+>> unauthorized disclosure, copying, distribution, or use of the informatio=
+n
+>> contained herein (including any reliance thereon) is strictly prohibited=
+.
+>> If you are not the intended recipient, please notify the sender that you
+>> have received this communication in error and delete and destroy all cop=
+ies
+>> in your possession. Nothing contained in this disclaimer shall be constr=
+ued
+>> in any way to grant permission to transmit confidential information via
+>> this firm=E2=80=99s e-mail system or as a waiver of confidentiality or p=
+rivilege.
+>> No responsibility or liability is accepted by Teneo for any loss or dama=
+ge
+>> arising in any way from the use of this communication. No representation=
+ is
+>> being made that the information presented is accurate, current or comple=
+te,
+>> and such information is at all times subject to change without notice.
+>> E-mail messages are not guaranteed to be secure.
+>>       Teneo does not provide tax, accounting or legal advice. This e-mai=
+l
+>> and any attachments are not intended or written to be used, and cannot b=
+e
+>> used or relied upon, by any taxpayer for the purpose of (i) avoiding U.S=
+.
+>> tax related penalties or (ii) promoting, marketing or recommending to
+>> another party any transaction or matter addressed herein. Each person
+>> should seek advice based on its particular circumstances from independen=
+t
+>> legal, accounting and tax advisors regarding the matters discussed in th=
+is
+>> communication.
+>>       This communication is for informational purposes only. Nothing
+>> herein should be construed as an attempt to effect any transaction in, o=
+r
+>> induce or attempt to induce the sale of, any security. Any such offer or
+>> solicitation may only be made by means of delivery of an offering
+>> memorandum and would be subject to applicable disclosure, documentation,
+>> registration and investor qualification requirements. Investment banking
+>> services are conducted by Teneo Capital LLC , including transactions by =
+its
+>> subsidiary Teneo Securities LLC, a member of FINRA and SIPC. To view our
+>> privacy policy, click here
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Fprivacy-policy%2Fglobal%2F&data=3D05%7C01%7Cfanda.shkreli%40te=
+neo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce7=
+13%7C0%7C0%7C638157975503343638%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDA=
+iLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DFOv=
+qUXcomFcg9TWWHDVlwonGsEkQBrH2yWDC%2FzkDsvM%3D&reserved=3D0>
+>> .
+>>
+>>
+>>
+>> ------------------------------
+>>
+>>       This communication is confidential and may contain privileged
+>> information, or may otherwise be protected from disclosure. Any
+>> unauthorized disclosure, copying, distribution, or use of the informatio=
+n
+>> contained herein (including any reliance thereon) is strictly prohibited=
+.
+>> If you are not the intended recipient, please notify the sender that you
+>> have received this communication in error and delete and destroy all cop=
+ies
+>> in your possession. Nothing contained in this disclaimer shall be constr=
+ued
+>> in any way to grant permission to transmit confidential information via
+>> this firm=E2=80=99s e-mail system or as a waiver of confidentiality or p=
+rivilege.
+>> No responsibility or liability is accepted by Teneo for any loss or dama=
+ge
+>> arising in any way from the use of this communication. No representation=
+ is
+>> being made that the information presented is accurate, current or comple=
+te,
+>> and such information is at all times subject to change without notice.
+>> E-mail messages are not guaranteed to be secure.
+>>       Teneo does not provide tax, accounting or legal advice. This e-mai=
+l
+>> and any attachments are not intended or written to be used, and cannot b=
+e
+>> used or relied upon, by any taxpayer for the purpose of (i) avoiding U.S=
+.
+>> tax related penalties or (ii) promoting, marketing or recommending to
+>> another party any transaction or matter addressed herein. Each person
+>> should seek advice based on its particular circumstances from independen=
+t
+>> legal, accounting and tax advisors regarding the matters discussed in th=
+is
+>> communication.
+>>       This communication is for informational purposes only. Nothing
+>> herein should be construed as an attempt to effect any transaction in, o=
+r
+>> induce or attempt to induce the sale of, any security. Any such offer or
+>> solicitation may only be made by means of delivery of an offering
+>> memorandum and would be subject to applicable disclosure, documentation,
+>> registration and investor qualification requirements. Investment banking
+>> services are conducted by Teneo Capital LLC , including transactions by =
+its
+>> subsidiary Teneo Securities LLC, a member of FINRA and SIPC. To view our
+>> privacy policy, click here
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Fprivacy-policy%2Fglobal%2F&data=3D05%7C01%7Cfanda.shkreli%40te=
+neo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce7=
+13%7C0%7C0%7C638157975503343638%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDA=
+iLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DFOv=
+qUXcomFcg9TWWHDVlwonGsEkQBrH2yWDC%2FzkDsvM%3D&reserved=3D0>
+>> .
+>>
+>>
+>>
+>> ------------------------------
+>>
+>>       This communication is confidential and may contain privileged
+>> information, or may otherwise be protected from disclosure. Any
+>> unauthorized disclosure, copying, distribution, or use of the informatio=
+n
+>> contained herein (including any reliance thereon) is strictly prohibited=
+.
+>> If you are not the intended recipient, please notify the sender that you
+>> have received this communication in error and delete and destroy all cop=
+ies
+>> in your possession. Nothing contained in this disclaimer shall be constr=
+ued
+>> in any way to grant permission to transmit confidential information via
+>> this firm=E2=80=99s e-mail system or as a waiver of confidentiality or p=
+rivilege.
+>> No responsibility or liability is accepted by Teneo for any loss or dama=
+ge
+>> arising in any way from the use of this communication. No representation=
+ is
+>> being made that the information presented is accurate, current or comple=
+te,
+>> and such information is at all times subject to change without notice.
+>> E-mail messages are not guaranteed to be secure.
+>>       Teneo does not provide tax, accounting or legal advice. This e-mai=
+l
+>> and any attachments are not intended or written to be used, and cannot b=
+e
+>> used or relied upon, by any taxpayer for the purpose of (i) avoiding U.S=
+.
+>> tax related penalties or (ii) promoting, marketing or recommending to
+>> another party any transaction or matter addressed herein. Each person
+>> should seek advice based on its particular circumstances from independen=
+t
+>> legal, accounting and tax advisors regarding the matters discussed in th=
+is
+>> communication.
+>>       This communication is for informational purposes only. Nothing
+>> herein should be construed as an attempt to effect any transaction in, o=
+r
+>> induce or attempt to induce the sale of, any security. Any such offer or
+>> solicitation may only be made by means of delivery of an offering
+>> memorandum and would be subject to applicable disclosure, documentation,
+>> registration and investor qualification requirements. Investment banking
+>> services are conducted by Teneo Capital LLC , including transactions by =
+its
+>> subsidiary Teneo Securities LLC, a member of FINRA and SIPC. To view our
+>> privacy policy, click here
+>> <https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fwww=
+.teneo.com%2Fprivacy-policy%2Fglobal%2F&data=3D05%7C01%7Cfanda.shkreli%40te=
+neo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce7=
+13%7C0%7C0%7C638157975503343638%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDA=
+iLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DFOv=
+qUXcomFcg9TWWHDVlwonGsEkQBrH2yWDC%2FzkDsvM%3D&reserved=3D0>
+>> .
+>>
+>>
+>>
+>>
+>>
+>> *Disclaimer*
+>>
+>> The information contained in this communication from the sender is
+>> confidential. It is intended solely for use by the recipient and others
+>> authorized to receive it. If you are not the recipient, you are hereby
+>> notified that any disclosure, copying, distribution or taking action in
+>> relation of the contents of this information is strictly prohibited and =
+may
+>> be unlawful. If you have received this communication in error, please
+>> notify Tribe at (619) 567-9955 and delete this communication immediately
+>> without making any copy or distribution.
+>> ------------------------------
+>>
+>>       This communication is confidential and may contain privileged
+>> information, or may otherwise be protected from disclosure. Any
+>> unauthorized disclosure, copying, distribution, or use of the informatio=
+n
+>> contained herein (including any reliance thereon) is strictly prohibited=
+.
+>> If you are not the intended recipient, please notify the sender that you
+>> have received this communication in error and delete and destroy all cop=
+ies
+>> in your possession. Nothing contained in this disclaimer shall be constr=
+ued
+>> in any way to grant permission to transmit confidential information via
+>> this firm=E2=80=99s e-mail system or as a waiver of confidentiality or p=
+rivilege.
+>> No responsibility or liability is accepted by Teneo for any loss or dama=
+ge
+>> arising in any way from the use of this communication. No representation=
+ is
+>> being made that the information presented is accurate, current or comple=
+te,
+>> and such information is at all times subject to change without notice.
+>> E-mail messages are not guaranteed to be secure.
+>>       Teneo does not provide tax, accounting or legal advice. This e-mai=
+l
+>> and any attachments are not intended or written to be used, and cannot b=
+e
+>> used or relied upon, by any taxpayer for the purpose of (i) avoiding U.S=
+.
+>> tax related penalties or (ii) promoting, marketing or recommending to
+>> another party any transaction or matter addressed herein. Each person
+>> should seek advice based on its particular circumstances from independen=
+t
+>> legal, accounting and tax advisors regarding the matters discussed in th=
+is
+>> communication.
+>>       This communication is for informational purposes only. Nothing
+>> herein should be construed as an attempt to effect any transaction in, o=
+r
+>> induce or attempt to induce the sale of, any security. Any such offer or
+>> solicitation may only be made by means of delivery of an offering
+>> memorandum and would be subject to applicable disclosure, documentation,
+>> registration and investor qualification requirements. Investment banking
+>> services are conducted by Teneo Capital LLC , including transactions by =
+its
+>> subsidiary Teneo Securities LLC, a member of FINRA and SIPC. To view our
+>> privacy policy, click here <https://www.teneo.com/privacy-policy/global/=
+>
+>> .
+>>
+>>
+
+--00000000000090861a05f86598fa
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gmail_default" style=3D"fon=
+t-family:tahoma,sans-serif">Fanda, are you sending out an invite?</div><div=
+><div dir=3D"ltr" class=3D"gmail_signature"><div dir=3D"ltr"><div><br></div=
+>Veronica Sullivan<div>Assistant to Arjun Sethi</div><div>Tribe Capital</di=
+v><div>(646) 280-5410</div></div></div></div><br></div><br><div class=3D"gm=
+ail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Mar 31, 2023 at 10=
+:15=E2=80=AFAM Naz Fazli &lt;<a href=3D"mailto:naz.fazli@kraken.com">naz.fa=
+zli@kraken.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" st=
+yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
+ing-left:1ex"><div dir=3D"ltr">Good morning all,=C2=A0<div><br></div><div>H=
+appy Friday-=C2=A0</div><div><br></div><div>Yes we can lock the 7am slot -=
+=C2=A0</div><div><br></div><div>Regards,</div><div><br></div><div>Naz</div>=
+<div><br></div><div><br></div></div><br><div class=3D"gmail_quote"><div dir=
+=3D"ltr" class=3D"gmail_attr">On Fri, Mar 31, 2023 at 6:18=E2=80=AFAM Fanda=
+ Shkreli &lt;<a href=3D"mailto:fanda.shkreli@teneo.com" target=3D"_blank">f=
+anda.shkreli@teneo.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_q=
+uote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,2=
+04);padding-left:1ex"><div>
+
+
+
+
+
+<div lang=3D"EN-US">
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Good mo=
+rning and Happy Friday!<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif"><u></u>=
+=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">@Naz ca=
+n we lock in 4/19 @ 7am PT?<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif"><u></u>=
+=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif"><u></u>=
+=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif"><u></u>=
+=C2=A0<u></u></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif"><u></u>=
+=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif"><u></u>=
+=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif"><u></u>=
+=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10pt;font-family:Arial,s=
+ans-serif;color:rgb(39,106,165)">Fanda Shkreli<br>
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">Executive Assistant to Paul Keary<br>
+<br>
+<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10pt;font-family:Arial,s=
+ans-serif;color:rgb(39,106,165)">Teneo
+<br>
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">280 Park Avenue, 4th Floor<br>
+New York, NY 10017<br>
+</span><b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:=
+rgb(39,106,165)">M:
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">+1 (917) 525-6729<br>
+</span><b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:=
+rgb(39,106,165)">E:
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black"><a href=3D"mailto:fanda.shkreli@teneo.com" target=3D"_blank">fanda.=
+shkreli@teneo.com</a><br>
+<br>
+<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><a href=3D"https://www.linkedin.com/company/teneoglo=
+bal/" target=3D"_blank"><span style=3D"font-size:10pt;font-family:Arial,san=
+s-serif;color:black;text-decoration:none"><img border=3D"0" width=3D"20" he=
+ight=3D"20" style=3D"width: 0.2083in; height: 0.2083in;" id=3D"m_3870569039=
+838565884m_-1197516658052983040Picture_x0020_1" src=3D"cid:187380311af4cff3=
+11"></span></a><a href=3D"https://twitter.com/Teneo/" target=3D"_blank"><sp=
+an style=3D"font-size:10pt;font-family:Arial,sans-serif;color:black;text-de=
+coration:none"><img border=3D"0" width=3D"27" height=3D"20" style=3D"width:=
+ 0.2812in; height: 0.2083in;" id=3D"m_3870569039838565884m_-119751665805298=
+3040Picture_x0020_2" src=3D"cid:187380311af5b16b22"></span></a><a href=3D"h=
+ttps://www.teneo.com/" target=3D"_blank"><span style=3D"font-size:10pt;font=
+-family:Arial,sans-serif;color:black;text-decoration:none"><img border=3D"0=
+" width=3D"27" height=3D"20" style=3D"width: 0.2812in; height: 0.2083in;" i=
+d=3D"m_3870569039838565884m_-1197516658052983040Picture_x0020_3" src=3D"cid=
+:187380311af692e333"></span></a><a href=3D"https://www.teneo.com/insights/p=
+odcasts/" target=3D"_blank"><span style=3D"font-size:10pt;font-family:Arial=
+,sans-serif;color:black;text-decoration:none"><img border=3D"0" width=3D"27=
+" height=3D"20" style=3D"width: 0.2812in; height: 0.2083in;" id=3D"m_387056=
+9039838565884m_-1197516658052983040Picture_x0020_4" src=3D"cid:187380311af7=
+745b44"></span></a><span style=3D"font-size:10pt;font-family:Arial,sans-ser=
+if;color:black"><u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><u></u>=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://www.teneo.com/" target=3D"_blank"><b=
+><span style=3D"font-size:11pt;color:rgb(36,106,165);text-decoration:none">=
+teneo.com</span></b></a><u></u><u></u></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif"><u></u>=
+=C2=A0<u></u></span></p>
+<div>
+<div style=3D"border-right:none;border-bottom:none;border-left:none;border-=
+top:1pt solid rgb(225,225,225);padding:3pt 0in 0in">
+<p class=3D"MsoNormal"><b>From:</b> Veronica Sullivan &lt;<a href=3D"mailto=
+:veronica@tribecap.co" target=3D"_blank">veronica@tribecap.co</a>&gt; <br>
+<b>Sent:</b> Thursday, March 30, 2023 2:25 PM<br>
+<b>To:</b> Janae Brooks &lt;<a href=3D"mailto:janaeb@kraken.com" target=3D"=
+_blank">janaeb@kraken.com</a>&gt;<br>
+<b>Cc:</b> Fanda Shkreli &lt;<a href=3D"mailto:fanda.shkreli@teneo.com" tar=
+get=3D"_blank">fanda.shkreli@teneo.com</a>&gt;; Naz Fazli &lt;<a href=3D"ma=
+ilto:naz.fazli@kraken.com" target=3D"_blank">naz.fazli@kraken.com</a>&gt;; =
+Stacy Nisthal &lt;<a href=3D"mailto:stacy.nisthal@kraken.com" target=3D"_bl=
+ank">stacy.nisthal@kraken.com</a>&gt;<br>
+<b>Subject:</b> Re: Teneo Proposal for Kraken<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white"></p>
+</div>
+
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<p class=3D"MsoNormal">Arjun will be traveling overseas during this time.=
+=C2=A0<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">On 04/14 he has a dinner so Arjun is a no-go.=C2=A0<=
+u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">04/19 at 7 am =C2=A0is a strong possibility!=C2=A0 C=
+an we book this?=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt">04/20 =C2=A0he=E2=80=99=
+s on a flight so no-go!=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">Veronica Sullivan<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Assistant to Arjun Sethi=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Tribe Capital<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">(646) 280-5410<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><b><br>
+<br>
+</b><u></u><u></u></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt"><br>
+On Mar 30, 2023, at 12:57 PM, Janae Brooks &lt;<a href=3D"mailto:janaeb@kra=
+ken.com" target=3D"_blank">janaeb@kraken.com</a>&gt; wrote:<u></u><u></u></=
+p>
+</div>
+<div>
+<p class=3D"MsoNormal">=EF=BB=BF<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt">Hello=C2=A0Fanda,<br>
+Here is what I have for Dave for PT mornings (also, I just found out he wil=
+l be taking some time off):<br>
+4/14 - 9am PT<br>
+4/19 - 7am PT<br>
+4/20 - 9am PT<br>
+<br>
+All the best,<br>
+Janae<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Thu, Mar 30, 2023 at 9:34=E2=80=AFAM Fanda Shkrel=
+i &lt;<a href=3D"mailto:fanda.shkreli@teneo.com" target=3D"_blank">fanda.sh=
+kreli@teneo.com</a>&gt; wrote:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border-top:none;border-right:none;border-bottom:none;b=
+order-left:1pt solid rgb(204,204,204);padding:0in 0in 0in 6pt;margin-left:4=
+.8pt;margin-right:0in">
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Hello,<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Followi=
+ng up on the email below.=C2=A0
+</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Please =
+let me know some times that work in the morning as I now have to include tw=
+o of the Teneo team members, one from Saudi Arabia
+ and the other in Hong Kong.</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Janae a=
+nd Naz, can you please provide some times that work on your end and Veronic=
+a and I will see what we can make work.</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Thank y=
+ou,</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Fanda</=
+span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt"><b><span style=3D"font-=
+size:10pt;font-family:Arial,sans-serif;color:rgb(39,106,165)">Fanda Shkreli=
+<br>
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">Executive Assistant to Paul Keary</span><u></u><u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt"><b><span style=3D"font-=
+size:10pt;font-family:Arial,sans-serif;color:rgb(39,106,165)">Teneo
+<br>
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">280 Park Avenue, 4th Floor<br>
+New York, NY 10017<br>
+</span><b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:=
+rgb(39,106,165)">M:
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">+1 (917) 525-6729<br>
+</span><b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:=
+rgb(39,106,165)">E:
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black"><a href=3D"mailto:fanda.shkreli@teneo.com" target=3D"_blank">fanda.=
+shkreli@teneo.com</a></span><u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fteneoglobal%2F&amp;=
+data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f=
+1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503031194%7CUnknow=
+n%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI=
+6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=3DYqtat13Zz4hYxAjzUodyfJvKaeJiAx7%2Fk%2BA=
+OoRuJ6bg%3D&amp;reserved=3D0" target=3D"_blank">&lt;image001.png&gt;</a><u>=
+</u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Ftwitter.com%2FTeneo%2F&amp;data=3D05%7C01%7Cfand=
+a.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc=
+9a88eaef968ce713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWI=
+joiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%=
+7C&amp;sdata=3DSIrHjlqTPnXtaGHIAtlQen46k%2F6DlILCS6Dj26D4H%2B0%3D&amp;reser=
+ved=3D0" target=3D"_blank"><span style=3D"font-size:10pt;font-family:Arial,=
+sans-serif;color:black;text-decoration:none"><u></u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Ftwitter.com%2FTeneo%2F&amp;data=3D05%7C01%7Cfanda.s=
+hkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a8=
+8eaef968ce713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoi=
+MC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&=
+amp;sdata=3DSIrHjlqTPnXtaGHIAtlQen46k%2F6DlILCS6Dj26D4H%2B0%3D&amp;reserved=
+=3D0" target=3D"_blank"><span style=3D"color:black;text-decoration:none">&l=
+t;image002.png&gt;</span><span style=3D"font-size:11pt;font-family:Calibri,=
+sans-serif;color:windowtext;text-decoration:none"><u></u><u></u></span></a>=
+</span></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkr=
+eli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88ea=
+ef968ce713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4=
+wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp=
+;sdata=3DQeQmRVH%2BHUviAuVYMhRNFoBQRs2pQchoUWXymr3SocM%3D&amp;reserved=3D0"=
+ target=3D"_blank"><span style=3D"color:black;text-decoration:none"><u></u>=
+<u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkreli=
+%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef9=
+68ce713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLj=
+AwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sd=
+ata=3DQeQmRVH%2BHUviAuVYMhRNFoBQRs2pQchoUWXymr3SocM%3D&amp;reserved=3D0" ta=
+rget=3D"_blank"><span style=3D"color:black;text-decoration:none">&lt;image0=
+03.png&gt;</span><span style=3D"font-size:11pt;font-family:Calibri,sans-ser=
+if;color:windowtext;text-decoration:none"><u></u><u></u></span></a></span><=
+/p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2Finsights%2Fpodcasts%2F&amp;data=
+=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7=
+C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503031194%7CUnknown%7C=
+TWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0=
+%3D%7C3000%7C%7C%7C&amp;sdata=3DM0F6jhLGHrQDZ6%2Bcu4pI6rMIIZ2yWfA3Fzl8C0qfd=
+G4%3D&amp;reserved=3D0" target=3D"_blank"><span style=3D"color:black;text-d=
+ecoration:none"><u></u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2Finsights%2Fpodcasts%2F&amp;data=3D0=
+5%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C360=
+1ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFp=
+bGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%=
+7C3000%7C%7C%7C&amp;sdata=3DM0F6jhLGHrQDZ6%2Bcu4pI6rMIIZ2yWfA3Fzl8C0qfdG4%3=
+D&amp;reserved=3D0" target=3D"_blank"><span style=3D"color:black;text-decor=
+ation:none">&lt;image004.png&gt;</span><span style=3D"font-size:11pt;font-f=
+amily:Calibri,sans-serif;color:windowtext;text-decoration:none"><u></u><u><=
+/u></span></a></span></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black">=C2=A0</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkreli=
+%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef9=
+68ce713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLj=
+AwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sd=
+ata=3DQeQmRVH%2BHUviAuVYMhRNFoBQRs2pQchoUWXymr3SocM%3D&amp;reserved=3D0" ta=
+rget=3D"_blank"><b><span style=3D"font-size:11pt;color:rgb(36,106,165);text=
+-decoration:none">teneo.com</span></b></a></span><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<div>
+<div style=3D"border-right:none;border-bottom:none;border-left:none;border-=
+top:1pt solid rgb(225,225,225);padding:3pt 0in 0in">
+<p class=3D"MsoNormal"><b>From:</b> Fanda Shkreli
+<br>
+<b>Sent:</b> Wednesday, March 29, 2023 12:18 PM<br>
+<b>To:</b> Naz Fazli &lt;<a href=3D"mailto:naz.fazli@kraken.com" target=3D"=
+_blank">naz.fazli@kraken.com</a>&gt;<br>
+<b>Cc:</b> Janae Brooks &lt;<a href=3D"mailto:janaeb@kraken.com" target=3D"=
+_blank">janaeb@kraken.com</a>&gt;; Veronica Sullivan &lt;<a href=3D"mailto:=
+veronica@tribecap.co" target=3D"_blank">veronica@tribecap.co</a>&gt;; Stacy=
+ Nisthal &lt;<a href=3D"mailto:stacy.nisthal@kraken.com" target=3D"_blank">=
+stacy.nisthal@kraken.com</a>&gt;<br>
+<b>Subject:</b> RE: FW: Teneo Proposal for Kraken<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Ladies,=
+</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">My sinc=
+ere apologies, it was just brough to my attention that I need to include tw=
+o of my colleagues, Nick who is in Saudi Arabi and
+ Lauren who is in Hong Kong on this call.</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Can you=
+ please make send through availability for PT mornings and I will then alig=
+n with everyone on the different time zones.</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Once ag=
+ain, apologies for the misunderstanding.</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Thank y=
+ou,</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Fanda</=
+span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt"><b><span style=3D"font-=
+size:10pt;font-family:Arial,sans-serif;color:rgb(39,106,165)">Fanda Shkreli=
+<br>
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">Executive Assistant to Paul Keary</span><u></u><u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt"><b><span style=3D"font-=
+size:10pt;font-family:Arial,sans-serif;color:rgb(39,106,165)">Teneo
+<br>
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">280 Park Avenue, 4th Floor<br>
+New York, NY 10017<br>
+</span><b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:=
+rgb(39,106,165)">M:
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">+1 (917) 525-6729<br>
+</span><b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:=
+rgb(39,106,165)">E:
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black"><a href=3D"mailto:fanda.shkreli@teneo.com" target=3D"_blank">fanda.=
+shkreli@teneo.com</a></span><u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fteneoglobal%2F&amp;=
+data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f=
+1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503031194%7CUnknow=
+n%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI=
+6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=3DYqtat13Zz4hYxAjzUodyfJvKaeJiAx7%2Fk%2BA=
+OoRuJ6bg%3D&amp;reserved=3D0" target=3D"_blank">&lt;image001.png&gt;</a><u>=
+</u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Ftwitter.com%2FTeneo%2F&amp;data=3D05%7C01%7Cfand=
+a.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc=
+9a88eaef968ce713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWI=
+joiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%=
+7C&amp;sdata=3DSIrHjlqTPnXtaGHIAtlQen46k%2F6DlILCS6Dj26D4H%2B0%3D&amp;reser=
+ved=3D0" target=3D"_blank"><span style=3D"font-size:10pt;font-family:Arial,=
+sans-serif;color:black;text-decoration:none"><u></u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Ftwitter.com%2FTeneo%2F&amp;data=3D05%7C01%7Cfanda.s=
+hkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a8=
+8eaef968ce713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoi=
+MC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&=
+amp;sdata=3DSIrHjlqTPnXtaGHIAtlQen46k%2F6DlILCS6Dj26D4H%2B0%3D&amp;reserved=
+=3D0" target=3D"_blank"><span style=3D"color:black;text-decoration:none">&l=
+t;image002.png&gt;</span><span style=3D"font-size:11pt;font-family:Calibri,=
+sans-serif;color:windowtext;text-decoration:none"><u></u><u></u></span></a>=
+</span></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkr=
+eli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88ea=
+ef968ce713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4=
+wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp=
+;sdata=3DQeQmRVH%2BHUviAuVYMhRNFoBQRs2pQchoUWXymr3SocM%3D&amp;reserved=3D0"=
+ target=3D"_blank"><span style=3D"color:black;text-decoration:none"><u></u>=
+<u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkreli=
+%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef9=
+68ce713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLj=
+AwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sd=
+ata=3DQeQmRVH%2BHUviAuVYMhRNFoBQRs2pQchoUWXymr3SocM%3D&amp;reserved=3D0" ta=
+rget=3D"_blank"><span style=3D"color:black;text-decoration:none">&lt;image0=
+03.png&gt;</span><span style=3D"font-size:11pt;font-family:Calibri,sans-ser=
+if;color:windowtext;text-decoration:none"><u></u><u></u></span></a></span><=
+/p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2Finsights%2Fpodcasts%2F&amp;data=
+=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7=
+C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503031194%7CUnknown%7C=
+TWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0=
+%3D%7C3000%7C%7C%7C&amp;sdata=3DM0F6jhLGHrQDZ6%2Bcu4pI6rMIIZ2yWfA3Fzl8C0qfd=
+G4%3D&amp;reserved=3D0" target=3D"_blank"><span style=3D"color:black;text-d=
+ecoration:none"><u></u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2Finsights%2Fpodcasts%2F&amp;data=3D0=
+5%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C360=
+1ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFp=
+bGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%=
+7C3000%7C%7C%7C&amp;sdata=3DM0F6jhLGHrQDZ6%2Bcu4pI6rMIIZ2yWfA3Fzl8C0qfdG4%3=
+D&amp;reserved=3D0" target=3D"_blank"><span style=3D"color:black;text-decor=
+ation:none">&lt;image004.png&gt;</span><span style=3D"font-size:11pt;font-f=
+amily:Calibri,sans-serif;color:windowtext;text-decoration:none"><u></u><u><=
+/u></span></a></span></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black">=C2=A0</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkreli=
+%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef9=
+68ce713%7C0%7C0%7C638157975503031194%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLj=
+AwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sd=
+ata=3DQeQmRVH%2BHUviAuVYMhRNFoBQRs2pQchoUWXymr3SocM%3D&amp;reserved=3D0" ta=
+rget=3D"_blank"><b><span style=3D"font-size:11pt;color:rgb(36,106,165);text=
+-decoration:none">teneo.com</span></b></a></span><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<div>
+<div style=3D"border-right:none;border-bottom:none;border-left:none;border-=
+top:1pt solid rgb(225,225,225);padding:3pt 0in 0in">
+<p class=3D"MsoNormal"><b>From:</b> Naz Fazli &lt;<a href=3D"mailto:naz.faz=
+li@kraken.com" target=3D"_blank">naz.fazli@kraken.com</a>&gt;
+<br>
+<b>Sent:</b> Wednesday, March 29, 2023 10:42 AM<br>
+<b>To:</b> Fanda Shkreli &lt;<a href=3D"mailto:fanda.shkreli@teneo.com" tar=
+get=3D"_blank">fanda.shkreli@teneo.com</a>&gt;<br>
+<b>Cc:</b> Janae Brooks &lt;<a href=3D"mailto:janaeb@kraken.com" target=3D"=
+_blank">janaeb@kraken.com</a>&gt;; Veronica Sullivan &lt;<a href=3D"mailto:=
+veronica@tribecap.co" target=3D"_blank">veronica@tribecap.co</a>&gt;; Stacy=
+ Nisthal &lt;<a href=3D"mailto:stacy.nisthal@kraken.com" target=3D"_blank">=
+stacy.nisthal@kraken.com</a>&gt;<br>
+<b>Subject:</b> Re: FW: Teneo Proposal for Kraken<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Hello,=C2=A0<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">I can make=C2=A0<span style=3D"font-family:Arial,san=
+s-serif">Thursday, April 6<sup>th</sup>=C2=A0@ 2:30 pm work for=C2=A025 min=
+s; kindly note Carrie has a hard stop at 2:55pm.</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Thanks,=
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Naz</sp=
+an><u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Wed, Mar 29, 2023 at 6:01=E2=80=AFAM Fanda Shkrel=
+i &lt;<a href=3D"mailto:fanda.shkreli@teneo.com" target=3D"_blank">fanda.sh=
+kreli@teneo.com</a>&gt; wrote:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border-top:none;border-right:none;border-bottom:none;b=
+order-left:1pt solid rgb(204,204,204);padding:0in 0in 0in 6pt;margin:5pt 0i=
+n 5pt 4.8pt">
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Good mo=
+rning,</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">It seem=
+s as if we do not have any times that work for everyone.</span><u></u><u></=
+u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Naz is =
+there anyway you can make either Monday, April 3<sup>rd</sup> @ 3pm or Thur=
+sday, April 6<sup>th</sup> @ 2:30pm work for Carrie?=C2=A0
+ It seems those times would work for everyone else.</span><u></u><u></u></p=
+>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Please =
+let me know.=C2=A0 Once confirmed, I will send through a calendar invite.=
+=C2=A0
+</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Best,</=
+span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Fanda
+</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt"><b><span style=3D"font-=
+size:10pt;font-family:Arial,sans-serif;color:rgb(39,106,165)">Fanda Shkreli=
+<br>
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">Executive Assistant to Paul Keary</span><u></u><u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt"><b><span style=3D"font-=
+size:10pt;font-family:Arial,sans-serif;color:rgb(39,106,165)">Teneo
+<br>
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">280 Park Avenue, 4th Floor<br>
+New York, NY 10017<br>
+</span><b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:=
+rgb(39,106,165)">M:
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">+1 (917) 525-6729<br>
+</span><b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:=
+rgb(39,106,165)">E:
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black"><a href=3D"mailto:fanda.shkreli@teneo.com" target=3D"_blank">fanda.=
+shkreli@teneo.com</a></span><u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fteneoglobal%2F&amp;=
+data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f=
+1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknow=
+n%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI=
+6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=3Dw%2BjB6FJzSLj0numv7HH5mW6GCctokah1GDh9n=
+w1xifM%3D&amp;reserved=3D0" target=3D"_blank">&lt;image001.png&gt;</a><u></=
+u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Ftwitter.com%2FTeneo%2F&amp;data=3D05%7C01%7Cfand=
+a.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc=
+9a88eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWI=
+joiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%=
+7C&amp;sdata=3D2G4fO4Z4bMw3z9%2Bf7aV5wG1xjRVb84wu7%2FlnbCW8hMk%3D&amp;reser=
+ved=3D0" target=3D"_blank"><span style=3D"font-size:10pt;font-family:Arial,=
+sans-serif;color:black;text-decoration:none"><u></u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Ftwitter.com%2FTeneo%2F&amp;data=3D05%7C01%7Cfanda.s=
+hkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a8=
+8eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoi=
+MC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&=
+amp;sdata=3D2G4fO4Z4bMw3z9%2Bf7aV5wG1xjRVb84wu7%2FlnbCW8hMk%3D&amp;reserved=
+=3D0" target=3D"_blank"><span style=3D"color:black;text-decoration:none">&l=
+t;image002.png&gt;</span><span style=3D"font-size:11pt;font-family:Calibri,=
+sans-serif;color:windowtext;text-decoration:none"><u></u><u></u></span></a>=
+</span></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkr=
+eli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88ea=
+ef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4=
+wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp=
+;sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGlnk7T2vS6n8j4RXpP7wc%3D&amp;reserved=3D=
+0" target=3D"_blank"><span style=3D"color:black;text-decoration:none"><u></=
+u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkreli=
+%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef9=
+68ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLj=
+AwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sd=
+ata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGlnk7T2vS6n8j4RXpP7wc%3D&amp;reserved=3D0" =
+target=3D"_blank"><span style=3D"color:black;text-decoration:none">&lt;imag=
+e003.png&gt;</span><span style=3D"font-size:11pt;font-family:Calibri,sans-s=
+erif;color:windowtext;text-decoration:none"><u></u><u></u></span></a></span=
+></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2Finsights%2Fpodcasts%2F&amp;data=
+=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7=
+C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7C=
+TWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0=
+%3D%7C3000%7C%7C%7C&amp;sdata=3DM2icxH8%2FMGgYoaChOLJJWHhJUiqlfdfnr%2BafGqX=
+nz9c%3D&amp;reserved=3D0" target=3D"_blank"><span style=3D"color:black;text=
+-decoration:none"><u></u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2Finsights%2Fpodcasts%2F&amp;data=3D0=
+5%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C360=
+1ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFp=
+bGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%=
+7C3000%7C%7C%7C&amp;sdata=3DM2icxH8%2FMGgYoaChOLJJWHhJUiqlfdfnr%2BafGqXnz9c=
+%3D&amp;reserved=3D0" target=3D"_blank"><span style=3D"color:black;text-dec=
+oration:none">&lt;image004.png&gt;</span><span style=3D"font-size:11pt;font=
+-family:Calibri,sans-serif;color:windowtext;text-decoration:none"><u></u><u=
+></u></span></a></span></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black">=C2=A0</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkreli=
+%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef9=
+68ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLj=
+AwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sd=
+ata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGlnk7T2vS6n8j4RXpP7wc%3D&amp;reserved=3D0" =
+target=3D"_blank"><b><span style=3D"font-size:11pt;color:rgb(36,106,165);te=
+xt-decoration:none">teneo.com</span></b></a></span><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<div>
+<div style=3D"border-right:none;border-bottom:none;border-left:none;border-=
+top:1pt solid rgb(225,225,225);padding:3pt 0in 0in">
+<p class=3D"MsoNormal"><b>From:</b> Naz Fazli &lt;<a href=3D"mailto:naz.faz=
+li@kraken.com" target=3D"_blank">naz.fazli@kraken.com</a>&gt;
+<br>
+<b>Sent:</b> Tuesday, March 28, 2023 2:38 PM<br>
+<b>To:</b> Janae Brooks &lt;<a href=3D"mailto:janaeb@kraken.com" target=3D"=
+_blank">janaeb@kraken.com</a>&gt;<br>
+<b>Cc:</b> Fanda Shkreli &lt;<a href=3D"mailto:fanda.shkreli@teneo.com" tar=
+get=3D"_blank">fanda.shkreli@teneo.com</a>&gt;; Veronica Sullivan &lt;<a hr=
+ef=3D"mailto:veronica@tribecap.co" target=3D"_blank">veronica@tribecap.co</=
+a>&gt;; Stacy Nisthal &lt;<a href=3D"mailto:stacy.nisthal@kraken.com" targe=
+t=3D"_blank">stacy.nisthal@kraken.com</a>&gt;<br>
+<b>Subject:</b> Re: FW: Teneo Proposal for Kraken<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Hello,<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">For Carrie=C2=A0<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><s>Monday, April 3rd - anytime between 2pm-5pm PT</s=
+><br>
+Tuesday, April 4th - 9am PT (30 mins)<br>
+Wednesday, April 5th - 1pm PT or 3pm PT (30 mins)<br>
+Thursday, April 6th - anytime between 2pm-230pm or 4-5pm PT<u></u><u></u></=
+p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Regards,<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Naz<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Tue, Mar 28, 2023 at 9:47=E2=80=AFAM Janae Brooks=
+ &lt;<a href=3D"mailto:janaeb@kraken.com" target=3D"_blank">janaeb@kraken.c=
+om</a>&gt; wrote:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border-top:none;border-right:none;border-bottom:none;b=
+order-left:1pt solid rgb(204,204,204);padding:0in 0in 0in 6pt;margin:5pt 0i=
+n 5pt 4.8pt">
+<div>
+<p class=3D"MsoNormal">Hello=C2=A0Fanda,<br>
+Also copying Carrie&#39;s interim EA (Naz) to assist with her calendar. Dav=
+id&#39;s availability for a call will start next week, below are the option=
+s he has open:<br>
+<br>
+Monday, April 3rd - anytime between 2pm-5pm PT<br>
+Tuesday, April 4th - 9am PT (30 mins)<br>
+Wednesday, April 3rd - 1pm PT or 3pm PT (30 mins)<br>
+Thursday, April 4th - anytime between 2pm-5pm PT<br>
+<br>
+Naz will let us know if Carrie can match=C2=A0any of the times listed=C2=A0=
+above.<br>
+<br>
+All the best,<br>
+Janae<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Tue, Mar 28, 2023 at 6:56=E2=80=AFAM Fanda Shkrel=
+i &lt;<a href=3D"mailto:fanda.shkreli@teneo.com" target=3D"_blank">fanda.sh=
+kreli@teneo.com</a>&gt; wrote:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border-top:none;border-right:none;border-bottom:none;b=
+order-left:1pt solid rgb(204,204,204);padding:0in 0in 0in 6pt;margin:5pt 0i=
+n 5pt 4.8pt">
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Good mo=
+rning,</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">I hope =
+this email finds you both well.=C2=A0 Following up on the emails below.=C2=
+=A0 Looking to schedule a time for everyone to connect.=C2=A0 Janae,
+ can you please provide some times that work for your team and Veronica and=
+ I can align calendars accordingly.</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Thank y=
+ou both in advance for your help in getting this on the calendar.</span><u>=
+</u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Warm re=
+gards,</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">Fanda</=
+span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt"><b><span style=3D"font-=
+size:10pt;font-family:Arial,sans-serif;color:rgb(39,106,165)">Fanda Shkreli=
+<br>
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">Executive Assistant to Paul Keary</span><u></u><u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt"><b><span style=3D"font-=
+size:10pt;font-family:Arial,sans-serif;color:rgb(39,106,165)">Teneo
+<br>
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">280 Park Avenue, 4th Floor<br>
+New York, NY 10017<br>
+</span><b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:=
+rgb(39,106,165)">M:
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black">+1 (917) 525-6729<br>
+</span><b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:=
+rgb(39,106,165)">E:
+</span></b><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color=
+:black"><a href=3D"mailto:fanda.shkreli@teneo.com" target=3D"_blank">fanda.=
+shkreli@teneo.com</a></span><u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fteneoglobal%2F&amp;=
+data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f=
+1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknow=
+n%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI=
+6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=3Dw%2BjB6FJzSLj0numv7HH5mW6GCctokah1GDh9n=
+w1xifM%3D&amp;reserved=3D0" target=3D"_blank">&lt;image001.png&gt;</a><u></=
+u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Ftwitter.com%2FTeneo%2F&amp;data=3D05%7C01%7Cfand=
+a.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc=
+9a88eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWI=
+joiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%=
+7C&amp;sdata=3D2G4fO4Z4bMw3z9%2Bf7aV5wG1xjRVb84wu7%2FlnbCW8hMk%3D&amp;reser=
+ved=3D0" target=3D"_blank"><span style=3D"font-size:10pt;font-family:Arial,=
+sans-serif;color:black;text-decoration:none"><u></u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Ftwitter.com%2FTeneo%2F&amp;data=3D05%7C01%7Cfanda.s=
+hkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a8=
+8eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoi=
+MC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&=
+amp;sdata=3D2G4fO4Z4bMw3z9%2Bf7aV5wG1xjRVb84wu7%2FlnbCW8hMk%3D&amp;reserved=
+=3D0" target=3D"_blank"><span style=3D"color:black;text-decoration:none">&l=
+t;image002.png&gt;</span><span style=3D"font-size:11pt;font-family:Calibri,=
+sans-serif;color:windowtext;text-decoration:none"><u></u><u></u></span></a>=
+</span></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkr=
+eli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88ea=
+ef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4=
+wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp=
+;sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGlnk7T2vS6n8j4RXpP7wc%3D&amp;reserved=3D=
+0" target=3D"_blank"><span style=3D"color:black;text-decoration:none"><u></=
+u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkreli=
+%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef9=
+68ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLj=
+AwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sd=
+ata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGlnk7T2vS6n8j4RXpP7wc%3D&amp;reserved=3D0" =
+target=3D"_blank"><span style=3D"color:black;text-decoration:none">&lt;imag=
+e003.png&gt;</span><span style=3D"font-size:11pt;font-family:Calibri,sans-s=
+erif;color:windowtext;text-decoration:none"><u></u><u></u></span></a></span=
+></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2Finsights%2Fpodcasts%2F&amp;data=
+=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7=
+C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7C=
+TWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0=
+%3D%7C3000%7C%7C%7C&amp;sdata=3DM2icxH8%2FMGgYoaChOLJJWHhJUiqlfdfnr%2BafGqX=
+nz9c%3D&amp;reserved=3D0" target=3D"_blank"><span style=3D"color:black;text=
+-decoration:none"><u></u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2Finsights%2Fpodcasts%2F&amp;data=3D0=
+5%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C360=
+1ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFp=
+bGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%=
+7C3000%7C%7C%7C&amp;sdata=3DM2icxH8%2FMGgYoaChOLJJWHhJUiqlfdfnr%2BafGqXnz9c=
+%3D&amp;reserved=3D0" target=3D"_blank"><span style=3D"color:black;text-dec=
+oration:none">&lt;image004.png&gt;</span><span style=3D"font-size:11pt;font=
+-family:Calibri,sans-serif;color:windowtext;text-decoration:none"><u></u><u=
+></u></span></a></span></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black">=C2=A0</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkreli=
+%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef9=
+68ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLj=
+AwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sd=
+ata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGlnk7T2vS6n8j4RXpP7wc%3D&amp;reserved=3D0" =
+target=3D"_blank"><b><span style=3D"font-size:11pt;color:rgb(36,106,165);te=
+xt-decoration:none">teneo.com</span></b></a></span><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif">=C2=A0<=
+/span><u></u><u></u></p>
+<div>
+<div style=3D"border-right:none;border-bottom:none;border-left:none;border-=
+top:1pt solid rgb(225,225,225);padding:3pt 0in 0in">
+<p class=3D"MsoNormal"><b>From:</b> David Ripley &lt;<a href=3D"mailto:davi=
+d@kraken.com" target=3D"_blank">david@kraken.com</a>&gt;
+<br>
+<b>Sent:</b> Monday, March 27, 2023 3:28 PM<br>
+<b>To:</b> Colleen Hsia &lt;<a href=3D"mailto:colleen.hsia@teneo.com" targe=
+t=3D"_blank">colleen.hsia@teneo.com</a>&gt;<br>
+<b>Cc:</b> <a href=3D"mailto:arj@tribecap.co" target=3D"_blank">arj@tribeca=
+p.co</a>; Paul Keary &lt;<a href=3D"mailto:paul.keary@teneo.com" target=3D"=
+_blank">paul.keary@teneo.com</a>&gt;; Nicholas McDonagh &lt;<a href=3D"mail=
+to:nicholas.mcdonagh@teneo.com" target=3D"_blank">nicholas.mcdonagh@teneo.c=
+om</a>&gt;; Lauren Chung &lt;<a href=3D"mailto:Lauren.Chung@teneo.com" targ=
+et=3D"_blank">Lauren.Chung@teneo.com</a>&gt;;
+ Fanda Shkreli &lt;<a href=3D"mailto:fanda.shkreli@teneo.com" target=3D"_bl=
+ank">fanda.shkreli@teneo.com</a>&gt;<br>
+<b>Subject:</b> Re: Teneo Proposal for Kraken<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Hi Colleen,<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal">Thanks for the follow up.=C2=A0 Yes, we can work on =
+scheduling another call.=C2=A0 We&#39;ll have Carrie, our CFO, join the nex=
+t call.<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">- Dave<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Mon, Mar 27, 2023 at 11:48=E2=80=AFAM Colleen Hsi=
+a &lt;<a href=3D"mailto:colleen.hsia@teneo.com" target=3D"_blank">colleen.h=
+sia@teneo.com</a>&gt; wrote:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border-top:none;border-right:none;border-bottom:none;b=
+order-left:1pt solid rgb(204,204,204);padding:0in 0in 0in 6pt;margin:5pt 0i=
+n 5pt 4.8pt">
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal">Dave and Arjun,<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Hope you have been well.=C2=A0 An action-packed few =
+weeks, to say the least.=C2=A0 We wanted to check in and resurface our prop=
+osal for consideration.=C2=A0 Would you have some time in the next
+ 1-2 weeks to connect and discuss? <u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Copying Fanda who I know is already in contact with =
+Veronica and Janae.<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Thanks,<u></u><u></u></p>
+<p class=3D"MsoNormal">Colleen<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<div>
+<div style=3D"border-right:none;border-bottom:none;border-left:none;border-=
+top:1pt solid rgb(225,225,225);padding:3pt 0in 0in">
+<p class=3D"MsoNormal"><b>From:</b> Colleen Hsia
+<br>
+<b>Sent:</b> Tuesday, March 14, 2023 7:41 PM<br>
+<b>To:</b> David Ripley &lt;<a href=3D"mailto:david@kraken.com" target=3D"_=
+blank">david@kraken.com</a>&gt;;
+<a href=3D"mailto:arj@tribecap.co" target=3D"_blank">arj@tribecap.co</a><br=
+>
+<b>Cc:</b> Paul Keary &lt;<a href=3D"mailto:paul.keary@teneo.com" target=3D=
+"_blank">paul.keary@teneo.com</a>&gt;; Nicholas McDonagh &lt;<a href=3D"mai=
+lto:nicholas.mcdonagh@teneo.com" target=3D"_blank">nicholas.mcdonagh@teneo.=
+com</a>&gt;; Lauren Chung &lt;<a href=3D"mailto:Lauren.Chung@teneo.com" tar=
+get=3D"_blank">Lauren.Chung@teneo.com</a>&gt;<br>
+<b>Subject:</b> Teneo Proposal for Kraken<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">David and Arjun,<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Thanks so much for taking the time to speak with us =
+a few weeks ago.=C2=A0 Hard to believe how much has changed in the world si=
+nce then.
+<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Per our conversation, we=E2=80=99ve assembled a broa=
+d scope of work to describe how we can be helpful to Kraken in the MENA and=
+ Asia regions.=C2=A0
+<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">In MENA, we understand this will be your second fora=
+y, which will shape some of the nuances of engagement =E2=80=93 but ultimat=
+ely we didn=E2=80=99t feel it changes what should be done.=C2=A0 As for
+ Asia, we didn=E2=80=99t have the team on our last call, but we=E2=80=99ve =
+brought Lauren and her team up to speed and they=E2=80=99ve fed in their th=
+oughts as well.=C2=A0 We=E2=80=99ve also attached our credentials for each =
+region.=C2=A0
+<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Once you=E2=80=99ve had a chance to review the propo=
+sal, we=E2=80=99d love the opportunity to walk you through our approach and=
+ get a sense for your thinking.<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">Thanks,<u></u><u></u></p>
+<p class=3D"MsoNormal">Colleen<u></u><u></u></p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt"><b><span style=3D"color=
+:rgb(39,106,165)">Colleen Hsia<br>
+</span></b><span style=3D"color:black">Senior Managing Director</span><u></=
+u><u></u></p>
+<p class=3D"MsoNormal"><b><span style=3D"color:rgb(39,106,165)">Teneo
+<br>
+</span></b><span style=3D"color:black">280 Park Avenue, 4th Floor<br>
+New York, NY 10017<br>
+</span><b><span style=3D"color:rgb(39,106,165)">M: </span></b><span style=
+=3D"color:black">+1 (646) 387-8580<br>
+</span><b><span style=3D"color:rgb(39,106,165)">E: </span></b><span style=
+=3D"color:black"><a href=3D"mailto:colleen.hsia@teneo.com" target=3D"_blank=
+">colleen.hsia@teneo.com</a></span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"color:black">=C2=A0</span><u></u><u><=
+/u></p>
+<div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fteneoglobal%2F&amp;=
+data=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f=
+1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknow=
+n%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI=
+6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=3Dw%2BjB6FJzSLj0numv7HH5mW6GCctokah1GDh9n=
+w1xifM%3D&amp;reserved=3D0" target=3D"_blank">&lt;image001.png&gt;</a><u></=
+u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Ftwitter.com%2FTeneo%2F&amp;data=3D05%7C01%7Cfand=
+a.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc=
+9a88eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWI=
+joiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%=
+7C&amp;sdata=3D2G4fO4Z4bMw3z9%2Bf7aV5wG1xjRVb84wu7%2FlnbCW8hMk%3D&amp;reser=
+ved=3D0" target=3D"_blank"><span style=3D"font-size:10pt;font-family:Arial,=
+sans-serif;color:black;text-decoration:none"><u></u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Ftwitter.com%2FTeneo%2F&amp;data=3D05%7C01%7Cfanda.s=
+hkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a8=
+8eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoi=
+MC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&=
+amp;sdata=3D2G4fO4Z4bMw3z9%2Bf7aV5wG1xjRVb84wu7%2FlnbCW8hMk%3D&amp;reserved=
+=3D0" target=3D"_blank"><span style=3D"color:black;text-decoration:none">&l=
+t;image002.png&gt;</span><span style=3D"font-size:11pt;font-family:Calibri,=
+sans-serif;color:windowtext;text-decoration:none"><u></u><u></u></span></a>=
+</span></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkr=
+eli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88ea=
+ef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4=
+wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp=
+;sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGlnk7T2vS6n8j4RXpP7wc%3D&amp;reserved=3D=
+0" target=3D"_blank"><span style=3D"color:black;text-decoration:none"><u></=
+u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkreli=
+%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef9=
+68ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLj=
+AwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sd=
+ata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGlnk7T2vS6n8j4RXpP7wc%3D&amp;reserved=3D0" =
+target=3D"_blank"><span style=3D"color:black;text-decoration:none">&lt;imag=
+e003.png&gt;</span><span style=3D"font-size:11pt;font-family:Calibri,sans-s=
+erif;color:windowtext;text-decoration:none"><u></u><u></u></span></a></span=
+></p>
+</div>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2Finsights%2Fpodcasts%2F&amp;data=
+=3D05%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7=
+C3601ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7C=
+TWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0=
+%3D%7C3000%7C%7C%7C&amp;sdata=3DM2icxH8%2FMGgYoaChOLJJWHhJUiqlfdfnr%2BafGqX=
+nz9c%3D&amp;reserved=3D0" target=3D"_blank"><span style=3D"color:black;text=
+-decoration:none"><u></u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black"><a href=3D"https://nam12.safelinks.protection.outlook.c=
+om/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2Finsights%2Fpodcasts%2F&amp;data=3D0=
+5%7C01%7Cfanda.shkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C360=
+1ef954dea4cfc9a88eaef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFp=
+bGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%=
+7C3000%7C%7C%7C&amp;sdata=3DM2icxH8%2FMGgYoaChOLJJWHhJUiqlfdfnr%2BafGqXnz9c=
+%3D&amp;reserved=3D0" target=3D"_blank"><span style=3D"color:black;text-dec=
+oration:none">&lt;image004.png&gt;</span><span style=3D"font-size:11pt;font=
+-family:Calibri,sans-serif;color:windowtext;text-decoration:none"><u></u><u=
+></u></span></a></span></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt;font-family:Arial,sans=
+-serif;color:black">=C2=A0</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><a href=3D"https://nam12.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Fwww.teneo.com%2F&amp;data=3D05%7C01%7Cfanda.shkr=
+eli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88ea=
+ef968ce713%7C0%7C0%7C638157975503187417%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4=
+wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp=
+;sdata=3DUcX6fJUl6CpTY%2F8UkK%2BobtGlnk7T2vS6n8j4RXpP7wc%3D&amp;reserved=3D=
+0" target=3D"_blank"><b><span style=3D"font-family:Arial,sans-serif;color:r=
+gb(36,106,165);text-decoration:none">teneo.com</span></b></a><u></u><u></u>=
+</p>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span=
+ style=3D"font-size:10pt">
+<hr size=3D"1" width=3D"100%" align=3D"center">
+</span></div>
+<p><span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(42=
+,42,42)">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0This communication is confiden=
+tial and may contain privileged information, or may otherwise be protected =
+from disclosure. Any unauthorized disclosure, copying, distribution,
+ or use of the information contained herein (including any reliance thereon=
+) is strictly prohibited. If you are not the intended recipient, please not=
+ify the sender that you have received this communication in error and delet=
+e and destroy all copies in your
+ possession. Nothing contained in this disclaimer shall be construed in any=
+ way to grant permission to transmit confidential information via this firm=
+=E2=80=99s e-mail system or as a waiver of confidentiality or privilege. No=
+ responsibility or liability is accepted
+ by Teneo for any loss or damage arising in any way from the use of this co=
+mmunication. No representation is being made that the information presented=
+ is accurate, current or complete, and such information is at all times sub=
+ject to change without notice. E-mail
+ messages are not guaranteed to be secure.<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0Teneo does not provide tax, accounting =
+or legal advice. This e-mail and any attachments are not intended or writte=
+n to be used, and cannot be used or relied upon, by any taxpayer for the pu=
+rpose of (i) avoiding U.S. tax related penalties or (ii) promoting,
+ marketing or recommending to another party any transaction or matter addre=
+ssed herein. Each person should seek advice based on its particular circums=
+tances from independent legal, accounting and tax advisors regarding the ma=
+tters discussed in this communication.<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0This communication is for informational=
+ purposes only. Nothing herein should be construed as an attempt to effect =
+any transaction in, or induce or attempt to induce the sale of, any securit=
+y. Any such offer or solicitation may only be made by means of
+ delivery of an offering memorandum and would be subject to applicable disc=
+losure, documentation, registration and investor qualification requirements=
+. Investment banking services are conducted by Teneo Capital LLC , includin=
+g transactions by its subsidiary
+ Teneo Securities LLC, a member of FINRA and SIPC. To view our privacy poli=
+cy, click
+<a href=3D"https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2=
+F%2Fwww.teneo.com%2Fprivacy-policy%2Fglobal%2F&amp;data=3D05%7C01%7Cfanda.s=
+hkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a8=
+8eaef968ce713%7C0%7C0%7C638157975503343638%7CUnknown%7CTWFpbGZsb3d8eyJWIjoi=
+MC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&=
+amp;sdata=3DFOvqUXcomFcg9TWWHDVlwonGsEkQBrH2yWDC%2FzkDsvM%3D&amp;reserved=
+=3D0" target=3D"_blank">
+here</a>.</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt">=C2=A0</span><u></u><=
+u></u></p>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+<p class=3D"MsoNormal"><br clear=3D"all">
+<u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal">=C2=A0<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal">--
+<u></u><u></u></p>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:9.5pt;color:rgb(136,136,136=
+)">David Ripley<br>
+COO | Kraken<br>
+</span><a href=3D"https://nam12.safelinks.protection.outlook.com/?url=3Dhtt=
+p%3A%2F%2Fwww.kraken.com%2F&amp;data=3D05%7C01%7Cfanda.shkreli%40teneo.com%=
+7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a88eaef968ce713%7C0%7=
+C0%7C638157975503343638%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjo=
+iV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=3DXwTse7Y=
+LJvK6kW8tkpU%2FUhdsg%2FQoOo2pSdbdYlaTt9k%3D&amp;reserved=3D0" target=3D"_bl=
+ank"><span style=3D"font-size:9.5pt;color:rgb(17,85,204)">www.kraken.com</s=
+pan></a><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span=
+ style=3D"font-size:10pt">
+<hr size=3D"1" width=3D"100%" align=3D"center">
+</span></div>
+<p><span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(42=
+,42,42)">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0This communication is confiden=
+tial and may contain privileged information, or may otherwise be protected =
+from disclosure. Any unauthorized disclosure, copying, distribution,
+ or use of the information contained herein (including any reliance thereon=
+) is strictly prohibited. If you are not the intended recipient, please not=
+ify the sender that you have received this communication in error and delet=
+e and destroy all copies in your
+ possession. Nothing contained in this disclaimer shall be construed in any=
+ way to grant permission to transmit confidential information via this firm=
+=E2=80=99s e-mail system or as a waiver of confidentiality or privilege. No=
+ responsibility or liability is accepted
+ by Teneo for any loss or damage arising in any way from the use of this co=
+mmunication. No representation is being made that the information presented=
+ is accurate, current or complete, and such information is at all times sub=
+ject to change without notice. E-mail
+ messages are not guaranteed to be secure.<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0Teneo does not provide tax, accounting =
+or legal advice. This e-mail and any attachments are not intended or writte=
+n to be used, and cannot be used or relied upon, by any taxpayer for the pu=
+rpose of (i) avoiding U.S. tax related penalties or (ii) promoting,
+ marketing or recommending to another party any transaction or matter addre=
+ssed herein. Each person should seek advice based on its particular circums=
+tances from independent legal, accounting and tax advisors regarding the ma=
+tters discussed in this communication.<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0This communication is for informational=
+ purposes only. Nothing herein should be construed as an attempt to effect =
+any transaction in, or induce or attempt to induce the sale of, any securit=
+y. Any such offer or solicitation may only be made by means of
+ delivery of an offering memorandum and would be subject to applicable disc=
+losure, documentation, registration and investor qualification requirements=
+. Investment banking services are conducted by Teneo Capital LLC , includin=
+g transactions by its subsidiary
+ Teneo Securities LLC, a member of FINRA and SIPC. To view our privacy poli=
+cy, click
+<a href=3D"https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2=
+F%2Fwww.teneo.com%2Fprivacy-policy%2Fglobal%2F&amp;data=3D05%7C01%7Cfanda.s=
+hkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a8=
+8eaef968ce713%7C0%7C0%7C638157975503343638%7CUnknown%7CTWFpbGZsb3d8eyJWIjoi=
+MC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&=
+amp;sdata=3DFOvqUXcomFcg9TWWHDVlwonGsEkQBrH2yWDC%2FzkDsvM%3D&amp;reserved=
+=3D0" target=3D"_blank">
+here</a>.</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt">=C2=A0</span><u></u><=
+u></u></p>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</blockquote>
+</div>
+</div>
+<div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span=
+ style=3D"font-size:10pt">
+<hr size=3D"1" width=3D"100%" align=3D"center">
+</span></div>
+<p><span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(42=
+,42,42)">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0This communication is confiden=
+tial and may contain privileged information, or may otherwise be protected =
+from disclosure. Any unauthorized disclosure, copying, distribution,
+ or use of the information contained herein (including any reliance thereon=
+) is strictly prohibited. If you are not the intended recipient, please not=
+ify the sender that you have received this communication in error and delet=
+e and destroy all copies in your
+ possession. Nothing contained in this disclaimer shall be construed in any=
+ way to grant permission to transmit confidential information via this firm=
+=E2=80=99s e-mail system or as a waiver of confidentiality or privilege. No=
+ responsibility or liability is accepted
+ by Teneo for any loss or damage arising in any way from the use of this co=
+mmunication. No representation is being made that the information presented=
+ is accurate, current or complete, and such information is at all times sub=
+ject to change without notice. E-mail
+ messages are not guaranteed to be secure.<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0Teneo does not provide tax, accounting =
+or legal advice. This e-mail and any attachments are not intended or writte=
+n to be used, and cannot be used or relied upon, by any taxpayer for the pu=
+rpose of (i) avoiding U.S. tax related penalties or (ii) promoting,
+ marketing or recommending to another party any transaction or matter addre=
+ssed herein. Each person should seek advice based on its particular circums=
+tances from independent legal, accounting and tax advisors regarding the ma=
+tters discussed in this communication.<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0This communication is for informational=
+ purposes only. Nothing herein should be construed as an attempt to effect =
+any transaction in, or induce or attempt to induce the sale of, any securit=
+y. Any such offer or solicitation may only be made by means of
+ delivery of an offering memorandum and would be subject to applicable disc=
+losure, documentation, registration and investor qualification requirements=
+. Investment banking services are conducted by Teneo Capital LLC , includin=
+g transactions by its subsidiary
+ Teneo Securities LLC, a member of FINRA and SIPC. To view our privacy poli=
+cy, click
+<a href=3D"https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2=
+F%2Fwww.teneo.com%2Fprivacy-policy%2Fglobal%2F&amp;data=3D05%7C01%7Cfanda.s=
+hkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a8=
+8eaef968ce713%7C0%7C0%7C638157975503343638%7CUnknown%7CTWFpbGZsb3d8eyJWIjoi=
+MC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&=
+amp;sdata=3DFOvqUXcomFcg9TWWHDVlwonGsEkQBrH2yWDC%2FzkDsvM%3D&amp;reserved=
+=3D0" target=3D"_blank">
+here</a>.</span><u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt">=C2=A0</span><u></u><=
+u></u></p>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+<div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span=
+ style=3D"font-size:10pt">
+<hr size=3D"1" width=3D"100%" align=3D"center">
+</span></div>
+<p><span style=3D"font-size:8.5pt;font-family:Arial,sans-serif;color:rgb(42=
+,42,42)">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0This communication is confiden=
+tial and may contain privileged information, or may otherwise be protected =
+from disclosure. Any unauthorized disclosure, copying, distribution,
+ or use of the information contained herein (including any reliance thereon=
+) is strictly prohibited. If you are not the intended recipient, please not=
+ify the sender that you have received this communication in error and delet=
+e and destroy all copies in your
+ possession. Nothing contained in this disclaimer shall be construed in any=
+ way to grant permission to transmit confidential information via this firm=
+=E2=80=99s e-mail system or as a waiver of confidentiality or privilege. No=
+ responsibility or liability is accepted
+ by Teneo for any loss or damage arising in any way from the use of this co=
+mmunication. No representation is being made that the information presented=
+ is accurate, current or complete, and such information is at all times sub=
+ject to change without notice. E-mail
+ messages are not guaranteed to be secure.<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0Teneo does not provide tax, accounting =
+or legal advice. This e-mail and any attachments are not intended or writte=
+n to be used, and cannot be used or relied upon, by any taxpayer for the pu=
+rpose of (i) avoiding U.S. tax related penalties or (ii) promoting,
+ marketing or recommending to another party any transaction or matter addre=
+ssed herein. Each person should seek advice based on its particular circums=
+tances from independent legal, accounting and tax advisors regarding the ma=
+tters discussed in this communication.<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0This communication is for informational=
+ purposes only. Nothing herein should be construed as an attempt to effect =
+any transaction in, or induce or attempt to induce the sale of, any securit=
+y. Any such offer or solicitation may only be made by means of
+ delivery of an offering memorandum and would be subject to applicable disc=
+losure, documentation, registration and investor qualification requirements=
+. Investment banking services are conducted by Teneo Capital LLC , includin=
+g transactions by its subsidiary
+ Teneo Securities LLC, a member of FINRA and SIPC. To view our privacy poli=
+cy, click
+<a href=3D"https://nam12.safelinks.protection.outlook.com/?url=3Dhttps%3A%2=
+F%2Fwww.teneo.com%2Fprivacy-policy%2Fglobal%2F&amp;data=3D05%7C01%7Cfanda.s=
+hkreli%40teneo.com%7C3d347dcf32844469df5808db314c2f1a%7C3601ef954dea4cfc9a8=
+8eaef968ce713%7C0%7C0%7C638157975503343638%7CUnknown%7CTWFpbGZsb3d8eyJWIjoi=
+MC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&=
+amp;sdata=3DFOvqUXcomFcg9TWWHDVlwonGsEkQBrH2yWDC%2FzkDsvM%3D&amp;reserved=
+=3D0" target=3D"_blank">
+here</a>.<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10pt"><u></u>=C2=A0<u></u><=
+/span></p>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:Arial,=
+sans-serif">Disclaimer</span></b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:Arial,san=
+s-serif">The information contained in this communication from the sender is=
+ confidential. It is intended solely for use by the recipient and others au=
+thorized to receive it. If you are
+ not the recipient, you are hereby notified that any disclosure, copying, d=
+istribution or taking action in relation of the contents of this informatio=
+n is strictly prohibited and may be unlawful. If you have received this com=
+munication in error, please notify
+ Tribe at (619) 567-9955 and delete this communication immediately without =
+making any copy or distribution.</span><u></u><u></u></p>
+</div>
+</div>
+<div style=3D"font-size:10pt;font-family:Calibri,sans-serif">
+<hr size=3D"1">
+<p style=3D"font-size:8.5pt;font-family:Arial,Cambria,&quot;times new roman=
+&quot;,garamond,serif;color:rgb(42,42,42)">
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0This communication is confidential and =
+may contain privileged information, or may otherwise be protected from disc=
+losure. Any unauthorized disclosure, copying, distribution, or use of the i=
+nformation contained herein (including any reliance thereon) is
+ strictly prohibited. If you are not the intended recipient, please notify =
+the sender that you have received this communication in error and delete an=
+d destroy all copies in your possession. Nothing contained in this disclaim=
+er shall be construed in any way
+ to grant permission to transmit confidential information via this firm=E2=
+=80=99s e-mail system or as a waiver of confidentiality or privilege. No re=
+sponsibility or liability is accepted by Teneo for any loss or damage arisi=
+ng in any way from the use of this communication.
+ No representation is being made that the information presented is accurate=
+, current or complete, and such information is at all times subject to chan=
+ge without notice. E-mail messages are not guaranteed to be secure.<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0Teneo does not provide tax, accounting =
+or legal advice. This e-mail and any attachments are not intended or writte=
+n to be used, and cannot be used or relied upon, by any taxpayer for the pu=
+rpose of (i) avoiding U.S. tax related penalties or (ii) promoting,
+ marketing or recommending to another party any transaction or matter addre=
+ssed herein. Each person should seek advice based on its particular circums=
+tances from independent legal, accounting and tax advisors regarding the ma=
+tters discussed in this communication.<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0This communication is for informational=
+ purposes only. Nothing herein should be construed as an attempt to effect =
+any transaction in, or induce or attempt to induce the sale of, any securit=
+y. Any such offer or solicitation may only be made by means of
+ delivery of an offering memorandum and would be subject to applicable disc=
+losure, documentation, registration and investor qualification requirements=
+. Investment banking services are conducted by Teneo Capital LLC , includin=
+g transactions by its subsidiary
+ Teneo Securities LLC, a member of FINRA and SIPC. To view our privacy poli=
+cy, click
+<a href=3D"https://www.teneo.com/privacy-policy/global/" target=3D"_blank">=
+here</a>.</p>
+<br>
+</div>
+</div>
+
+</div></blockquote></div>
+</blockquote></div></div>
+
+--00000000000090861a05f86598fa--
+--00000000000090861b05f86598fb
+Content-Type: image/png; name="image001.png"
+Content-Disposition: inline; filename="image001.png"
+Content-Transfer-Encoding: base64
+Content-ID: <187380311af4cff311>
+X-Attachment-Id: 187380311af4cff311
+
+iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
+SUQ9InhtcC5paWQ6QTJCRDEwRjNCRTI5MTFFQjk5M0FEOUY0RUFEODU1MjciIHhtcE1NOkRvY3Vt
+ZW50SUQ9InhtcC5kaWQ6QTJCRDEwRjRCRTI5MTFFQjk5M0FEOUY0RUFEODU1MjciPiA8eG1wTU06
+RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBMkJEMTBGMUJFMjkxMUVCOTkz
+QUQ5RjRFQUQ4NTUyNyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBMkJEMTBGMkJFMjkxMUVC
+OTkzQUQ5RjRFQUQ4NTUyNyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w
+bWV0YT4gPD94cGFja2V0IGVuZD0iciI/PkhJq1kAAAHVSURBVHjaYmTAAgTK9vAAqSggDgBiEyAW
+hUq9BuIzQLwBiJd96HL5gq6XEYthyUCqE4iFGfCDt0BcDjR0LlYDgQaxASmQZAwDaWAJECcDDf4F
+4rAgSZBjGAOSnli4C6HenANi83KwMJS7KDLce/OdYd6JJ6QYnALyPiM0Ah7AwizbVo6hxUcVrMKw
+8xjDg3ffiTUQFKYKLNDYhEfAyYcfGb78/Mvw6P13hueffpLiQpAZUSAXbgMyPJFlmJkYGf7++4+h
+gwUoriTCxfD111+Gpx9+YDN0Ows0ncGBt7Yow5I4PTBbsHwvw7QwLYZIY0mGo/feM0jyczAoCXOC
+5TZfecWQsOQKw7//KBabMCElWrzAWkmQQYyHDRwcIOCrI8bgqCaErkyUidgAev3lF4NW2xEG/Y6j
+DD///AOLaYpzY6hjgmYnguDi088Mn3/8YXj37TfDg7eQmOdhZ8GwlwmaNwmCX3//wdm/sUQYFJxh
+gmZ0aoENIAOXQRMlpQBkxjKMrCfOy85gIscHVrH16msGfWleBhkBDoaXn38ynHn0CSxuqyzIwAfM
+ordefWO4/foratZDKm0Wk1k4gEscoGGxsFiGgWRoUcRATvFF+wKWWlUAQIABAGrhoXBLg/LpAAAA
+AElFTkSuQmCC
+--00000000000090861b05f86598fb
+Content-Type: image/png; name="image002.png"
+Content-Disposition: inline; filename="image002.png"
+Content-Transfer-Encoding: base64
+Content-ID: <187380311af5b16b22>
+X-Attachment-Id: 187380311af5b16b22
+
+iVBORw0KGgoAAAANSUhEUgAAABsAAAAUCAYAAAB8gkaAAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAA4NpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDA2IDc5LjE2
+NDc1MywgMjAyMS8wMi8xNS0xMTo1MjoxMyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEu
+MC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVz
+b3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1N
+Ok9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDphY2E0MWVmMi1kZDI5LTQyNjMtOWRjMC01OTgw
+YTAxOWEwZmEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTU1QTY1RkQ5QUNGMTFFQjlBQjc5
+ODQ1REE2N0U3N0YiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTU1QTY1RkM5QUNGMTFFQjlB
+Qjc5ODQ1REE2N0U3N0YiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKE1h
+Y2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDox
+ZmVhMDM0OC05Njg4LTRkYzktOTNmOC1lNzg3YWRiZGVhODciIHN0UmVmOmRvY3VtZW50SUQ9ImFk
+b2JlOmRvY2lkOnBob3Rvc2hvcDo4NmFiZjg5MS1lZWJiLWJhNDktYWIzYy02ZjJkM2M0NjcwYzQi
+Lz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBl
+bmQ9InIiPz6vetrUAAACEElEQVR42mL8//8/Ay7AyMiIISZQtocHSEUBcQAQmwCxKFTqNRCfAeIN
+QLzsQ5fLFwzzSLEMaFEykOoEYmEG/OAtEJcDLZxLsmVAS9iAFEhjDANpYAkQJwMt/QXisBCpiRyL
+GJD0xIIIJkKqoUFHjkVwC6Fm4A9GwfK9oMTwADmOmJkYGf7+Q9XDzsLEEGksySDEzcqw6dIrhicf
+fzDwcbAwvPr8CzkOFQgFYxSyRaqiXAyVbkoMmSuvMfz88w+uaHmCPoOjqhCYXeasyPD800+GnNXX
+kS0DmRFFKBgDkDm87CwMgXriDAfyzBic1IQYmIAJSF6IE24RzJegwHr47juGWYR8ZoLMuQ804Mrz
+Lww6kjwMa5MNGV5+/slw/y2GoQxbrr5mePLhB4ZZhCwTReYIcbGCLYIBcV52MEYHjzB9BTaLiZRk
+dffNN4befQ8Y/uFJVCCp3TffYpUjZNlrdIE9QIN+/P6HU8Paiy+wxRfYLEKWnUEXOPHgA0PpxpsM
+97DE1eP3PxgqNt3CaRYhyzYgc1RFuRkC9MQYTGT5GaT4UOPqzKOPDB7TzzC8/fobp1mEEsgyIG6D
+5bVH778zmCvwMwgDM++NV18Zfv7+y3DnzXeGzVdeMey68YYBT1SCInEZwYIYWtTMYaAMpIBqAGJL
+/cUUlI9LgBYRVxBDQTK0uiDZIqjeQVp5UqtZABBgADzA0OQMyaxPAAAAAElFTkSuQmCC
+--00000000000090861b05f86598fb
+Content-Type: image/png; name="image003.png"
+Content-Disposition: inline; filename="image003.png"
+Content-Transfer-Encoding: base64
+Content-ID: <187380311af692e333>
+X-Attachment-Id: 187380311af692e333
+
+iVBORw0KGgoAAAANSUhEUgAAABsAAAAUCAYAAAB8gkaAAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAA4NpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDA2IDc5LjE2
+NDc1MywgMjAyMS8wMi8xNS0xMTo1MjoxMyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEu
+MC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVz
+b3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1N
+Ok9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDphY2E0MWVmMi1kZDI5LTQyNjMtOWRjMC01OTgw
+YTAxOWEwZmEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDQ1MTAzRkU5QUNGMTFFQjlBQjc5
+ODQ1REE2N0U3N0YiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDQ1MTAzRkQ5QUNGMTFFQjlB
+Qjc5ODQ1REE2N0U3N0YiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKE1h
+Y2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDox
+ZmVhMDM0OC05Njg4LTRkYzktOTNmOC1lNzg3YWRiZGVhODciIHN0UmVmOmRvY3VtZW50SUQ9ImFk
+b2JlOmRvY2lkOnBob3Rvc2hvcDo4NmFiZjg5MS1lZWJiLWJhNDktYWIzYy02ZjJkM2M0NjcwYzQi
+Lz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBl
+bmQ9InIiPz7VCDofAAAB8klEQVR42mL8//8/Ay7AyMiIISZQtocHSEUBcQAQmwCxKFTqNRCfAeIN
+QLzsQ5fLFwzzSLEMaFEykOoEYmEG/OAtEJcDLZxLsmVAS9iAFEhjDANpYAkQJwMt/QXisBCpiRyL
+GJD0xBLlM2jQzUGXY2FiZLBWEmTQkeQB8688/8Jw9N57hj//sJqXAgpSvJYJlu8FmfQAPY4sFQUY
++gI1GFRFucCWgADI0tuvvzEUrb/BcPz+B2xxqEAoGKOwWdTpp8Yw69hjBkMZPobrLyCWXZLgYTj/
+5BNYrnzTLXQLQWZEEfLZNiDlCeOzMjMyHCkwZwClG3FedoZXX34x8LAxg+W+/PrLIMbDxvDy808G
+kJE2E04y/P6LYvZ2JgI+M0Hm2ADj6OTDjwxmPScYHrz7zmDTf5Jh0sGHYAxig8RAciA1ILXoZhEK
+RlFkjq4ULwMfBwtDpo0sgwQfO0OShTQ4kcAASAwkB1IDUrv/9jsUs5gY6AgIWfYamXP52WeGTz/+
+MEw/8pjhxaefDPNOPAUndxAGsUFiIDmQGpBadLPomkAIxdkGZMtAmgvW3QAn78btdxkMZHjhSV8T
+mPQvPPnMkGAuBU76aBaBzaJrph48xRVSqb+YzIIYXPIDLYolJjXCQDK0umAgp4oZvJUntZoFAAEG
+AM8PFaU4dMgZAAAAAElFTkSuQmCC
+--00000000000090861b05f86598fb
+Content-Type: image/png; name="image004.png"
+Content-Disposition: inline; filename="image004.png"
+Content-Transfer-Encoding: base64
+Content-ID: <187380311af7745b44>
+X-Attachment-Id: 187380311af7745b44
+
+iVBORw0KGgoAAAANSUhEUgAAABsAAAAUCAYAAAB8gkaAAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAA4NpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDA2IDc5LjE2
+NDc1MywgMjAyMS8wMi8xNS0xMTo1MjoxMyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEu
+MC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVz
+b3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1N
+Ok9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDphY2E0MWVmMi1kZDI5LTQyNjMtOWRjMC01OTgw
+YTAxOWEwZmEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTU1QTY2MDE5QUNGMTFFQjlBQjc5
+ODQ1REE2N0U3N0YiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTU1QTY2MDA5QUNGMTFFQjlB
+Qjc5ODQ1REE2N0U3N0YiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKE1h
+Y2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDox
+ZmVhMDM0OC05Njg4LTRkYzktOTNmOC1lNzg3YWRiZGVhODciIHN0UmVmOmRvY3VtZW50SUQ9ImFk
+b2JlOmRvY2lkOnBob3Rvc2hvcDo4NmFiZjg5MS1lZWJiLWJhNDktYWIzYy02ZjJkM2M0NjcwYzQi
+Lz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBl
+bmQ9InIiPz4MhbDVAAAB2UlEQVR42mL8//8/Ay7AyMiIISZQtocHSEUBcQAQmwCxKFTqNRCfAeIN
+QLzsQ5fLFwzzSLEMaFEykOoEYmEG/OAtEJcDLZxLsmVAS9iAFEhjDANpYAkQJwMt/QXisBCpiRyL
+GJD0xIIIJkKqoUFHjkVwC6Fm4A9GwfK9oMTwAD2O2JiZGLjYmBj4OFAD5tOPPwzffv1j+PX3H7Y4
+VCAUjFHIFkWZSDLUuiszSPCx49X04tNPhuaddxmWnXkOEwKZEUUoGAOQOTVuhC0CAZAakFp0swhZ
+ZgJjsLMwMUjyo1r08vNPhnNPPmHVCFIL0oNsFiHLYBmWgYMVU+nrL78ZXKacZshefY3h1edfGPJo
+ekSZiE1SLEyMWMVB6Wv/7XcMpx5+xJBjRisUCCWQ1zDfff+NkcKAwcTIUOqsyFDoKM/AycqMIf/j
+D4qe14R8dgbG+PbrL8OXn39RJFVFuRmq3JSwWgRSC9KDbBYhyzYgczZefkV0TsaidgNJmZoJGAf6
+0rwMMgIcDLwczGAfsTFD4uXX3//AoP7L8PnHX4YnH34wXHz6meEfwmxwpiZYEEOLmjkMlIEUUA1A
+bKm/mILycQnQIuIKYihIhlYXJFsE1TtIK09qNQsAAgwAKI2yf75SqOwAAAAASUVORK5CYII=
+--00000000000090861b05f86598fb--

@@ -1,0 +1,1703 @@
+Delivered-To: kavin@tribecap.co
+Received: by 2002:a05:7010:ac8e:b0:341:6b4e:1a5e with SMTP id dv14csp2069105mdb;
+        Sun, 2 Apr 2023 19:14:04 -0700 (PDT)
+X-Received: by 2002:a17:906:6dd7:b0:931:c99c:480 with SMTP id j23-20020a1709066dd700b00931c99c0480mr35318360ejt.69.1680488044014;
+        Sun, 02 Apr 2023 19:14:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1680488044; cv=none;
+        d=google.com; s=arc-20160816;
+        b=Ik4i/IgqC0DUm6GUiAUAKdyYBvNCnN+OdBVut5Z8uENoqlCPqUSnbikL9CtMDBNN6S
+         jx/lqpDlFFuvGd1R5DU28rOnX63aY8hppX2uiX/hjxIY9niWj4+etz5BVGfJzb+V1zuG
+         d0M5CC+4YtyTJg5Ht++mjfhccyZX6Dr3M/gxIvVVqMud+QYPxjL3MxgO+qoZFhw4O8QJ
+         4WRETTHtWAimSaRWeGBXWAOczR7ZL/YW9EMsMGBVurbFdx5JRWvyxbTVQ7ycI0OM4SXU
+         uxhtJBjuGiVh00q8l7MiTNyOdSA2YDAuJRjoHiRaIZXplTo+IqRcPlMtFTzeyuSyNso9
+         Rw0A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=wWeS7n1KXtSXFojhaM32BsKfi32G7MNIUn3ATJYUb58=;
+        b=uDoohIuF717PRNsBjLzVVbH7xo9YGrIdTrBJeUmn4+eVxWhL+UotBnocoYlIY0QFui
+         DSE50c92Dj1uE6mOp3KYhd0dZmhP/ESFLfkrH8hsahVbFIq2AHIL8r2Kk9KiF0hkNwm4
+         p21gm54A944jCcbx/S25hClThcjAr3q9c+p28TpDFmPPTU5Xbsb0FBkmVa+i1ibAckKO
+         /onK3pKbv6lZaDxTZ3MCjTMpoxi9TBOKb2C9IEmv44+BUhZOhqeECBjKSMptobMtCyP7
+         S95uiNA2wx0XhPcKHxIqyxextAJuxJQp2C94Q6jS4kilfDzWXr+RfzKbHccPRHivrtY/
+         1L9A==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=SkJEdRe0;
+       spf=pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=veronica@tribecap.co
+Return-Path: <veronica@tribecap.co>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id sa41-20020a1709076d2900b008ee3a7ab317sor3629662ejc.3.2023.04.02.19.14.03
+        for <kavin@tribecap.co>
+        (Google Transport Security);
+        Sun, 02 Apr 2023 19:14:03 -0700 (PDT)
+Received-SPF: pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tribecap.co header.s=google header.b=SkJEdRe0;
+       spf=pass (google.com: domain of veronica@tribecap.co designates 209.85.220.41 as permitted sender) smtp.mailfrom=veronica@tribecap.co
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tribecap.co; s=google; t=1680488043;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=wWeS7n1KXtSXFojhaM32BsKfi32G7MNIUn3ATJYUb58=;
+        b=SkJEdRe0mXDJ0sKzZfigKqlo6fILJ66/ZXgkQ2lLOuur8vG3d/80mBV1ujSNE7ZwQE
+         Jct+DoYq+lyKkzARGRAd/djupGRoTNpsAcx4okA0WudF5LwgK3l/kebV82gnH+9kdfwy
+         e1USaPc4RvkPfGi2dFnfFox1DN9ZoUwc3xL0aO3tCGQJI3Rn+93IOVSUY6W634A4sKf7
+         hPC99X0pKgLc0W4HFaVQlz/OhUVBdJWtu62xfails++8Nz/Aj9fwhN7GPuv5TjjpWpSN
+         WhOv4DBrnPII0AcKPJOg3pkpfAm8wdwadu1yYiDtn9FNo775i7y25ofLpVfen3Kj980u
+         6qKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680488043;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=wWeS7n1KXtSXFojhaM32BsKfi32G7MNIUn3ATJYUb58=;
+        b=vQmD3yXqKOLM8oXo2G0UUgDfyWuctNXWJb9Exp7MCucp0SfSiuDYVqxad3GkzOIPxA
+         gyF0fOK+kpPxLByyTVJNTcl1QDcI3fOc6pcJwIQVvsTjkl+o0KTzeOOLm6dKatK5SAxs
+         2EALdoAGw9yN4vVz4+DkTD8wnzIULYCL/SS7FXuwTXu8GfKhdzWRFJzExrCueNb3EjaD
+         r/ssiUpOKYNZCRXT4jTdOIh+s8rcG8tRizRbG+AtWQhs2bveewUzpbf6IiKrDB/1GBWk
+         Wexat7G440k6FWOkaTmLheZNSDp9i12jLdp1oyA0B8gQL8xWyZKUcVQ20+xSS2izUWVb
+         3KDg==
+X-Gm-Message-State: AAQBX9eGHOQYvP+Kn/PE1+MESNQRYsvJgVOTWZKVntMC/pYKIrD7P1+A
+	NTERZEOGebnBNSSemKB+RA1AqdojxIPrQoc5kO0BO6mFRd2rafIWi0feKcYYlbkzqC+S5WdxoJj
+	TimxnmIMzA3Jpo6bbw/qfsrMVHqn/rrxnHT86Ay6hbrLqG+M9aOOmJG9qLJI5E8QTV1GIFcp0mD
+	R4Zq34ajO4EFClduV0zyd0LCgMnFaQ5GMYlhwTaAIjtwPnZg==
+X-Google-Smtp-Source: AKy350YQkv3VpI4jbi61f8xAo0Ta+eFrEo6euToL4nfvZ7iBCekPF2Rs7dZ6lM6aZ3dKNtV6unBuCY5P1Ks0haRWqZ4=
+X-Received: by 2002:a17:906:da81:b0:93f:82cb:fe44 with SMTP id
+ xh1-20020a170906da8100b0093f82cbfe44mr16211032ejb.11.1680488043438; Sun, 02
+ Apr 2023 19:14:03 -0700 (PDT)
+MIME-Version: 1.0
+References: <VI1PR0602MB33096D9D5659140E4076AAC3C6B99@VI1PR0602MB3309.eurprd06.prod.outlook.com>
+ <30F2A160-ADDD-4724-9499-960E39A56231@tribecap.co> <AM0PR06MB5842AD8DA3DB29D405DA9B2AB48D9@AM0PR06MB5842.eurprd06.prod.outlook.com>
+In-Reply-To: <AM0PR06MB5842AD8DA3DB29D405DA9B2AB48D9@AM0PR06MB5842.eurprd06.prod.outlook.com>
+From: Veronica Sullivan <veronica@tribecap.co>
+Date: Sun, 2 Apr 2023 22:13:51 -0400
+Message-ID: <CAGhPhKctHBsC=RTQZqYGe3vO=4uZd1AKxscN1rp0W3RjUOK3-Q@mail.gmail.com>
+Subject: Re: introduction space investment
+To: =?UTF-8?Q?Adri=C3=A0_Roca?= <aroca@inveready.com>
+Cc: =?UTF-8?Q?Carla_Rodr=C3=ADguez?= <carodriguez@inveready.com>, 
+	Aniol Brosa <abrosa@inveready.com>
+Content-Type: multipart/related; boundary="000000000000e1128c05f8651cfb"
+Bcc: kavin@tribecap.co
+
+--000000000000e1128c05f8651cfb
+Content-Type: multipart/alternative; boundary="000000000000e1128b05f8651cfa"
+
+--000000000000e1128b05f8651cfa
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Adri=C3=A0,
+
+Arjun will be traveling until the last week of April.  Is Anol available to
+Zoom at 10 am PDT / 7 pm Barcelona time on April 28th?  Might this be
+appropriate?
+
+Kind regards,
+
+Veronica Sullivan
+Assistant to Arjun Sethi
+Tribe Capital
+(646) 280-5410
+
+
+On Sun, Apr 2, 2023 at 5:14=E2=80=AFPM Adri=C3=A0 Roca <aroca@inveready.com=
+> wrote:
+
+> Dear Veronica,
+>
+>
+>
+> In order to schedule the call, how does it works Tuesday 4th at 9am (Los
+> Angeles time)?
+>
+>
+>
+> I=E2=80=99ve tried to match Barcelona with Los Angeles time so we both ca=
+n make it!
+>
+>
+>
+> Thanks,
+>
+>
+>
+>
+>
+>
+>
+> Adri=C3=A0 Roca Valls
+>
+> Senior Associate
+>
+>
+>
+> M: +34 / 634.750.181
+>
+> Add: Carrer dels Cavallers 50, 08034 Barcelona
+>
+> www.inveready.com                 *aroca@inveready.com
+> <aroca@inveready.com>*
+>
+>
+>
+> *De acuerdo con lo que establece el Reglamento General de Protecci=C3=B3n=
+ de
+> Datos y la normativa vigente, INVEREADY ASSET MANAGEMENT SGEIC, S.A.
+> garantiza la confidencialidad y privacidad de los datos personales que
+> trata. Para ampliar la informaci=C3=B3n puede acceder a la pol=C3=ADtica =
+de
+> privacidad a trav=C3=A9s del siguiente enlace: *
+> *https://inveready.com/politica-privacidad/*
+> <https://inveready.com/politica-privacidad/>* Este mensaje y los ficheros
+> anexos son confidenciales y se dirigen exclusivamente al destinatario
+> referenciado. Si lo ha recibido por error, le pedimos que nos lo comuniqu=
+e
+> por este medio y lo elimine. En todo caso, abst=C3=A9ngase de utilizarlo,
+> reproducirlo, alterarlo, archivarlo, comunicar o someter a cualquier otro
+> tratamiento, ya sea su contenido como los datos personales que pueda
+> contener*
+>
+>
+>
+> *De:* Veronica Sullivan <veronica@tribecap.co>
+> *Enviado el:* lunes, 27 de marzo de 2023 16:40
+> *Para:* Aniol Brosa <abrosa@inveready.com>
+> *CC:* Adri=C3=A0 Roca <aroca@inveready.com>; Carla Rodr=C3=ADguez <
+> carodriguez@inveready.com>; Francois, Herve <hfrancois@investcorp.com>
+> *Asunto:* Re: introduction space investment
+>
+>
+>
+> I am proposing in Los Angeles time. (Pacific Daylight time)  Veronica
+> Sullivan Assistant to Arjun Sethi  Tribe Capital (646) 280-5410 On Mar 27=
+,
+> 2023, at 4:25 AM, Aniol Brosa wrote: =EF=BB=BF Dear,
+>
+> Caution! This message was sent from outside your organization.
+>
+> sophospsmartbannerend
+>
+> I am proposing in Los Angeles time. (Pacific Daylight time)
+>
+> Veronica Sullivan
+>
+> Assistant to Arjun Sethi
+>
+> Tribe Capital
+>
+> (646) 280-5410
+>
+>
+>
+>
+> On Mar 27, 2023, at 4:25 AM, Aniol Brosa <abrosa@inveready.com> wrote:
+>
+> =EF=BB=BF
+>
+> Dear, I see you could make it 9am, but realize we are in different time
+> zones, please can you tell us in which time zone so I can propose a new
+> time to meet, today 18h (Spain time zone) doesn=E2=80=99t work for me
+>
+>
+>
+> Obt=C3=A9n l'aplicaci=C3=B3 Outlook per a l'iOS
+> <https://eu-central-1.protection.sophos.com?d=3Daka.ms&u=3DaHR0cHM6Ly9ha2=
+EubXMvbzB1a2Vm&i=3DNjJkZTc1ODEzZWUwYjgxMjEzZjU4MTE5&t=3DRndaanFMYmt5SVV4MlV=
+idFVmU3UwZzM3YXJqT2kyZHRuMDdaMGI3REtmOD0=3D&h=3D076b3c1af0c543a2a197899d168=
+9f9f7&s=3DAVNPUEhUT0NFTkNSWVBUSVaUMwhGicNyyDogcTbuCVe8nABpMm45MFUjEVDEZ8M6E=
+A>
+> ------------------------------
+>
+> *De:* Veronica Sullivan <veronica@tribecap.co>
+> *Enviat el:* Monday, March 13, 2023 7:07:18 PM
+> *Per a:* Aniol Brosa <abrosa@inveready.com>
+> *A/c:* Adri=C3=A0 Roca <aroca@inveready.com>; Carla Rodr=C3=ADguez <
+> carodriguez@inveready.com>; Francois, Herve <hfrancois@investcorp.com>
+> *Tema:* Re: introduction space investment
+>
+>
+>
+> I'll make 9 am work on the 27th and send the invite out now.  Sorry for
+> the back and forth! Veronica Sullivan Assistant to Arjun Sethi Tribe
+> Capital (646) 280-5410 On Mon, Mar 13, 2023 at 1:56=E2=80=AFPM
+>
+> Caution! This message was sent from outside your organization.
+>
+> sophospsmartbannerend
+>
+> I'll make 9 am work on the 27th and send the invite out now.  Sorry for
+> the back and forth!
+>
+>
+>
+> Veronica Sullivan
+>
+> Assistant to Arjun Sethi
+>
+> Tribe Capital
+>
+> (646) 280-5410
+>
+>
+>
+>
+>
+> On Mon, Mar 13, 2023 at 1:56=E2=80=AFPM Aniol Brosa <abrosa@inveready.com=
+> wrote:
+>
+> I can=E2=80=99t make it neither 8 nor 9:30, how about the 29th ?
+>
+>
+>
+> *De: *Veronica Sullivan <veronica@tribecap.co>
+> *Fecha: *lunes, 13 de marzo de 2023, 17:15
+> *Para: *Aniol Brosa <abrosa@inveready.com>
+> *CC: *Adri=C3=A0 Roca <aroca@inveready.com>, Carla Rodr=C3=ADguez <
+> carodriguez@inveready.com>, Francois, Herve <hfrancois@investcorp.com>
+> *Asunto: *Re: introduction space investment
+>
+> Hi Aniol,  There has been a shift in the calendar.  Would you prefer 8 am
+> or 9:30 am instead?  Apologies for the inconvenience! Kind regards,
+> Veronica Sullivan Assistant to Arjun Sethi
+>
+> Caution! This message was sent from outside your organization.
+>
+> sophospsmartbannerend
+>
+> Hi Aniol,
+>
+>
+>
+> There has been a shift in the calendar.  Would you prefer 8 am or 9:30 am
+> instead?  Apologies for the inconvenience!
+>
+>
+>
+> Kind regards,
+>
+>
+>
+> Veronica Sullivan
+>
+> Assistant to Arjun Sethi
+>
+> Tribe Capital
+>
+> (646) 280-5410
+>
+>
+>
+>
+>
+> On Mon, Mar 13, 2023 at 6:09=E2=80=AFAM Aniol Brosa <abrosa@inveready.com=
+> wrote:
+>
+> Yes, please CC @Adri=C3=A0 Roca <aroca@inveready.com> @Carla Rodr=C3=ADgu=
+ez
+> <carodriguez@inveready.com>
+>
+>
+>
+> *De: *Veronica Sullivan <veronica@tribecap.co>
+> *Fecha: *viernes, 10 de marzo de 2023, 20:33
+> *Para: *Aniol Brosa <abrosa@inveready.com>
+> *CC: *Francois, Herve <hfrancois@investcorp.com>, Adri=C3=A0 Roca <
+> aroca@inveready.com>
+> *Asunto: *Re: introduction space investment
+>
+> Hi Aniol, Are you available to Zoom with Arjun on March 27th at 9 am PDT?
+> Kind regards, Veronica Sullivan Assistant to Arjun Sethi Tribe Capital
+> (646) 280-5410 On Thu, Mar 9, 2023 at 9:28=E2=80=AFAM Anio
+>
+> Caution! This message was sent from outside your organization.
+>
+> sophospsmartbannerend
+>
+> Hi Aniol,
+>
+>
+>
+> Are you available to Zoom with Arjun on March 27th at 9 am PDT?
+>
+>
+>
+> Kind regards,
+>
+>
+>
+> Veronica Sullivan
+>
+> Assistant to Arjun Sethi
+>
+> Tribe Capital
+>
+> (646) 280-5410
+>
+>
+>
+>
+>
+> On Thu, Mar 9, 2023 at 9:28=E2=80=AFAM Aniol Brosa <abrosa@inveready.com>=
+ wrote:
+>
+> Dear Herv=C3=A9,
+>
+> Many thanks for the introduction and apologize for the late reply, just
+> catching-up on the email now after hectics days at the MWC
+>
+>
+>
+> Dear Arjun,
+>
+> A pleasure to e-meet you. How about organizing a videoconference for next
+> week? Please let me know your agenda
+>
+>
+>
+> Best
+>
+>
+>
+>
+>
+> *De: *Francois, Herve <hfrancois@Investcorp.com>
+> *Fecha: *viernes, 3 de marzo de 2023, 20:42
+> *Para: *Arjun Sethi <arj@tribecap.co>, Aniol Brosa <abrosa@inveready.com>
+> *CC: *Veronica Sullivan <veronica@tribecap.co>
+> *Asunto: *introduction space investment
+>
+> Arjun, Aniol,   As discussed separately, I thought it might be beneficial
+> to introduce each other as you are both active in the space investment.
+> Arjun is co-founder of Tribe capital and l
+>
+> Caution! This message was sent from outside your organization.
+>
+> sophospsmartbannerend
+>
+> Arjun, Aniol,
+>
+>
+>
+> As discussed separately, I thought it might be beneficial to introduce
+> each other as you are both active in the space investment.
+>
+>
+>
+> Arjun is co-founder of Tribe capital and look at 3d printed rocket
+> investment, among others.
+>
+> Aniol is partner at Inveready and look at rocket engine investment.
+>
+>
+>
+> I let you take it from here and veronica can help to set a meeting.
+>
+> Best,
+>
+>
+>
+> *Herv=C3=A9 Fran=C3=A7ois *
+>
+> Partner =E2=80=93 Investcorp Blockchain Fund
+>
+> <image001.png>
+>
+> Al Sila Tower =E2=80=93 8th Floor
+>
+> Abu Dhabi Global Market Square
+>
+> Al Maryah Island, PO Box 36961
+>
+> Abu Dhabi, U.A.E.
+>
+>
+>
+> *M:* +971 50 533 8528 | *M:* +44 7 443 758 990
+>
+> www.investcorp.com
+> <https://eu-central-1.protection.sophos.com?d=3Dinvestcorp.com&u=3DaHR0cD=
+ovL3d3dy5pbnZlc3Rjb3JwLmNvbS8=3D&i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMmVl&t=3DR=
+GRaK2t0Vm92QTVTVndnbXRwb0RzYjRLdi9wZVFFZ1R5bDlxL0FMblJUMD0=3D&h=3D1a11b5d20=
+423453db35d0eedf65fe99e&s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL19uMrpp=
+17BfJJpuw5fafnAn3_csdgb6SEeIhvZp8n2zOOE8>
+>
+> <image002.png>
+> <https://eu-central-1.protection.sophos.com/?d=3Durldefense.com&u=3DaHR0c=
+HM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi93d3cubGlua2VkaW4uY29tL2NvbXBhbnkv=
+aW52ZXN0Y29ycC9fXzshIVAxb2EyZEl5IVFHbE1lZ0JrYnhWblJLMW1lUEZzelJQdEppRnI4NjJ=
+ocGhxUEw0LXZLeUF0MUpUcWNNdURJdDd3UGViYVY5TmFJMkhUZzBuR1lGOXRyU2MwX3Voc2FHcm=
+NjeGdKU0FzMnlnJA=3D=3D&i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMmVl&t=3DZURUTHdSdVk=
+rZkw2a2dobVF1LzhnSmZpTXRoeHJQUVZqZjRqNlN5emo1VT0=3D&h=3D1a11b5d20423453db35=
+d0eedf65fe99e&s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL19uMrpp17BfJJpuw5=
+fafnAn3_csdgb6SEeIhvZp8n2zOOE8>
+>
+>
+> <https://eu-central-1.protection.sophos.com/?d=3Durldefense.com&u=3DaHR0c=
+HM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi90d2l0dGVyLmNvbS9JbnZlc3Rjb3JwP3Jl=
+Zl9zcmM9dHdzcmMqNUVnb29nbGUqN0N0d2NhbXAqNUVzZXJwKjdDdHdncio1RWF1dGhvcl9fO0p=
+TVWxKU1UhIVAxb2EyZEl5IVFHbE1lZ0JrYnhWblJLMW1lUEZzelJQdEppRnI4NjJocGhxUEw0LX=
+ZLeUF0MUpUcWNNdURJdDd3UGViYVY5TmFJMkhUZzBuR1lGOXRyU2MwX3Voc2FHcmNjeGpkOXo1M=
+zlnJA=3D=3D&i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMmVl&t=3DUDZvamdsUDA3dFN5KzlSRG=
+s3d3lQYUo2NVRqWnZDTkRxOVpWM3VETlhHbz0=3D&h=3D1a11b5d20423453db35d0eedf65fe9=
+9e&s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL19uMrpp17BfJJpuw5fafnAn3_csd=
+gb6SEeIhvZp8n2zOOE8>
+>
+> <image003.png>
+> <https://eu-central-1.protection.sophos.com/?d=3Durldefense.com&u=3DaHR0c=
+HM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi90d2l0dGVyLmNvbS9JbnZlc3Rjb3JwP3Jl=
+Zl9zcmM9dHdzcmMqNUVnb29nbGUqN0N0d2NhbXAqNUVzZXJwKjdDdHdncio1RWF1dGhvcl9fO0p=
+TVWxKU1UhIVAxb2EyZEl5IVFHbE1lZ0JrYnhWblJLMW1lUEZzelJQdEppRnI4NjJocGhxUEw0LX=
+ZLeUF0MUpUcWNNdURJdDd3UGViYVY5TmFJMkhUZzBuR1lGOXRyU2MwX3Voc2FHcmNjeGpkOXo1M=
+zlnJA=3D=3D&i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMmVl&t=3DUDZvamdsUDA3dFN5KzlSRG=
+s3d3lQYUo2NVRqWnZDTkRxOVpWM3VETlhHbz0=3D&h=3D1a11b5d20423453db35d0eedf65fe9=
+9e&s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL19uMrpp17BfJJpuw5fafnAn3_csd=
+gb6SEeIhvZp8n2zOOE8>
+>
+>
+> <https://eu-central-1.protection.sophos.com/?d=3Durldefense.com&u=3DaHR0c=
+HM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi93d3cuaW5zdGFncmFtLmNvbS9hY2NvdW50=
+cy9sb2dpbi8_bmV4dD0qaW52ZXN0Y29ycCpfXztMeTghIVAxb2EyZEl5IVFHbE1lZ0JrYnhWblJ=
+LMW1lUEZzelJQdEppRnI4NjJocGhxUEw0LXZLeUF0MUpUcWNNdURJdDd3UGViYVY5TmFJMkhUZz=
+BuR1lGOXRyU2MwX3Voc2FHcmNjeGpONTNoRDdBJA=3D=3D&i=3DNjE4MTA4OGNkNTI3N2QwZWYw=
+MTNkMmVl&t=3DTWl6aXJidERibWJGQlM1bzlraFh4cng0NFFvOGhqMEFyeWJ5UDF1MW1nZz0=3D=
+&h=3D1a11b5d20423453db35d0eedf65fe99e&s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKF=
+Py_SjYL19uMrpp17BfJJpuw5fafnAn3_csdgb6SEeIhvZp8n2zOOE8>
+>
+> <image004.png>
+> <https://eu-central-1.protection.sophos.com/?d=3Durldefense.com&u=3DaHR0c=
+HM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi93d3cuaW5zdGFncmFtLmNvbS9hY2NvdW50=
+cy9sb2dpbi8_bmV4dD0qaW52ZXN0Y29ycCpfXztMeTghIVAxb2EyZEl5IVFHbE1lZ0JrYnhWblJ=
+LMW1lUEZzelJQdEppRnI4NjJocGhxUEw0LXZLeUF0MUpUcWNNdURJdDd3UGViYVY5TmFJMkhUZz=
+BuR1lGOXRyU2MwX3Voc2FHcmNjeGpONTNoRDdBJA=3D=3D&i=3DNjE4MTA4OGNkNTI3N2QwZWYw=
+MTNkMmVl&t=3DTWl6aXJidERibWJGQlM1bzlraFh4cng0NFFvOGhqMEFyeWJ5UDF1MW1nZz0=3D=
+&h=3D1a11b5d20423453db35d0eedf65fe99e&s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKF=
+Py_SjYL19uMrpp17BfJJpuw5fafnAn3_csdgb6SEeIhvZp8n2zOOE8>
+>
+>
+> <https://eu-central-1.protection.sophos.com/?d=3Durldefense.com&u=3DaHR0c=
+HM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi93d3cueW91dHViZS5jb20vY2hhbm5lbC9V=
+Q3l5WFJGYWNnRXJLb1lNN3N5UmtYWlFfXzshIVAxb2EyZEl5IVFHbE1lZ0JrYnhWblJLMW1lUEZ=
+zelJQdEppRnI4NjJocGhxUEw0LXZLeUF0MUpUcWNNdURJdDd3UGViYVY5TmFJMkhUZzBuR1lGOX=
+RyU2MwX3Voc2FHcmNjeGpQcGdmakhnJA=3D=3D&i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMmVl=
+&t=3DdUZ5MkZJQWUrZ0Q5TjRob0hDSVBCM1JETTFkb2l1aW9PanAxMUloV1hjOD0=3D&h=3D1a1=
+1b5d20423453db35d0eedf65fe99e&s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL1=
+9uMrpp17BfJJpuw5fafnAn3_csdgb6SEeIhvZp8n2zOOE8>
+>
+> <image005.png>
+> <https://eu-central-1.protection.sophos.com/?d=3Durldefense.com&u=3DaHR0c=
+HM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi93d3cueW91dHViZS5jb20vY2hhbm5lbC9V=
+Q3l5WFJGYWNnRXJLb1lNN3N5UmtYWlFfXzshIVAxb2EyZEl5IVFHbE1lZ0JrYnhWblJLMW1lUEZ=
+zelJQdEppRnI4NjJocGhxUEw0LXZLeUF0MUpUcWNNdURJdDd3UGViYVY5TmFJMkhUZzBuR1lGOX=
+RyU2MwX3Voc2FHcmNjeGpQcGdmakhnJA=3D=3D&i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMmVl=
+&t=3DdUZ5MkZJQWUrZ0Q5TjRob0hDSVBCM1JETTFkb2l1aW9PanAxMUloV1hjOD0=3D&h=3D1a1=
+1b5d20423453db35d0eedf65fe99e&s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL1=
+9uMrpp17BfJJpuw5fafnAn3_csdgb6SEeIhvZp8n2zOOE8>
+>
+>
+>
+>
+>
+>
+> ------------------------------
+>
+>
+>
+> This email and any attachments are solely for the use of the intended
+> recipient(s), are confidential and may contain information that is
+> privileged or otherwise exempt from disclosure under applicable law. No
+> confidentiality or privilege is waived or lost by any transmission errors=
+.
+> If you are not an intended recipient, please notify the sender immediatel=
+y,
+> delete all copies of this email and any attachments from your system and =
+do
+> not copy, disclose, use, or otherwise act upon any part of this email or =
+of
+> any attachments and please note that any such copying, disclosure, usage,
+> or action is prohibited and may be unlawful.
+>
+> This email and any attachments may also contain personal data. For detail=
+s
+> of how and why we use personal data, please see our privacy notices locat=
+ed
+> at https://www.investcorp.com/legal-statement-and-privacy-policy/.
+> <https://eu-central-1.protection.sophos.com?d=3Dinvestcorp.com&u=3DaHR0cH=
+M6Ly93d3cuaW52ZXN0Y29ycC5jb20vbGVnYWwtc3RhdGVtZW50LWFuZC1wcml2YWN5LXBvbGlje=
+S8=3D&i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMmVl&t=3DaTNMVDg1Qkx3QzJ6ZDBCZlkyRTI4=
+a1lJelVJN0Uzd0ZzRlgzZWpjUkU1TT0=3D&h=3D1a11b5d20423453db35d0eedf65fe99e&s=
+=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL19uMrpp17BfJJpuw5fafnAn3_csdgb6S=
+EeIhvZp8n2zOOE8.>
+>
+>
+>
+> *Disclaimer*
+>
+> The information contained in this communication from the sender is
+> confidential. It is intended solely for use by the recipient and others
+> authorized to receive it. If you are not the recipient, you are hereby
+> notified that any disclosure, copying, distribution or taking action in
+> relation of the contents of this information is strictly prohibited and m=
+ay
+> be unlawful. If you have received this communication in error, please
+> notify Tribe at (619) 567-9955 and delete this communication immediately
+> without making any copy or distribution.
+>
+>
+>
+> *Disclaimer*
+>
+> The information contained in this communication from the sender is
+> confidential. It is intended solely for use by the recipient and others
+> authorized to receive it. If you are not the recipient, you are hereby
+> notified that any disclosure, copying, distribution or taking action in
+> relation of the contents of this information is strictly prohibited and m=
+ay
+> be unlawful. If you have received this communication in error, please
+> notify Tribe at (619) 567-9955 and delete this communication immediately
+> without making any copy or distribution.
+>
+>
+>
+> *Disclaimer*
+>
+> The information contained in this communication from the sender is
+> confidential. It is intended solely for use by the recipient and others
+> authorized to receive it. If you are not the recipient, you are hereby
+> notified that any disclosure, copying, distribution or taking action in
+> relation of the contents of this information is strictly prohibited and m=
+ay
+> be unlawful. If you have received this communication in error, please
+> notify Tribe at (619) 567-9955 and delete this communication immediately
+> without making any copy or distribution.
+>
+>
+>
+> *Disclaimer*
+>
+> The information contained in this communication from the sender is
+> confidential. It is intended solely for use by the recipient and others
+> authorized to receive it. If you are not the recipient, you are hereby
+> notified that any disclosure, copying, distribution or taking action in
+> relation of the contents of this information is strictly prohibited and m=
+ay
+> be unlawful. If you have received this communication in error, please
+> notify Tribe at (619) 567-9955 and delete this communication immediately
+> without making any copy or distribution.
+>
+
+--000000000000e1128b05f8651cfa
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"font-family:tahoma,s=
+ans-serif">Dear=C2=A0Adri=C3=A0,</div><div class=3D"gmail_default" style=3D=
+"font-family:tahoma,sans-serif"><br></div><div class=3D"gmail_default" styl=
+e=3D"font-family:tahoma,sans-serif">Arjun will be traveling until the last =
+week of April.=C2=A0 Is Anol available to Zoom at 10 am PDT / 7 pm Barcelon=
+a time on April 28th?=C2=A0 Might this be appropriate?</div><div class=3D"g=
+mail_default" style=3D"font-family:tahoma,sans-serif"><br></div><div class=
+=3D"gmail_default" style=3D"font-family:tahoma,sans-serif">Kind regards,</d=
+iv><div><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_=
+signature"><div dir=3D"ltr"><div><br></div>Veronica Sullivan<div>Assistant =
+to Arjun Sethi</div><div>Tribe Capital</div><div>(646) 280-5410</div></div>=
+</div></div><br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Sun, Apr 2, 2023 at 5:14=E2=80=AFPM Adri=C3=A0 Roca &lt;=
+<a href=3D"mailto:aroca@inveready.com">aroca@inveready.com</a>&gt; wrote:<b=
+r></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
+;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div class=3D"msg=
+-7693411501929020196">
+
+
+
+
+
+<div lang=3D"ES" style=3D"overflow-wrap: break-word;">
+<div class=3D"m_-7693411501929020196WordSection1">
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-family:&quot;Foun=
+ders Grotesk Light&quot;,sans-serif">Dear Veronica,<u></u><u></u></span></p=
+>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-family:&quot;Foun=
+ders Grotesk Light&quot;,sans-serif"><u></u>=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-family:&quot;Foun=
+ders Grotesk Light&quot;,sans-serif">In order to schedule the call, how doe=
+s it works Tuesday 4<sup>th</sup> at 9am (Los Angeles time)?<u></u><u></u><=
+/span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-family:&quot;Foun=
+ders Grotesk Light&quot;,sans-serif"><u></u>=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-family:&quot;Foun=
+ders Grotesk Light&quot;,sans-serif">I=E2=80=99ve tried to match Barcelona =
+with Los Angeles time so we both can make it!<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-family:&quot;Foun=
+ders Grotesk Light&quot;,sans-serif"><u></u>=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-family:&quot;Foun=
+ders Grotesk Light&quot;,sans-serif">Thanks,<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-family:&quot;Foun=
+ders Grotesk Light&quot;,sans-serif"><u></u>=C2=A0<u></u></span></p>
+<div>
+<p class=3D"MsoNormal" style=3D"vertical-align:baseline"><span lang=3D"EN-U=
+S" style=3D"color:rgb(20,32,58)">=C2=A0=C2=A0</span><span lang=3D"EN-US" st=
+yle=3D"font-size:9pt;font-family:&quot;Segoe UI&quot;,sans-serif"><u></u><u=
+></u></span></p>
+<table border=3D"1" cellspacing=3D"0" cellpadding=3D"0" width=3D"0" style=
+=3D"border-collapse:collapse">
+<tbody>
+<tr style=3D"height:77.25pt">
+<td width=3D"141" valign=3D"top" style=3D"width:105.75pt;border:1pt solid w=
+hite;padding:0cm;height:77.25pt">
+<p class=3D"MsoNormal" style=3D"vertical-align:baseline"><span style=3D"col=
+or:rgb(20,32,58)"><img width=3D"119" height=3D"41" style=3D"width: 1.2361in=
+; height: 0.4305in;" id=3D"m_-7693411501929020196Imagen_x0020_1" src=3D"cid=
+:18744dd8b6e4cff311">=C2=A0</span><u></u><u></u></p>
+</td>
+<td width=3D"424" valign=3D"top" style=3D"width:318pt;border-top:1pt solid =
+white;border-right:1pt solid white;border-bottom:1pt solid white;border-lef=
+t:none;padding:0cm;height:77.25pt">
+<p class=3D"MsoNormal" style=3D"vertical-align:baseline"><span lang=3D"EN-U=
+S" style=3D"font-family:&quot;Founders Grotesk Bold&quot;,sans-serif;color:=
+rgb(87,186,138)">Adri=C3=A0 Roca Valls</span><span lang=3D"EN-US" style=3D"=
+color:rgb(87,186,138)">=C2=A0</span><span lang=3D"EN-US"><u></u><u></u></sp=
+an></p>
+<p class=3D"MsoNormal" style=3D"vertical-align:baseline"><span lang=3D"EN-U=
+S" style=3D"font-family:&quot;Founders Grotesk Regular&quot;,sans-serif;col=
+or:rgb(20,32,58)">Senior Associate</span><span lang=3D"EN-US" style=3D"colo=
+r:rgb(20,32,58)">=C2=A0</span><span lang=3D"EN-US"><u></u><u></u></span></p=
+>
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center;vertical=
+-align:baseline">
+<span style=3D"color:rgb(20,32,58)"><img width=3D"303" height=3D"3" style=
+=3D"width: 3.1597in; height: 0.0347in;" id=3D"m_-7693411501929020196Imagen_=
+x0020_2" src=3D"cid:18744dd8b765b16b22"></span><span lang=3D"EN-US" style=
+=3D"color:rgb(20,32,58)">=C2=A0</span><span lang=3D"EN-US"><u></u><u></u></=
+span></p>
+<p class=3D"MsoNormal" style=3D"vertical-align:baseline"><span lang=3D"EN-U=
+S" style=3D"font-family:&quot;Founders Grotesk Light&quot;,sans-serif;color=
+:rgb(20,32,58)">M</span><span lang=3D"EN-US" style=3D"font-family:&quot;Fou=
+nders Grotesk Regular&quot;,sans-serif;color:rgb(20,32,58)">:</span><span l=
+ang=3D"EN-US" style=3D"font-family:&quot;Founders Grotesk Light&quot;,sans-=
+serif;color:rgb(20,32,58)">
+ +34 / 634.750.181</span><span lang=3D"EN-US" style=3D"color:rgb(20,32,58)"=
+>=C2=A0</span><span lang=3D"EN-US"><u></u><u></u></span></p>
+<p class=3D"MsoNormal" style=3D"vertical-align:baseline"><span lang=3D"EN-U=
+S" style=3D"font-family:&quot;Founders Grotesk Regular&quot;,sans-serif;col=
+or:rgb(20,32,58)">Add:</span><span lang=3D"EN-US" style=3D"font-family:&quo=
+t;Founders Grotesk Light&quot;,sans-serif;color:rgb(20,32,58)"> Carrer dels
+ Cavallers 50, 08034 Barcelona</span><span lang=3D"EN-US" style=3D"color:rg=
+b(20,32,58)">=C2=A0</span><span lang=3D"EN-US"><u></u><u></u></span></p>
+<p class=3D"MsoNormal" style=3D"vertical-align:baseline"><a href=3D"http://=
+www.inveready.com/" target=3D"_blank"><span lang=3D"EN-US" style=3D"font-fa=
+mily:&quot;Founders Grotesk Light&quot;,sans-serif">www.inveready.com</span=
+></a><span lang=3D"EN-US" style=3D"color:blue">=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span=
+><span lang=3D"EN-US" style=3D"font-family:&quot;Founders Grotesk Light&quo=
+t;,sans-serif;color:blue">
+</span><u><span style=3D"font-family:&quot;Founders Grotesk Light&quot;,san=
+s-serif;color:blue"><a href=3D"mailto:aroca@inveready.com" target=3D"_blank=
+"><span lang=3D"EN-US">aroca@inveready.com</span></a></span></u><span lang=
+=3D"EN-US" style=3D"color:blue">=C2=A0</span><span lang=3D"EN-US"><u></u><u=
+></u></span></p>
+<p class=3D"MsoNormal" style=3D"vertical-align:baseline"><span lang=3D"EN-U=
+S" style=3D"color:rgb(20,32,58)">=C2=A0</span><span lang=3D"EN-US"><u></u><=
+u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"vertical-align:baseline"><i><span style=3D"=
+font-size:10pt;color:rgb(166,166,166)">De acuerdo con lo que establece el R=
+eglamento General de Protecci=C3=B3n de Datos y la normativa vigente, INVER=
+EADY ASSET MANAGEMENT SGEIC, S.A. garantiza la confidencialidad
+ y privacidad de los datos personales que trata. Para ampliar la informaci=
+=C3=B3n puede acceder a la pol=C3=ADtica de privacidad a trav=C3=A9s del si=
+guiente enlace:
+</span></i><span style=3D"font-size:9pt;font-family:&quot;Segoe UI&quot;,sa=
+ns-serif"><a href=3D"https://inveready.com/politica-privacidad/" target=3D"=
+_blank"><i><span style=3D"font-size:10pt;font-family:Calibri,sans-serif">ht=
+tps://inveready.com/politica-privacidad/</span></i></a></span><i><span styl=
+e=3D"font-size:10pt;color:rgb(166,166,166)">
+ Este mensaje y los ficheros anexos son confidenciales y se dirigen exclusi=
+vamente al destinatario referenciado. Si lo ha recibido por error, le pedim=
+os que nos lo comunique por este medio y lo elimine. En todo caso, abst=C3=
+=A9ngase de utilizarlo, reproducirlo,
+ alterarlo, archivarlo, comunicar o someter a cualquier otro tratamiento, y=
+a sea su contenido como los datos personales que pueda contener</span></i><=
+span style=3D"font-size:10pt;color:rgb(166,166,166)">=C2=A0</span><span sty=
+le=3D"font-size:9pt;font-family:&quot;Segoe UI&quot;,sans-serif"><u></u><u>=
+</u></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Founders Grotesk Li=
+ght&quot;,sans-serif"><u></u>=C2=A0<u></u></span></p>
+<div>
+<div style=3D"border-right:none;border-bottom:none;border-left:none;border-=
+top:1pt solid rgb(225,225,225);padding:3pt 0cm 0cm">
+<p class=3D"MsoNormal"><b>De:</b> Veronica Sullivan &lt;<a href=3D"mailto:v=
+eronica@tribecap.co" target=3D"_blank">veronica@tribecap.co</a>&gt; <br>
+<b>Enviado el:</b> lunes, 27 de marzo de 2023 16:40<br>
+<b>Para:</b> Aniol Brosa &lt;<a href=3D"mailto:abrosa@inveready.com" target=
+=3D"_blank">abrosa@inveready.com</a>&gt;<br>
+<b>CC:</b> Adri=C3=A0 Roca &lt;<a href=3D"mailto:aroca@inveready.com" targe=
+t=3D"_blank">aroca@inveready.com</a>&gt;; Carla Rodr=C3=ADguez &lt;<a href=
+=3D"mailto:carodriguez@inveready.com" target=3D"_blank">carodriguez@inverea=
+dy.com</a>&gt;; Francois, Herve &lt;<a href=3D"mailto:hfrancois@investcorp.=
+com" target=3D"_blank">hfrancois@investcorp.com</a>&gt;<br>
+<b>Asunto:</b> Re: introduction space investment<u></u><u></u></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div id=3D"m_-7693411501929020196319d0a9e2556b29d06746c98358d1751884b2e6a">
+<div id=3D"m_-7693411501929020196bbb0d9e7c84383fe844df976787809d9b2bd4f5f">
+<p class=3D"MsoNormal" style=3D"line-height:0%"><span style=3D"font-size:1p=
+t;color:white">I am proposing in Los Angeles time. (Pacific Daylight time)=
+=C2=A0 Veronica Sullivan Assistant to Arjun Sethi=C2=A0 Tribe Capital (646)=
+ 280-5410 On Mar 27, 2023, at 4:25 AM, Aniol Brosa
+ wrote: =EF=BB=BF Dear, <u></u><u></u></span></p>
+</div>
+<table border=3D"1" cellspacing=3D"3" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100%;background:rgb(255,251,204);border-width:1pt 1pt 1pt 4.5pt;=
+border-style:solid;border-color:rgb(255,239,43)" id=3D"m_-76934115019290201=
+96cac9f78e3becd7bf8962489d0fe4934a61b90b99">
+<tbody>
+<tr id=3D"m_-7693411501929020196e0fcd0ceddcf73fd128be75e4ab681efadbdc022">
+<td style=3D"border:none;padding:6pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:9pt;font-family:Arial,sans-=
+serif;color:black">Caution! This message was sent from outside your organiz=
+ation.
+<u></u><u></u></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><span style=3D"font-size:1pt;color:white">sophospsma=
+rtbannerend
+</span><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt">I am proposing in Los A=
+ngeles time. (Pacific Daylight time)=C2=A0
+<u></u><u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">Veronica Sullivan <u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Assistant to Arjun Sethi=C2=A0 <u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Tribe Capital <u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">(646) 280-5410 <u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><b><br>
+<br>
+</b><u></u><u></u></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12pt"><br>
+On Mar 27, 2023, at 4:25 AM, Aniol Brosa &lt;<a href=3D"mailto:abrosa@inver=
+eady.com" target=3D"_blank">abrosa@inveready.com</a>&gt; wrote:
+<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">=EF=BB=BF <u></u><u></u></p>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white">
+<span lang=3D"EN-US" style=3D"color:black">Dear, I see you could make it 9a=
+m, but realize we are in different time zones, please can you tell us in wh=
+ich time zone so I can propose a new time to meet, today 18h (Spain time zo=
+ne) doesn=E2=80=99t work for me
+</span><u></u><u></u></p>
+</div>
+</div>
+<div id=3D"m_-7693411501929020196ms-outlook-mobile-signature">
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">=C2=A0
+</span><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Obt=C3=A9n l&#39;aplicaci=C3=B3
+</span><a href=3D"https://eu-central-1.protection.sophos.com?d=3Daka.ms&amp=
+;u=3DaHR0cHM6Ly9ha2EubXMvbzB1a2Vm&amp;i=3DNjJkZTc1ODEzZWUwYjgxMjEzZjU4MTE5&=
+amp;t=3DRndaanFMYmt5SVV4MlVidFVmU3UwZzM3YXJqT2kyZHRuMDdaMGI3REtmOD0=3D&amp;=
+h=3D076b3c1af0c543a2a197899d1689f9f7&amp;s=3DAVNPUEhUT0NFTkNSWVBUSVaUMwhGic=
+NyyDogcTbuCVe8nABpMm45MFUjEVDEZ8M6EA" target=3D"_blank"><span lang=3D"EN-US=
+">Outlook
+ per a l&#39;iOS</span></a> <u></u><u></u></p>
+</div>
+</div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"1" width=3D"100%" align=3D"center">
+</div>
+<div id=3D"m_-7693411501929020196divRplyFwdMsg">
+<p class=3D"MsoNormal"><b><span style=3D"color:black">De:</span></b><span s=
+tyle=3D"color:black"> Veronica Sullivan &lt;<a href=3D"mailto:veronica@trib=
+ecap.co" target=3D"_blank">veronica@tribecap.co</a>&gt;<br>
+<b>Enviat el:</b> Monday, March 13, 2023 7:07:18 PM<br>
+<b>Per a:</b> Aniol Brosa &lt;<a href=3D"mailto:abrosa@inveready.com" targe=
+t=3D"_blank">abrosa@inveready.com</a>&gt;<br>
+<b>A/c:</b> Adri=C3=A0 Roca &lt;<a href=3D"mailto:aroca@inveready.com" targ=
+et=3D"_blank">aroca@inveready.com</a>&gt;; Carla Rodr=C3=ADguez &lt;<a href=
+=3D"mailto:carodriguez@inveready.com" target=3D"_blank">carodriguez@inverea=
+dy.com</a>&gt;; Francois, Herve &lt;<a href=3D"mailto:hfrancois@investcorp.=
+com" target=3D"_blank">hfrancois@investcorp.com</a>&gt;<br>
+<b>Tema:</b> Re: introduction space investment</span> <u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal">=C2=A0
+<u></u><u></u></p>
+</div>
+</div>
+<div>
+<div id=3D"m_-7693411501929020196x_319d0a9e2556b29d06746c98358d1751884b2e6a=
+">
+<div id=3D"m_-7693411501929020196x_bbb0d9e7c84383fe844df976787809d9b2bd4f5f=
+">
+<p class=3D"MsoNormal" style=3D"line-height:0%">
+<span style=3D"font-size:1pt;color:white">I&#39;ll make 9 am work on the 27=
+th and send the invite out now.=C2=A0 Sorry for the back and forth! Veronic=
+a Sullivan Assistant to Arjun Sethi Tribe Capital (646) 280-5410 On Mon, Ma=
+r 13, 2023 at 1:56=E2=80=AFPM
+</span><u></u><u></u></p>
+</div>
+<table border=3D"1" cellspacing=3D"3" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100%;background:rgb(255,251,204);border-width:1pt 1pt 1pt 4.5pt;=
+border-style:solid;border-color:rgb(255,239,43);font-size:12px;border-colla=
+pse:separate" id=3D"m_-7693411501929020196x_cac9f78e3becd7bf8962489d0fe4934=
+a61b90b99">
+<tbody>
+<tr id=3D"m_-7693411501929020196x_e0fcd0ceddcf73fd128be75e4ab681efadbdc022"=
+>
+<td style=3D"border:none;padding:6pt;background-color:rgb(255,251,204);font=
+-size:12px;color:black">
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-family:&quot;Aria=
+l!important&quot;,serif;color:black">Caution! This message was sent from ou=
+tside your organization.
+</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:1pt;color:wh=
+ite">sophospsmartbannerend
+</span><u></u><u></u></p>
+</div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-family:Tahoma,san=
+s-serif">I&#39;ll make 9 am work on the 27th and send the invite out now.=
+=C2=A0 Sorry for the back and forth!
+</span><u></u><u></u></p>
+</div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">=C2=A0
+</span><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Veronica Sullivan
+</span><u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Assistant to Arjun Sethi
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Tribe Capital
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">(646) 280-5410
+</span><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">=C2=A0
+</span><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">=C2=A0
+</span><u></u><u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">On Mon, Mar 13, 2023 at 1:56=E2=
+=80=AFPM Aniol Brosa &lt;</span><a href=3D"mailto:abrosa@inveready.com" tar=
+get=3D"_blank"><span lang=3D"EN-US">abrosa@inveready.com</span></a><span la=
+ng=3D"EN-US">&gt;
+ wrote: </span><u></u><u></u></p>
+</div>
+<blockquote style=3D"border-top:none;border-right:none;border-bottom:none;b=
+order-left:1pt solid rgb(204,204,204);padding:0cm 0cm 0cm 6pt;margin:5pt 0c=
+m 5pt 4.8pt">
+<div>
+<div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">I can=E2=
+=80=99t make it neither 8 nor 9:30, how about the 29<sup>th</sup> ?
+</span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+<div style=3D"border-right:none;border-bottom:none;border-left:none;border-=
+top:1pt solid rgb(181,196,223);padding:3pt 0cm 0cm">
+<p class=3D"m_-7693411501929020196xmsonormal" style=3D"margin-bottom:12pt">=
+<b><span style=3D"font-size:12pt;color:black">De:
+</span></b><span style=3D"font-size:12pt;color:black">Veronica Sullivan &lt=
+;<a href=3D"mailto:veronica@tribecap.co" target=3D"_blank">veronica@tribeca=
+p.co</a>&gt;<br>
+<b>Fecha: </b>lunes, 13 de marzo de 2023, 17:15<br>
+<b>Para: </b>Aniol Brosa &lt;<a href=3D"mailto:abrosa@inveready.com" target=
+=3D"_blank">abrosa@inveready.com</a>&gt;<br>
+<b>CC: </b>Adri=C3=A0 Roca &lt;<a href=3D"mailto:aroca@inveready.com" targe=
+t=3D"_blank">aroca@inveready.com</a>&gt;, Carla Rodr=C3=ADguez &lt;<a href=
+=3D"mailto:carodriguez@inveready.com" target=3D"_blank">carodriguez@inverea=
+dy.com</a>&gt;, Francois, Herve &lt;<a href=3D"mailto:hfrancois@investcorp.=
+com" target=3D"_blank">hfrancois@investcorp.com</a>&gt;<br>
+<b>Asunto: </b>Re: introduction space investment</span><u></u><u></u></p>
+</div>
+<div id=3D"m_-7693411501929020196x_m_-3891581308582605399319d0a9e2556b29d06=
+746c98358d1751884b2e6a">
+<div id=3D"m_-7693411501929020196x_m_-3891581308582605399bbb0d9e7c84383fe84=
+4df976787809d9b2bd4f5f">
+<p class=3D"m_-7693411501929020196xmsonormal" style=3D"line-height:0%"><spa=
+n lang=3D"EN-US" style=3D"font-size:1pt;color:white">Hi Aniol,=C2=A0 There =
+has been a shift in the calendar.=C2=A0 Would you prefer 8 am or 9:30 am in=
+stead?=C2=A0 Apologies for the inconvenience! Kind regards, Veronica Sulliv=
+an
+ Assistant to Arjun Sethi </span><u></u><u></u></p>
+</div>
+<table border=3D"1" cellspacing=3D"3" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100%;background:rgb(255,251,204);border-width:1pt 1pt 1pt 4.5pt;=
+border-style:solid;border-color:rgb(255,239,43)" id=3D"m_-76934115019290201=
+96x_m_-3891581308582605399cac9f78e3becd7bf8962489d0fe4934a61b90b99">
+<tbody>
+<tr id=3D"m_-7693411501929020196x_m_-3891581308582605399e0fcd0ceddcf73fd128=
+be75e4ab681efadbdc022">
+<td style=3D"border:none;padding:6pt">
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-size:9pt;font-family:Arial,sans-serif;color:black">Caution! This mess=
+age was sent from outside your organization.
+</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-size:1pt;color:white">sophospsmartbannerend
+</span><u></u><u></u></p>
+</div>
+<div>
+<div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-family:Tahoma,sans-serif">Hi Aniol,=C2=A0</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-family:Tahoma,sans-serif">=C2=A0</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-family:Tahoma,sans-serif">There has been a shift in the calendar.=C2=
+=A0 Would you prefer 8 am or 9:30 am instead?=C2=A0 Apologies for the incon=
+venience!</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-family:Tahoma,sans-serif">=C2=A0</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-family:Tahoma,sans-serif">Kind regards,</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+</div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Veronica=
+ Sullivan </span><u></u><u></u></p>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Assistan=
+t to Arjun Sethi </span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Tribe Ca=
+pital </span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">(646) 28=
+0-5410 </span><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+</div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+<div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">On Mon, =
+Mar 13, 2023 at 6:09=E2=80=AFAM Aniol Brosa &lt;</span><a href=3D"mailto:ab=
+rosa@inveready.com" target=3D"_blank"><span lang=3D"EN-US">abrosa@inveready=
+.com</span></a><span lang=3D"EN-US">&gt; wrote:
+</span><u></u><u></u></p>
+</div>
+<blockquote style=3D"border-top:none;border-right:none;border-bottom:none;b=
+order-left:1pt solid rgb(204,204,204);padding:0cm 0cm 0cm 6pt;margin:5pt 0c=
+m 5pt 4.8pt">
+<div>
+<div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal">Yes, please CC <a href=3D"mai=
+lto:aroca@inveready.com" target=3D"_blank">
+<span style=3D"text-decoration:none">@Adri=C3=A0 Roca</span></a> <span lang=
+=3D"EN-US"><a href=3D"mailto:carodriguez@inveready.com" target=3D"_blank"><=
+span lang=3D"ES-TRAD" style=3D"text-decoration:none">@Carla Rodr=C3=ADguez<=
+/span></a>
+</span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal">=C2=A0<u></u><u></u></p>
+<div style=3D"border-right:none;border-bottom:none;border-left:none;border-=
+top:1pt solid rgb(181,196,223);padding:3pt 0cm 0cm">
+<p class=3D"m_-7693411501929020196xmsonormal" style=3D"margin-bottom:12pt">=
+<b><span style=3D"font-size:12pt;color:black">De:
+</span></b><span style=3D"font-size:12pt;color:black">Veronica Sullivan &lt=
+;<a href=3D"mailto:veronica@tribecap.co" target=3D"_blank">veronica@tribeca=
+p.co</a>&gt;<br>
+<b>Fecha: </b>viernes, 10 de marzo de 2023, 20:33<br>
+<b>Para: </b>Aniol Brosa &lt;<a href=3D"mailto:abrosa@inveready.com" target=
+=3D"_blank">abrosa@inveready.com</a>&gt;<br>
+<b>CC: </b>Francois, Herve &lt;<a href=3D"mailto:hfrancois@investcorp.com" =
+target=3D"_blank">hfrancois@investcorp.com</a>&gt;, Adri=C3=A0 Roca &lt;<a =
+href=3D"mailto:aroca@inveready.com" target=3D"_blank">aroca@inveready.com</=
+a>&gt;<br>
+<b>Asunto: </b>Re: introduction space investment</span><u></u><u></u></p>
+</div>
+<div id=3D"m_-7693411501929020196x_m_-3891581308582605399m_8453796080458850=
+16319d0a9e2556b29d06746c98358d1751884b2e6a">
+<div id=3D"m_-7693411501929020196x_m_-3891581308582605399m_8453796080458850=
+16bbb0d9e7c84383fe844df976787809d9b2bd4f5f">
+<p class=3D"m_-7693411501929020196xmsonormal" style=3D"line-height:0%"><spa=
+n lang=3D"EN-US" style=3D"font-size:1pt;color:white">Hi Aniol, Are you avai=
+lable=C2=A0to Zoom with Arjun on March 27th at 9 am PDT? Kind regards, Vero=
+nica Sullivan Assistant to Arjun Sethi Tribe Capital (646) 280-5410
+ On Thu, Mar 9, 2023 at 9:28=E2=80=AFAM Anio </span><u></u><u></u></p>
+</div>
+<table border=3D"1" cellspacing=3D"3" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100%;background:rgb(255,251,204);border-width:1pt 1pt 1pt 4.5pt;=
+border-style:solid;border-color:rgb(255,239,43)" id=3D"m_-76934115019290201=
+96x_m_-3891581308582605399m_845379608045885016cac9f78e3becd7bf8962489d0fe49=
+34a61b90b99">
+<tbody>
+<tr id=3D"m_-7693411501929020196x_m_-3891581308582605399m_84537960804588501=
+6e0fcd0ceddcf73fd128be75e4ab681efadbdc022">
+<td style=3D"border:none;padding:6pt">
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-size:9pt;font-family:Arial,sans-serif;color:black">Caution! This mess=
+age was sent from outside your organization.
+</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-size:1pt;color:white">sophospsmartbannerend
+</span><u></u><u></u></p>
+</div>
+<div>
+<div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-family:Tahoma,sans-serif">Hi Aniol,</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-family:Tahoma,sans-serif">=C2=A0</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-family:Tahoma,sans-serif">Are you available=C2=A0to Zoom with Arjun o=
+n March 27th at 9 am PDT?</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-family:Tahoma,sans-serif">=C2=A0</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-family:Tahoma,sans-serif">Kind regards,</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+</div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Veronica=
+ Sullivan </span><u></u><u></u></p>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Assistan=
+t to Arjun Sethi </span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Tribe Ca=
+pital </span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">(646) 28=
+0-5410 </span><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+</div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+<div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">On Thu, =
+Mar 9, 2023 at 9:28=E2=80=AFAM Aniol Brosa &lt;</span><a href=3D"mailto:abr=
+osa@inveready.com" target=3D"_blank"><span lang=3D"EN-US">abrosa@inveready.=
+com</span></a><span lang=3D"EN-US">&gt; wrote:
+</span><u></u><u></u></p>
+</div>
+<blockquote style=3D"border-top:none;border-right:none;border-bottom:none;b=
+order-left:1pt solid rgb(204,204,204);padding:0cm 0cm 0cm 6pt;margin:5pt 0c=
+m 5pt 4.8pt">
+<div>
+<div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Dear Her=
+v=C3=A9, </span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Many tha=
+nks for the introduction and apologize for the late reply, just catching-up=
+ on the email now after hectics days at the MWC
+</span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Dear Arj=
+un, </span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">A pleasu=
+re to e-meet you. How about organizing a videoconference for next week? Ple=
+ase let me know your agenda
+</span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Best </s=
+pan><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+<div style=3D"border-right:none;border-bottom:none;border-left:none;border-=
+top:1pt solid rgb(181,196,223);padding:3pt 0cm 0cm">
+<p class=3D"m_-7693411501929020196xmsonormal" style=3D"margin-bottom:12pt">=
+<b><span lang=3D"EN-GB" style=3D"font-size:12pt;color:black">De:
+</span></b><span lang=3D"EN-GB" style=3D"font-size:12pt;color:black">Franco=
+is, Herve &lt;<a href=3D"mailto:hfrancois@Investcorp.com" target=3D"_blank"=
+>hfrancois@Investcorp.com</a>&gt;<br>
+<b>Fecha: </b>viernes, 3 de marzo de 2023, 20:42<br>
+<b>Para: </b>Arjun Sethi &lt;</span><a href=3D"mailto:arj@tribecap.co" targ=
+et=3D"_blank"><span lang=3D"EN-GB" style=3D"font-size:12pt">arj@tribecap.co=
+</span></a><span lang=3D"EN-GB" style=3D"font-size:12pt;color:black">&gt;, =
+Aniol Brosa &lt;</span><a href=3D"mailto:abrosa@inveready.com" target=3D"_b=
+lank"><span lang=3D"EN-GB" style=3D"font-size:12pt">abrosa@inveready.com</s=
+pan></a><span lang=3D"EN-GB" style=3D"font-size:12pt;color:black">&gt;<br>
+<b>CC: </b>Veronica Sullivan &lt;</span><a href=3D"mailto:veronica@tribecap=
+.co" target=3D"_blank"><span lang=3D"EN-GB" style=3D"font-size:12pt">veroni=
+ca@tribecap.co</span></a><span lang=3D"EN-GB" style=3D"font-size:12pt;color=
+:black">&gt;<br>
+<b>Asunto: </b>introduction space investment</span><span lang=3D"EN-GB"> </=
+span><u></u><u></u></p>
+</div>
+<div id=3D"m_-7693411501929020196x_m_-3891581308582605399m_8453796080458850=
+16m_7480513671491421854319d0a9e2556b29d06746c98358d1751884b2e6a">
+<div id=3D"m_-7693411501929020196x_m_-3891581308582605399m_8453796080458850=
+16m_7480513671491421854bbb0d9e7c84383fe844df976787809d9b2bd4f5f">
+<p class=3D"m_-7693411501929020196xmsonormal" style=3D"line-height:0%"><spa=
+n lang=3D"EN-GB" style=3D"font-size:1pt;color:white">Arjun, Aniol, =C2=A0 A=
+s discussed separately, I thought it might be beneficial to introduce each =
+other as you are both active in the space investment. =C2=A0 Arjun is
+ co-founder of Tribe capital and l </span><u></u><u></u></p>
+</div>
+<table border=3D"1" cellspacing=3D"3" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"width:100%;background:rgb(255,251,204);border-width:1pt 1pt 1pt 4.5pt;=
+border-style:solid;border-color:rgb(255,239,43)" id=3D"m_-76934115019290201=
+96x_m_-3891581308582605399m_845379608045885016m_7480513671491421854cac9f78e=
+3becd7bf8962489d0fe4934a61b90b99">
+<tbody>
+<tr id=3D"m_-7693411501929020196x_m_-3891581308582605399m_84537960804588501=
+6m_7480513671491421854e0fcd0ceddcf73fd128be75e4ab681efadbdc022">
+<td style=3D"border:none;padding:6pt">
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-size:9pt;font-family:Arial,sans-serif;color:black">Caution! This mess=
+age was sent from outside your organization.
+</span><u></u><u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB" style=3D=
+"font-size:1pt;color:white">sophospsmartbannerend
+</span><u></u><u></u></p>
+</div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB">Arjun, A=
+niol, </span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB">=C2=A0 <=
+/span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB">As discu=
+ssed separately, I thought it might be beneficial to introduce each other a=
+s you are both active in the space investment.
+</span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB">=C2=A0 <=
+/span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB">Arjun is=
+ co-founder of Tribe capital and look at 3d printed rocket investment, amon=
+g others.
+</span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB">Aniol is=
+ partner at Inveready and look at rocket engine investment.
+</span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB">=C2=A0 <=
+/span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB">I let yo=
+u take it from here and veronica can help to set a meeting.
+</span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB">Best, </=
+span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB">=C2=A0 <=
+/span><u></u><u></u></p>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"border-col=
+lapse:collapse">
+<tbody>
+<tr>
+<td width=3D"378" valign=3D"top" style=3D"width:283.2pt;padding:0cm">
+<p class=3D"m_-7693411501929020196xmsonormal"><b><span lang=3D"EN-US" style=
+=3D"color:rgb(0,118,192)">Herv=C3=A9 Fran=C3=A7ois </span>
+</b><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Partner =
+=E2=80=93 Investcorp Blockchain Fund </span>
+<u></u><u></u></p>
+</td>
+</tr>
+<tr style=3D"height:64.8pt">
+<td width=3D"378" style=3D"width:283.2pt;padding:0cm;height:64.8pt">
+<div>
+<p class=3D"MsoNormal">&lt;image001.png&gt; <u></u><u></u></p>
+</div>
+</td>
+</tr>
+<tr style=3D"height:2.85pt">
+<td width=3D"378" valign=3D"top" style=3D"width:283.2pt;padding:0cm;height:=
+2.85pt">
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Al Sila =
+Tower =E2=80=93 8<sup>th</sup> Floor </span>
+<u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Abu Dhab=
+i Global Market Square </span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">Al Marya=
+h Island, PO Box 36961 </span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal">Abu Dhabi, U.A.E. <u></u><u><=
+/u></p>
+<p class=3D"m_-7693411501929020196xmsonormal">=C2=A0 <u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><b>M:</b> +971 50 533 8528 | =
+<b>M:</b> +44 7 443 758 990 <u></u>
+<u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><a href=3D"https://eu-central=
+-1.protection.sophos.com?d=3Dinvestcorp.com&amp;u=3DaHR0cDovL3d3dy5pbnZlc3R=
+jb3JwLmNvbS8=3D&amp;i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMmVl&amp;t=3DRGRaK2t0Vm=
+92QTVTVndnbXRwb0RzYjRLdi9wZVFFZ1R5bDlxL0FMblJUMD0=3D&amp;h=3D1a11b5d2042345=
+3db35d0eedf65fe99e&amp;s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL19uMrpp1=
+7BfJJpuw5fafnAn3_csdgb6SEeIhvZp8n2zOOE8" target=3D"_blank">www.investcorp.c=
+om</a>
+<u></u><u></u></p>
+</td>
+</tr>
+<tr style=3D"height:21.6pt">
+<td width=3D"378" valign=3D"bottom" style=3D"width:283.2pt;padding:0cm;heig=
+ht:21.6pt">
+<div>
+<p class=3D"MsoNormal"><a href=3D"https://eu-central-1.protection.sophos.co=
+m/?d=3Durldefense.com&amp;u=3DaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzO=
+i93d3cubGlua2VkaW4uY29tL2NvbXBhbnkvaW52ZXN0Y29ycC9fXzshIVAxb2EyZEl5IVFHbE1l=
+Z0JrYnhWblJLMW1lUEZzelJQdEppRnI4NjJocGhxUEw0LXZLeUF0MUpUcWNNdURJdDd3UGViYVY=
+5TmFJMkhUZzBuR1lGOXRyU2MwX3Voc2FHcmNjeGdKU0FzMnlnJA=3D=3D&amp;i=3DNjE4MTA4O=
+GNkNTI3N2QwZWYwMTNkMmVl&amp;t=3DZURUTHdSdVkrZkw2a2dobVF1LzhnSmZpTXRoeHJQUVZ=
+qZjRqNlN5emo1VT0=3D&amp;h=3D1a11b5d20423453db35d0eedf65fe99e&amp;s=3DAVNPUE=
+hUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL19uMrpp17BfJJpuw5fafnAn3_csdgb6SEeIhvZp8n=
+2zOOE8" target=3D"_blank">&lt;image002.png&gt;
+</a><u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif;color:rg=
+b(76,76,78)">=C2=A0</span><a href=3D"https://eu-central-1.protection.sophos=
+.com/?d=3Durldefense.com&amp;u=3DaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dH=
+BzOi90d2l0dGVyLmNvbS9JbnZlc3Rjb3JwP3JlZl9zcmM9dHdzcmMqNUVnb29nbGUqN0N0d2Nhb=
+XAqNUVzZXJwKjdDdHdncio1RWF1dGhvcl9fO0pTVWxKU1UhIVAxb2EyZEl5IVFHbE1lZ0JrYnhW=
+blJLMW1lUEZzelJQdEppRnI4NjJocGhxUEw0LXZLeUF0MUpUcWNNdURJdDd3UGViYVY5TmFJMkh=
+UZzBuR1lGOXRyU2MwX3Voc2FHcmNjeGpkOXo1MzlnJA=3D=3D&amp;i=3DNjE4MTA4OGNkNTI3N=
+2QwZWYwMTNkMmVl&amp;t=3DUDZvamdsUDA3dFN5KzlSRGs3d3lQYUo2NVRqWnZDTkRxOVpWM3V=
+ETlhHbz0=3D&amp;h=3D1a11b5d20423453db35d0eedf65fe99e&amp;s=3DAVNPUEhUT0NFTk=
+NSWVBUSVYVPloXGjxKFPy_SjYL19uMrpp17BfJJpuw5fafnAn3_csdgb6SEeIhvZp8n2zOOE8" =
+target=3D"_blank"><span style=3D"font-family:Arial,sans-serif;color:rgb(76,=
+76,78);text-decoration:none">
+</span><span style=3D"font-family:Arial,sans-serif;color:rgb(76,76,78);text=
+-decoration:none"><u></u><u></u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif;color:rg=
+b(76,76,78)"><a href=3D"https://eu-central-1.protection.sophos.com/?d=3Durl=
+defense.com&amp;u=3DaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi90d2l0dGV=
+yLmNvbS9JbnZlc3Rjb3JwP3JlZl9zcmM9dHdzcmMqNUVnb29nbGUqN0N0d2NhbXAqNUVzZXJwKj=
+dDdHdncio1RWF1dGhvcl9fO0pTVWxKU1UhIVAxb2EyZEl5IVFHbE1lZ0JrYnhWblJLMW1lUEZze=
+lJQdEppRnI4NjJocGhxUEw0LXZLeUF0MUpUcWNNdURJdDd3UGViYVY5TmFJMkhUZzBuR1lGOXRy=
+U2MwX3Voc2FHcmNjeGpkOXo1MzlnJA=3D=3D&amp;i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMm=
+Vl&amp;t=3DUDZvamdsUDA3dFN5KzlSRGs3d3lQYUo2NVRqWnZDTkRxOVpWM3VETlhHbz0=3D&a=
+mp;h=3D1a11b5d20423453db35d0eedf65fe99e&amp;s=3DAVNPUEhUT0NFTkNSWVBUSVYVPlo=
+XGjxKFPy_SjYL19uMrpp17BfJJpuw5fafnAn3_csdgb6SEeIhvZp8n2zOOE8" target=3D"_bl=
+ank"><span style=3D"color:rgb(76,76,78);text-decoration:none">&lt;image003.=
+png&gt;
+</span><span style=3D"font-family:Calibri,sans-serif;color:windowtext;text-=
+decoration:none"><u></u><u></u></span></a></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif;color:rg=
+b(76,76,78)">=C2=A0</span><a href=3D"https://eu-central-1.protection.sophos=
+.com/?d=3Durldefense.com&amp;u=3DaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dH=
+BzOi93d3cuaW5zdGFncmFtLmNvbS9hY2NvdW50cy9sb2dpbi8_bmV4dD0qaW52ZXN0Y29ycCpfX=
+ztMeTghIVAxb2EyZEl5IVFHbE1lZ0JrYnhWblJLMW1lUEZzelJQdEppRnI4NjJocGhxUEw0LXZL=
+eUF0MUpUcWNNdURJdDd3UGViYVY5TmFJMkhUZzBuR1lGOXRyU2MwX3Voc2FHcmNjeGpONTNoRDd=
+BJA=3D=3D&amp;i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMmVl&amp;t=3DTWl6aXJidERibWJG=
+QlM1bzlraFh4cng0NFFvOGhqMEFyeWJ5UDF1MW1nZz0=3D&amp;h=3D1a11b5d20423453db35d=
+0eedf65fe99e&amp;s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL19uMrpp17BfJJp=
+uw5fafnAn3_csdgb6SEeIhvZp8n2zOOE8" target=3D"_blank"><span style=3D"font-fa=
+mily:Arial,sans-serif;color:rgb(76,76,78);text-decoration:none">
+</span><span style=3D"color:rgb(76,76,78);text-decoration:none"><u></u><u><=
+/u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif;color:rg=
+b(76,76,78)"><a href=3D"https://eu-central-1.protection.sophos.com/?d=3Durl=
+defense.com&amp;u=3DaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi93d3cuaW5=
+zdGFncmFtLmNvbS9hY2NvdW50cy9sb2dpbi8_bmV4dD0qaW52ZXN0Y29ycCpfXztMeTghIVAxb2=
+EyZEl5IVFHbE1lZ0JrYnhWblJLMW1lUEZzelJQdEppRnI4NjJocGhxUEw0LXZLeUF0MUpUcWNNd=
+URJdDd3UGViYVY5TmFJMkhUZzBuR1lGOXRyU2MwX3Voc2FHcmNjeGpONTNoRDdBJA=3D=3D&amp=
+;i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMmVl&amp;t=3DTWl6aXJidERibWJGQlM1bzlraFh4c=
+ng0NFFvOGhqMEFyeWJ5UDF1MW1nZz0=3D&amp;h=3D1a11b5d20423453db35d0eedf65fe99e&=
+amp;s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL19uMrpp17BfJJpuw5fafnAn3_cs=
+dgb6SEeIhvZp8n2zOOE8" target=3D"_blank"><span style=3D"color:rgb(76,76,78);=
+text-decoration:none">&lt;image004.png&gt;
+</span><span style=3D"font-family:Calibri,sans-serif;color:windowtext;text-=
+decoration:none"><u></u><u></u></span></a></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif;color:rg=
+b(76,76,78)">=C2=A0</span><a href=3D"https://eu-central-1.protection.sophos=
+.com/?d=3Durldefense.com&amp;u=3DaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dH=
+BzOi93d3cueW91dHViZS5jb20vY2hhbm5lbC9VQ3l5WFJGYWNnRXJLb1lNN3N5UmtYWlFfXzshI=
+VAxb2EyZEl5IVFHbE1lZ0JrYnhWblJLMW1lUEZzelJQdEppRnI4NjJocGhxUEw0LXZLeUF0MUpU=
+cWNNdURJdDd3UGViYVY5TmFJMkhUZzBuR1lGOXRyU2MwX3Voc2FHcmNjeGpQcGdmakhnJA=3D=
+=3D&amp;i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMmVl&amp;t=3DdUZ5MkZJQWUrZ0Q5TjRob0=
+hDSVBCM1JETTFkb2l1aW9PanAxMUloV1hjOD0=3D&amp;h=3D1a11b5d20423453db35d0eedf6=
+5fe99e&amp;s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL19uMrpp17BfJJpuw5faf=
+nAn3_csdgb6SEeIhvZp8n2zOOE8" target=3D"_blank"><span style=3D"font-family:A=
+rial,sans-serif;color:rgb(76,76,78);text-decoration:none">
+</span><span style=3D"color:rgb(76,76,78);text-decoration:none"><u></u><u><=
+/u></span></a></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-family:Arial,sans-serif;color:rg=
+b(76,76,78)"><a href=3D"https://eu-central-1.protection.sophos.com/?d=3Durl=
+defense.com&amp;u=3DaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi93d3cueW9=
+1dHViZS5jb20vY2hhbm5lbC9VQ3l5WFJGYWNnRXJLb1lNN3N5UmtYWlFfXzshIVAxb2EyZEl5IV=
+FHbE1lZ0JrYnhWblJLMW1lUEZzelJQdEppRnI4NjJocGhxUEw0LXZLeUF0MUpUcWNNdURJdDd3U=
+GViYVY5TmFJMkhUZzBuR1lGOXRyU2MwX3Voc2FHcmNjeGpQcGdmakhnJA=3D=3D&amp;i=3DNjE=
+4MTA4OGNkNTI3N2QwZWYwMTNkMmVl&amp;t=3DdUZ5MkZJQWUrZ0Q5TjRob0hDSVBCM1JETTFkb=
+2l1aW9PanAxMUloV1hjOD0=3D&amp;h=3D1a11b5d20423453db35d0eedf65fe99e&amp;s=3D=
+AVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjYL19uMrpp17BfJJpuw5fafnAn3_csdgb6SEeI=
+hvZp8n2zOOE8" target=3D"_blank"><span style=3D"color:rgb(76,76,78);text-dec=
+oration:none">&lt;image005.png&gt;
+</span><span style=3D"font-family:Calibri,sans-serif;color:windowtext;text-=
+decoration:none"><u></u><u></u></span></a></span></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB">=C2=A0 <=
+/span><u></u><u></u></p>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB">=C2=A0 <=
+/span><u></u><u></u></p>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span=
+ lang=3D"EN-GB">
+<hr size=3D"1" width=3D"100%" align=3D"center">
+</span></div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-GB"><br>
+<br>
+</span><span lang=3D"EN-GB" style=3D"font-size:7.5pt;font-family:Arial,sans=
+-serif;color:black">This email and any attachments are solely for the use o=
+f the intended recipient(s), are confidential and may contain information t=
+hat is privileged or otherwise exempt
+ from disclosure under applicable law. No confidentiality or privilege is w=
+aived or lost by any transmission errors. If you are not an intended recipi=
+ent, please notify the sender immediately, delete all copies of this email =
+and any attachments from your system
+ and do not copy, disclose, use, or otherwise act upon any part of this ema=
+il or of any attachments and please note that any such copying, disclosure,=
+ usage, or action is prohibited and may be unlawful.<br>
+<br>
+This email and any attachments may also contain personal data. For details =
+of how and why we use personal data, please see our privacy notices located=
+ at
+</span><a href=3D"https://eu-central-1.protection.sophos.com?d=3Dinvestcorp=
+.com&amp;u=3DaHR0cHM6Ly93d3cuaW52ZXN0Y29ycC5jb20vbGVnYWwtc3RhdGVtZW50LWFuZC=
+1wcml2YWN5LXBvbGljeS8=3D&amp;i=3DNjE4MTA4OGNkNTI3N2QwZWYwMTNkMmVl&amp;t=3Da=
+TNMVDg1Qkx3QzJ6ZDBCZlkyRTI4a1lJelVJN0Uzd0ZzRlgzZWpjUkU1TT0=3D&amp;h=3D1a11b=
+5d20423453db35d0eedf65fe99e&amp;s=3DAVNPUEhUT0NFTkNSWVBUSVYVPloXGjxKFPy_SjY=
+L19uMrpp17BfJJpuw5fafnAn3_csdgb6SEeIhvZp8n2zOOE8." target=3D"_blank"><span =
+lang=3D"EN-GB" style=3D"font-size:7.5pt;font-family:Arial,sans-serif">https=
+://www.investcorp.com/legal-statement-and-privacy-policy/.</span></a>
+<u></u><u></u></p>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><b><span lang=3D"EN-US" style=
+=3D"font-size:7.5pt;font-family:Arial,sans-serif">Disclaimer</span></b><spa=
+n lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-size:7.5pt;font-family:Arial,sans-serif">The information contained in=
+ this communication from the sender is confidential. It is intended solely =
+for use by the recipient and others authorized to receive
+ it. If you are not the recipient, you are hereby notified that any disclos=
+ure, copying, distribution or taking action in relation of the contents of =
+this information is strictly prohibited and may be unlawful. If you have re=
+ceived this communication in error,
+ please notify Tribe at (619) 567-9955 and delete this communication immedi=
+ately without making any copy or distribution.</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US">=C2=A0 <=
+/span><u></u><u></u></p>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><b><span lang=3D"EN-US" style=
+=3D"font-size:7.5pt;font-family:Arial,sans-serif">Disclaimer</span></b><spa=
+n lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"m_-7693411501929020196xmsonormal"><span lang=3D"EN-US" style=3D=
+"font-size:7.5pt;font-family:Arial,sans-serif">The information contained in=
+ this communication from the sender is confidential. It is intended solely =
+for use by the recipient and others authorized to receive
+ it. If you are not the recipient, you are hereby notified that any disclos=
+ure, copying, distribution or taking action in relation of the contents of =
+this information is strictly prohibited and may be unlawful. If you have re=
+ceived this communication in error,
+ please notify Tribe at (619) 567-9955 and delete this communication immedi=
+ately without making any copy or distribution.</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">=C2=A0
+</span><u></u><u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span lang=3D"EN-US" style=3D"font-size:7.5pt;fon=
+t-family:Arial,sans-serif">Disclaimer</span></b><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:7.5pt;font-f=
+amily:Arial,sans-serif">The information contained in this communication fro=
+m the sender is confidential. It is intended solely
+ for use by the recipient and others authorized to receive it. If you are n=
+ot the recipient, you are hereby notified that any disclosure, copying, dis=
+tribution or taking action in relation of the contents of this information =
+is strictly prohibited and may be
+ unlawful. If you have received this communication in error, please notify =
+Tribe at (619) 567-9955 and delete this communication immediately without m=
+aking any copy or distribution.</span><span lang=3D"EN-US">
+</span><u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:7.5pt;font-family:Arial,=
+sans-serif">Disclaimer</span></b><u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.5pt;font-family:Arial,san=
+s-serif">The information contained in this communication from the sender is=
+ confidential. It is intended solely for use by the recipient and others au=
+thorized to receive it. If you are
+ not the recipient, you are hereby notified that any disclosure, copying, d=
+istribution or taking action in relation of the contents of this informatio=
+n is strictly prohibited and may be unlawful. If you have received this com=
+munication in error, please notify
+ Tribe at (619) 567-9955 and delete this communication immediately without =
+making any copy or distribution.</span><u></u><u></u></p>
+</div>
+</div>
+</div>
+
+</div></blockquote></div>
+
+--000000000000e1128b05f8651cfa--
+--000000000000e1128c05f8651cfb
+Content-Type: image/png; name="image001.png"
+Content-Disposition: inline; filename="image001.png"
+Content-Transfer-Encoding: base64
+Content-ID: <18744dd8b6e4cff311>
+X-Attachment-Id: 18744dd8b6e4cff311
+
+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
+--000000000000e1128c05f8651cfb
+Content-Type: image/png; name="image002.png"
+Content-Disposition: inline; filename="image002.png"
+Content-Transfer-Encoding: base64
+Content-ID: <18744dd8b765b16b22>
+X-Attachment-Id: 18744dd8b765b16b22
+
+iVBORw0KGgoAAAANSUhEUgAAAS8AAAADCAYAAADCx4khAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAvSURBVEhL7cPBDQAgCACxY0rW8asbyXLoGiTX
+pGSdtu1J6Q7y7mXbkwLxS9I08ABflI12Ng99+QAAAABJRU5ErkJggg==
+--000000000000e1128c05f8651cfb--
