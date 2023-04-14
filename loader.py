@@ -40,7 +40,8 @@ def decode_email():
 
     # Loop through the list of messages in the thread and extract content of each message.
     for message in thread['messages']:
-        msg = service.users().messages().get(userId=user_id, id=message['id'], format='full').execute()
+        msg = service.users().messages().get(
+            userId=user_id, id=message['id'], format='full').execute()
 
         # Extract the raw message payload and decode it from base64.
         payload = msg['payload']
@@ -75,7 +76,7 @@ def process_part(part):
     else:
         # Decode the message content from base64 and print it.
         if part['mimeType'] != 'text/plain':
-            return '';
+            return ''
         data = part['body']['data']
         content = base64.urlsafe_b64decode(data).decode()
     return content

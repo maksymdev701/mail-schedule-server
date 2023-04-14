@@ -78,6 +78,7 @@ class RecurringTool(BaseTool):
         """Use the tool asynchronously"""
         return "Recurring meeting"
 
+
 class UnexpectedTool(BaseTool):
     name = "Unexpected"
     description = "Only use for when email is about schedule in case of unexpected interruptions"
@@ -102,6 +103,7 @@ class GeneralLackTool(BaseTool):
     async def _arun(self, tool_input: str) -> str:
         """Use the tool asynchronously."""
         return "General lack of clarity in communication"
+
 
 class InviteDelayTool(BaseTool):
     name = "InviteDelay"
