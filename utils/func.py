@@ -2,7 +2,6 @@ from langchain.llms import OpenAIChat
 from langchain import PromptTemplate
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import (
-    AIMessage,
     HumanMessage,
     SystemMessage
 )
@@ -15,6 +14,8 @@ def calc_time(email_content: str):
     ##############
     {email_content}
     ##############
+
+    Only answer date and time.
     """
     email_prompt = PromptTemplate(
         input_variables=["email_content"],
@@ -29,7 +30,23 @@ def calc_time(email_content: str):
 
 
 def predict_reply(email_content: str):
-    return ""
+    chat = ChatOpenAI(model="gpt-4", temperature=0)
+    email_template = """Following is meeting time discussion email thread and schedule the exact meeting datetime and reply kindly to people's email:
+
+    ##############
+    {email_content}
+    ##############
+    """
+    email_prompt = PromptTemplate(
+        input_variables=["email_content"],
+        template=email_template
+    )
+    messages = [
+        SystemMessage(content="You are AI Bot which is responsible for executive assistance. You have to schedule exact meeting date and time that is as suitable as possible for everyone and reply kindly to each person's email in thread."),
+        HumanMessage(content=email_prompt.format(email_content=email_content))
+    ]
+    output = chat(messages).content
+    return output
 
 
 def check_whether_schedule(email_thread):

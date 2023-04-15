@@ -1,7 +1,7 @@
 import base64
 
-from loader import parse_json_file, process_part
-from func import check_whether_schedule, calc_time
+from api.utils.loader import parse_json_file, process_part
+from api.utils.func import check_whether_schedule, calc_time, predict_reply
 from dotenv import load_dotenv
 
 # Load environment variables from the .env file
@@ -34,6 +34,7 @@ if __name__ == "__main__":
                 if is_schedule == 'True':
                     meeting_time = calc_time(content)
                     print("Meeting time ---> " + meeting_time)
+                    print("Virtual reply ---> " + predict_reply(content))
                 print("\n====================================\n")
         else:
             # Decode the message content from base64 and display it.
@@ -49,6 +50,7 @@ if __name__ == "__main__":
             if is_schedule == 'True':
                 meeting_time = calc_time(content)
                 print("Meeting time ---> " + meeting_time)
+                print("Virtual reply ---> " + predict_reply(content))
             print("\n====================================\n")
 
     print(total_content)

@@ -1,7 +1,7 @@
 import pymongo
 import os
 from dotenv import load_dotenv
-from loader import parse_json_file
+from api.utils.loader import parse_json_file
 
 # Load environment variables from the .env file
 load_dotenv()
