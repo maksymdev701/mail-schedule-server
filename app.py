@@ -4,9 +4,11 @@ from loader import parse_json_file, process_part
 from func import check_whether_schedule, calc_time
 from dotenv import load_dotenv
 
+# Load environment variables from the .env file
 load_dotenv()
 
 if __name__ == "__main__":
+    # Load email threads in json format
     json_iterator = parse_json_file(
         "./example_emails/json/veronica_emails.json")
 
