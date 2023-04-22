@@ -1,25 +1,27 @@
-import pymongo
-import os
+from utils.loader import parse_json_file
+from pymongo import MongoClient
 from dotenv import load_dotenv
-from api.utils.loader import parse_json_file
+import os
+from core.config import db_name
 
-# Load environment variables from the .env file
+# load environment variables from .env file
 load_dotenv()
 
-client = pymongo.MongoClient(os.getenv('MONGO_URI'))
-db = client["daystream"]
+# connect to the MongoDB server
+client = MongoClient(os.getenv("MONGO_URI"))
+
+# the database working with this project
+db = client.get_database(db_name)
 
 
 def load_threads():
+    # load json objects from big json file
     json_interator = parse_json_file(
-        "./example_emails/json/veronica_emails.json")
+        "../resources/example_emails/json/veronica_emails.json")
 
+    # select collection where data to be inserted
     threads = db["threads"]
 
     for obj in json_interator:
         del obj["_id"]
         threads.insert_one(obj)
-
-
-# Load email thread json file and insert it into mongo datbase
-load_threads()
