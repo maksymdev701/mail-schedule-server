@@ -25,3 +25,14 @@ def load_threads():
     for obj in json_interator:
         del obj["_id"]
         threads.insert_one(obj)
+
+
+def put_documents(thread: dict):
+
+    return ""
+
+
+if __name__ == "__main__":
+    thread_cuont = db["threads"].count_documents({})
+    if thread_cuont == 0:
+        load_threads()
