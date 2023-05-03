@@ -1,11 +1,15 @@
 from fastapi import APIRouter
-from core.database import db, put_documents
+from core.database import db, put_documents, load_threads
 from bson.objectid import ObjectId
 
 router = APIRouter(prefix="/threads", tags=["threads"])
 thread_collection = db["threads"]
 document_collection = db["documents"]
 
+@router.get("/load", description="Load threads from json file")
+async def load():
+    load_threads()
+    return {"message": "Successfully loaded threads from json file"}
 
 @router.get("/", description="Get threads by using pagination")
 async def get_all_threads(page: int = 1, page_size: int = 10):

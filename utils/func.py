@@ -8,7 +8,10 @@ from langchain.schema import (
 
 
 def calc_time(email_content: str):
-    chat = ChatOpenAI(model="gpt-4", temperature=0)
+    model_name = "gpt-4"
+    if len(email_content) > 9000:
+        model_name = "gpt-4-32k"
+    chat = ChatOpenAI(model_name=model_name, temperature=0)
     email_template = """Following is meeting time discussion email thread and calculate the exact meeting date and time on this email thread:
 
     ##############
@@ -30,8 +33,11 @@ def calc_time(email_content: str):
 
 
 def predict_reply(email_content: str):
-    chat = ChatOpenAI(model="gpt-4", temperature=0)
-    email_template = """Following is meeting time discussion email thread and schedule the exact meeting datetime and reply kindly to people's email:
+    model_name = "gpt-4"
+    if len(email_content) > 9000:
+        model_name = "gpt-4-32k"
+    chat = ChatOpenAI(model_name=model_name, temperature=0)
+    email_template = """Following is meeting time discussion email thread:
 
     ##############
     {email_content}
@@ -42,7 +48,8 @@ def predict_reply(email_content: str):
         template=email_template
     )
     messages = [
-        SystemMessage(content="You are AI Bot which is responsible for executive assistance. You have to schedule exact meeting date and time that is as suitable as possible for everyone and reply kindly to each person's email in thread."),
+        SystemMessage(
+            content="You are AI Bot which is responsible for executive assistance. You have to write down kind reply email."),
         HumanMessage(content=email_prompt.format(email_content=email_content))
     ]
     output = chat(messages).content
@@ -50,7 +57,10 @@ def predict_reply(email_content: str):
 
 
 def check_whether_schedule(email_thread):
-    chat = ChatOpenAI(model_name="gpt-4", temperature=0)
+    model_name = "gpt-4"
+    if len(email_thread) > 9000:
+        model_name = "gpt-4-32k"
+    chat = ChatOpenAI(model_name=model_name, temperature=0)
     check_template = """Check whether the mail is meeting schedule discussion mail.
     
     ###############
@@ -67,6 +77,31 @@ def check_whether_schedule(email_thread):
         SystemMessage(
             content="You are AI Bot that checks email and identifies the mail is related to meeting schedule."),
         HumanMessage(content=check_prompt.format(email_thread=email_thread))
+    ]
+    output = chat(messages).content
+    return output
+
+
+def sort_messages(thread, sender, sendtime):
+    model_name = "gpt-4"
+    if len(thread) > 9000:
+        model_name = "gpt-4-32k"
+    chat = ChatOpenAI(model_name=model_name, temperature=0)
+    check_template = """It is mainly decoded in reverse order. The top message is the latest mssage but its sender {sender} and send datetime {sendtime} is not mentioned in the thread. You have to keep rule when mention about sender, for example, "On Mon, Apr 10, 2023 at 5:35 PM Denis Titov <titov.denis2@gmail.com> wrote:". Rearrange the messages in right order and mention about sender, send datetime in the latest message.
+    
+    ###############
+    {email_thread}
+    ###############
+    """
+    check_prompt = PromptTemplate(
+        input_variables=["email_thread", "sender", "sendtime"],
+        template=check_template
+    )
+    messages = [
+        SystemMessage(
+            content="You are AI Bot that rearrange the decoded message in email thread."),
+        HumanMessage(content=check_prompt.format(
+            email_thread=thread, sender=sender, sendtime=sendtime))
     ]
     output = chat(messages).content
     return output

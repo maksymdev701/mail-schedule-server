@@ -17,7 +17,7 @@ db = client.get_database(db_name)
 def load_threads():
     # load json objects from big json file
     json_interator = parse_json_file(
-        "../resources/example_emails/json/veronica_emails.json")
+        "resources/example_emails/json/veronica_emails.json")
 
     # select collection where data to be inserted
     threads = db["threads"]
